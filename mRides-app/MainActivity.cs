@@ -4,6 +4,8 @@ using Android.OS;
 using Xamarin.Auth;
 using System;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
+
 namespace mRides_app
 {
     [Activity(Label = "mRides_app", MainLauncher = true, Icon = "@drawable/icon")]
@@ -45,10 +47,10 @@ namespace mRides_app
                         builder.SetTitle("Task Canceled");
                     else
                     {
-                        //var obj = JsonValue.Parse(t.Result.GetResponseText());
+                        var obj = JObject.Parse(t.Result.GetResponseText());
 
                         builder.SetTitle("Logged in");
-                        // builder.SetMessage("Name: " + obj["name"]);
+                        builder.SetMessage("Name: " + obj["name"]);
                     }
 
                     builder.SetPositiveButton("Ok", (o, e) => { });
