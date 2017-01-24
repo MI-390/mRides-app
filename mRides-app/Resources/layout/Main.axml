@@ -1,13 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:minWidth="25px"
-    android:minHeight="25px">
-    <Button
-        android:text="Button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/button1" />
+<LinearLayout xmlns:p1="http://schemas.android.com/apk/res/android"
+    p1:orientation="vertical"
+    p1:layout_width="match_parent"
+    p1:layout_height="match_parent"
+    p1:id="@+id/linearLayout1"
+    p1:background="#EDECEB"
+    p1:gravity="center">
+
+  <ImageView
+      p1:src="@drawable/mrideslogo"
+      p1:layout_width="370.0dp"
+      p1:layout_height="207.5dp"
+      p1:id="@+id/imageView1"
+             p1:maxWidth="80dp"
+      p1:minHeight="80dp"
+      p1:scaleType="fitCenter" />
+
+  <Button
+      p1:layout_width="222.0dp"
+      p1:layout_height="wrap_content"
+      p1:id="@+id/button1"
+      p1:background="@drawable/fblogin"
+      p1:stateListAnimator="@null" />
+
 </LinearLayout>
