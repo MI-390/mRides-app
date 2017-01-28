@@ -60,5 +60,11 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\mRides-app\mRides-app.csproj">
+      <Project>{2a124686-4c6e-448e-a0d8-159da3828abe}</Project>
+      <Name>mRides-app</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
