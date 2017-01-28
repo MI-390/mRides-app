@@ -23,7 +23,8 @@ namespace UITest
                 .Android
                 // TODO: Update this path to point to your Android app and uncomment the
                 // code if the app is not included in the solution.
-                //.ApkFile ("../../../Android/bin/Debug/UITestsAndroid.apk")
+                .ApkFile ("D:/Projects/mRides-app/mRides-app/bin/Release//mRides_app.mRides_app-Signed.apk")
+                .EnableLocalScreenshots()
                 .StartApp();
         }
 
