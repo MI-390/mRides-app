@@ -8,7 +8,7 @@ using Newtonsoft.Json.Linq;
 
 namespace mRides_app
 {
-    //ggrrg
+    //ggrrg 
     [Activity(Label = "mRides_app", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
