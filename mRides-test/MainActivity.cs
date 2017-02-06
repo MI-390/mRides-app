@@ -13,7 +13,7 @@ namespace mRides_test
             // tests can be inside the main assembly
             AddTest(Assembly.GetExecutingAssembly());
             // or in any reference assemblies
-            // AddTest (typeof (Your.Library.TestClass).Assembly);
+            //AddTest (typeof (mRides_app.TestClass).Assembly);
 
             // Once you called base.OnCreate(), you cannot add more assemblies.
             base.OnCreate(bundle);

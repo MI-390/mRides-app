@@ -10,10 +10,14 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
-namespace mRides_app.Authentication
+namespace mRides_app
 {
-    class Facebook
+    public class TestClass
     {
+        void test()
+        {
 
+
+        }
     }
 }
