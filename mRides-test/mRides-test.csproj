@@ -51,6 +51,7 @@
     <Reference Include="Xamarin.Android.NUnitLite" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TestMeTest.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="TestSample.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
@@ -68,6 +69,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\mRides-app\mRides-app.csproj">
+      <Project>{2a124686-4c6e-448e-a0d8-159da3828abe}</Project>
+      <Name>mRides-app</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
