@@ -75,6 +75,18 @@ namespace mRides_app
 			// aapt resource value: 0x7f050000
 			public const int linearLayout1 = 2131034112;
 			
+			// aapt resource value: 0x7f050004
+			public const int linearLayout2 = 2131034116;
+			
+			// aapt resource value: 0x7f050006
+			public const int ratingBar = 2131034118;
+			
+			// aapt resource value: 0x7f050005
+			public const int userName = 2131034117;
+			
+			// aapt resource value: 0x7f050003
+			public const int userPhoto = 2131034115;
+			
 			static Id()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -90,6 +102,9 @@ namespace mRides_app
 			
 			// aapt resource value: 0x7f030000
 			public const int Main = 2130903040;
+			
+			// aapt resource value: 0x7f030001
+			public const int UserProfile = 2130903041;
 			
 			static Layout()
 			{
