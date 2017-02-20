@@ -5,10 +5,10 @@ using Xamarin.Auth;
 using System;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
-
+//cvnewggbsc_1487629189@tfbnw.net
+//mi-390
 namespace mRides_app
 {
-    //ggrrg
     [Activity(Label = "mRides_app", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
@@ -71,7 +71,10 @@ namespace mRides_app
             SetContentView(Resource.Layout.Main);
 
             var facebook = FindViewById<Button>(Resource.Id.button1);
-            facebook.Click += delegate { LoginToFacebook(true); };
+            facebook.Click += delegate {
+                LoginToFacebook(true);
+                StartActivity(typeof(MapActivity));
+            };
 
             //var facebookNoCancel = FindViewById<Button>(Resource.Id.FacebookButtonNoCancel);
             // facebookNoCancel.Click += delegate { LoginToFacebook(false); };
