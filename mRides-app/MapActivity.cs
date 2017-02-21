@@ -30,11 +30,11 @@ namespace mRides_app
         private LocationRequest locationRequest;
         private Location lastUserLocation;
         private bool locationPermissionGranted;
+        private string Destination;
         const string googleApiKey = "AIzaSyAz9p6O99w8ZWkFUbaREJXmnj01Mpm19dA";
 
         protected override void OnCreate(Bundle bundle)
         {
-
             base.OnCreate(bundle);
 
             // Create an instance of GoogleAPIClient.
@@ -51,6 +51,10 @@ namespace mRides_app
             }
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Destination);
+
+            string text = Intent.GetStringExtra("Profile Info") ?? "Data not available";
+            Toast.MakeText(ApplicationContext, "Hello " + text, ToastLength.Long).Show();
+
             // Retrieve the PlaceAutocompleteFragment.
             PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)FragmentManager.FindFragmentById(Resource.Id.place_autocomplete_fragment);
             AutocompleteFilter typeFilter = new AutocompleteFilter.Builder().SetTypeFilter(AutocompleteFilter.TypeFilterEstablishment).Build();
@@ -162,7 +166,9 @@ namespace mRides_app
 
         public void OnPlaceSelected(IPlace place)
         {
+            Destination = place.NameFormatted.ToString();
             // throw new NotImplementedException();
+            Toast.MakeText(ApplicationContext, "Destination : " + Destination, ToastLength.Long).Show();
             Log.Info("Xamarin ", "Place : " + place.NameFormatted);
         }
     }

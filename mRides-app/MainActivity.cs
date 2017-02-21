@@ -5,6 +5,7 @@ using Xamarin.Auth;
 using System;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using Android.Content;
 //cvnewggbsc_1487629189@tfbnw.net
 //mi-390
 namespace mRides_app
@@ -12,6 +13,8 @@ namespace mRides_app
     [Activity(Label = "mRides_app", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
+        string userName;
+
         void LoginToFacebook(bool allowCancel)
         {
             var auth = new OAuth2Authenticator(
@@ -52,10 +55,19 @@ namespace mRides_app
 
                         builder.SetTitle("Logged in");
                         builder.SetMessage("Name: " + obj["name"]);
+                        userName = "Name: " + obj["name"].ToString();
+                        if (userName != null && ee.IsAuthenticated)
+                         {
+                            var mapActivity = new Intent(this, typeof(MapActivity));
+                            mapActivity.PutExtra("Profile Info", userName);
+                            StartActivity(mapActivity);
+                            //StartActivity(typeof(MapActivity));
+                         }
                     }
 
                     builder.SetPositiveButton("Ok", (o, e) => { });
                     builder.Create().Show();
+
                 }, UIScheduler);
             };
 
@@ -73,7 +85,6 @@ namespace mRides_app
             var facebook = FindViewById<Button>(Resource.Id.button1);
             facebook.Click += delegate {
                 LoginToFacebook(true);
-                StartActivity(typeof(MapActivity));
             };
 
             //var facebookNoCancel = FindViewById<Button>(Resource.Id.FacebookButtonNoCancel);
