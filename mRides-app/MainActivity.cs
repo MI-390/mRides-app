@@ -5,6 +5,7 @@ using Xamarin.Auth;
 using System;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using Android.Content;
 
 namespace mRides_app
 {
@@ -52,6 +53,14 @@ namespace mRides_app
 
                         builder.SetTitle("Logged in");
                         builder.SetMessage("Name: " + obj["name"]);
+                        String username = ("Name: " + obj["name"]);
+                        if (username != null && ee.IsAuthenticated)
+                        {
+                            var userProfile = new Intent(this, typeof(UserProfile));
+                            userProfile.PutExtra("Profile Info", username);
+                            StartActivity(userProfile);
+
+                        }
                     }
 
                     builder.SetPositiveButton("Ok", (o, e) => { });
@@ -72,6 +81,7 @@ namespace mRides_app
 
             var facebook = FindViewById<Button>(Resource.Id.button1);
             facebook.Click += delegate { LoginToFacebook(true); };
+
 
             //var facebookNoCancel = FindViewById<Button>(Resource.Id.FacebookButtonNoCancel);
             // facebookNoCancel.Click += delegate { LoginToFacebook(false); };

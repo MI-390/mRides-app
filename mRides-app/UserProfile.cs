@@ -19,6 +19,16 @@ namespace mRides_app
         {
             base.OnCreate(savedInstanceState);
 
+            String username = Intent.GetStringExtra("Profile Info") ?? "Data not available";
+
+            SetContentView(Resource.Layout.UserProfile);
+
+            TextView text = (TextView)FindViewById(Resource.Id.userName);
+
+            text.Text = username;
+
+
+
             // Create your application here
         }
     }

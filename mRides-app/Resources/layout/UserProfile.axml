@@ -4,46 +4,46 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fcfcfc">
-  <!-- Child linear layout with horizontal orientation -->
-  <LinearLayout
-      android:layout_width="fill_parent"
-      android:layout_height="122.0dp"
-      android:orientation="horizontal"
-      android:background="#fcfcfc"
-      android:layout_marginTop="25dip">
-    <ImageView
-        android:src="@android:drawable/ic_menu_gallery"
-        android:id="@+id/userPhoto"
-        android:layout_width="139.0dp"
-        android:layout_height="match_parent"
-        android:layout_marginRight="0.0dp" />
+<!-- Child linear layout with horizontal orientation -->
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="99.0dp"
-        android:orientation="vertical"
+        android:layout_height="122.0dp"
+        android:orientation="horizontal"
         android:background="#fcfcfc"
-        android:layout_marginTop="25dip"
-        android:id="@+id/linearLayout2"
-        android:weightSum="100">
-      <TextView
-          android:text="Nice Person"
-          android:padding="5dip"
-          android:id="@+id/userName"
-          android:layout_width="196.0dp"
-          android:layout_height="50.0dp"
-          android:textColor="#626263"
-          android:textSize="33dp" />
-      <RatingBar
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:id="@+id/ratingBar"
-          style="?android:attr/ratingBarStyleIndicator"
-          android:scaleX=".5"
-          android:rating="3.5"
-          android:scaleY=".5"
-          android:transformPivotX="0dp"
-          android:transformPivotY="0dp"
-          android:max="5" />
+        android:layout_marginTop="25dip">
+        <ImageView
+            android:src="@android:drawable/ic_menu_gallery"
+            android:id="@+id/userPhoto"
+            android:layout_width="139.0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="0.0dp" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="99.0dp"
+            android:orientation="vertical"
+            android:background="#fcfcfc"
+            android:layout_marginTop="25dip"
+            android:id="@+id/linearLayout2"
+            android:weightSum="100">
+            <TextView
+                android:text="Nice Person"
+                android:padding="5dip"
+                android:id="@+id/userName"
+                android:layout_width="196.0dp"
+                android:layout_height="50.0dp"
+                android:textColor="#626263"
+                android:textSize="33dp" />
+            <RatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ratingBar"
+                style="?android:attr/ratingBarStyleIndicator"
+                android:scaleX=".5"
+                android:rating="3.5"
+                android:scaleY=".5"
+                android:transformPivotX="0dp"
+                android:transformPivotY="0dp"
+                android:max="5" />
+        </LinearLayout>
     </LinearLayout>
-  </LinearLayout>
 </LinearLayout>
