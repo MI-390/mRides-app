@@ -18,7 +18,6 @@ using Android.Locations;
 using Android.Gms.Location.Places;
 using Android.Gms.Location.Places.UI;
 using Android.Util;
-using Java.Lang;
 
 namespace mRides_app
 {
@@ -167,6 +166,8 @@ namespace mRides_app
 
         public void OnLocationChanged(Location location)
         {
+            if (lastUserLocation == null)
+                UpdateCameraPosition(new LatLng(location.Latitude, location.Longitude));
             lastUserLocation = location;
             PlaceAutocompleteFragment autocompleteFragment = FragmentManager.FindFragmentById<PlaceAutocompleteFragment>(Resource.Id.place_autocomplete_fragment);
             autocompleteFragment.SetBoundsBias(new LatLngBounds(new LatLng(lastUserLocation.Latitude - 0.2, lastUserLocation.Longitude - 0.2), new LatLng(lastUserLocation.Latitude + 0.2, lastUserLocation.Longitude + 0.2)));
@@ -186,7 +187,10 @@ namespace mRides_app
         {
             destination = place.NameFormatted.ToString();
             Toast.MakeText(ApplicationContext, "Destination : " + destination, ToastLength.Long).Show();
+            if (destinationMarker != null)
+                destinationMarker.Dispose();
             destinationMarker = map.AddMarker(new MarkerOptions().SetPosition(place.LatLng).SetTitle(destination));
+            UpdateCameraPosition(place.LatLng);
             //Geocoder geocoder = new Geocoder(this);
             //IList<Address> addresses = null;
             //addresses = geocoder.GetFromLocation(place.LatLng.Latitude, place.LatLng.Longitude, 1);
