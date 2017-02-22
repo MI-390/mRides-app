@@ -18,14 +18,15 @@ namespace mRides_app
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            TextView usernameText;
 
             String username = Intent.GetStringExtra("Profile Info") ?? "Data not available";
 
             SetContentView(Resource.Layout.UserProfile);
 
-            TextView text = (TextView)FindViewById(Resource.Id.userName);
+            usernameText = (TextView)FindViewById(Resource.Id.userName);
 
-            text.Text = username;
+            usernameText.Text = username;
 
 
 

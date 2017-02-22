@@ -19,28 +19,28 @@
             android:layout_marginRight="0.0dp" />
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="99.0dp"
+            android:layout_height="110dp"
             android:orientation="vertical"
             android:background="#fcfcfc"
-            android:layout_marginTop="25dip"
+            android:layout_marginTop="15dip"
             android:id="@+id/linearLayout2"
             android:weightSum="100">
             <TextView
-                android:text="Nice Person"
+                android:text="Person"
                 android:padding="5dip"
                 android:id="@+id/userName"
                 android:layout_width="196.0dp"
-                android:layout_height="50.0dp"
-                android:textColor="#626263"
-                android:textSize="33dp" />
+                android:layout_height="66.0dp"
+                android:textColor="#161616"
+                android:textSize="20dp" />
             <RatingBar
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/ratingBar"
                 style="?android:attr/ratingBarStyleIndicator"
-                android:scaleX=".5"
+                android:scaleX="0.75"
                 android:rating="3.5"
-                android:scaleY=".5"
+                android:scaleY="0.75"
                 android:transformPivotX="0dp"
                 android:transformPivotY="0dp"
                 android:max="5" />
