@@ -28,6 +28,22 @@ namespace mRides_app
 		{
 		}
 		
+		public partial class Array
+		{
+			
+			// aapt resource value: 0x7f050000
+			public const int numbers_array = 2131034112;
+			
+			static Array()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Array()
+			{
+			}
+		}
+		
 		public partial class Attribute
 		{
 			
@@ -66,14 +82,47 @@ namespace mRides_app
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f050002
-			public const int button1 = 2131034114;
+			// aapt resource value: 0x7f06000c
+			public const int CloseButton = 2131099660;
 			
-			// aapt resource value: 0x7f050001
-			public const int imageView1 = 2131034113;
+			// aapt resource value: 0x7f06000d
+			public const int Next = 2131099661;
 			
-			// aapt resource value: 0x7f050000
-			public const int linearLayout1 = 2131034112;
+			// aapt resource value: 0x7f060004
+			public const int button1 = 2131099652;
+			
+			// aapt resource value: 0x7f060009
+			public const int driver1 = 2131099657;
+			
+			// aapt resource value: 0x7f060001
+			public const int driverModeText = 2131099649;
+			
+			// aapt resource value: 0x7f060003
+			public const int imageView1 = 2131099651;
+			
+			// aapt resource value: 0x7f060002
+			public const int linearLayout1 = 2131099650;
+			
+			// aapt resource value: 0x7f06000b
+			public const int numOfPeople = 2131099659;
+			
+			// aapt resource value: 0x7f06000a
+			public const int numOfPeopleText = 2131099658;
+			
+			// aapt resource value: 0x7f060007
+			public const int rider1 = 2131099655;
+			
+			// aapt resource value: 0x7f060005
+			public const int riderModeText = 2131099653;
+			
+			// aapt resource value: 0x7f060006
+			public const int riderOrDriver = 2131099654;
+			
+			// aapt resource value: 0x7f060008
+			public const int riderOrDriverSwitch = 2131099656;
+			
+			// aapt resource value: 0x7f060000
+			public const int simpleButton = 2131099648;
 			
 			static Id()
 			{
@@ -89,7 +138,19 @@ namespace mRides_app
 		{
 			
 			// aapt resource value: 0x7f030000
-			public const int Main = 2130903040;
+			public const int Alert = 2130903040;
+			
+			// aapt resource value: 0x7f030001
+			public const int DriverMode = 2130903041;
+			
+			// aapt resource value: 0x7f030002
+			public const int Main = 2130903042;
+			
+			// aapt resource value: 0x7f030003
+			public const int RiderMode = 2130903043;
+			
+			// aapt resource value: 0x7f030004
+			public const int UserTypeFragment = 2130903044;
 			
 			static Layout()
 			{
@@ -104,11 +165,8 @@ namespace mRides_app
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f040001
-			public const int ApplicationName = 2130968577;
-			
 			// aapt resource value: 0x7f040000
-			public const int Hello = 2130968576;
+			public const int ApplicationName = 2130968576;
 			
 			static String()
 			{
