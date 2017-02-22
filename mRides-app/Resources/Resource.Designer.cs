@@ -28,6 +28,22 @@ namespace mRides_app
 		{
 		}
 		
+		public partial class Array
+		{
+			
+			// aapt resource value: 0x7f050000
+			public const int numbers_array = 2131034112;
+			
+			static Array()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Array()
+			{
+			}
+		}
+		
 		public partial class Attribute
 		{
 			
@@ -410,12 +426,6 @@ namespace mRides_app
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f080020
-			public const int CloseButton = 2131230752;
-			
-			// aapt resource value: 0x7f080021
-			public const int Next = 2131230753;
-			
 			// aapt resource value: 0x7f080005
 			public const int adjust_height = 2131230725;
 			
@@ -425,14 +435,9 @@ namespace mRides_app
 			// aapt resource value: 0x7f08000a
 			public const int auto = 2131230730;
 			
-			// aapt resource value: 0x7f080011
-			public const int button1 = 2131230737;
-			
 			// aapt resource value: 0x7f08000b
 			public const int dark = 2131230731;
 			
-			// aapt resource value: 0x7f08001d
-			public const int driver1 = 2131230749;
 			
 			// aapt resource value: 0x7f080000
 			public const int hybrid = 2131230720;
@@ -440,14 +445,9 @@ namespace mRides_app
 			// aapt resource value: 0x7f080007
 			public const int icon_only = 2131230727;
 			
-			// aapt resource value: 0x7f080010
-			public const int imageView1 = 2131230736;
-			
 			// aapt resource value: 0x7f08000c
 			public const int light = 2131230732;
 			
-			// aapt resource value: 0x7f08000e
-			public const int linearLayout1 = 2131230734;
 			
 			// aapt resource value: 0x7f08000d
 			public const int map = 2131230733;
@@ -458,8 +458,6 @@ namespace mRides_app
 			// aapt resource value: 0x7f080002
 			public const int normal = 2131230722;
 			
-			// aapt resource value: 0x7f08001f
-			public const int numOfPeople = 2131230751;
 			
 			// aapt resource value: 0x7f080014
 			public const int place_autocomplete_clear_button = 2131230740;
@@ -488,11 +486,6 @@ namespace mRides_app
 			// aapt resource value: 0x7f080015
 			public const int place_autocomplete_separator = 2131230741;
 			
-			// aapt resource value: 0x7f08001b
-			public const int rider1 = 2131230747;
-			
-			// aapt resource value: 0x7f08001c
-			public const int riderOrDriverSwitch = 2131230748;
 			
 			// aapt resource value: 0x7f080003
 			public const int satellite = 2131230723;
@@ -503,15 +496,52 @@ namespace mRides_app
 			// aapt resource value: 0x7f080004
 			public const int terrain = 2131230724;
 			
-			// aapt resource value: 0x7f08001a
-			public const int textView2 = 2131230746;
-			
-			// aapt resource value: 0x7f08001e
-			public const int textView3 = 2131230750;
 			
 			// aapt resource value: 0x7f080009
 			public const int wide = 2131230729;
+
+			// aapt resource value: 0x7f06000c
+			public const int CloseButton = 2131099660;
 			
+			// aapt resource value: 0x7f06000d
+			public const int Next = 2131099661;
+			
+			// aapt resource value: 0x7f060004
+			public const int button1 = 2131099652;
+			
+			// aapt resource value: 0x7f060009
+			public const int driver1 = 2131099657;
+			
+			// aapt resource value: 0x7f060001
+			public const int driverModeText = 2131099649;
+			
+			// aapt resource value: 0x7f060003
+			public const int imageView1 = 2131099651;
+			
+			// aapt resource value: 0x7f060002
+			public const int linearLayout1 = 2131099650;
+			
+			// aapt resource value: 0x7f06000b
+			public const int numOfPeople = 2131099659;
+			
+			// aapt resource value: 0x7f06000a
+			public const int numOfPeopleText = 2131099658;
+			
+			// aapt resource value: 0x7f060007
+			public const int rider1 = 2131099655;
+			
+			// aapt resource value: 0x7f060005
+			public const int riderModeText = 2131099653;
+			
+			// aapt resource value: 0x7f060006
+			public const int riderOrDriver = 2131099654;
+			
+			// aapt resource value: 0x7f060008
+			public const int riderOrDriverSwitch = 2131099656;
+			
+			// aapt resource value: 0x7f060000
+			public const int simpleButton = 2131099648;
+
 			static Id()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -558,9 +588,20 @@ namespace mRides_app
 			
 			// aapt resource value: 0x7f030005
 			public const int place_autocomplete_progress = 2130903045;
+
+			public const int Alert = 2130903040;
 			
-			// aapt resource value: 0x7f030006
-			public const int UserType = 2130903046;
+			// aapt resource value: 0x7f030001
+			public const int DriverMode = 2130903041;
+			
+			// aapt resource value: 0x7f030002
+			public const int Main = 2130903042;
+			
+			// aapt resource value: 0x7f030003
+			public const int RiderMode = 2130903043;
+			
+			// aapt resource value: 0x7f030004
+			public const int UserTypeFragment = 2130903044;
 			
 			static Layout()
 			{
@@ -679,6 +720,9 @@ namespace mRides_app
 			
 			// aapt resource value: 0x7f060000
 			public const int place_autocomplete_search_hint = 2131099648;
+      
+			// aapt resource value: 0x7f040000
+			public const int ApplicationName = 2130968576;
 			
 			static String()
 			{

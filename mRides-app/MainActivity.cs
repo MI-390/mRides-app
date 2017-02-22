@@ -10,7 +10,8 @@ using Android.Content;
 //mi-390
 namespace mRides_app
 {
-    [Activity(Label = "mRides_app", MainLauncher = true, Icon = "@drawable/icon")]
+    //ggrrg
+    [Activity(Label = "mRides_app", Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
         string userName;
