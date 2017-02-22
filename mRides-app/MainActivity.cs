@@ -54,6 +54,7 @@ namespace mRides_app
                         builder.SetTitle("Logged in");
                         builder.SetMessage("Name: " + obj["name"]);
                         String username = ("" + obj["name"]);
+                        
                         if (username != null && ee.IsAuthenticated)
                         {
                             var userProfile = new Intent(this, typeof(UserProfile));
