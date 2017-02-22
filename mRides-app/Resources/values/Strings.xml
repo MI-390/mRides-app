@@ -25,4 +25,13 @@
   <string name="Back">Back</string>
   <string name="Done">Done</string>
 
+    <string name="ApplicationName">mRides-app</string>
+  <string-array name="numbers_array">
+    <item>"1"</item>
+    <item>"2"</item>
+    <item>"3"</item>
+    <item>"4"</item>
+    <item>"5"</item>
+    <item>"6"</item>
+  </string-array>
 </resources>
