@@ -42,8 +42,10 @@ namespace mRides_app
                     var obj = JObject.Parse(response.GetResponseText());
                     userName = "Name: " + obj["name"].ToString();
                     var mapActivity = new Intent(this, typeof(MapActivity));
+                    var userProfileActivity = new Intent(this, typeof(UserProfile));
                     mapActivity.PutExtra("Profile Info", userName);
-                    StartActivity(mapActivity);
+                    userProfileActivity.PutExtra("Profile Info", userName);
+                    StartActivity(mapActivity); //change to userProfile if want to test user profile activity
                 }
             }
         }
