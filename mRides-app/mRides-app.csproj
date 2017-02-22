@@ -75,13 +75,13 @@
     <AndroidResource Include="Resources\layout\UserTypeFragment.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\DriverMode.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
     <AndroidResource Include="Resources\layout\RiderMode.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\Alert.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\DriverMode.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

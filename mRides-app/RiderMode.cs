@@ -19,7 +19,11 @@ namespace mRides_app
         {
             base.OnCreate(savedInstanceState);
 
-            // Create your application here
+            SetContentView(Resource.Layout.RiderMode);
+            String num = Intent.GetStringExtra("numOfPeople");
+            int test = Int32.Parse(num); // parse the string to an int
+            TextView tv = FindViewById<TextView>(Resource.Id.riderModeText);
+            tv.SetText("Number of people in your group: " + test, TextView.BufferType.Normal);
         }
     }
 }

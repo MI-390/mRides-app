@@ -31,7 +31,7 @@ namespace mRides_app
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             Boolean driver = false;
-            //int num = 0;
+            String num="";
             // Use this to return your custom view for this Fragment
             // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
             View view = inflater.Inflate(Resource.Layout.UserTypeFragment, container, false);
@@ -70,10 +70,12 @@ namespace mRides_app
             adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
             spinner.Adapter = adapter;
 
+            // Store the number selected
             spinner.ItemSelected += delegate
             {
-                //num++;
+                num = spinner.SelectedItem.ToString();
             };
+
 
             // Close dialog fragment
             previous.Click += delegate
@@ -87,20 +89,18 @@ namespace mRides_app
             {
                 if (driver)
                 {
-                    view.Context.StartActivity(typeof(DriverMode));
+                    Intent myIntent1 = new Intent(view.Context, typeof(DriverMode));
+                    myIntent1.PutExtra("numOfSeats", num);
+                    view.Context.StartActivity(myIntent1);
                 }
                 else
-                    view.Context.StartActivity(typeof(RiderMode));
+                {
+                    Intent myIntent2 = new Intent(view.Context, typeof(RiderMode));
+                    myIntent2.PutExtra("numOfPeople", num);
+                    view.Context.StartActivity(myIntent2);
+                }
             };
             return view;
-            //return base.OnCreateView(inflater, container, savedInstanceState);
-        }
-
-        private void selectSpinnedItem(object sender, AdapterView.ItemSelectedEventArgs e)
-        {
-            Spinner spinner = (Spinner)sender;
-            string toast = string.Format("Selected text is {0}", spinner.GetItemAtPosition(e.Position));
-            //Toast.MakeText(View.Context, 2131034112, ToastLength.Long).Show();
         }
     }
 }

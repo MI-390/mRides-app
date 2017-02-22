@@ -19,7 +19,11 @@ namespace mRides_app
         {
             base.OnCreate(savedInstanceState);
 
-            // Create your application here
+            SetContentView(Resource.Layout.DriverMode);
+
+            String num = Intent.GetStringExtra("numOfSeats");
+            TextView tv = FindViewById<TextView>(Resource.Id.driverModeText);
+            tv.SetText("Number of available seats: " + num, TextView.BufferType.Normal);
         }
     }
 }

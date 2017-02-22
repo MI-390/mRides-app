@@ -5,9 +5,11 @@
     android:layout_height="match_parent"
     android:minWidth="25px"
     android:minHeight="25px">
-  <TextView
-      android:text="Rider Mode"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/ridermodetext" />
+    <TextView
+        android:text="TEST"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/riderModeText"
+        android:textSize="20dp"
+        android:textColor="#ffffff" />
 </LinearLayout>

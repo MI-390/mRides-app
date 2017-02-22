@@ -95,7 +95,7 @@ namespace mRides_app
 			public const int driver1 = 2131099657;
 			
 			// aapt resource value: 0x7f060001
-			public const int drivermodetext = 2131099649;
+			public const int driverModeText = 2131099649;
 			
 			// aapt resource value: 0x7f060003
 			public const int imageView1 = 2131099651;
@@ -112,14 +112,14 @@ namespace mRides_app
 			// aapt resource value: 0x7f060007
 			public const int rider1 = 2131099655;
 			
+			// aapt resource value: 0x7f060005
+			public const int riderModeText = 2131099653;
+			
 			// aapt resource value: 0x7f060006
 			public const int riderOrDriver = 2131099654;
 			
 			// aapt resource value: 0x7f060008
 			public const int riderOrDriverSwitch = 2131099656;
-			
-			// aapt resource value: 0x7f060005
-			public const int ridermodetext = 2131099653;
 			
 			// aapt resource value: 0x7f060000
 			public const int simpleButton = 2131099648;
