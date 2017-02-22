@@ -13,6 +13,7 @@ using Android.Widget;
 
 namespace mRides_app
 {
+
     public class UserTypeFragment : DialogFragment
     {
         View view;
