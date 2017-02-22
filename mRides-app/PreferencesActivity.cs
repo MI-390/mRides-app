@@ -38,15 +38,12 @@ namespace mRides_app
             RadioButton rbNoHandicap = FindViewById<RadioButton>(Resource.Id.radioButtonNoHandicap);
             RadioButton rbPet = FindViewById<RadioButton>(Resource.Id.radioButtonPet);
             RadioButton rbNoPet = FindViewById<RadioButton>(Resource.Id.radioButtonNoPet);
-            RadioButton rbMale = FindViewById<RadioButton>(Resource.Id.radioButtonMale);
-            RadioButton rbFemale = FindViewById<RadioButton>(Resource.Id.radioButtonNonFemale);
 
             // Create the preference sets that acts as radio button groups
             PreferenceSet smokerPreferences = new PreferenceSet();
             PreferenceSet luggagePreferences = new PreferenceSet();
             PreferenceSet handicapPreferences = new PreferenceSet();
             PreferenceSet petPreferences = new PreferenceSet();
-            PreferenceSet genderPreferences = new PreferenceSet();
 
             // Add the preferences to the sets
             smokerPreferences.AddPreference(rbSmoker);
@@ -57,32 +54,33 @@ namespace mRides_app
             handicapPreferences.AddPreference(rbNoHandicap);
             petPreferences.AddPreference(rbPet);
             petPreferences.AddPreference(rbNoPet);
-            genderPreferences.AddPreference(rbMale);
-            genderPreferences.AddPreference(rbFemale);
 
             // Set the default checked values
             rbSmoker.Checked = true;
             rbLuggage.Checked = true;
             rbHandicap.Checked = true;
-            rbMale.Checked = true;
             rbPet.Checked = true;
             smokerPreferences.Click(rbSmoker);
             luggagePreferences.Click(rbLuggage);
             handicapPreferences.Click(rbHandicap);
-            genderPreferences.Click(rbMale);
             petPreferences.Click(rbPet);
 
-            // Once the preferences are updated, saved them 
-            Button buttonDone = FindViewById<Button>(Resource.Id.buttonDone);
-            buttonDone.Click += delegate {
-                SaveAndContinue(rbSmoker.Checked, rbLuggage.Checked, rbHandicap.Checked, rbPet.Checked, rbMale.Checked);
-            };
+            // Populate the gender spinner
+            Spinner spinnerGender = FindViewById<Spinner>(Resource.Id.spinnerGender);
+            var adapter = ArrayAdapter.CreateFromResource(
+                    this, Resource.Array.Pref_Gender, Android.Resource.Layout.SimpleSpinnerItem);
+            adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+            spinnerGender.Adapter = adapter;
+
+            // Set the done button to save and continue to the next activity
+            Button doneButton = FindViewById<Button>(Resource.Id.buttonDone);
+            doneButton.Click += delegate { this.SaveAndContinue(rbSmoker.Checked, rbLuggage.Checked, rbHandicap.Checked, rbPet.Checked, spinnerGender.SelectedItemId); };
         }
 
-        private void SaveAndContinue(Boolean smoker, Boolean luggage, Boolean handicap, Boolean pet, Boolean male)
+        private void SaveAndContinue(Boolean smoker, Boolean luggage, Boolean handicap, Boolean pet, long gender)
         {
             // TODO: Save the preferences
-            Console.WriteLine("Smoker=" + smoker + ";Luggage=" + luggage + ";handicap=" + handicap + ";male=" + male + ";pet=" + pet);
+            Console.WriteLine("Smoker=" + smoker + ";Luggage=" + luggage + ";handicap=" + handicap + ";gender=" + gender + ";pet=" + pet);
             
             // TODO: Go to the next activity
             // var nextActivity = new Intent(this, typeof(PreferencesActivity));
