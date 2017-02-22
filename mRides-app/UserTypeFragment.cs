@@ -22,7 +22,8 @@ namespace mRides_app
         Spinner spinner;
         TextView tv1;
         Boolean driver = false; // Keep track if user selected 'Driver' or ' Rider'
-        String num = ""; // Keep track of the number selected by the user in the drop-down list
+        int num = 1; // Keep track of the number selected by the user in the drop-down list
+        IEditUserSelectionListener listener;
 
         // Static method to create a new instance of this fragment
         public static UserTypeFragment NewInstance(Bundle bundle)
@@ -58,6 +59,17 @@ namespace mRides_app
             return view;
         }
 
+        public override void OnAttach(Activity activity)
+        {
+            base.OnAttach(activity);
+            listener = (IEditUserSelectionListener)activity;
+        }
+
+        public interface IEditUserSelectionListener
+        {
+            void updateUserSelection(string type, int num);
+        }
+
         // Toggle between rider and driver
         void SwitchDriverOrRider(object sender, EventArgs e)
         {
@@ -79,23 +91,30 @@ namespace mRides_app
         // Store the number selected from the drop-down list
         void SpinnerItemSelected(object sender, EventArgs e)
         {
-            num = spinner.SelectedItem.ToString();
+            num = Int32.Parse(spinner.SelectedItem.ToString());
         }
         // Load a new activity and transfer the data to the new one
         void NextButtonClicked(object sender, EventArgs e)
         {
+            string userType = "";
+
             if (driver)
             {
-                Intent myIntent1 = new Intent(view.Context, typeof(DriverMode));
-                myIntent1.PutExtra("numOfSeats", num);
-                view.Context.StartActivity(myIntent1);
+                userType = "Driver";
+                //Intent myIntent1 = new Intent(view.Context, typeof(DriverMode));
+                //myIntent1.PutExtra("numOfSeats", num);
+                //view.Context.StartActivity(myIntent1);
             }
             else
             {
-                Intent myIntent2 = new Intent(view.Context, typeof(RiderMode));
-                myIntent2.PutExtra("numOfPeople", num);
-                view.Context.StartActivity(myIntent2);
+                userType = "Rider";
+                //Intent myIntent2 = new Intent(view.Context, typeof(RiderMode));
+                //myIntent2.PutExtra("numOfPeople", num);
+                //view.Context.StartActivity(myIntent2);
             }
+
+            listener.updateUserSelection(userType, num);
+            Dismiss();
         }
 
         // Close dialog fragment when clicking 'Previous' button
