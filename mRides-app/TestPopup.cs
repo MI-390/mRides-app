@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace mRides_app
 {
-    [Activity(Label = "mRides", MainLauncher = true)]
+    [Activity(Label = "mRides")]
     public class AlertScreen : Activity
     {
         protected override void OnCreate(Bundle bundle)

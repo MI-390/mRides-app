@@ -20,7 +20,7 @@ namespace mRides_app
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.DriverMode);
-
+            // Get the number of seats selected in previous activity
             String num = Intent.GetStringExtra("numOfSeats");
             TextView tv = FindViewById<TextView>(Resource.Id.driverModeText);
             tv.SetText("Number of available seats: " + num, TextView.BufferType.Normal);

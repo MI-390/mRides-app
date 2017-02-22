@@ -20,6 +20,8 @@ namespace mRides_app
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.RiderMode);
+
+            // Get the number of people in the group selected in previous activity
             String num = Intent.GetStringExtra("numOfPeople");
             int test = Int32.Parse(num); // parse the string to an int
             TextView tv = FindViewById<TextView>(Resource.Id.riderModeText);

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -14,13 +15,7 @@ namespace mRides_app
 {
     public class UserTypeFragment : DialogFragment
     {
-        //public override void OnCreate(Bundle savedInstanceState)
-        //{
-        //    base.OnCreate(savedInstanceState);
-
-        //    // Create your fragment here
-        //}
-
+        // Static method to create a new instance of this fragment
         public static UserTypeFragment NewInstance(Bundle bundle)
         {
             UserTypeFragment fragment = new UserTypeFragment();
@@ -30,8 +25,9 @@ namespace mRides_app
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            Boolean driver = false;
-            String num="";
+            Boolean driver = false; // Keep track if user selected 'Driver' or ' Rider'
+            String num=""; // Keep track of the number selected by the user in the drop-down list
+
             // Use this to return your custom view for this Fragment
             // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
             View view = inflater.Inflate(Resource.Layout.UserTypeFragment, container, false);
@@ -41,6 +37,8 @@ namespace mRides_app
             Spinner spinner = view.FindViewById<Spinner>(Resource.Id.numOfPeople);
             Button button2 = view.FindViewById<Button>(Resource.Id.Next);
             TextView tv1 = view.FindViewById<TextView>(Resource.Id.numOfPeopleText);
+
+            // Toggle between rider and driver
             bool check = true;
             switcher.CheckedChange += delegate
             {
@@ -70,21 +68,20 @@ namespace mRides_app
             adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
             spinner.Adapter = adapter;
 
-            // Store the number selected
+            // Store the number selected from the drop-down list
             spinner.ItemSelected += delegate
             {
                 num = spinner.SelectedItem.ToString();
             };
 
-
-            // Close dialog fragment
+            // Close dialog fragment when clicking 'Previous' button
             previous.Click += delegate
             {
                 Dismiss();
                 Toast.MakeText(Activity, "Choose your destination", ToastLength.Short).Show();
             };
 
-            // Click next
+            // Load a new activity and transfer the data to the new one
             next.Click += delegate
             {
                 if (driver)
