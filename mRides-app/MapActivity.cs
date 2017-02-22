@@ -30,7 +30,7 @@ namespace mRides_app
         private LocationRequest locationRequest;
         private Location lastUserLocation;
         private bool locationPermissionGranted;
-        private string Destination;
+        private string destination;
         const string googleApiKey = "AIzaSyAz9p6O99w8ZWkFUbaREJXmnj01Mpm19dA";
 
         protected override void OnCreate(Bundle bundle)
@@ -60,7 +60,6 @@ namespace mRides_app
             AutocompleteFilter typeFilter = new AutocompleteFilter.Builder().SetTypeFilter(AutocompleteFilter.TypeFilterEstablishment).Build();
             autocompleteFragment.SetHint("Destination?");
             autocompleteFragment.SetFilter(typeFilter);
-            //autocompleteFragment.SetBoundsBias(new LatLngBounds(new LatLng(lastUserLocation.Latitude - 0.2, lastUserLocation.Longitude - 0.2), new LatLng(lastUserLocation.Latitude + 0.2, lastUserLocation.Longitude + 0.2)));
 
             //// Register a listener to receive callbacks when a place has been selected or an error has
             //// occurred.
@@ -75,7 +74,6 @@ namespace mRides_app
                 map.MyLocationEnabled = true;
                 map.UiSettings.MyLocationButtonEnabled = true;
                 map.UiSettings.ZoomControlsEnabled = true;
-
                 if (lastUserLocation != null)
                 {
                     map.MyLocationButtonClick += OnMyLocationButtonClick;
@@ -86,6 +84,7 @@ namespace mRides_app
         private void OnMyLocationButtonClick(object sender, Android.Gms.Maps.GoogleMap.MyLocationButtonClickEventArgs e)
         {
             LatLng position = new LatLng(lastUserLocation.Latitude, lastUserLocation.Longitude);
+            PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)FragmentManager.FindFragmentById(Resource.Id.place_autocomplete_fragment);
             UpdateCameraPosition(position);
         }
 
@@ -152,6 +151,9 @@ namespace mRides_app
         public void OnLocationChanged(Location location)
         {
             lastUserLocation = location;
+            PlaceAutocompleteFragment autocompleteFragment = FragmentManager.FindFragmentById<PlaceAutocompleteFragment>(Resource.Id.place_autocomplete_fragment);
+            autocompleteFragment.SetBoundsBias(new LatLngBounds(new LatLng(lastUserLocation.Latitude - 0.2, lastUserLocation.Longitude - 0.2), new LatLng(lastUserLocation.Latitude + 0.2, lastUserLocation.Longitude + 0.2)));
+
         }
 
         public void OnConnectionSuspended(int i)
@@ -166,10 +168,14 @@ namespace mRides_app
 
         public void OnPlaceSelected(IPlace place)
         {
-            Destination = place.NameFormatted.ToString();
+            destination = place.NameFormatted.ToString();
             // throw new NotImplementedException();
-            Toast.MakeText(ApplicationContext, "Destination : " + Destination, ToastLength.Long).Show();
-            Log.Info("Xamarin ", "Place : " + place.NameFormatted);
+            Toast.MakeText(ApplicationContext, "Destination : " + destination, ToastLength.Long).Show();
+            Marker destinationMarker = map.AddMarker(new MarkerOptions().SetPosition(place.LatLng).SetTitle(destination).Visible(true));
+            //Geocoder geocoder = new Geocoder(this);
+            //IList<Address> addresses = null;
+            //addresses = geocoder.GetFromLocation(place.LatLng.Latitude, place.LatLng.Longitude, 1);
+            //string countryCode = addresses[0].CountryCode;
         }
     }
 }

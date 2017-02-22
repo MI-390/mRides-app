@@ -23,59 +23,32 @@ namespace mRides_app
                 authorizeUrl: new Uri("https://m.facebook.com/dialog/oauth/"),
                 redirectUrl: new Uri("http://www.facebook.com/connect/login_success.html"));
 
+            auth.Completed += OnAuthenticationCompleted;
+
             auth.AllowCancel = allowCancel;
-
-            // If authorization succeeds or is canceled, .Completed will be fired.
-            auth.Completed += (s, ee) =>
-            {
-                if (!ee.IsAuthenticated)
-                {
-                    var builder = new AlertDialog.Builder(this);
-                    builder.SetMessage("Not Authenticated");
-                    builder.SetPositiveButton("Ok", (o, e) => { });
-                    builder.Create().Show();
-                    return;
-                }
-
-                // Now that we're logged in, make a OAuth2 request to get the user's info.
-                var request = new OAuth2Request("GET", new Uri("https://graph.facebook.com/me"), null, ee.Account);
-                request.GetResponseAsync().ContinueWith(t =>
-                {
-                    var builder = new AlertDialog.Builder(this);
-                    if (t.IsFaulted)
-                    {
-                        builder.SetTitle("Error");
-                        builder.SetMessage(t.Exception.Flatten().InnerException.ToString());
-                    }
-                    else if (t.IsCanceled)
-                        builder.SetTitle("Task Canceled");
-                    else
-                    {
-                        var obj = JObject.Parse(t.Result.GetResponseText());
-
-                        builder.SetTitle("Logged in");
-                        builder.SetMessage("Name: " + obj["name"]);
-                        userName = "Name: " + obj["name"].ToString();
-                        if (userName != null && ee.IsAuthenticated)
-                         {
-                            var mapActivity = new Intent(this, typeof(MapActivity));
-                            mapActivity.PutExtra("Profile Info", userName);
-                            StartActivity(mapActivity);
-                            //StartActivity(typeof(MapActivity));
-                         }
-                    }
-
-                    builder.SetPositiveButton("Ok", (o, e) => { });
-                    builder.Create().Show();
-
-                }, UIScheduler);
-            };
 
             var intent = auth.GetUI(this);
             StartActivity(intent);
         }
 
-        private static readonly TaskScheduler UIScheduler = TaskScheduler.FromCurrentSynchronizationContext();
+        async void OnAuthenticationCompleted(object sender, AuthenticatorCompletedEventArgs e)
+        {
+            if (e.IsAuthenticated)
+            {
+                var request = new OAuth2Request("GET", new Uri("https://graph.facebook.com/me"), null, e.Account);
+                var response = await request.GetResponseAsync();
+                if (response != null)
+                {
+                    var obj = JObject.Parse(response.GetResponseText());
+                    userName = "Name: " + obj["name"].ToString();
+                    var mapActivity = new Intent(this, typeof(MapActivity));
+                    mapActivity.PutExtra("Profile Info", userName);
+                    StartActivity(mapActivity);
+                }
+            }
+        }
+
+       // private static readonly TaskScheduler UIScheduler = TaskScheduler.FromCurrentSynchronizationContext();
 
         protected override void OnCreate(Bundle bundle)
         {
