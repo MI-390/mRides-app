@@ -21,7 +21,7 @@
         android:gravity="center"
         android:textAllCaps="true"
         android:id="@+id/textViewSetYourPreferences"
-        android:paddingBottom="20dp"/>
+        android:paddingBottom="20dp" />
     <TableLayout
         android:minWidth="25px"
         android:minHeight="25px"
@@ -116,19 +116,18 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:layout_gravity="center_horizontal">
-            <RadioButton
+            <TextView
                 android:layout_column="1"
-                android:layout_width="wrap_content"
+                android:text="@string/Prompt_Gender"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/Pref_Male"
-                android:id="@+id/radioButtonMale" />
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/textViewGenderPref" />
+            <Spinner
                 android:layout_column="2"
-                android:text="@string/Pref_Female"
-                android:id="@+id/radioButtonNonFemale" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinnerGender" />
         </TableRow>
     </TableLayout>
     <LinearLayout
