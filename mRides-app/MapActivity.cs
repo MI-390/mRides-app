@@ -18,12 +18,13 @@ using Android.Locations;
 using Android.Gms.Location.Places;
 using Android.Gms.Location.Places.UI;
 using Android.Util;
+using Java.Lang;
 
 namespace mRides_app
 {
     [Activity(Label = "MapActivity")]
     public class MapActivity : Activity, IOnMapReadyCallback, Android.Gms.Location.ILocationListener,
-        GoogleApiClient.IConnectionCallbacks, GoogleApiClient.IOnConnectionFailedListener, IPlaceSelectionListener
+        GoogleApiClient.IConnectionCallbacks, GoogleApiClient.IOnConnectionFailedListener, IPlaceSelectionListener, IEditUserSelectionListener
     {
         private Android.Gms.Maps.GoogleMap map;
         private GoogleApiClient googleApiClient;
@@ -31,7 +32,10 @@ namespace mRides_app
         private Location lastUserLocation;
         private bool locationPermissionGranted;
         private string destination;
+        private Marker destinationMarker;
         const string googleApiKey = "AIzaSyAz9p6O99w8ZWkFUbaREJXmnj01Mpm19dA";
+        string userType;
+        int numberOfPeople;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -61,14 +65,17 @@ namespace mRides_app
             autocompleteFragment.SetHint("Destination?");
             autocompleteFragment.SetFilter(typeFilter);
 
-            //// Register a listener to receive callbacks when a place has been selected or an error has
-            //// occurred.
+            // Register a listener to receive callbacks when a place has been selected or an error has occurred.
             autocompleteFragment.SetOnPlaceSelectedListener(this);
+
+            string userType;
+            int numberOfPeople;
         }
 
         public void OnMapReady(Android.Gms.Maps.GoogleMap googleMap)
         {
             map = googleMap;
+            map.MarkerClick += OnMarkerClick;
             if (locationPermissionGranted)
             {
                 map.MyLocationEnabled = true;
@@ -78,6 +85,16 @@ namespace mRides_app
                 {
                     map.MyLocationButtonClick += OnMyLocationButtonClick;
                 }
+            }
+        }
+
+        private void OnMarkerClick(object sender, Android.Gms.Maps.GoogleMap.MarkerClickEventArgs e)
+        {
+            if (e.Marker.Equals(destinationMarker))
+            {
+                FragmentTransaction transaction = FragmentManager.BeginTransaction();
+                UserTypeFragment dialog = new UserTypeFragment();
+                dialog.Show(transaction, "User type fragment");
             }
         }
 
@@ -162,20 +179,27 @@ namespace mRides_app
 
         public void OnError(Statuses status)
         {
-            //  throw new NotImplementedException();
             Log.Info("Xamarin ", "Error has occured");
         }
 
         public void OnPlaceSelected(IPlace place)
         {
             destination = place.NameFormatted.ToString();
-            // throw new NotImplementedException();
             Toast.MakeText(ApplicationContext, "Destination : " + destination, ToastLength.Long).Show();
-            Marker destinationMarker = map.AddMarker(new MarkerOptions().SetPosition(place.LatLng).SetTitle(destination).Visible(true));
+            destinationMarker = map.AddMarker(new MarkerOptions().SetPosition(place.LatLng).SetTitle(destination));
             //Geocoder geocoder = new Geocoder(this);
             //IList<Address> addresses = null;
             //addresses = geocoder.GetFromLocation(place.LatLng.Latitude, place.LatLng.Longitude, 1);
             //string countryCode = addresses[0].CountryCode;
         }
+
+        public void updateUserSelection(string type, int number)
+        {
+            userType = type;
+            numberOfPeople = number;
+            Toast.MakeText(ApplicationContext, "User type: " + userType + " Number of people: " + numberOfPeople, ToastLength.Long).Show();
+        }
+
+
     }
 }

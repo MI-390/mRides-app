@@ -410,6 +410,12 @@ namespace mRides_app
 		public partial class Id
 		{
 			
+			// aapt resource value: 0x7f080020
+			public const int CloseButton = 2131230752;
+			
+			// aapt resource value: 0x7f080021
+			public const int Next = 2131230753;
+			
 			// aapt resource value: 0x7f080005
 			public const int adjust_height = 2131230725;
 			
@@ -424,6 +430,9 @@ namespace mRides_app
 			
 			// aapt resource value: 0x7f08000b
 			public const int dark = 2131230731;
+			
+			// aapt resource value: 0x7f08001d
+			public const int driver1 = 2131230749;
 			
 			// aapt resource value: 0x7f080000
 			public const int hybrid = 2131230720;
@@ -448,6 +457,9 @@ namespace mRides_app
 			
 			// aapt resource value: 0x7f080002
 			public const int normal = 2131230722;
+			
+			// aapt resource value: 0x7f08001f
+			public const int numOfPeople = 2131230751;
 			
 			// aapt resource value: 0x7f080014
 			public const int place_autocomplete_clear_button = 2131230740;
@@ -476,6 +488,12 @@ namespace mRides_app
 			// aapt resource value: 0x7f080015
 			public const int place_autocomplete_separator = 2131230741;
 			
+			// aapt resource value: 0x7f08001b
+			public const int rider1 = 2131230747;
+			
+			// aapt resource value: 0x7f08001c
+			public const int riderOrDriverSwitch = 2131230748;
+			
 			// aapt resource value: 0x7f080003
 			public const int satellite = 2131230723;
 			
@@ -484,6 +502,12 @@ namespace mRides_app
 			
 			// aapt resource value: 0x7f080004
 			public const int terrain = 2131230724;
+			
+			// aapt resource value: 0x7f08001a
+			public const int textView2 = 2131230746;
+			
+			// aapt resource value: 0x7f08001e
+			public const int textView3 = 2131230750;
 			
 			// aapt resource value: 0x7f080009
 			public const int wide = 2131230729;
@@ -534,6 +558,9 @@ namespace mRides_app
 			
 			// aapt resource value: 0x7f030005
 			public const int place_autocomplete_progress = 2130903045;
+			
+			// aapt resource value: 0x7f030006
+			public const int UserType = 2130903046;
 			
 			static Layout()
 			{
