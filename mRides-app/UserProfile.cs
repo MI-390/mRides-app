@@ -24,13 +24,10 @@ namespace mRides_app
 
             SetContentView(Resource.Layout.UserProfile);
 
-            usernameText = (TextView)FindViewById(Resource.Id.userName);
+            usernameText = FindViewById<TextView>(Resource.Id.userName);
 
             usernameText.Text = username;
 
-
-
-            // Create your application here
         }
     }
 }

@@ -40,12 +40,19 @@ namespace mRides_app
                 if (response != null)
                 {
                     var obj = JObject.Parse(response.GetResponseText());
+
+                    /** COMMENT THE FOLLOWING TO VIEW USER PROFILE ACTIVITY UPON LOGIN **/
                     userName = "Name: " + obj["name"].ToString();
                     var mapActivity = new Intent(this, typeof(MapActivity));
-                    var userProfileActivity = new Intent(this, typeof(UserProfile));
                     mapActivity.PutExtra("Profile Info", userName);
-                    userProfileActivity.PutExtra("Profile Info", userName);
-                    StartActivity(mapActivity); //change to userProfile if want to test user profile activity
+                    StartActivity(mapActivity); 
+
+                    /** UNCOMMENT THE FOLLOWING TO VIEW USER PROFILE ACTIVITY UPON LOGIN **/
+                    //userName = "" + obj["name"].ToString();
+                    //var userProfileActivity = new Intent(this, typeof(UserProfile));
+                    //userProfileActivity.PutExtra("Profile Info", userName);
+                    //StartActivity(userProfileActivity); 
+
                 }
             }
         }
