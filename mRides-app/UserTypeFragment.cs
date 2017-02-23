@@ -13,10 +13,12 @@ using Android.Widget;
 
 namespace mRides_app
 {
-
+    public interface IEditUserSelectionListener
+    {
+        void updateUserSelection(string type, int num);
+    }
     public class UserTypeFragment : DialogFragment
     {
-        View view;
         Button previous;
         Button next;
         Switch switcher;
@@ -38,12 +40,13 @@ namespace mRides_app
         {
             // Use this to return your custom view for this Fragment
             // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
-            view = inflater.Inflate(Resource.Layout.UserTypeFragment, container, false);
+            base.OnCreateView(inflater, container, savedInstanceState);
+            View view = inflater.Inflate(Resource.Layout.UserTypeFragment, container, false);
             previous = view.FindViewById<Button>(Resource.Id.CloseButton);
             next = view.FindViewById<Button>(Resource.Id.Next);
             switcher = view.FindViewById<Switch>(Resource.Id.riderOrDriverSwitch);
             spinner = view.FindViewById<Spinner>(Resource.Id.numOfPeople);
-            tv1 = view.FindViewById<TextView>(Resource.Id.numOfPeopleText);
+            tv1 = view.FindViewById<TextView>(Resource.Id.textView3);
 
             switcher.CheckedChange += SwitchDriverOrRider;
 
@@ -66,10 +69,6 @@ namespace mRides_app
             listener = (IEditUserSelectionListener)activity;
         }
 
-        public interface IEditUserSelectionListener
-        {
-            void updateUserSelection(string type, int num);
-        }
 
         // Toggle between rider and driver
         void SwitchDriverOrRider(object sender, EventArgs e)
