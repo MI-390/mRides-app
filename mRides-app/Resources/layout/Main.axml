@@ -6,21 +6,18 @@
     p1:id="@+id/linearLayout1"
     p1:background="#EDECEB"
     p1:gravity="center">
-
-  <ImageView
-      p1:src="@drawable/mrideslogo"
-      p1:layout_width="370.0dp"
-      p1:layout_height="207.5dp"
-      p1:id="@+id/imageView1"
-      p1:maxWidth="80dp"
-      p1:minHeight="80dp"
-      p1:scaleType="fitCenter" />
-
-  <Button
-      p1:layout_width="222.0dp"
-      p1:layout_height="wrap_content"
-      p1:id="@+id/button1"
-      p1:background="@drawable/fblogin"
-      p1:stateListAnimator="@null" />
-
+    <ImageView
+        p1:src="@drawable/mrideslogo"
+        p1:layout_width="370.0dp"
+        p1:layout_height="207.5dp"
+        p1:id="@+id/imageView1"
+        p1:maxWidth="80dp"
+        p1:minHeight="80dp"
+        p1:scaleType="fitCenter" />
+    <Button
+        p1:layout_width="222.0dp"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/button1"
+        p1:background="@drawable/fblogin"
+        p1:stateListAnimator="@null" />
 </LinearLayout>
