@@ -16,7 +16,7 @@
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -89,6 +89,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UserTypeFragment.cs" />
     <Compile Include="MapActivity.cs" />
     <Compile Include="Authentication\Facebook.cs" />
     <Compile Include="DriverMode.cs" />
@@ -109,10 +110,10 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\UserType.axml">
-      <SubType>Designer</SubType>
+		<SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\Preferences.axml">
-      <SubType>Designer</SubType>
+	<AndroidResource Include="Resources\layout\Preferences.axml">
+	  <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\UserTypeFragment.axml">
       <SubType>Designer</SubType>
