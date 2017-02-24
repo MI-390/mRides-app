@@ -43,7 +43,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Tests.cs" />
+    <Compile Include="UITestSample.cs" />
+    <Compile Include="UnitTestSample.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

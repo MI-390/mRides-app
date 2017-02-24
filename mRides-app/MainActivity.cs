@@ -10,6 +10,7 @@ using Android.Content;
 //mi-390
 namespace mRides_app
 {
+    //ggrrg
     [Activity(Label = "mRides_app", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
