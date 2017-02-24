@@ -89,6 +89,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Feedback\DriverReview.cs" />
+    <Compile Include="Feedback\FeedbackTest.cs" />
+    <Compile Include="Feedback\RiderReview.cs" />
     <Compile Include="MapActivity.cs" />
     <Compile Include="Authentication\Facebook.cs" />
     <Compile Include="MainActivity.cs" />
@@ -108,6 +111,12 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\Alert.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\RiderReview.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\DriverReview.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
