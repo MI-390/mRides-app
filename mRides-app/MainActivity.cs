@@ -43,16 +43,22 @@ namespace mRides_app
                     var obj = JObject.Parse(response.GetResponseText());
 
                     /** COMMENT THE FOLLOWING TO VIEW USER PROFILE ACTIVITY UPON LOGIN **/
-                    userName = "Name: " + obj["name"].ToString();
-                    var mapActivity = new Intent(this, typeof(MapActivity));
-                    mapActivity.PutExtra("Profile Info", userName);
-                    StartActivity(mapActivity);
+                    //userName = "Name: " + obj["name"].ToString();
+                    //var mapActivity = new Intent(this, typeof(MapActivity));
+                    //mapActivity.PutExtra("Profile Info", userName);
+                    //StartActivity(mapActivity);
 
                     /** UNCOMMENT THE FOLLOWING TO VIEW USER PROFILE ACTIVITY UPON LOGIN **/
                     //userName = "" + obj["name"].ToString();
                     //var userProfileActivity = new Intent(this, typeof(UserProfile));
                     //userProfileActivity.PutExtra("Profile Info", userName);
                     //StartActivity(userProfileActivity);
+
+                    /** GO TO PREFERENCES */
+                    userName = obj["name"].ToString();
+                    var preferencesActivity = new Intent(this, typeof(PreferencesActivity));
+                    preferencesActivity.PutExtra(GetString(Resource.String.ExtraData_UserName), userName);
+                    StartActivity(preferencesActivity);
                 }
             }
         }

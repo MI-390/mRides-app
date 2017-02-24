@@ -729,6 +729,12 @@ namespace mRides_app
 			// aapt resource value: 0x7f060022
 			public const int ApplicationName = 2131099682;
 			
+			// aapt resource value: 0x7f060033
+			public const int ExtraData_DataNotAvailable = 2131099699;
+			
+			// aapt resource value: 0x7f060032
+			public const int ExtraData_UserName = 2131099698;
+			
 			// aapt resource value: 0x7f060021
 			public const int Hello = 2131099681;
 			
