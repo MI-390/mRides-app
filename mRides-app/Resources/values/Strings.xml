@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="Hello">Hello World, Click Me!</string>
+  <string name="ApplicationName">mRides-app</string>
+
+  <!--PREFERENCE-RELATED STRINGS-->
+  <string name="Pref_Hi">Hi</string>
+  <string name="Pref_SetYourPreferences">Set Your Preferences</string>
+  <string name="Pref_Smoker">Smoker</string>
+  <string name="Pref_NonSmoker">Non-Smoker</string>
+  <string name="Pref_Male">Male</string>
+  <string name="Pref_Female">Female</string>
+  <string name="Pref_Luggage">Luggage</string>
+  <string name="Pref_NoLuggage">No Luggage</string>
+  <string name="Pref_Handicap">Physical Disability</string>
+  <string name="Pref_NoHandicap">No Physical Disability</string>
+  <string name="Pref_Pet">Pet</string>
+  <string name="Pref_NoPet">No Pet</string>
+  <string name="Pref_Prompt_Gender">Preferred Gender</string>
+  <string-array name="Pref_Gender">
+    <item>Any</item>
+    <item>Male</item>
+    <item>Female</item>
+  </string-array>
+  <string name="Pref_Back">Back</string>
+  <string name="Pref_Done">Done</string>
+
     <string name="ApplicationName">mRides-app</string>
   <string-array name="numbers_array">
     <item>"1"</item>
