@@ -130,6 +130,9 @@
     </AndroidResource>
     <AndroidResource Include="Resources\layout\DriverReview.axml" />
     <AndroidResource Include="Resources\layout\RiderReview.axml" />
+    <AndroidResource Include="Resources\layout\UserProfileFragment.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">
