@@ -122,7 +122,7 @@
     <AndroidResource Include="Resources\layout\UserProfile.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\Preferences.axml" />
+    <AndroidResource Include="Resources\layout\Preferences.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
