@@ -12,16 +12,16 @@ using Android.Widget;
 
 namespace mRides_app
 {
-    class User
+    public class User
     {
-        private int id { get; set; }
-        private String firstName { get; set; }
-        private String lastName { get; set; }
-        private int gsd { get; set; }
-        private bool hasLuggage { get; set; }
-        private bool isHandicap { get; set; }
-        private bool isSmoker { get; set; }
-        private String preferredLanguage { get; set; }
+        public int id { get; private set; }
+        public String firstName { get; set; }
+        public String lastName { get; set; }
+        public int gsd { get; set; }
+        public bool hasLuggage { get; set; }
+        public bool isHandicap { get; set; }
+        public bool isSmoker { get; set; }
+        public String preferredLanguage { get; set; }
 
 
     }
