@@ -267,151 +267,160 @@ namespace mRides_app
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int common_full_open_on_phone = 2130837504;
+			public const int boy = 2130837504;
 			
 			// aapt resource value: 0x7f020001
-			public const int common_google_signin_btn_icon_dark = 2130837505;
+			public const int common_full_open_on_phone = 2130837505;
 			
 			// aapt resource value: 0x7f020002
-			public const int common_google_signin_btn_icon_dark_disabled = 2130837506;
+			public const int common_google_signin_btn_icon_dark = 2130837506;
 			
 			// aapt resource value: 0x7f020003
-			public const int common_google_signin_btn_icon_dark_focused = 2130837507;
+			public const int common_google_signin_btn_icon_dark_disabled = 2130837507;
 			
 			// aapt resource value: 0x7f020004
-			public const int common_google_signin_btn_icon_dark_normal = 2130837508;
+			public const int common_google_signin_btn_icon_dark_focused = 2130837508;
 			
 			// aapt resource value: 0x7f020005
-			public const int common_google_signin_btn_icon_dark_pressed = 2130837509;
+			public const int common_google_signin_btn_icon_dark_normal = 2130837509;
 			
 			// aapt resource value: 0x7f020006
-			public const int common_google_signin_btn_icon_light = 2130837510;
+			public const int common_google_signin_btn_icon_dark_pressed = 2130837510;
 			
 			// aapt resource value: 0x7f020007
-			public const int common_google_signin_btn_icon_light_disabled = 2130837511;
+			public const int common_google_signin_btn_icon_light = 2130837511;
 			
 			// aapt resource value: 0x7f020008
-			public const int common_google_signin_btn_icon_light_focused = 2130837512;
+			public const int common_google_signin_btn_icon_light_disabled = 2130837512;
 			
 			// aapt resource value: 0x7f020009
-			public const int common_google_signin_btn_icon_light_normal = 2130837513;
+			public const int common_google_signin_btn_icon_light_focused = 2130837513;
 			
 			// aapt resource value: 0x7f02000a
-			public const int common_google_signin_btn_icon_light_pressed = 2130837514;
+			public const int common_google_signin_btn_icon_light_normal = 2130837514;
 			
 			// aapt resource value: 0x7f02000b
-			public const int common_google_signin_btn_text_dark = 2130837515;
+			public const int common_google_signin_btn_icon_light_pressed = 2130837515;
 			
 			// aapt resource value: 0x7f02000c
-			public const int common_google_signin_btn_text_dark_disabled = 2130837516;
+			public const int common_google_signin_btn_text_dark = 2130837516;
 			
 			// aapt resource value: 0x7f02000d
-			public const int common_google_signin_btn_text_dark_focused = 2130837517;
+			public const int common_google_signin_btn_text_dark_disabled = 2130837517;
 			
 			// aapt resource value: 0x7f02000e
-			public const int common_google_signin_btn_text_dark_normal = 2130837518;
+			public const int common_google_signin_btn_text_dark_focused = 2130837518;
 			
 			// aapt resource value: 0x7f02000f
-			public const int common_google_signin_btn_text_dark_pressed = 2130837519;
+			public const int common_google_signin_btn_text_dark_normal = 2130837519;
 			
 			// aapt resource value: 0x7f020010
-			public const int common_google_signin_btn_text_light = 2130837520;
+			public const int common_google_signin_btn_text_dark_pressed = 2130837520;
 			
 			// aapt resource value: 0x7f020011
-			public const int common_google_signin_btn_text_light_disabled = 2130837521;
+			public const int common_google_signin_btn_text_light = 2130837521;
 			
 			// aapt resource value: 0x7f020012
-			public const int common_google_signin_btn_text_light_focused = 2130837522;
+			public const int common_google_signin_btn_text_light_disabled = 2130837522;
 			
 			// aapt resource value: 0x7f020013
-			public const int common_google_signin_btn_text_light_normal = 2130837523;
+			public const int common_google_signin_btn_text_light_focused = 2130837523;
 			
 			// aapt resource value: 0x7f020014
-			public const int common_google_signin_btn_text_light_pressed = 2130837524;
+			public const int common_google_signin_btn_text_light_normal = 2130837524;
 			
 			// aapt resource value: 0x7f020015
-			public const int common_ic_googleplayservices = 2130837525;
+			public const int common_google_signin_btn_text_light_pressed = 2130837525;
 			
 			// aapt resource value: 0x7f020016
-			public const int common_plus_signin_btn_icon_dark = 2130837526;
+			public const int common_ic_googleplayservices = 2130837526;
 			
 			// aapt resource value: 0x7f020017
-			public const int common_plus_signin_btn_icon_dark_disabled = 2130837527;
+			public const int common_plus_signin_btn_icon_dark = 2130837527;
 			
 			// aapt resource value: 0x7f020018
-			public const int common_plus_signin_btn_icon_dark_focused = 2130837528;
+			public const int common_plus_signin_btn_icon_dark_disabled = 2130837528;
 			
 			// aapt resource value: 0x7f020019
-			public const int common_plus_signin_btn_icon_dark_normal = 2130837529;
+			public const int common_plus_signin_btn_icon_dark_focused = 2130837529;
 			
 			// aapt resource value: 0x7f02001a
-			public const int common_plus_signin_btn_icon_dark_pressed = 2130837530;
+			public const int common_plus_signin_btn_icon_dark_normal = 2130837530;
 			
 			// aapt resource value: 0x7f02001b
-			public const int common_plus_signin_btn_icon_light = 2130837531;
+			public const int common_plus_signin_btn_icon_dark_pressed = 2130837531;
 			
 			// aapt resource value: 0x7f02001c
-			public const int common_plus_signin_btn_icon_light_disabled = 2130837532;
+			public const int common_plus_signin_btn_icon_light = 2130837532;
 			
 			// aapt resource value: 0x7f02001d
-			public const int common_plus_signin_btn_icon_light_focused = 2130837533;
+			public const int common_plus_signin_btn_icon_light_disabled = 2130837533;
 			
 			// aapt resource value: 0x7f02001e
-			public const int common_plus_signin_btn_icon_light_normal = 2130837534;
+			public const int common_plus_signin_btn_icon_light_focused = 2130837534;
 			
 			// aapt resource value: 0x7f02001f
-			public const int common_plus_signin_btn_icon_light_pressed = 2130837535;
+			public const int common_plus_signin_btn_icon_light_normal = 2130837535;
 			
 			// aapt resource value: 0x7f020020
-			public const int common_plus_signin_btn_text_dark = 2130837536;
+			public const int common_plus_signin_btn_icon_light_pressed = 2130837536;
 			
 			// aapt resource value: 0x7f020021
-			public const int common_plus_signin_btn_text_dark_disabled = 2130837537;
+			public const int common_plus_signin_btn_text_dark = 2130837537;
 			
 			// aapt resource value: 0x7f020022
-			public const int common_plus_signin_btn_text_dark_focused = 2130837538;
+			public const int common_plus_signin_btn_text_dark_disabled = 2130837538;
 			
 			// aapt resource value: 0x7f020023
-			public const int common_plus_signin_btn_text_dark_normal = 2130837539;
+			public const int common_plus_signin_btn_text_dark_focused = 2130837539;
 			
 			// aapt resource value: 0x7f020024
-			public const int common_plus_signin_btn_text_dark_pressed = 2130837540;
+			public const int common_plus_signin_btn_text_dark_normal = 2130837540;
 			
 			// aapt resource value: 0x7f020025
-			public const int common_plus_signin_btn_text_light = 2130837541;
+			public const int common_plus_signin_btn_text_dark_pressed = 2130837541;
 			
 			// aapt resource value: 0x7f020026
-			public const int common_plus_signin_btn_text_light_disabled = 2130837542;
+			public const int common_plus_signin_btn_text_light = 2130837542;
 			
 			// aapt resource value: 0x7f020027
-			public const int common_plus_signin_btn_text_light_focused = 2130837543;
+			public const int common_plus_signin_btn_text_light_disabled = 2130837543;
 			
 			// aapt resource value: 0x7f020028
-			public const int common_plus_signin_btn_text_light_normal = 2130837544;
+			public const int common_plus_signin_btn_text_light_focused = 2130837544;
 			
 			// aapt resource value: 0x7f020029
-			public const int common_plus_signin_btn_text_light_pressed = 2130837545;
+			public const int common_plus_signin_btn_text_light_normal = 2130837545;
 			
 			// aapt resource value: 0x7f02002a
-			public const int fbLogin = 2130837546;
+			public const int common_plus_signin_btn_text_light_pressed = 2130837546;
 			
 			// aapt resource value: 0x7f02002b
-			public const int Icon = 2130837547;
+			public const int divider = 2130837547;
 			
 			// aapt resource value: 0x7f02002c
-			public const int mRidesLogo = 2130837548;
+			public const int fbLogin = 2130837548;
 			
 			// aapt resource value: 0x7f02002d
-			public const int places_ic_clear = 2130837549;
+			public const int girl = 2130837549;
 			
 			// aapt resource value: 0x7f02002e
-			public const int places_ic_search = 2130837550;
+			public const int Icon = 2130837550;
 			
 			// aapt resource value: 0x7f02002f
-			public const int powered_by_google_dark = 2130837551;
+			public const int mRidesLogo = 2130837551;
 			
 			// aapt resource value: 0x7f020030
-			public const int powered_by_google_light = 2130837552;
+			public const int places_ic_clear = 2130837552;
+			
+			// aapt resource value: 0x7f020031
+			public const int places_ic_search = 2130837553;
+			
+			// aapt resource value: 0x7f020032
+			public const int powered_by_google_dark = 2130837554;
+			
+			// aapt resource value: 0x7f020033
+			public const int powered_by_google_light = 2130837555;
 			
 			static Drawable()
 			{
@@ -426,11 +435,11 @@ namespace mRides_app
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f090021
-			public const int CloseButton = 2131296289;
+			// aapt resource value: 0x7f090029
+			public const int CloseButton = 2131296297;
 			
-			// aapt resource value: 0x7f090022
-			public const int Next = 2131296290;
+			// aapt resource value: 0x7f09002a
+			public const int Next = 2131296298;
 			
 			// aapt resource value: 0x7f090005
 			public const int adjust_height = 2131296261;
@@ -447,8 +456,14 @@ namespace mRides_app
 			// aapt resource value: 0x7f09000b
 			public const int dark = 2131296267;
 			
+			// aapt resource value: 0x7f090020
+			public const int divider = 2131296288;
+			
+			// aapt resource value: 0x7f090026
+			public const int driver1 = 2131296294;
+			
 			// aapt resource value: 0x7f09001e
-			public const int driver1 = 2131296286;
+			public const int genderImage = 2131296286;
 			
 			// aapt resource value: 0x7f090000
 			public const int hybrid = 2131296256;
@@ -465,6 +480,9 @@ namespace mRides_app
 			// aapt resource value: 0x7f09000f
 			public const int linearLayout1 = 2131296271;
 			
+			// aapt resource value: 0x7f09001c
+			public const int linearLayout2 = 2131296284;
+			
 			// aapt resource value: 0x7f09000e
 			public const int map = 2131296270;
 			
@@ -474,8 +492,8 @@ namespace mRides_app
 			// aapt resource value: 0x7f090002
 			public const int normal = 2131296258;
 			
-			// aapt resource value: 0x7f090020
-			public const int numOfPeople = 2131296288;
+			// aapt resource value: 0x7f090028
+			public const int numOfPeople = 2131296296;
 			
 			// aapt resource value: 0x7f090015
 			public const int place_autocomplete_clear_button = 2131296277;
@@ -504,14 +522,20 @@ namespace mRides_app
 			// aapt resource value: 0x7f090016
 			public const int place_autocomplete_separator = 2131296278;
 			
-			// aapt resource value: 0x7f09001c
-			public const int rider1 = 2131296284;
+			// aapt resource value: 0x7f09001f
+			public const int ratingBar = 2131296287;
 			
-			// aapt resource value: 0x7f09001d
-			public const int riderOrDriverSwitch = 2131296285;
+			// aapt resource value: 0x7f090024
+			public const int rider1 = 2131296292;
+			
+			// aapt resource value: 0x7f090025
+			public const int riderOrDriverSwitch = 2131296293;
 			
 			// aapt resource value: 0x7f090003
 			public const int satellite = 2131296259;
+			
+			// aapt resource value: 0x7f090022
+			public const int scrollingReviews = 2131296290;
 			
 			// aapt resource value: 0x7f09000d
 			public const int simpleButton = 2131296269;
@@ -522,11 +546,20 @@ namespace mRides_app
 			// aapt resource value: 0x7f090004
 			public const int terrain = 2131296260;
 			
-			// aapt resource value: 0x7f09001b
-			public const int textView2 = 2131296283;
+			// aapt resource value: 0x7f090021
+			public const int textView1 = 2131296289;
 			
-			// aapt resource value: 0x7f09001f
-			public const int textView3 = 2131296287;
+			// aapt resource value: 0x7f090023
+			public const int textView2 = 2131296291;
+			
+			// aapt resource value: 0x7f090027
+			public const int textView3 = 2131296295;
+			
+			// aapt resource value: 0x7f09001d
+			public const int userName = 2131296285;
+			
+			// aapt resource value: 0x7f09001b
+			public const int userPhoto = 2131296283;
 			
 			// aapt resource value: 0x7f090009
 			public const int wide = 2131296265;
@@ -582,7 +615,10 @@ namespace mRides_app
 			public const int place_autocomplete_progress = 2130903046;
 			
 			// aapt resource value: 0x7f030007
-			public const int UserTypeFragment = 2130903047;
+			public const int UserProfile = 2130903047;
+			
+			// aapt resource value: 0x7f030008
+			public const int UserTypeFragment = 2130903048;
 			
 			static Layout()
 			{
