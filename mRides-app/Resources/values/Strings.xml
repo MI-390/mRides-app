@@ -25,6 +25,12 @@
   <string name="Pref_Back">Back</string>
   <string name="Pref_Done">Done</string>
 
+  <!-- STRINGS FOR DATA SENT FROM ACTIVITY TO ACTIVITY -->
+  <string name="ExtraData_UserName">username</string>
+  <string name="ExtraData_DataNotAvailable">Data not available</string>
+  
+  
+
     <string name="ApplicationName">mRides-app</string>
   <string-array name="numbers_array">
     <item>"1"</item>

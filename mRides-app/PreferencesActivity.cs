@@ -15,6 +15,7 @@ namespace mRides_app
     [Activity(Label = "PreferencesActivity")]
     public class PreferencesActivity : Activity
     {
+        private string userName;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -22,6 +23,10 @@ namespace mRides_app
             SetContentView(Resource.Layout.Preferences);
 
             // TODO: Obtain the extra data passed, the username, and display it in the Hi message
+            this.userName = Intent.GetStringExtra(GetString(Resource.String.ExtraData_UserName)) ?? GetString(Resource.String.ExtraData_DataNotAvailable);
+            TextView textViewHi = FindViewById<TextView>(Resource.Id.textViewHi);
+            string prefHi = GetString(Resource.String.Pref_Hi);
+            textViewHi.Text = prefHi + " " + userName;
 
             // Set the back button to go back to the previous activity
             Button backButton = FindViewById<Button>(Resource.Id.buttonBack);
@@ -81,11 +86,11 @@ namespace mRides_app
         {
             // TODO: Save the preferences
             Console.WriteLine("Smoker=" + smoker + ";Luggage=" + luggage + ";handicap=" + handicap + ";gender=" + gender + ";pet=" + pet);
-            
+
             // TODO: Go to the next activity
-            // var nextActivity = new Intent(this, typeof(PreferencesActivity));
-            // nextActivity.PutExtra("user_id", "1");
-            // StartActivity(nextActivity);
+            var mapActivity = new Intent(this, typeof(MapActivity));
+            mapActivity.PutExtra(GetString(Resource.String.ExtraData_UserName), this.userName);
+            StartActivity(mapActivity);
         }
 
         /**
