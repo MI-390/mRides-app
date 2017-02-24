@@ -56,7 +56,7 @@ namespace mRides_app
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
 
-            var facebook = FindViewById<Button>(Resource.Id.button1);
+            var facebook = FindViewById<Button>(Resource.Id.loginButton);
             facebook.Click += delegate {
                 LoginToFacebook(true);
             };

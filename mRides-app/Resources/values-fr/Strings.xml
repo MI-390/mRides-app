@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="ApplicationName">mRides-app</string>
+  <string name="slogan">Voyager ensemble</string>
+  <string name="fblogin">Pour commencer, connectez-vous à l’aide d’un simple clic :</string>
+  <string name="fb">Connexion avec Facebook</string>
+  <string name="riderOrDriver">Vous êtes un Passager \nou un Conducteur ?</string>
+  <string name="previous">Précédent</string>
+  <string name="next">Suivant</string>
+  <string name="r">P</string>
+  <string name="d">C</string>
+  <string name="seatsAvailable">Le nombre de sièges disponible ?</string>
+  <string name="numberOfRiders">Combien êtes-vous ?</string>
+  <string name="dest">Destination</string>
+  <string name="user_type">Type d\'utilisateur</string>
+  <string name="number_of_people">Nombre de personnes</string>
+</resources>

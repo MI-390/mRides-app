@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en-US" target-language="es" original="MRIDES-APP/RESOURCES/VALUES/STRINGS.XML" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1795.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="MRIDES-APP/RESOURCES/VALUES/STRINGS.XML" datatype="resx">
+        <trans-unit id="ApplicationName" translate="yes" xml:space="preserve">
+          <source>mRides-app</source>
+          <target state="final" state-qualifier="mt-suggestion">mRides-aplicación</target>
+        </trans-unit>
+        <trans-unit id="slogan" translate="yes" xml:space="preserve">
+          <source>Travel together</source>
+          <target state="translated">Viajar juntos</target>
+        </trans-unit>
+        <trans-unit id="fblogin" translate="yes" xml:space="preserve">
+          <source>To get started, sign in with a simple click:</source>
+          <target state="final" state-qualifier="mt-suggestion">Para comenzar, inicia sesión con un simple clic:</target>
+        </trans-unit>
+        <trans-unit id="fb" translate="yes" xml:space="preserve">
+          <source>Login with Facebook</source>
+          <target state="translated" state-qualifier="mt-suggestion">Iniciar sesión con Facebook</target>
+        </trans-unit>
+        <trans-unit id="numbers_array" translate="yes" xml:space="preserve">
+          <source>""1"",""2"",""3"",""4"",""5"",""6""</source>
+          <target state="new">""1"",""2"",""3"",""4"",""5"",""6""</target>
+        </trans-unit>
+        <trans-unit id="riderOrDriver" translate="yes" xml:space="preserve">
+          <source>  Are you a Rider \nor Driver? </source>
+          <target state="translated">¿Eres un Pasajero \n o un Conductor?</target>
+        </trans-unit>
+        <trans-unit id="previous" translate="yes" xml:space="preserve">
+          <source>Previous</source>
+          <target state="translated" state-qualifier="tm-suggestion">Anterior</target>
+        </trans-unit>
+        <trans-unit id="next" translate="yes" xml:space="preserve">
+          <source>Next</source>
+          <target state="translated">Proximo</target>
+        </trans-unit>
+        <trans-unit id="r" translate="yes" xml:space="preserve">
+          <source>R</source>
+          <target state="translated">P</target>
+        </trans-unit>
+        <trans-unit id="d" translate="yes" xml:space="preserve">
+          <source>D</source>
+          <target state="translated">C</target>
+        </trans-unit>
+        <trans-unit id="seatsAvailable" translate="yes" xml:space="preserve">
+          <source>How many available seats?</source>
+          <target state="translated">¿Cuántas plazas disponibles?</target>
+        </trans-unit>
+        <trans-unit id="numberOfRiders" translate="yes" xml:space="preserve">
+          <source>How many are you?</source>
+          <target state="translated">¿Cuantos son?</target>
+        </trans-unit>
+        <trans-unit id="dest" translate="yes" xml:space="preserve">
+          <source>Destination</source>
+          <target state="translated">Destinación</target>
+        </trans-unit>
+        <trans-unit id="user_type" translate="yes" xml:space="preserve">
+          <source>User type</source>
+          <target state="final" state-qualifier="tm-suggestion">Tipo de usuario</target>
+        </trans-unit>
+        <trans-unit id="number_of_people" translate="yes" xml:space="preserve">
+          <source>Number of people</source>
+          <target state="final" state-qualifier="mt-suggestion">Número de personas</target>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>

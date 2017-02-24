@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="ApplicationName">mRides-app</string>
+  <string name="slogan">Travel together</string>
+  <string name="fblogin">To get started, sign in with a simple click:</string>
+  <string name="fb">Login with Facebook</string>
+  <string name="riderOrDriver">  Are you a Rider \nor Driver? </string>
+  <string name="r">R</string>
+  <string name="d">D</string>
+  <string name="seatsAvailable">How many available seats?</string>
+  <string name="numberOfRiders">How many are you?</string>
+  <string name="previous">Previous</string>
+  <string name="next">Next</string>
+
+  <string name="dest">Destination</string>
+  <string name="user_type">User type</string>
+  <string name="number_of_people">Number of people</string>
+   
   <string-array name="numbers_array">
     <item>"1"</item>
     <item>"2"</item>

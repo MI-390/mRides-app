@@ -186,7 +186,11 @@ namespace mRides_app
         public void OnPlaceSelected(IPlace place)
         {
             destination = place.NameFormatted.ToString();
-            Toast.MakeText(ApplicationContext, "Destination : " + destination, ToastLength.Long).Show();
+            string str1 = GetString(Resource.String.dest);
+            Toast.MakeText(ApplicationContext, str1 + " : " + destination, ToastLength.Long).Show();
+
+           
+        
             if (destinationMarker != null)
                 destinationMarker.Dispose();
             destinationMarker = map.AddMarker(new MarkerOptions().SetPosition(place.LatLng).SetTitle(destination));
@@ -201,7 +205,9 @@ namespace mRides_app
         {
             userType = type;
             numberOfPeople = number;
-            Toast.MakeText(ApplicationContext, "User type: " + userType + " Number of people: " + numberOfPeople, ToastLength.Long).Show();
+            string str2 = GetString(Resource.String.user_type);
+            string str3 = GetString(Resource.String.number_of_people);
+            Toast.MakeText(ApplicationContext, str2 + ": " + userType + str3 + " : " + numberOfPeople, ToastLength.Long).Show();
         }
 
 
