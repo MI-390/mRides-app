@@ -41,10 +41,18 @@ namespace mRides_app
                 if (response != null)
                 {
                     var obj = JObject.Parse(response.GetResponseText());
+
+                    /** COMMENT THE FOLLOWING TO VIEW USER PROFILE ACTIVITY UPON LOGIN **/
                     userName = "Name: " + obj["name"].ToString();
                     var mapActivity = new Intent(this, typeof(MapActivity));
                     mapActivity.PutExtra("Profile Info", userName);
                     StartActivity(mapActivity);
+
+                    /** UNCOMMENT THE FOLLOWING TO VIEW USER PROFILE ACTIVITY UPON LOGIN **/
+                    //userName = "" + obj["name"].ToString();
+                    //var userProfileActivity = new Intent(this, typeof(UserProfile));
+                    //userProfileActivity.PutExtra("Profile Info", userName);
+                    //StartActivity(userProfileActivity);
                 }
             }
         }
@@ -60,6 +68,7 @@ namespace mRides_app
             facebook.Click += delegate {
                 LoginToFacebook(true);
             };
+
 
             //var facebookNoCancel = FindViewById<Button>(Resource.Id.FacebookButtonNoCancel);
             // facebookNoCancel.Click += delegate { LoginToFacebook(false); };

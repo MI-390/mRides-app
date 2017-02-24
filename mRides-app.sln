@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mRides-app", "mRides-app\mRides-app.csproj", "{2A124686-4C6E-448E-A0D8-159DA3828ABE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UITest", "UITest\UITest.csproj", "{85A4CC98-F1AD-45F2-9C01-EBB5EA192326}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "UITest\Tests.csproj", "{85A4CC98-F1AD-45F2-9C01-EBB5EA192326}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{9EEF742B-038D-4A6C-A5B9-21CA32F0D25E}"
 EndProject
