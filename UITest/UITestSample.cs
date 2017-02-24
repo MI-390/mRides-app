@@ -47,6 +47,46 @@ namespace UITest
             Thread.Sleep(5000);
             app.Screenshot("Login");
         }
+
+        /**
+         * The following tests are for testing the UI of user profile
+         * These tests are temporary and will change once the user profile is integrated as a button
+         * in the application.
+         * Since it hasn't been integrated yet, I start UserProfile activity upon starting the application
+         * To test these UI test cases
+         */
+        [Test]
+        public void testUserProfileName()
+        {
+            Thread.Sleep(1000);
+            AppResult[] r = app.Query(c => c.Marked("userName"));
+            Assert.IsTrue(r[0] != null);
+        }
+
+        [Test]
+        public void testUserProfilePhoto()
+        {
+            Thread.Sleep(1000);
+            AppResult[] r = app.Query(c => c.Marked("userPhoto"));
+            Assert.IsTrue(r[0] != null);
+        }
+
+        [Test]
+        public void testUserProfileGender()
+        {
+            Thread.Sleep(1000);
+            AppResult[] r = app.Query(c => c.Marked("genderImage"));
+            Assert.IsTrue(r[0] != null);
+        }
+
+        [Test]
+        public void testUserProfileRating()
+        {
+            Thread.Sleep(1000);
+            AppResult[] r = app.Query(c => c.Marked("ratingBar"));
+            Assert.IsTrue(r[0] != null);
+        }
+
     }
 }
 
