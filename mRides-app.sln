@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mRides-app", "mRides-app\mR
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UITest", "UITest\UITest.csproj", "{85A4CC98-F1AD-45F2-9C01-EBB5EA192326}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{9EEF742B-038D-4A6C-A5B9-21CA32F0D25E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +26,12 @@ Global
 		{85A4CC98-F1AD-45F2-9C01-EBB5EA192326}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{85A4CC98-F1AD-45F2-9C01-EBB5EA192326}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{85A4CC98-F1AD-45F2-9C01-EBB5EA192326}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EEF742B-038D-4A6C-A5B9-21CA32F0D25E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EEF742B-038D-4A6C-A5B9-21CA32F0D25E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EEF742B-038D-4A6C-A5B9-21CA32F0D25E}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{9EEF742B-038D-4A6C-A5B9-21CA32F0D25E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EEF742B-038D-4A6C-A5B9-21CA32F0D25E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EEF742B-038D-4A6C-A5B9-21CA32F0D25E}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

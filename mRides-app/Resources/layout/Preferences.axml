@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:gravity="center">
     <TextView
-        android:text="@string/Hi"
+        android:text="@string/Pref_Hi"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,7 +14,7 @@
         android:id="@+id/textViewHi"
         android:paddingTop="30dp" />
     <TextView
-        android:text="@string/SetYourPreferences"
+        android:text="@string/Pref_SetYourPreferences"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -118,7 +118,7 @@
             android:layout_gravity="center_horizontal">
             <TextView
                 android:layout_column="1"
-                android:text="@string/Prompt_Gender"
+                android:text="@string/Pref_Prompt_Gender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -137,7 +137,7 @@
         android:gravity="bottom"
         android:layout_weight="1">
         <Button
-            android:text="@string/Back"
+            android:text="@string/Pref_Back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/buttonBack" />
@@ -146,7 +146,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" />
         <Button
-            android:text="@string/Done"
+            android:text="@string/Pref_Done"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/buttonDone" />

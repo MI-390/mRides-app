@@ -4,8 +4,8 @@
   <string name="ApplicationName">mRides-app</string>
 
   <!--PREFERENCE-RELATED STRINGS-->
-  <string name="Hi">Hi</string>
-  <string name="SetYourPreferences">Set Your Preferences</string>
+  <string name="Pref_Hi">Hi</string>
+  <string name="Pref_SetYourPreferences">Set Your Preferences</string>
   <string name="Pref_Smoker">Smoker</string>
   <string name="Pref_NonSmoker">Non-Smoker</string>
   <string name="Pref_Male">Male</string>
@@ -16,14 +16,14 @@
   <string name="Pref_NoHandicap">No Physical Disability</string>
   <string name="Pref_Pet">Pet</string>
   <string name="Pref_NoPet">No Pet</string>
-  <string name="Prompt_Gender">Preferred Gender</string>
+  <string name="Pref_Prompt_Gender">Preferred Gender</string>
   <string-array name="Pref_Gender">
     <item>Any</item>
     <item>Male</item>
     <item>Female</item>
   </string-array>
-  <string name="Back">Back</string>
-  <string name="Done">Done</string>
+  <string name="Pref_Back">Back</string>
+  <string name="Pref_Done">Done</string>
 
     <string name="ApplicationName">mRides-app</string>
   <string-array name="numbers_array">
