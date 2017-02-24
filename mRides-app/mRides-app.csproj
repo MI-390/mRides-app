@@ -104,6 +104,9 @@
     <Compile Include="UserTypeFragment.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserProfile.cs" />
+    <Compile Include="Feedback\FeedbackTest.cs" />
+    <Compile Include="Feedback\DriverReview.cs" />
+    <Compile Include="Feedback\RiderReview.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GettingStarted.Xamarin" />
@@ -125,6 +128,8 @@
     <AndroidResource Include="Resources\layout\Preferences.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\DriverReview.axml" />
+    <AndroidResource Include="Resources\layout\RiderReview.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">
