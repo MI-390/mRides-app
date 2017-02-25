@@ -66,6 +66,110 @@
           <source>Number of people</source>
           <target state="final" state-qualifier="mt-suggestion">Nombre de personnes</target>
         </trans-unit>
+        <trans-unit id="Hello" translate="yes" xml:space="preserve">
+          <source>Hello World, Click Me!</source>
+          <target state="final" state-qualifier="mt-suggestion">Bonjour monde, cliquez-moi !</target>
+        </trans-unit>
+        <trans-unit id="Pref_Hi" translate="yes" xml:space="preserve">
+          <source>Hi</source>
+          <target state="final" state-qualifier="mt-suggestion">Salut</target>
+        </trans-unit>
+        <trans-unit id="Pref_SetYourPreferences" translate="yes" xml:space="preserve">
+          <source>Set Your Preferences</source>
+          <target state="final" state-qualifier="mt-suggestion">Définir vos préférences</target>
+        </trans-unit>
+        <trans-unit id="Pref_Smoker" translate="yes" xml:space="preserve">
+          <source>Smoker</source>
+          <target state="final" state-qualifier="mt-suggestion">Fumeur</target>
+        </trans-unit>
+        <trans-unit id="Pref_NonSmoker" translate="yes" xml:space="preserve">
+          <source>Non-Smoker</source>
+          <target state="final" state-qualifier="mt-suggestion">Non fumeur</target>
+        </trans-unit>
+        <trans-unit id="Pref_Male" translate="yes" xml:space="preserve">
+          <source>Male</source>
+          <target state="final" state-qualifier="tm-suggestion">masculin</target>
+        </trans-unit>
+        <trans-unit id="Pref_Female" translate="yes" xml:space="preserve">
+          <source>Female</source>
+          <target state="final" state-qualifier="tm-suggestion">féminin</target>
+        </trans-unit>
+        <trans-unit id="Pref_Luggage" translate="yes" xml:space="preserve">
+          <source>Luggage</source>
+          <target state="final" state-qualifier="mt-suggestion">Bagages</target>
+        </trans-unit>
+        <trans-unit id="Pref_NoLuggage" translate="yes" xml:space="preserve">
+          <source>No Luggage</source>
+          <target state="final" state-qualifier="mt-suggestion">Aucun bagage</target>
+        </trans-unit>
+        <trans-unit id="Pref_Handicap" translate="yes" xml:space="preserve">
+          <source>Physical Disability</source>
+          <target state="final" state-qualifier="mt-suggestion">Déficience physique</target>
+        </trans-unit>
+        <trans-unit id="Pref_NoHandicap" translate="yes" xml:space="preserve">
+          <source>No Physical Disability</source>
+          <target state="final" state-qualifier="mt-suggestion">Aucune déficience physique</target>
+        </trans-unit>
+        <trans-unit id="Pref_Pet" translate="yes" xml:space="preserve">
+          <source>Pet</source>
+          <target state="final" state-qualifier="mt-suggestion">Animal de compagnie</target>
+        </trans-unit>
+        <trans-unit id="Pref_NoPet" translate="yes" xml:space="preserve">
+          <source>No Pet</source>
+          <target state="final" state-qualifier="mt-suggestion">Aucun animal de compagnie</target>
+        </trans-unit>
+        <trans-unit id="Pref_Prompt_Gender" translate="yes" xml:space="preserve">
+          <source>Preferred Gender</source>
+          <target state="final" state-qualifier="mt-suggestion">Sexe préféré</target>
+        </trans-unit>
+        <trans-unit id="Pref_Back" translate="yes" xml:space="preserve">
+          <source>Back</source>
+          <target state="final" state-qualifier="tm-suggestion">Retour</target>
+        </trans-unit>
+        <trans-unit id="Pref_Done" translate="yes" xml:space="preserve">
+          <source>Done</source>
+          <target state="final" state-qualifier="tm-suggestion">Terminé</target>
+        </trans-unit>
+        <trans-unit id="ExtraData_UserName" translate="yes" xml:space="preserve">
+          <source>username</source>
+          <target state="final" state-qualifier="tm-suggestion">nom d'utilisateur</target>
+        </trans-unit>
+        <trans-unit id="ExtraData_DataNotAvailable" translate="yes" xml:space="preserve">
+          <source>Data not available</source>
+          <target state="final" state-qualifier="tm-suggestion">Données non disponibles</target>
+        </trans-unit>
+        <trans-unit id="smoker" translate="yes" xml:space="preserve">
+          <source>Smoker</source>
+          <target state="final" state-qualifier="mt-suggestion">Fumeur</target>
+        </trans-unit>
+        <trans-unit id="handicap" translate="yes" xml:space="preserve">
+          <source>Handicap</source>
+          <target state="final" state-qualifier="tm-suggestion">Handicapés</target>
+        </trans-unit>
+        <trans-unit id="pet" translate="yes" xml:space="preserve">
+          <source>Pet</source>
+          <target state="final" state-qualifier="mt-suggestion">Animal de compagnie</target>
+        </trans-unit>
+        <trans-unit id="gender" translate="yes" xml:space="preserve">
+          <source>Gender</source>
+          <target state="final" state-qualifier="tm-suggestion">Sexe</target>
+        </trans-unit>
+        <trans-unit id="luggage" translate="yes" xml:space="preserve">
+          <source>Luggage</source>
+          <target state="final" state-qualifier="mt-suggestion">Bagages</target>
+        </trans-unit>
+        <trans-unit id="person_profile" translate="yes" xml:space="preserve">
+          <source>Person</source>
+          <target state="final" state-qualifier="tm-suggestion">Personne</target>
+        </trans-unit>
+        <trans-unit id="ratings_reviews" translate="yes" xml:space="preserve">
+          <source>Ratings and Reviews</source>
+          <target state="final" state-qualifier="mt-suggestion">Notes et commentaires</target>
+        </trans-unit>
+        <trans-unit id="Pref_Gender" translate="yes" xml:space="preserve">
+          <source>"Any","Male","Female"</source>
+          <target state="final" state-qualifier="mt-suggestion">« Toute », « masculin », « Femelle »</target>
+        </trans-unit>
       </group>
     </body>
   </file>

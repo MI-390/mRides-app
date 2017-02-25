@@ -85,7 +85,14 @@ namespace mRides_app
         private void SaveAndContinue(Boolean smoker, Boolean luggage, Boolean handicap, Boolean pet, long gender)
         {
             // TODO: Save the preferences
-            Console.WriteLine("Smoker=" + smoker + ";Luggage=" + luggage + ";handicap=" + handicap + ";gender=" + gender + ";pet=" + pet);
+            
+
+            string smoker1 = GetString(Resource.String.smoker);
+            string luggage1 = GetString(Resource.String.luggage);
+            string handicap1 = GetString(Resource.String.handicap);
+            string pet1 = GetString(Resource.String.pet);
+            string gender1 = GetString(Resource.String.gender);
+            Console.WriteLine(smoker1 + " = " + smoker + "; " + luggage1 + " = " + luggage + ";" + handicap1 + "=" + handicap + ";" + gender1 + "=" + gender + ";" + pet1+ "=" + pet);
 
             // TODO: Go to the next activity
             var mapActivity = new Intent(this, typeof(MapActivity));

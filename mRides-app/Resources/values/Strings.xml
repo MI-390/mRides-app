@@ -22,6 +22,7 @@
     <item>Male</item>
     <item>Female</item>
   </string-array>
+  
   <string name="Pref_Back">Back</string>
   <string name="Pref_Done">Done</string>
 
@@ -31,7 +32,7 @@
   
   
 
-    <string name="ApplicationName">mRides-app</string>
+    
   <string name="slogan">Travel together</string>
   <string name="fblogin">To get started, sign in with a simple click:</string>
   <string name="fb">Login with Facebook</string>
@@ -46,7 +47,17 @@
   <string name="dest">Destination</string>
   <string name="user_type">User type</string>
   <string name="number_of_people">Number of people</string>
-   
+  <string name="smoker">Smoker</string>
+  <string name="luggage">Luggage</string>
+  <string name="handicap">Handicap</string>
+  <string name="pet">Pet</string>
+  <string name="gender">Gender</string>
+
+  <!-- STRINGS FOR user profile ACTIVITY -->
+  <string name="person_profile">Person</string>
+  <string name="ratings_reviews">Ratings and Reviews</string>
+  
+
   <string-array name="numbers_array">
     <item>"1"</item>
     <item>"2"</item>
