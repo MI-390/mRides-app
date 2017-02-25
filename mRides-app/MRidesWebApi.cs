@@ -10,7 +10,68 @@ namespace mRides_app
     /**
      * This class allows to send API calls to the server.
      * It is a singleton since only one instance of it is required across the application.
-     */ 
+     * 
+     * ---------------------------------------------------------------------------------------------
+     * Details:
+     * 
+     * To communicate with the server, data is sent through RestSharp requests objects.
+     * In brief, to call a method found on the server side, we access a URL, and attach data
+     * to the URL. For instance, if we wish to obtain the User object for userid = 1:
+     * http://mrides-server.azurewebsites.net/api/User/getUser/1 will be called, and the response
+     * of that call is expected to be the User object with ID = 1.
+     * 
+     * ---------------------------------------------------------------------------------------------
+     * Structure:
+     * 
+     * 1. The private class ApiEndPointUrl contains a list of constant strings representing the 
+     * URL to access each method on the server side.
+     * 
+     * 2. Multiple public static methods define the exposed interface of the server. They will be
+     * used by the app activities to make api calls. For example: if an activity needs to find the
+     * user object with userid = 1, it will call "MRidesWebApi.getUser(1)". This method will be
+     * responsible to commnicate with the server and obtain the object.
+     * 
+     * 3. Multiple private static methods help the other methods to send the GET/POST/DELETE requests
+     * to the server.
+     * 
+     * ---------------------------------------------------------------------------------------------
+     * Steps to add a method to the exposed interface:
+     * 
+     * 1. Go to http://mrides-server.azurewebsites.net/swagger/index.html
+     * 2. Find the method of interest to be added
+     * 3. Notice the HTTP method used (GET, POST, DELETE) and the URL used.
+     * 4. Define a public static method with the type signature corresponding to the expected
+     *    data type on the server. For this, you can use objects found under /Models/ to send
+     *    data.
+     * 5. The return value of this method can be known by looking at the server code, or 
+     *    asking the server development team about it.
+     * 6. Call the appropriate private static helper methods to send the request to the server,
+     *    specifying the type that the response should be converted to.
+     * 7. Manipulate the response if necessary, and return it.
+     * 
+     * In order to test those, add test cases to the UnitTests project.
+     * 
+     * ---------------------------------------------------------------------------------------------
+     * Example:
+     * 
+     * The server defines the following:
+     * POST | api/User/createUser
+     * and expects as parameter a User object as shown under Data Type / Example value on 
+     * http://mrides-server.azurewebsites.net/swagger/index.html
+     * 
+     * A method must then be defined for the app activities. Let's call it "CreateUser" 
+     * and take a User object as a paramater (from the Models namespace). From the server
+     * we see that such call will return the newly created user object (with its primary key ID
+     * assigned). Thus, the definition of the method will be:
+     * 
+     * public static User CreateUser(User newUser)
+     * 
+     * Since it is a POST, use the SendPost with type User, to make the call, giving it
+     * the correct URL, data (User), and in this case "false" since
+     * the user id is unknown and must not be included for this post
+     * request. Generally, this parameter is set to true.
+     * 
+     */
     public class MRidesWebApi
     {
         // URL to the web server

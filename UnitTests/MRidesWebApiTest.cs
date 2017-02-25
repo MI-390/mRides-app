@@ -112,26 +112,26 @@ namespace UnitTests
         [Test]
         public void FindDrivers()
         {
-            // Create a sample user and set it to be the current user
-            // Add a request for this current user
-            User rider = new User();
-            User.currentUser = MRidesWebApi.CreateUser(rider);
-            Request riderRequest = new Request(0, "45.4928064,-73.5781321", "45.4975281,-73.5789193", DateTime.Now, false, Request.TYPE_RIDER);
-            MRidesWebApi.CreateRequest(riderRequest);
+            
 
             // Create another sample user and set it to be the current user
             // Add a request for this current user
             User driver = new User();
             User.currentUser = MRidesWebApi.CreateUser(driver);
-            Request driverRequest = new Request(0, "45.4928064,-73.5781321", "45.4975281,-73.5789193", DateTime.Now, false, Request.TYPE_RIDER);
+            Request driverRequest = new Request(0, "45.4928064,-73.5781321", "45.4975281,-73.5789193", DateTime.Now, false, Request.TYPE_DRIVER);
             MRidesWebApi.CreateRequest(driverRequest);
 
-            // Make a request and send it
-            Request newRequest = new Request(0, "45.4975281,-73.5789193", "45.4975281,-73.5789193", DateTime.Now, false, Request.TYPE_DRIVER);
-            List<Request> requests = MRidesWebApi.FindDrivers(newRequest);
+            // Create a sample user and set it to be the current user
+            // Add a request for this current user
+            User rider = new User();
+            User.currentUser = MRidesWebApi.CreateUser(rider);
+            Request riderRequest = new Request(0, "45.4928064,-73.5781321", "45.4975281,-73.5789193", DateTime.Now, false, Request.TYPE_RIDER);
 
-            // Ensure that the find drivers updated the ID of the request we created
-            Assert.True(newRequest.ID != 0);
+            // Find drivers for this request
+            List<Request> requests = MRidesWebApi.FindDrivers(riderRequest);
+
+            // Ensure that FindDrivers updated the ID of the request we created
+            Assert.True(riderRequest.ID != 0);
 
             // Check the requests list
             Assert.True(requests != null);
