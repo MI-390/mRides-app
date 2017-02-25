@@ -78,7 +78,7 @@ namespace mRides_app
                 Log.Debug("Driver", "I am a driver woohoo");
                 // Open a session as a Driver?
                 string str = GetString(Resource.String.seatsAvailable);
-                    tv1.SetText(str, TextView.BufferType.Normal);
+                tv1.SetText(str, TextView.BufferType.Normal);
             }
             else
             {
