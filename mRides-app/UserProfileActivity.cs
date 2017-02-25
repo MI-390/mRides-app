@@ -43,7 +43,7 @@ namespace mRides_app
             //testing purposes
             UserRides us = new UserRides();
             us.rideId = 1;
-            userRideId = 1;
+            us.userRideId = 1;
             us.riderId = 10;
             us.driverId = 11;
             us.riderFeedback = "Good driver";
@@ -58,10 +58,10 @@ namespace mRides_app
             {
                 //If user has reviews in the database, display the fragment for it
                 FragmentTransaction transaction = FragmentManager.BeginTransaction();
-                UserTypeFragment dialog = new UserProfileFeedbackFragment();
-                dialog.Show(transaction, "User Profile Feedback Fragment");
+                UserProfileFeedbackFragment reviewListFragment = new UserProfileFeedbackFragment();
+                //reviewListFragment.Show(transaction, "User Profile Feedback Fragment");
 
-                transaction.add(Resource.Id.scrollingReviews);
+                //transaction.add(Resource.Id.scrollingReviews);
             }
 
         }

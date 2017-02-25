@@ -10,8 +10,7 @@
         android:layout_margin="10dp"
         android:id="@+id/linearLayout1"
         android:minWidth="25px"
-        android:minHeight="25px"
-        android:defaultMinSizeSet="true">
+        android:minHeight="25px">
         <ImageView
             android:src="@android:drawable/ic_menu_gallery"
             android:layout_width="55.3dp"

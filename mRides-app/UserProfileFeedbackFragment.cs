@@ -17,7 +17,7 @@ namespace mRides_app
     {
         TextView dateTV;
         TextView nameTV;
-        Textview reviewTV;
+        TextView reviewTV;
         RatingBar ratingBar;
 
         // Static method to create a new instance of this fragment
@@ -37,7 +37,7 @@ namespace mRides_app
             dateTV = view.FindViewById<TextView>(Resource.Id.feedbackDateProfileFragment);
             nameTV = view.FindViewById<TextView>(Resource.Id.feedbackFragmentUserName);
             reviewTV = view.FindViewById<TextView>(Resource.Id.feedbackFragmentReview);
-            ratingBar = view.FindViewById<TextView>(Resource.Id.feedbackFragmentRatingBar);
+            ratingBar = view.FindViewById<RatingBar>(Resource.Id.feedbackFragmentRatingBar);
 
             return view;
         }
