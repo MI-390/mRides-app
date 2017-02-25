@@ -15,6 +15,33 @@ namespace mRides_app
     public class MainActivity : Activity
     {
         string userName;
+        // For UI testing
+        [Java.Interop.Export("StartActivityOne")]
+        public void StartActivityOne()
+        {
+            Intent i = new Intent(this, typeof(PreferencesActivity));
+            StartActivity(i);
+        }
+        [Java.Interop.Export("StartActivityTwo")]
+        public void StartActivityTwo()
+        {
+            Intent i = new Intent(this, typeof(MapActivity));
+            StartActivity(i);
+        }
+
+        [Java.Interop.Export("StartActivityThree")]
+        public void StartActivityThree()
+        {
+            Intent i = new Intent(this, typeof(TestFragments));
+            StartActivity(i);
+        }
+
+        [Java.Interop.Export("StartActivityFour")]
+        public void StartActivityFour()
+        {
+            Intent i = new Intent(this, typeof(Feedback.FeedbackTest));
+            StartActivity(i);
+        }
 
         void LoginToFacebook(bool allowCancel)
         {
@@ -63,7 +90,7 @@ namespace mRides_app
             }
         }
 
-       // private static readonly TaskScheduler UIScheduler = TaskScheduler.FromCurrentSynchronizationContext();
+        // private static readonly TaskScheduler UIScheduler = TaskScheduler.FromCurrentSynchronizationContext();
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -71,7 +98,8 @@ namespace mRides_app
             SetContentView(Resource.Layout.Main);
 
             var facebook = FindViewById<Button>(Resource.Id.button1);
-            facebook.Click += delegate {
+            facebook.Click += delegate
+            {
                 LoginToFacebook(true);
             };
 

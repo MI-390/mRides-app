@@ -32,61 +32,78 @@ namespace UITest
             // the Unit Tests window, right click Test Apps, select Add App Project
             // and select the app projects that should be tested.
             app = ConfigureApp
-                .Android
-                // TODO: Update this path to point to your Android app and uncomment the
-                // code if the app is not included in the solution.
-                .ApkFile("D:/Projects/mi-390/mRides-app/bin/Release//mRides_app.mRides_app-Signed.apk") //CHANGE THIS APK PATH
-                .EnableLocalScreenshots()
-                .StartApp();
+ .Android
+// TODO: Update this path to point to your Android app and uncomment the
+// code if the app is not included in the solution.
+.ApkFile("D:/Projects/mi-390/mRides-app/bin/Release//mRides_app.mRides_app-Signed.apk") //CHANGE THIS APK PATH
+.EnableLocalScreenshots().StartApp();
         }
 
         [Test]
         public void FacebookLogin()
         {
+            // Start app only once, so that further test can continue
             app.Tap(c => c.Marked("button1"));
-            Thread.Sleep(5000);
+            Thread.Sleep(3000);
             app.Screenshot("Login");
+            app.TapCoordinates(549, 900);
+            app.EnterText("cvnewggbsc_1487629189@tfbnw.net");
+            // app.EnterText(c => c.Marked("NoResourceEntry-42"), "cvnewggbsc_1487629189@tfbnw.net");
+            app.ScrollDownTo(c => c.Css("input#u_0_2"));
+            app.EnterText(c => c.Css("input#u_0_2"), "mi-390");
+            app.ScrollToVerticalStart();
+            app.TapCoordinates(549, 1200);
+            app.WaitForElement(c => c.Marked("radioButtonNonSmoker"));
         }
-
-        /**
-         * The following tests are for testing the UI of user profile
-         * These tests are temporary and will change once the user profile is integrated as a button
-         * in the application.
-         * Since it hasn't been integrated yet, I start UserProfile activity upon starting the application
-         * To test these UI test cases
-         */
         [Test]
-        public void testUserProfileName()
+        public void SelectPreferences()
         {
-            Thread.Sleep(1000);
-            AppResult[] r = app.Query(c => c.Marked("userName"));
-            Assert.IsTrue(r[0] != null);
+            app.WaitForElement(c => c.Marked("button1"));
+            app.Invoke("StartActivityOne");
+            app.Tap(c => c.Marked("radioButtonNonSmoker"));
+            app.Tap(c => c.Marked("radioButtonNoLuggage"));
+            app.Tap(c => c.Marked("radioButtonNoHandicap"));
+            app.Tap(c => c.Marked("radioButtonNoPet"));
+            app.Tap(c => c.Marked("text1"));
+            app.TapCoordinates(721, 1200);
+            app.Tap(c => c.Marked("buttonDone"));
+            app.WaitForElement(c => c.Marked("place_autocomplete_search_input"));
+        }
+
+        //[Test]
+        //public void ChooseDestination()
+        //{
+        //    app.WaitForElement(c => c.Marked("button1"));
+        //    app.Invoke("StartActivityTwo");
+        //    app.DoubleTap(c => c.Marked("place_autocomplete_search_input"));
+        //    app.TapCoordinates(100, 50);
+        //    app.EnterText("test");
+        //}
+
+        [Test]
+        public void SelectDriverOrRider()
+        {
+            app.WaitForElement(c => c.Marked("button1"));
+            app.Invoke("StartActivityThree");
+            Thread.Sleep(3000);
+            app.Tap(c => c.Marked("testFragment1"));
+            app.Tap(c => c.Marked("riderOrDriverSwitch"));
+            app.Tap(c => c.Marked("numOfPeople"));
+            app.TapCoordinates(760, 1200);
+            app.Tap("Next");
+            //app.Repl();
         }
 
         [Test]
-        public void testUserProfilePhoto()
+        public void GiveFeedbackToRider()
         {
-            Thread.Sleep(1000);
-            AppResult[] r = app.Query(c => c.Marked("userPhoto"));
-            Assert.IsTrue(r[0] != null);
+            app.WaitForElement(c => c.Marked("button1"));
+            app.Invoke("StartActivityThree");
+            app.Tap(c => c.Marked("testFragment2"));
+            app.EnterText(c => c.Marked("driverReviewEdit"), "Best driver!");
+            app.Tap(c => c.Marked("ratingBarDriver"));
+            app.Tap("submitFeedback1");
         }
-
-        [Test]
-        public void testUserProfileGender()
-        {
-            Thread.Sleep(1000);
-            AppResult[] r = app.Query(c => c.Marked("genderImage"));
-            Assert.IsTrue(r[0] != null);
-        }
-
-        [Test]
-        public void testUserProfileRating()
-        {
-            Thread.Sleep(1000);
-            AppResult[] r = app.Query(c => c.Marked("ratingBar"));
-            Assert.IsTrue(r[0] != null);
-        }
-
     }
 }
 
