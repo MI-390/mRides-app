@@ -393,13 +393,6 @@ namespace mRides_app
         
 
         //Interface methods below
-        public void updateUserSelection(string type, int number)
-        {
-            userType = type;
-            numberOfPeople = number;
-            Toast.MakeText(ApplicationContext, "User type: " + userType + " Number of people: " + numberOfPeople, ToastLength.Long).Show();
-        }
-
         protected override void OnResume()
         {
             base.OnResume();

@@ -425,8 +425,8 @@ namespace mRides_app
 			// aapt resource value: 0x7f020033
 			public const int powered_by_google_light = 2130837555;
 			
-			// aapt resource value: 0x7f020031
-			public const int userIcon2 = 2130837553;
+			// aapt resource value: 0x7f020034
+			public const int userIcon2 = 2130837556;
 			
 			static Drawable()
 			{
