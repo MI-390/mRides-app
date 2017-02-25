@@ -15,6 +15,33 @@ namespace mRides_app
     public class MainActivity : Activity
     {
         string userName;
+        // For UI testing
+        [Java.Interop.Export("StartActivityOne")]
+        public void StartActivityOne()
+        {
+            Intent i = new Intent(this, typeof(PreferencesActivity));
+            StartActivity(i);
+        }
+        [Java.Interop.Export("StartActivityTwo")]
+        public void StartActivityTwo()
+        {
+            Intent i = new Intent(this, typeof(MapActivity));
+            StartActivity(i);
+        }
+
+        [Java.Interop.Export("StartActivityThree")]
+        public void StartActivityThree()
+        {
+            Intent i = new Intent(this, typeof(TestFragments));
+            StartActivity(i);
+        }
+
+        [Java.Interop.Export("StartActivityFour")]
+        public void StartActivityFour()
+        {
+            Intent i = new Intent(this, typeof(Feedback.FeedbackTest));
+            StartActivity(i);
+        }
 
         void LoginToFacebook(bool allowCancel)
         {
@@ -41,15 +68,29 @@ namespace mRides_app
                 if (response != null)
                 {
                     var obj = JObject.Parse(response.GetResponseText());
-                    userName = "Name: " + obj["name"].ToString();
-                    var mapActivity = new Intent(this, typeof(MapActivity));
-                    mapActivity.PutExtra("Profile Info", userName);
-                    StartActivity(mapActivity);
+
+                    /** COMMENT THE FOLLOWING TO VIEW USER PROFILE ACTIVITY UPON LOGIN **/
+                    //userName = "Name: " + obj["name"].ToString();
+                    //var mapActivity = new Intent(this, typeof(MapActivity));
+                    //mapActivity.PutExtra("Profile Info", userName);
+                    //StartActivity(mapActivity);
+
+                    /** UNCOMMENT THE FOLLOWING TO VIEW USER PROFILE ACTIVITY UPON LOGIN **/
+                    //userName = "" + obj["name"].ToString();
+                    //var userProfileActivity = new Intent(this, typeof(UserProfile));
+                    //userProfileActivity.PutExtra("Profile Info", userName);
+                    //StartActivity(userProfileActivity);
+
+                    /** GO TO PREFERENCES */
+                    userName = obj["name"].ToString();
+                    var preferencesActivity = new Intent(this, typeof(PreferencesActivity));
+                    preferencesActivity.PutExtra(GetString(Resource.String.ExtraData_UserName), userName);
+                    StartActivity(preferencesActivity);
                 }
             }
         }
 
-       // private static readonly TaskScheduler UIScheduler = TaskScheduler.FromCurrentSynchronizationContext();
+        // private static readonly TaskScheduler UIScheduler = TaskScheduler.FromCurrentSynchronizationContext();
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -60,6 +101,7 @@ namespace mRides_app
             facebook.Click += delegate {
                 LoginToFacebook(true);
             };
+
 
             //var facebookNoCancel = FindViewById<Button>(Resource.Id.FacebookButtonNoCancel);
             // facebookNoCancel.Click += delegate { LoginToFacebook(false); };

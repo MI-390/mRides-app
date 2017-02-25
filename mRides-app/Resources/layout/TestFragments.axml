@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <Button
-        android:text="Click for Feedback popup!"
+        android:text="Test UserTypeFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/openFeedbackAlert" />
-<!--<Button
-        android:text="ComplexButton"
+        android:id="@+id/testFragment1" />
+    <Button
+        android:text="Test DriverReview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/complexButton" />-->
+        android:id="@+id/testFragment2" />
 </LinearLayout>
