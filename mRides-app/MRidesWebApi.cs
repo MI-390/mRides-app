@@ -1,8 +1,10 @@
 ﻿using mRides_app.Models;
+using MRidesJSON;
 using Newtonsoft.Json;
 using RestSharp;
 using RestSharp.Authenticators;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace mRides_app
@@ -24,15 +26,19 @@ namespace mRides_app
      * Structure:
      * 
      * 1. The private class ApiEndPointUrl contains a list of constant strings representing the 
-     * URL to access each method on the server side.
+     *    URL to access each method on the server side.
      * 
      * 2. Multiple public static methods define the exposed interface of the server. They will be
-     * used by the app activities to make api calls. For example: if an activity needs to find the
-     * user object with userid = 1, it will call "MRidesWebApi.getUser(1)". This method will be
-     * responsible to commnicate with the server and obtain the object.
+     *    used by the app activities to make api calls. For example: if an activity needs to find the
+     *    user object with userid = 1, it will call "MRidesWebApi.getUser(1)". This method will be
+     *    responsible to commnicate with the server and obtain the object.
      * 
      * 3. Multiple private static methods help the other methods to send the GET/POST/DELETE requests
-     * to the server.
+     *    to the server.
+     * 
+     * 4. The response may not exactly to correspond to a model object, it may contain a composition of 
+     *    those objects. For this purpose, the namespace MRidesJSON is used to contain classes that will
+     *    correspond to the deserialized responses from the server side.
      * 
      * ---------------------------------------------------------------------------------------------
      * Steps to add a method to the exposed interface:
@@ -116,8 +122,6 @@ namespace mRides_app
             public const string findRiders = "Console/findRiders";
             public const string confirm = "Console/confirm";
             public const string acceptConfirm = "Console/acceptConfirm";
-            public const string createRide = "Console/createRide";
-            public const string addRiderToRequest = "Console/addRiderToRequest";
 
             // Request related url
             public const string createRequest = "Request/createRequest";
@@ -160,16 +164,36 @@ namespace mRides_app
           */
         public static List<Request> FindRiders(Request newRequest)
         {
-            dynamic response = SendPost<dynamic>(MRidesWebApi.ApiEndPointUrl.findRiders, newRequest, true);
+            //FindRidersJson response = SendPost<FindRidersJson>(ApiEndPointUrl.findRiders, newRequest, true);
 
-            // The response consists of a list:
-            // - The first element is a list of Ride
-            // - The second element is the id of the newly create request
-            List<Request> requests = response.rides.ToObject<List<Request>>();
-            int requestId = Convert.ToInt32(response.requestId);
-            newRequest.ID = requestId;
+            //// Set the ID of the newRequest to its new one
+            //newRequest.ID = response.driverRequestID;
 
-            return requests;
+            //return response.requests;
+
+            // Create a new rest client
+            var client = new RestClient()
+            {
+                BaseUrl = new System.Uri(BaseUrl),
+                Authenticator = new HttpBasicAuthenticator(_accountSid, _secretKey)
+            };
+
+            // Serialize the object of interest into a JSON
+            var json = JsonConvert.SerializeObject(newRequest);
+
+            // Make a new request object
+            var request = new RestRequest(ApiEndPointUrl.findRiders, Method.POST);
+            if (true)
+            {
+                request.AddHeader(HeaderNameUserId, User.currentUser.id.ToString());
+            }
+            request.AddParameter("text/json", json, ParameterType.RequestBody);
+
+            // Execute the request and return the response
+            var response = client.Execute<FindRidersJson>(request).Data;
+
+            newRequest.ID = response.driverRequestID;
+            return response.requests;
         }
 
         /**
@@ -219,7 +243,7 @@ namespace mRides_app
          */ 
         public static void CreateRequest(Request newRequest)
         {
-            newRequest.DriverID = null;
+            newRequest.driverID = null;
             SendPost<Request>(MRidesWebApi.ApiEndPointUrl.createRequest, newRequest, true);
         }
         
@@ -298,8 +322,8 @@ namespace mRides_app
             request.AddParameter("text/json", json, ParameterType.RequestBody);
 
             // Execute the request and return the response
-            var response = client.Execute<T>(request).Data;
-            return response;
+            var response = client.Execute<T>(request);
+            return response.Data;
         }
 
         /**

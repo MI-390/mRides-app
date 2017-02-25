@@ -102,6 +102,7 @@
     <Compile Include="Models\Ride.cs" />
     <Compile Include="Models\RiderRequest.cs" />
     <Compile Include="Models\UserRides.cs" />
+    <Compile Include="MRidesJSON\FindRidersJson.cs" />
     <Compile Include="MRidesWebApi.cs" />
     <Compile Include="PreferencesActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />

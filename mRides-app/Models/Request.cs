@@ -17,21 +17,15 @@ namespace mRides_app.Models
         public const string TYPE_RIDER = "rider";
         public const string TYPE_DRIVER = "driver";
 
+        public string type { get; set; }
         public int ID { get; set; }
         public string destination { get; set; }
         public string location { get; set; }
         public DateTime dateTime { get; set; }
-        public Boolean isWeekly { get; set; }
-        public string type { get; set; }
-
-        //public string type;
-
-        //1 Driver per Ride
-        public int? DriverID { get; set; }
-        public User Driver { get; set; }
-
-        //Many Riders through an association table
-        public ICollection<RiderRequest> RiderRequests { get; set; }
+        public bool isWeekly { get; set; }
+        public int? driverID { get; set; }
+        public User driver { get; set; }
+        public List<RiderRequest> riderRequests { get; set; }
 
         // Default constructor
         public Request() { }
