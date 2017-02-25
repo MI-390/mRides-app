@@ -52,7 +52,7 @@ namespace UITest
             app.ScrollDownTo(c => c.Css("input#u_0_2"));
             app.EnterText(c => c.Css("input#u_0_2"), "mi-390");
             app.ScrollToVerticalStart();
-            app.TapCoordinates(549, 1200);
+            app.TapCoordinates(549, 1300);
             app.WaitForElement(c => c.Marked("radioButtonNonSmoker"));
         }
         [Test]
