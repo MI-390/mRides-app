@@ -726,14 +726,23 @@ namespace mRides_app
 		public partial class String
 		{
 			
+			// aapt resource value: 0x7f060036
+			public const int ActivityName_MainActivity = 2131099702;
+			
 			// aapt resource value: 0x7f060022
 			public const int ApplicationName = 2131099682;
 			
-			// aapt resource value: 0x7f060033
-			public const int ExtraData_DataNotAvailable = 2131099699;
+			// aapt resource value: 0x7f060034
+			public const int ExtraData_DataNotAvailable = 2131099700;
 			
 			// aapt resource value: 0x7f060032
-			public const int ExtraData_UserName = 2131099698;
+			public const int ExtraData_FacebookId = 2131099698;
+			
+			// aapt resource value: 0x7f060035
+			public const int ExtraData_PreviousActivity = 2131099701;
+			
+			// aapt resource value: 0x7f060033
+			public const int ExtraData_UserName = 2131099699;
 			
 			// aapt resource value: 0x7f060021
 			public const int Hello = 2131099681;

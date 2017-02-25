@@ -9,87 +9,114 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using mRides_app.Models;
 
 namespace mRides_app
 {
     [Activity(Label = "PreferencesActivity")]
     public class PreferencesActivity : Activity
     {
-        private string userName;
-
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.Preferences);
 
-            // TODO: Obtain the extra data passed, the username, and display it in the Hi message
-            this.userName = Intent.GetStringExtra(GetString(Resource.String.ExtraData_UserName)) ?? GetString(Resource.String.ExtraData_DataNotAvailable);
-            TextView textViewHi = FindViewById<TextView>(Resource.Id.textViewHi);
-            string prefHi = GetString(Resource.String.Pref_Hi);
-            textViewHi.Text = prefHi + " " + userName;
+            // If the previous activity is the main activity and the user already exists,
+            // skip this activity
+            long facebookId = Intent.GetLongExtra(GetString(Resource.String.ExtraData_FacebookId), -1);
+            User currentUser = MRidesWebApi.GetUserByFacebookId(facebookId);
+            string previousActivity = Intent.GetStringExtra(GetString(Resource.String.ExtraData_PreviousActivity));
 
-            // Set the back button to go back to the previous activity
-            Button backButton = FindViewById<Button>(Resource.Id.buttonBack);
-            backButton.Click += delegate { this.Finish(); };
+            if (previousActivity.Equals(GetString(Resource.String.ActivityName_MainActivity)) && currentUser.id > 0)
+            {
+                // Set current user to the retrieved user
+                User.currentUser = currentUser;
+                this.Continue();
+            }
+            else
+            {
+                // Set the view to preferences layout
+                SetContentView(Resource.Layout.Preferences);
 
-            // Manually set the radio button groups since the radiogroup in the layout
-            // is considered as a layout, and will not display the options properly
-            // TODO: Find a way to implement this through the layout
-            RadioButton rbSmoker = FindViewById<RadioButton>(Resource.Id.radioButtonSmoker);
-            RadioButton rbNonSmoker = FindViewById<RadioButton>(Resource.Id.radioButtonNonSmoker);
-            RadioButton rbLuggage = FindViewById<RadioButton>(Resource.Id.radioButtonLuggage);
-            RadioButton rbNoLuggage = FindViewById<RadioButton>(Resource.Id.radioButtonNoLuggage);
-            RadioButton rbHandicap = FindViewById<RadioButton>(Resource.Id.radioButtonHandicap);
-            RadioButton rbNoHandicap = FindViewById<RadioButton>(Resource.Id.radioButtonNoHandicap);
-            RadioButton rbPet = FindViewById<RadioButton>(Resource.Id.radioButtonPet);
-            RadioButton rbNoPet = FindViewById<RadioButton>(Resource.Id.radioButtonNoPet);
+                // TODO: Obtain the extra data passed, the username, and display it in the Hi message
+                string userName = Intent.GetStringExtra(GetString(Resource.String.ExtraData_UserName)) ?? GetString(Resource.String.ExtraData_DataNotAvailable);
+                TextView textViewHi = FindViewById<TextView>(Resource.Id.textViewHi);
+                string prefHi = GetString(Resource.String.Pref_Hi);
+                textViewHi.Text = prefHi + " " + userName;
 
-            // Create the preference sets that acts as radio button groups
-            PreferenceSet smokerPreferences = new PreferenceSet();
-            PreferenceSet luggagePreferences = new PreferenceSet();
-            PreferenceSet handicapPreferences = new PreferenceSet();
-            PreferenceSet petPreferences = new PreferenceSet();
+                // Set the back button to go back to the previous activity
+                Button backButton = FindViewById<Button>(Resource.Id.buttonBack);
+                backButton.Click += delegate { this.Finish(); };
 
-            // Add the preferences to the sets
-            smokerPreferences.AddPreference(rbSmoker);
-            smokerPreferences.AddPreference(rbNonSmoker);
-            luggagePreferences.AddPreference(rbLuggage);
-            luggagePreferences.AddPreference(rbNoLuggage);
-            handicapPreferences.AddPreference(rbHandicap);
-            handicapPreferences.AddPreference(rbNoHandicap);
-            petPreferences.AddPreference(rbPet);
-            petPreferences.AddPreference(rbNoPet);
+                // Manually set the radio button groups since the radiogroup in the layout
+                // is considered as a layout, and will not display the options properly
+                // TODO: Find a way to implement this through the layout
+                RadioButton rbSmoker = FindViewById<RadioButton>(Resource.Id.radioButtonSmoker);
+                RadioButton rbNonSmoker = FindViewById<RadioButton>(Resource.Id.radioButtonNonSmoker);
+                RadioButton rbLuggage = FindViewById<RadioButton>(Resource.Id.radioButtonLuggage);
+                RadioButton rbNoLuggage = FindViewById<RadioButton>(Resource.Id.radioButtonNoLuggage);
+                RadioButton rbHandicap = FindViewById<RadioButton>(Resource.Id.radioButtonHandicap);
+                RadioButton rbNoHandicap = FindViewById<RadioButton>(Resource.Id.radioButtonNoHandicap);
+                RadioButton rbPet = FindViewById<RadioButton>(Resource.Id.radioButtonPet);
+                RadioButton rbNoPet = FindViewById<RadioButton>(Resource.Id.radioButtonNoPet);
 
-            // Set the default checked values
-            rbSmoker.Checked = true;
-            rbLuggage.Checked = true;
-            rbHandicap.Checked = true;
-            rbPet.Checked = true;
-            smokerPreferences.Click(rbSmoker);
-            luggagePreferences.Click(rbLuggage);
-            handicapPreferences.Click(rbHandicap);
-            petPreferences.Click(rbPet);
+                // Create the preference sets that acts as radio button groups
+                PreferenceSet smokerPreferences = new PreferenceSet();
+                PreferenceSet luggagePreferences = new PreferenceSet();
+                PreferenceSet handicapPreferences = new PreferenceSet();
+                PreferenceSet petPreferences = new PreferenceSet();
 
-            // Populate the gender spinner
-            Spinner spinnerGender = FindViewById<Spinner>(Resource.Id.spinnerGender);
-            var adapter = ArrayAdapter.CreateFromResource(
-                    this, Resource.Array.Pref_Gender, Android.Resource.Layout.SimpleSpinnerItem);
-            adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
-            spinnerGender.Adapter = adapter;
+                // Add the preferences to the sets
+                smokerPreferences.AddPreference(rbSmoker);
+                smokerPreferences.AddPreference(rbNonSmoker);
+                luggagePreferences.AddPreference(rbLuggage);
+                luggagePreferences.AddPreference(rbNoLuggage);
+                handicapPreferences.AddPreference(rbHandicap);
+                handicapPreferences.AddPreference(rbNoHandicap);
+                petPreferences.AddPreference(rbPet);
+                petPreferences.AddPreference(rbNoPet);
 
-            // Set the done button to save and continue to the next activity
-            Button doneButton = FindViewById<Button>(Resource.Id.buttonDone);
-            doneButton.Click += delegate { this.SaveAndContinue(rbSmoker.Checked, rbLuggage.Checked, rbHandicap.Checked, rbPet.Checked, spinnerGender.SelectedItemId); };
+                // Set the default checked values
+                rbSmoker.Checked = true;
+                rbLuggage.Checked = true;
+                rbHandicap.Checked = true;
+                rbPet.Checked = true;
+                smokerPreferences.Click(rbSmoker);
+                luggagePreferences.Click(rbLuggage);
+                handicapPreferences.Click(rbHandicap);
+                petPreferences.Click(rbPet);
+
+                // Populate the gender spinner
+                Spinner spinnerGender = FindViewById<Spinner>(Resource.Id.spinnerGender);
+                var adapter = ArrayAdapter.CreateFromResource(
+                        this, Resource.Array.Pref_Gender, Android.Resource.Layout.SimpleSpinnerItem);
+                adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+                spinnerGender.Adapter = adapter;
+
+                // Set the done button to save and continue to the next activity
+                Button doneButton = FindViewById<Button>(Resource.Id.buttonDone);
+                doneButton.Click += delegate { this.SaveAndContinue(rbSmoker.Checked, rbLuggage.Checked, rbHandicap.Checked, rbPet.Checked, (int)spinnerGender.SelectedItemId); };
+            }
         }
 
-        private void SaveAndContinue(Boolean smoker, Boolean luggage, Boolean handicap, Boolean pet, long gender)
+        private void SaveAndContinue(Boolean smoker, Boolean luggage, Boolean handicap, Boolean pet, int gender)
         {
             // TODO: Save the preferences
             Console.WriteLine("Smoker=" + smoker + ";Luggage=" + luggage + ";handicap=" + handicap + ";gender=" + gender + ";pet=" + pet);
+            User.currentUser.isSmoker = smoker;
+            User.currentUser.hasLuggage = luggage;
+            User.currentUser.isHandicap = handicap;
+            User.currentUser.genderPreference = gender;
+            User.currentUser.hasPet = pet;
+            //User.currentUser.save();
+            
+            this.Continue();
+        }
 
-            // TODO: Go to the next activity
+        private void Continue()
+        {
+            // Go to the next activity
             var mapActivity = new Intent(this, typeof(MapActivity));
-            mapActivity.PutExtra(GetString(Resource.String.ExtraData_UserName), this.userName);
+            mapActivity.PutExtras(Intent);
             StartActivity(mapActivity);
         }
 

@@ -57,7 +57,9 @@ namespace mRides_app
                     /** GO TO PREFERENCES */
                     userName = obj["name"].ToString();
                     var preferencesActivity = new Intent(this, typeof(PreferencesActivity));
+                    preferencesActivity.PutExtra(GetString(Resource.String.ExtraData_FacebookId), obj["id"].ToString());
                     preferencesActivity.PutExtra(GetString(Resource.String.ExtraData_UserName), userName);
+                    preferencesActivity.PutExtra(GetString(Resource.String.ExtraData_PreviousActivity), GetString(Resource.String.ActivityName_MainActivity));
                     StartActivity(preferencesActivity);
                 }
             }
