@@ -207,7 +207,7 @@ namespace mRides_app
             numberOfPeople = number;
             string str2 = GetString(Resource.String.user_type);
             string str3 = GetString(Resource.String.number_of_people);
-            Toast.MakeText(ApplicationContext, str2 + ": " + userType + str3 + " : " + numberOfPeople, ToastLength.Long).Show();
+            Toast.MakeText(ApplicationContext, str2 + " : " + userType + " " + str3 + " : " + numberOfPeople, ToastLength.Long).Show();
         }
 
 
