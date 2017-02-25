@@ -23,11 +23,11 @@
             android:layout_marginTop="15dp"
             android:layout_marginBottom="4dp" />
         <TextView
-            android:text="Large Text"
+            android:text="Person"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView1"
+            android:id="@+id/feedbackFragmentUserName"
             android:textColor="#161616"
             android:gravity="center" />
         <RatingBar
