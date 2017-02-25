@@ -22,11 +22,11 @@ namespace mRides_app
 
             // If the previous activity is the main activity and the user already exists,
             // skip this activity
-            long facebookId = Intent.GetLongExtra(GetString(Resource.String.ExtraData_FacebookId), -1);
+            long facebookId = Convert.ToInt64(Intent.GetStringExtra(GetString(Resource.String.ExtraData_FacebookId)));
             User currentUser = MRidesWebApi.GetUserByFacebookId(facebookId);
             string previousActivity = Intent.GetStringExtra(GetString(Resource.String.ExtraData_PreviousActivity));
 
-            if (previousActivity.Equals(GetString(Resource.String.ActivityName_MainActivity)) && currentUser.id > 0)
+            if (previousActivity.Equals(GetString(Resource.String.ActivityName_MainActivity)) && currentUser != null)
             {
                 // Set current user to the retrieved user
                 User.currentUser = currentUser;
@@ -34,11 +34,21 @@ namespace mRides_app
             }
             else
             {
+                // The user does not exist, create it
+                string userName = Intent.GetStringExtra(GetString(Resource.String.ExtraData_UserName));
+                string[] names = userName.Split(new char[] { ' ' }, 2);
+                currentUser = new User
+                {
+                    facebookID = facebookId,
+                    firstName = names[0],
+                    lastName = names[1]
+                };
+                User.currentUser = MRidesWebApi.CreateUser(currentUser);
+
                 // Set the view to preferences layout
                 SetContentView(Resource.Layout.Preferences);
 
-                // TODO: Obtain the extra data passed, the username, and display it in the Hi message
-                string userName = Intent.GetStringExtra(GetString(Resource.String.ExtraData_UserName)) ?? GetString(Resource.String.ExtraData_DataNotAvailable);
+                // Obtain the extra data passed, the username, and display it in the Hi message
                 TextView textViewHi = FindViewById<TextView>(Resource.Id.textViewHi);
                 string prefHi = GetString(Resource.String.Pref_Hi);
                 textViewHi.Text = prefHi + " " + userName;

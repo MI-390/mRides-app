@@ -18,5 +18,6 @@ namespace mRides_app.Models
         public string givenAs { get; set; }
         public int givenBy { get; set; }
         public int Ride { get; set; }
+        public int rating { get; set; }
     }
 }

@@ -86,8 +86,6 @@ namespace mRides_app
             // The response consists of a list:
             // - The first element is a list of Ride
             // - The second element is the id of the newly create request
-
-            
             List<Request> requests = response.rides.ToObject<List<Request>>();
             int requestId = Convert.ToInt32(response.requestId);
             newRequest.ID = requestId;
@@ -147,13 +145,21 @@ namespace mRides_app
             return SendPost<bool>(MRidesWebApi.ApiEndPointUrl.acceptConfirm, confirmationAcceptance, true);
         }
 
+
+
+
+
         // ---------------------------------------------------------------------------
         // CALLS TO REQUEST WEB API
         // ---------------------------------------------------------------------------
-        public static Request CreateRequest(Request newRequest)
+        
+        /**
+         * Create a request
+         */ 
+        public static void CreateRequest(Request newRequest)
         {
             newRequest.DriverID = null;
-            return SendPost<Request>(MRidesWebApi.ApiEndPointUrl.createRequest, newRequest, true);
+            SendPost<Request>(MRidesWebApi.ApiEndPointUrl.createRequest, newRequest, true);
         }
         
 
