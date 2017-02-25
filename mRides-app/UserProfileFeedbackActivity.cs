@@ -21,8 +21,6 @@ namespace mRides_app
 
             // Create your application here
 
-            ListAdapter = new UserProfileFeedbackAdapter(this, items);
-
         }
     }
 }

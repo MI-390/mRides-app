@@ -37,25 +37,12 @@ namespace mRides_app
             List<FeedbackForNow> feedbackfornowlist = new List<FeedbackForNow>();
             feedbackfornowlist.Add(fb);
 
+            //put for loop later in the future
             var userProfileFeedbackAdapter = new UserProfileFeedbackAdapter(this, feedbackfornowlist);
+            //var feedbackAdapter = new UserProfileFeedbackAdapter(this);
+            var feedbackListView = FindViewById<ListView>(Resource.Id.userProfileListView);
+            feedbackListView.Adapter = userProfileFeedbackAdapter;
 
-            //var feedbackListView = FindViewById<ListView>(Resource.Id.userProfileListView);
-            //feedbackListView.Adapter = userProfileFeedbackAdapter;
-            var feedbackAdapter = new UserProfileFeedbackAdapter(this);
-            var contactsListView = FindViewById<ListView>(Resource.Id.ContactsListView);
-            contactsListView.Adapter = contactsAdapter;
-
-
-            //display as many feedback fragments as there are feedbacks for user
-            for (int i = 0; i < myuser.numOfFeedback; i++)
-            {
-                //If user has reviews in the database, display the fragment for it
-                FragmentTransaction transaction = FragmentManager.BeginTransaction();
-                UserProfileFeedbackFragment reviewListFragment = new UserProfileFeedbackFragment();
-                //reviewListFragment.Show(transaction, "User Profile Feedback Fragment");
-
-                //transaction.add(Resource.Id.scrollingReviews);
-            }
 
         }
     }

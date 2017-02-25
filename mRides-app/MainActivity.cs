@@ -49,16 +49,16 @@ namespace mRides_app
                     //StartActivity(mapActivity);
 
                     /** UNCOMMENT THE FOLLOWING TO VIEW USER PROFILE ACTIVITY UPON LOGIN **/
-                    //userName = "" + obj["name"].ToString();
-                    //var userProfileActivity = new Intent(this, typeof(UserProfileActivity));
-                    //userProfileActivity.PutExtra("Profile Info", userName);
-                    //StartActivity(userProfileActivity);
+                    userName = "" + obj["name"].ToString();
+                    var userProfileActivity = new Intent(this, typeof(UserProfileActivity));
+                    userProfileActivity.PutExtra("Profile Info", userName);
+                    StartActivity(userProfileActivity);
 
                     /** GO TO PREFERENCES */
-                    userName = obj["name"].ToString();
-                    var preferencesActivity = new Intent(this, typeof(PreferencesActivity));
-                    preferencesActivity.PutExtra(GetString(Resource.String.ExtraData_UserName), userName);
-                    StartActivity(preferencesActivity);
+                    //userName = obj["name"].ToString();
+                    //var preferencesActivity = new Intent(this, typeof(PreferencesActivity));
+                    //preferencesActivity.PutExtra(GetString(Resource.String.ExtraData_UserName), userName);
+                    //StartActivity(preferencesActivity);
                 }
             }
         }
