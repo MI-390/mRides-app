@@ -121,6 +121,14 @@ namespace mRides_app
             
             this.Continue();
         }
+            
+
+            string smoker1 = GetString(Resource.String.smoker);
+            string luggage1 = GetString(Resource.String.luggage);
+            string handicap1 = GetString(Resource.String.handicap);
+            string pet1 = GetString(Resource.String.pet);
+            string gender1 = GetString(Resource.String.gender);
+            Console.WriteLine(smoker1 + " = " + smoker + "; " + luggage1 + " = " + luggage + ";" + handicap1 + "=" + handicap + ";" + gender1 + "=" + gender + ";" + pet1+ "=" + pet);
 
         private void Continue()
         {
