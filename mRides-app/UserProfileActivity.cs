@@ -12,8 +12,8 @@ using Android.Widget;
 
 namespace mRides_app
 {
-    [Activity(Label = "UserProfile")]
-    public class UserProfile : Activity
+    [Activity(Label = "UserProfileActivity")]
+    public class UserProfileActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {

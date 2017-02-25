@@ -50,7 +50,7 @@ namespace mRides_app
 
                     /** UNCOMMENT THE FOLLOWING TO VIEW USER PROFILE ACTIVITY UPON LOGIN **/
                     //userName = "" + obj["name"].ToString();
-                    //var userProfileActivity = new Intent(this, typeof(UserProfile));
+                    //var userProfileActivity = new Intent(this, typeof(UserProfileActivity));
                     //userProfileActivity.PutExtra("Profile Info", userName);
                     //StartActivity(userProfileActivity);
 

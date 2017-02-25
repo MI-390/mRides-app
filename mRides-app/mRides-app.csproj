@@ -101,9 +101,11 @@
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestMe.cs" />
+    <Compile Include="UserProfileFeedbackFragment.cs" />
+    <Compile Include="UserRides.cs" />
     <Compile Include="UserTypeFragment.cs" />
     <Compile Include="User.cs" />
-    <Compile Include="UserProfile.cs" />
+    <Compile Include="UserProfileActivity.cs" />
     <Compile Include="Feedback\FeedbackTest.cs" />
     <Compile Include="Feedback\DriverReview.cs" />
     <Compile Include="Feedback\RiderReview.cs" />
@@ -131,6 +133,9 @@
     <AndroidResource Include="Resources\layout\DriverReview.axml" />
     <AndroidResource Include="Resources\layout\RiderReview.axml" />
     <AndroidResource Include="Resources\layout\UserProfileFragment.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\UserProfileFeedbackFragment.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
