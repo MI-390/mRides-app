@@ -27,31 +27,24 @@ namespace mRides_app
             usernameText = FindViewById<TextView>(Resource.Id.userName);
             usernameText.Text = username;
 
+            FeedbackForNow fb = new FeedbackForNow();
+            fb.dateOfFeedback = DateTime.Now;
+            fb.rating = 3;
+            fb.review = "Awesome";
+            fb.userIdForNow = 2;
+            fb.username = "Nassim";
 
-            //for testing purposes
-            User myuser = new User();
-            myuser.id = 10;
-            myuser.firstName = "Nassim";
-            myuser.lastName = "ES";
-            myuser.gsd = 0;
-            myuser.hasLuggage = false;
-            myuser.isHandicap = true;
-            myuser.isSmoker = true;
-            myuser.preferredLanguage = "French";
-            myuser.numOfFeedback = 1;
+            List<FeedbackForNow> feedbackfornowlist = new List<FeedbackForNow>();
+            feedbackfornowlist.Add(fb);
 
-            //testing purposes
-            UserRides us = new UserRides();
-            us.rideId = 1;
-            us.userRideId = 1;
-            us.riderId = 10;
-            us.driverId = 11;
-            us.riderFeedback = "Good driver";
-            us.driverFeedback = "Good rider";
-            us.riderRating = 4;
-            us.driverRating = 5;
-            us.location = "Toronto";
-            us.dateOfRide = DateTime.Today;
+            var userProfileFeedbackAdapter = new UserProfileFeedbackAdapter(this, feedbackfornowlist);
+
+            //var feedbackListView = FindViewById<ListView>(Resource.Id.userProfileListView);
+            //feedbackListView.Adapter = userProfileFeedbackAdapter;
+            var feedbackAdapter = new UserProfileFeedbackAdapter(this);
+            var contactsListView = FindViewById<ListView>(Resource.Id.ContactsListView);
+            contactsListView.Adapter = contactsAdapter;
+
 
             //display as many feedback fragments as there are feedbacks for user
             for (int i = 0; i < myuser.numOfFeedback; i++)

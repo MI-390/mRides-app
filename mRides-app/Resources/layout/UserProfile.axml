@@ -23,7 +23,7 @@
             android:orientation="vertical"
             android:background="#fcfcfc"
             android:layout_marginTop="8dip"
-            android:id="@+id/linearLayout2"
+            android:id="@+id/userProfileLinearLayout2"
             android:weightSum="100"
             android:layout_marginBottom="19.0dp">
             <TextView
@@ -74,5 +74,12 @@
         android:layout_width="match_parent"
         android:layout_height="286.7dp"
         android:fillViewport="true"
-        android:id="@+id/scrollingReviews" />
+        android:id="@+id/scrollingReviews">
+        <ListView
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/userProfileListView" />
+    </ScrollView>
 </LinearLayout>

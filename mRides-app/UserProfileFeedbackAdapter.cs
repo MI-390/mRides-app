@@ -12,38 +12,74 @@ using Android.Widget;
 
 namespace mRides_app
 {
-    class UserProfileFeedbackAdapter : BaseAdapter<String>
+
+    public class FeedbackForNow
     {
-        string[] items;
+        public String review { get; set; }
+        public int rating { get; set; }
+        public int userIdForNow { get; set; }
+        public String username { get; set; }
+        public DateTime dateOfFeedback { get; set; }
+    }
+
+
+    class UserProfileFeedbackAdapter : BaseAdapter
+    { 
+
+        List<FeedbackForNow> fbfn;
         Activity context;
-        public UserProfileFeedbackAdapter(Activity context, string[] items) : base() {
+
+        public UserProfileFeedbackAdapter(Activity context, List<FeedbackForNow> fb) : base() { //change the FeedbackForNow parameter to Feedback later when it is implemented
             this.context = context;
-            this.items = items;
+            this.fbfn = fb;
         }
 
-        public override long GetItemId(int position)
+        public UserProfileFeedbackAdapter(Activity activity)
         {
-            return position;
+            context = activity;
+            FillFeedbacks();
         }
 
-        public override string this[int position]
+        void FillFeedbacks()
         {
-            get { return items[position]; }
+
         }
 
         public override int Count
         {
-            get { return items.Length; }
+            get { return fbfn.Count; }
+        }
+
+        public override Java.Lang.Object GetItem(int position)
+        {
+            // could wrap a Contact in a Java.Lang.Object
+            // to return it here if needed
+            return null;
+        }
+
+        public override long GetItemId(int position)
+        {
+            return fbfn[position].userIdForNow;
         }
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            View view = convertView; // re-use an existing view, if one is available
-            if (view == null) // otherwise create a new one
-                view = context.LayoutInflater.Inflate(Android.Resource.Layout.SimpleListItem1, null);
-            view.FindViewById<TextView>(Android.Resource.Id.Text1).Text = items[position];
+            var view = convertView ?? context.LayoutInflater.Inflate(
+                Resource.Layout.UserProfileFeedbackFragment, parent, false);
+
+            var dateOfFeedback = view.FindViewById<TextView>(Resource.Id.feedbackDateProfileFragment);
+            var userNameGivingFeedback = view.FindViewById<TextView>(Resource.Id.feedbackFragmentUserName);
+            var ratingBarOfFeedback = view.FindViewById<RatingBar>(Resource.Id.feedbackFragmentRatingBar);
+            var reviewOfFeedback = view.FindViewById<TextView>(Resource.Id.feedbackFragmentReview);
+
+            userNameGivingFeedback.Text = fbfn[position].username;
+            dateOfFeedback.Text = fbfn[position].dateOfFeedback.ToString();
+            ratingBarOfFeedback.NumStars = fbfn[position].rating;
+            reviewOfFeedback.Text = fbfn[position].review;
+
             return view;
         }
+
 
     }
 
