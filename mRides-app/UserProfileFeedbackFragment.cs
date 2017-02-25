@@ -30,6 +30,32 @@ namespace mRides_app
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
+            //for testing purposes
+            User myuser = new User();
+            myuser.id = 10;
+            myuser.firstName = "Nassim";
+            myuser.lastName = "ES";
+            myuser.gsd = 0;
+            myuser.hasLuggage = false;
+            myuser.isHandicap = true;
+            myuser.isSmoker = true;
+            myuser.preferredLanguage = "French";
+            myuser.numOfFeedback = 1;
+
+            //testing purposes
+            UserRides us = new UserRides();
+            us.rideId = 1;
+            us.userRideId = 1;
+            us.riderId = 10;
+            us.driverId = 11;
+            us.riderFeedback = "Good driver";
+            us.driverFeedback = "Good rider";
+            us.riderRating = 4;
+            us.driverRating = 5;
+            us.location = "Toronto";
+            us.dateOfRide = DateTime.Today;
+
+
             // Use this to return your custom view for this Fragment
             // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
             base.OnCreateView(inflater, container, savedInstanceState);
