@@ -22,6 +22,7 @@ namespace mRides_app
         public bool isHandicap { get; set; }
         public bool isSmoker { get; set; }
         public String preferredLanguage { get; set; }
+        public int numOfFeedback { get; set; } //we should add this to DB because it helps for front end
 
 
     }

@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace mRides_app
 {
-    class UserRides
+    public class UserRides
     {
         public int userRideId { get; set; }
         public int rideId { get; set; }

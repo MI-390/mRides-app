@@ -42,10 +42,5 @@ namespace mRides_app
             return view;
         }
 
-        public override void OnAttach(Activity activity)
-        {
-            base.OnAttach(activity);
-        }
-
     }
 }
