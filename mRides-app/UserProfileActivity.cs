@@ -27,6 +27,7 @@ namespace mRides_app
             usernameText = FindViewById<TextView>(Resource.Id.userName);
             usernameText.Text = username;
 
+            //For testing
             FeedbackForNow fb = new FeedbackForNow();
             fb.dateOfFeedback = DateTime.Now;
             fb.rating = 3;
@@ -34,15 +35,22 @@ namespace mRides_app
             fb.userIdForNow = 2;
             fb.username = "Nassim";
 
+            FeedbackForNow fb2 = new FeedbackForNow();
+            fb.dateOfFeedback = DateTime.Now;
+            fb.rating = 5;
+            fb.review = "Cool";
+            fb.userIdForNow = 3;
+            fb.username = "Hannah";
+
             List<FeedbackForNow> feedbackfornowlist = new List<FeedbackForNow>();
             feedbackfornowlist.Add(fb);
+            feedbackfornowlist.Add(fb2);
 
             //put for loop later in the future
             var userProfileFeedbackAdapter = new UserProfileFeedbackAdapter(this, feedbackfornowlist);
             //var feedbackAdapter = new UserProfileFeedbackAdapter(this);
             var feedbackListView = FindViewById<ListView>(Resource.Id.userProfileListView);
             feedbackListView.Adapter = userProfileFeedbackAdapter;
-
 
         }
     }

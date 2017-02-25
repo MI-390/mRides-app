@@ -25,7 +25,6 @@ namespace mRides_app
 
     class UserProfileFeedbackAdapter : BaseAdapter
     { 
-
         List<FeedbackForNow> fbfn;
         Activity context;
 
@@ -64,22 +63,26 @@ namespace mRides_app
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            var view = convertView ?? context.LayoutInflater.Inflate(
-                Resource.Layout.UserProfileFeedbackFragment, parent, false);
 
-            var dateOfFeedback = view.FindViewById<TextView>(Resource.Id.feedbackDateProfileFragment);
-            var userNameGivingFeedback = view.FindViewById<TextView>(Resource.Id.feedbackFragmentUserName);
-            var ratingBarOfFeedback = view.FindViewById<RatingBar>(Resource.Id.feedbackFragmentRatingBar);
-            var reviewOfFeedback = view.FindViewById<TextView>(Resource.Id.feedbackFragmentReview);
+            for (int i = 0; i < fbfn.Count; i++)
+            {
+                var view = convertView ?? context.LayoutInflater.Inflate(
+                     Resource.Layout.UserProfileFeedbackFragment, parent, false);
+                    
+                var dateOfFeedback = view.FindViewById<TextView>(Resource.Id.feedbackDateProfileFragment);
+                var userNameGivingFeedback = view.FindViewById<TextView>(Resource.Id.feedbackFragmentUserName);
+                var ratingBarOfFeedback = view.FindViewById<RatingBar>(Resource.Id.feedbackFragmentRatingBar);
+                var reviewOfFeedback = view.FindViewById<TextView>(Resource.Id.feedbackFragmentReview);
 
-            userNameGivingFeedback.Text = fbfn[position].username;
-            dateOfFeedback.Text = fbfn[position].dateOfFeedback.ToString();
-            ratingBarOfFeedback.NumStars = fbfn[position].rating;
-            reviewOfFeedback.Text = fbfn[position].review;
+                userNameGivingFeedback.Text = fbfn.ElementAt(position).username;
+                dateOfFeedback.Text = fbfn.ElementAt(position).dateOfFeedback.ToString();
+                ratingBarOfFeedback.NumStars = fbfn.ElementAt(position).rating;
+                reviewOfFeedback.Text = fbfn.ElementAt(position).review;
 
-            return view;
+                return view;
+            }
+            return null;
         }
-
 
     }
 

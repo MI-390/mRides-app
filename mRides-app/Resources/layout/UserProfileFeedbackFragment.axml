@@ -12,6 +12,11 @@
         android:layout_width="360.3dp"
         android:layout_height="wrap_content"
         android:id="@+id/feedbackFragmentLinearLayout1">
+        <ImageView
+            android:src="@drawable/divider"
+            android:layout_width="match_parent"
+            android:layout_height="9.0dp"
+            android:id="@+id/imageView1" />
         <TextView
             android:text="Date of feedback"
             android:layout_width="match_parent"
@@ -51,6 +56,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/feedbackFragmentReview"
             android:textColor="#161616"
-            android:gravity="center" />
+            android:gravity="center"
+            android:layout_marginBottom="10dp" />
     </LinearLayout>
 </LinearLayout>

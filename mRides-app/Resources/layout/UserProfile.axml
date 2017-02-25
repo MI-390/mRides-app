@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fcfcfc">
+    android:background="#FFFFFF">
 <!-- Child linear layout with horizontal orientation -->
     <LinearLayout
         android:layout_width="fill_parent"
@@ -57,7 +57,7 @@
     <ImageView
         android:src="@drawable/divider"
         android:layout_width="match_parent"
-        android:layout_height="49.7dp"
+        android:layout_height="39.0dp"
         android:id="@+id/divider"
         android:layout_marginBottom="0.0dp" />
     <TextView
@@ -67,19 +67,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textColor="#161616" />
-    <ScrollView
+        android:textColor="#161616"
+        android:layout_marginBottom="13dp" />
+    <ListView
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
-        android:layout_height="286.7dp"
-        android:fillViewport="true"
-        android:id="@+id/scrollingReviews">
-        <ListView
-            android:minWidth="25px"
-            android:minHeight="25px"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/userProfileListView" />
-    </ScrollView>
+        android:layout_height="match_parent"
+        android:id="@+id/userProfileListView" />
 </LinearLayout>
