@@ -4,23 +4,63 @@
     p1:layout_width="match_parent"
     p1:layout_height="match_parent"
     p1:id="@+id/linearLayout1"
-    p1:background="#EDECEB"
-    p1:gravity="center">
-
-  <ImageView
-      p1:src="@drawable/mrideslogo"
-      p1:layout_width="370.0dp"
-      p1:layout_height="207.5dp"
-      p1:id="@+id/imageView1"
-      p1:maxWidth="80dp"
-      p1:minHeight="80dp"
-      p1:scaleType="fitCenter" />
-
-  <Button
-      p1:layout_width="222.0dp"
-      p1:layout_height="wrap_content"
-      p1:id="@+id/button1"
-      p1:background="@drawable/fblogin"
-      p1:stateListAnimator="@null" />
-
+    p1:background="@drawable/background_mrides"
+    p1:visibility="visible"
+    p1:textAlignment="center">
+    <TextView
+        p1:text="mRides "
+        p1:textAppearance="?android:attr/textAppearanceLarge"
+        p1:id="@+id/textView1"
+        p1:fontFamily="helvetica"
+        p1:textColor="#ff5d55"
+        p1:textSize="48dp"
+        p1:textStyle="bold"
+        p1:layout_width="wrap_content"
+        p1:layout_height="wrap_content"
+        p1:layout_gravity="center"
+        p1:layout_marginTop="29.5dp" />
+    <ImageView
+        p1:id="@+id/imageView2"
+        p1:src="@drawable/mrides_logo"
+        p1:layout_width="wrap_content"
+        p1:layout_height="wrap_content"
+        p1:layout_gravity="center" />
+    <TextView
+        p1:textAppearance="?android:attr/textAppearanceSmall"
+        p1:id="@+id/textView2"
+        p1:fontFamily="helvetica"
+        p1:textColor="#fafafa"
+        p1:gravity="center"
+        p1:text="@string/slogan"
+        p1:textSize="15dp"
+        p1:layout_width="wrap_content"
+        p1:layout_height="wrap_content"
+        p1:textStyle="italic"
+        p1:layout_gravity="center" />
+    <TextView
+        p1:text="@string/fblogin"
+        p1:textAppearance="?android:attr/textAppearanceSmall"
+        p1:layout_width="244.0dp"
+        p1:layout_height="29.0dp"
+        p1:id="@+id/textView3"
+        p1:layout_gravity="center"
+        p1:fontFamily="helvetica"
+        p1:textColor="#444444"
+        p1:layout_marginTop="60.5dp"
+        p1:textSize="12dp"
+        p1:textStyle="bold"
+        p1:layout_marginLeft="0.0dp" />
+    <Button
+        p1:text="@string/fb"
+        p1:id="@+id/loginButton"
+        p1:layout_width="121.0dp"
+        p1:layout_height="25.0dp"
+        p1:layout_gravity="center"
+        p1:textSize="10dp"
+        p1:fontFamily="helvetica"
+        p1:backgroundTint="#ff0844a4"
+        p1:background="#ff0844a4"
+        p1:layout_marginBottom="0.0dp"
+        p1:layout_marginTop="13.5dp"
+        p1:textAllCaps="false" />
 </LinearLayout>

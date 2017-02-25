@@ -68,7 +68,7 @@ namespace mRides_app
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Destination);
 
-            string text = Intent.GetStringExtra("Profile Info") ?? "Data not available";
+            string text = Intent.GetStringExtra(GetString(Resource.String.ExtraData_UserName)) ?? GetString(Resource.String.ExtraData_DataNotAvailable);
             Toast.MakeText(ApplicationContext, "Hello " + text, ToastLength.Long).Show();
 
             // Retrieve the PlaceAutocompleteFragment.
@@ -447,7 +447,11 @@ namespace mRides_app
         public void OnPlaceSelected(IPlace place)
         {
             destination = place.NameFormatted.ToString();
-            Toast.MakeText(ApplicationContext, "Destination : " + destination, ToastLength.Long).Show();
+            string str1 = GetString(Resource.String.dest);
+            Toast.MakeText(ApplicationContext, str1 + " : " + destination, ToastLength.Long).Show();
+
+           
+        
             if (destinationMarker != null)
                 map.Clear();
             destinationMarker = map.AddMarker(new MarkerOptions().SetPosition(place.LatLng).SetTitle(destination));
@@ -463,6 +467,15 @@ namespace mRides_app
             //IList<Address> addresses = null;
             //addresses = geocoder.GetFromLocation(place.LatLng.Latitude, place.LatLng.Longitude, 1);
             //string countryCode = addresses[0].CountryCode;
+        }
+
+        public void updateUserSelection(string type, int number)
+        {
+            userType = type;
+            numberOfPeople = number;
+            string str2 = GetString(Resource.String.user_type);
+            string str3 = GetString(Resource.String.number_of_people);
+            Toast.MakeText(ApplicationContext, str2 + " : " + userType + " " + str3 + " : " + numberOfPeople, ToastLength.Long).Show();
         }
 
 
