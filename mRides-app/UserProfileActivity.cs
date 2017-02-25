@@ -58,8 +58,8 @@ namespace mRides_app
             {
                 //If user has reviews in the database, display the fragment for it
                 FragmentTransaction transaction = FragmentManager.BeginTransaction();
-                UserTypeFragment dialog = new UserTypeFragment();
-                dialog.Show(transaction, "User type fragment");
+                UserTypeFragment dialog = new UserProfileFeedbackFragment();
+                dialog.Show(transaction, "User Profile Feedback Fragment");
 
                 transaction.add(Resource.Id.scrollingReviews);
             }
