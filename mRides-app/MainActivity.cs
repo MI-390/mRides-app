@@ -81,10 +81,15 @@ namespace mRides_app
                     //userProfileActivity.PutExtra("Profile Info", userName);
                     //StartActivity(userProfileActivity);
 
-                    /** GO TO PREFERENCES */
+                    /** 
+                     * If we already know the user, instantiate the user object and skip the preference activity 
+                     * Otherwise, give the facebook ID to the preference activity (first time user)
+                     */
                     userName = obj["name"].ToString();
                     var preferencesActivity = new Intent(this, typeof(PreferencesActivity));
+                    preferencesActivity.PutExtra(GetString(Resource.String.ExtraData_FacebookId), obj["id"].ToString());
                     preferencesActivity.PutExtra(GetString(Resource.String.ExtraData_UserName), userName);
+                    preferencesActivity.PutExtra(GetString(Resource.String.ExtraData_PreviousActivity), GetString(Resource.String.ActivityName_MainActivity));
                     StartActivity(preferencesActivity);
                 }
             }

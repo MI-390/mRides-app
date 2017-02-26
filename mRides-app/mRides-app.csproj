@@ -61,6 +61,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Java.Interop" />
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Mono.Android" />
     <Reference Include="Mono.Android.Export" />
     <Reference Include="mscorlib" />
@@ -106,17 +107,27 @@
     <Compile Include="MapActivity.cs" />
     <Compile Include="Authentication\Facebook.cs" />
     <Compile Include="MainActivity.cs" />
-    <Compile Include="MRidesWebApi.cs" />
+    <Compile Include="Models\Feedback.cs" />
+    <Compile Include="Models\Request.cs" />
+    <Compile Include="Models\Ride.cs" />
+    <Compile Include="Models\RiderRequest.cs" />
+    <Compile Include="Models\UserRides.cs" />
+    <Compile Include="Mappers\MRidesJSON\FindDriversJson.cs" />
+    <Compile Include="Mappers\MRidesJSON\FindRidersJson.cs" />
+    <Compile Include="Mappers\AbstractMapper.cs" />
+    <Compile Include="Mappers\ConsoleMapper.cs" />
+    <Compile Include="Mappers\RequestMapper.cs" />
+    <Compile Include="Mappers\UserMapper.cs" />
     <Compile Include="PreferencesActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="User.cs" />
+    <Compile Include="UserTypeFragment.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="UserProfile.cs" />
     <Compile Include="Feedback\FeedbackTest.cs" />
     <Compile Include="Feedback\DriverReview.cs" />
     <Compile Include="Feedback\RiderReview.cs" />
     <Compile Include="TestFragments.cs" />
-    <Compile Include="UserTypeFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GettingStarted.Xamarin" />

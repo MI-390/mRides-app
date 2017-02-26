@@ -27,10 +27,13 @@
   <string name="Pref_Done">Done</string>
 
   <!-- STRINGS FOR DATA SENT FROM ACTIVITY TO ACTIVITY -->
+  <string name="ExtraData_FacebookId">facebookId</string>
   <string name="ExtraData_UserName">username</string>
   <string name="ExtraData_DataNotAvailable">Data not available</string>
-  
-  
+  <string name="ExtraData_PreviousActivity">previousActivity</string>
+
+  <!-- ACTIVITY NAMES -->
+  <string name="ActivityName_MainActivity">Main Activity</string>
 
     
   <string name="slogan">Travel together</string>
