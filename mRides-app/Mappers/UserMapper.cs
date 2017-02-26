@@ -57,6 +57,21 @@ namespace mRides_app.Mappers
         }
 
         /**
+         * Create a new review 
+         */
+        public User LeaveReview(int rideid, int reviewerId, int revieweeId, string review)
+        {
+            object newReview = new
+            {
+                rideid = rideid,
+                reviewerId = reviewerId,
+                revieweeId = revieweeId,
+                review = review
+            };
+            return SendPost<User>(ApiEndPointUrl.leaveReview, newReview, true);
+        }
+
+        /**
          * Obtain reviews given to a user
          */
         public List<Models.Feedback> GetReviews(int userId)

@@ -14,6 +14,9 @@ namespace mRides_app.Models
 {
     public class Feedback
     {
+        public const string GIVEN_AS_RIDER = "rider";
+        public const string GIVEN_AS_DRIVER = "driver";
+
         public string feedback { get; set; }
         public string givenAs { get; set; }
         public int givenBy { get; set; }

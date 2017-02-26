@@ -204,6 +204,7 @@ namespace mRides_app.Mappers
         public const string getUser = "User/getUser/{id}";
         public const string getUserByFacebookId = "User/getUserByFacebookId/{id}";
         public const string getReviews = "User/getReviews/{id}";
+        public const string leaveReview = "User/leaveReview";
 
     }
 }
