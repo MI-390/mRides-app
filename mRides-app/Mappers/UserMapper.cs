@@ -59,13 +59,14 @@ namespace mRides_app.Mappers
         /**
          * Create a new review 
          */
-        public User LeaveReview(int rideid, int reviewerId, int revieweeId, string review)
+        public User LeaveReview(int rideid, int reviewerId, int revieweeId, int rating, string review)
         {
             object newReview = new
             {
                 rideid = rideid,
                 reviewerId = reviewerId,
                 revieweeId = revieweeId,
+                rating = rating,
                 review = review
             };
             return SendPost<User>(ApiEndPointUrl.leaveReview, newReview, true);
