@@ -103,6 +103,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\ActivityNames.cs" />
+    <Compile Include="Constants\IntentExtraNames.cs" />
     <Compile Include="DestinationJSON.cs" />
     <Compile Include="MapActivity.cs" />
     <Compile Include="Authentication\Facebook.cs" />
