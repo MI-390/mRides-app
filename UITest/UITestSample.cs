@@ -42,9 +42,8 @@ namespace UITest
         [Test]
         public void FacebookLogin()
         {
-            // Start app only once, so that further test can continue
-            app.Tap(c => c.Marked("button1"));
-            Thread.Sleep(3000);
+            app.Tap(c => c.Marked("loginButton"));
+            Thread.Sleep(5000);
             app.Screenshot("Login");
             app.TapCoordinates(549, 900);
             app.EnterText("cvnewggbsc_1487629189@tfbnw.net");
