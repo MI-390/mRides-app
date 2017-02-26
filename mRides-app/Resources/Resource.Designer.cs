@@ -441,14 +441,11 @@ namespace mRides_app
 		public partial class Id
 		{
 			
+			// aapt resource value: 0x7f090050
+			public const int CloseButton = 2131296336;
+			
 			// aapt resource value: 0x7f090051
-			public const int CloseButton = 2131296337;
-			
-			// aapt resource value: 0x7f090052
-			public const int Next = 2131296338;
-			
-			// aapt resource value: 0x7f09004c
-			public const int acceptRideButton1 = 2131296332;
+			public const int Next = 2131296337;
 			
 			// aapt resource value: 0x7f090005
 			public const int adjust_height = 2131296261;
@@ -471,8 +468,8 @@ namespace mRides_app
 			// aapt resource value: 0x7f090040
 			public const int divider = 2131296320;
 			
-			// aapt resource value: 0x7f09004f
-			public const int driver1 = 2131296335;
+			// aapt resource value: 0x7f09004e
+			public const int driver1 = 2131296334;
 			
 			// aapt resource value: 0x7f090013
 			public const int driverReviewEdit = 2131296275;
@@ -519,9 +516,6 @@ namespace mRides_app
 			// aapt resource value: 0x7f090048
 			public const int linearLayout2 = 2131296328;
 			
-			// aapt resource value: 0x7f09004b
-			public const int linearLayout3 = 2131296331;
-			
 			// aapt resource value: 0x7f090019
 			public const int loginButton = 2131296281;
 			
@@ -534,8 +528,8 @@ namespace mRides_app
 			// aapt resource value: 0x7f090002
 			public const int normal = 2131296258;
 			
-			// aapt resource value: 0x7f090050
-			public const int numOfPeople = 2131296336;
+			// aapt resource value: 0x7f09004f
+			public const int numOfPeople = 2131296335;
 			
 			// aapt resource value: 0x7f09000d
 			public const int openFeedbackAlert = 2131296269;
@@ -600,11 +594,14 @@ namespace mRides_app
 			// aapt resource value: 0x7f090036
 			public const int ratingBarRider = 2131296310;
 			
-			// aapt resource value: 0x7f09004d
-			public const int rider1 = 2131296333;
+			// aapt resource value: 0x7f09004b
+			public const int reviewFragmentButton = 2131296331;
 			
-			// aapt resource value: 0x7f09004e
-			public const int riderOrDriverSwitch = 2131296334;
+			// aapt resource value: 0x7f09004c
+			public const int rider1 = 2131296332;
+			
+			// aapt resource value: 0x7f09004d
+			public const int riderOrDriverSwitch = 2131296333;
 			
 			// aapt resource value: 0x7f090037
 			public const int riderReviewEdit = 2131296311;
@@ -675,9 +672,6 @@ namespace mRides_app
 			// aapt resource value: 0x7f09003b
 			public const int userPhoto = 2131296315;
 			
-			// aapt resource value: 0x7f09004a
-			public const int userProfileFragmentDetour = 2131296330;
-			
 			// aapt resource value: 0x7f090049
 			public const int userProfileFragmentName = 2131296329;
 			
@@ -686,6 +680,9 @@ namespace mRides_app
 			
 			// aapt resource value: 0x7f090041
 			public const int userProfileListView = 2131296321;
+			
+			// aapt resource value: 0x7f09004a
+			public const int viewProfileFragmentButton = 2131296330;
 			
 			// aapt resource value: 0x7f090009
 			public const int wide = 2131296265;

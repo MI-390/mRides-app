@@ -43,8 +43,7 @@ namespace mRides_app
         private string destination;
 
         private Marker destinationMarker;
-        private List<MarkerOptions> userMarkers;
-        private List<User> userList;
+        private Dictionary<User, Marker> usersOnMap;
         private List<LatLng> directionList;
         private List<Request> requestList;
         private DestinationJSON destinationData;
@@ -90,19 +89,18 @@ namespace mRides_app
         {
             map = googleMap;
             map.MarkerClick += OnMarkerClick;
-            map.PolylineClick += OnPolylineClick;
+           //map.PolylineClick += OnPolylineClick;
             if (locationPermissionGranted)
             {
                 map.MyLocationEnabled = true;
                 map.UiSettings.MyLocationButtonEnabled = true;
                 map.UiSettings.ZoomControlsEnabled = true;
-                if (lastUserLocation != null)
-                {
-                    map.MyLocationButtonClick += OnMyLocationButtonClick;
-                }
+                map.MyLocationButtonClick += OnMyLocationButtonClick;
+                //map.SetOnMyLocationButtonClickListener(this);              
             }
         }
 
+        //When the user clicks on a marker
         private void OnMarkerClick(object sender, Android.Gms.Maps.GoogleMap.MarkerClickEventArgs e)
         {
             if (e.Marker.Equals(destinationMarker))
@@ -110,26 +108,48 @@ namespace mRides_app
                 FragmentTransaction transaction = FragmentManager.BeginTransaction();
                 UserTypeFragment dialog = new UserTypeFragment();
                 dialog.Show(transaction, "User type fragment");
+                findUsers();
             }
             else
-                e.Marker.ShowInfoWindow();
-        }
-
-        private void OnPolylineClick(object sender, Android.Gms.Maps.GoogleMap.PolylineClickEventArgs e)
-        {
-            findUsers();
-            if (userMarkers != null)
             {
-                foreach (MarkerOptions option in userMarkers)
-                    map.AddMarker(option);
+                foreach (KeyValuePair<User, Marker> option in usersOnMap)
+                {
+                    if (e.Marker.Equals(option.Value))
+                    {
+                        Bundle args = new Bundle();
+                        args.PutString("name", e.Marker.Title);
+                        args.PutString("id", option.Key.id.ToString());
+                        FragmentTransaction transaction = FragmentManager.BeginTransaction();
+                        UserProfileFragment dialog = new UserProfileFragment();
+                        dialog.Arguments = args;
+                        dialog.Show(transaction, "User profile fragment");
+                        //e.Marker.ShowInfoWindow();
+                    }
+                }
             }
         }
+
+        //When the user clicks on a polyline
+        //private void OnPolylineClick(object sender, Android.Gms.Maps.GoogleMap.PolylineClickEventArgs e)
+        //{
+        //    findUsers();
+        //    if (usersOnMap != null)
+        //    {
+        //        foreach (KeyValuePair<User, MarkerOptions> option in usersOnMap)
+        //            map.AddMarker(option.Value);
+                
+        //    }
+        //}
 
         private void OnMyLocationButtonClick(object sender, Android.Gms.Maps.GoogleMap.MyLocationButtonClickEventArgs e)
         {
             LatLng position = new LatLng(lastUserLocation.Latitude, lastUserLocation.Longitude);
             PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)FragmentManager.FindFragmentById(Resource.Id.place_autocomplete_fragment);
             UpdateCameraPosition(position);
+            if (usersOnMap != null)
+            {
+                findUsers();
+            }
         }
 
         //Update the camera position to a latitude/longitude coordinate position
@@ -281,87 +301,25 @@ namespace mRides_app
             return path;
         }
 
-        //Temporary class for users REMOVE AFTER IMPLEMENTING SERVER
-        //public class User
-        //{
-        //    public LatLng position;
-        //    public string name;
-        //}
-
-        ////Hardcoded users REMOVE AFTER IMPLEMENTING SERVER
-        //public void createUserList()
-        //{
-        //    userList = new List<User>();
-        //    User user1 = new User();
-        //    User user2 = new User();
-        //    User user3 = new User();
-        //    User user4 = new User();
-        //    User user5 = new User();
-        //    User user6 = new User();
-        //    User user7 = new User();
-        //    User user8 = new User();
-        //    user1.name = "Aline One";
-        //    user2.name = "Aline Two";
-        //    user3.name = "Aline Three";
-        //    user4.name = "Aline Four";
-        //    user5.name = "Aline Five";
-        //    user6.name = "Aline Six";
-        //    user7.name = "Aline Seven";
-        //    user8.name = "Aline Eight";
-        //    user1.position = new LatLng(45.45834, -73.6398);
-        //    user2.position = new LatLng(45.4544, -73.6488);
-        //    user3.position = new LatLng(45.50000, -73.6408);
-        //    user4.position = new LatLng(45.45034, -73.6398);
-        //    user5.position = new LatLng(45.47834, -73.6308);
-        //    user6.position = new LatLng(45.45834, -73.6598);
-        //    user7.position = new LatLng(45.45900, -73.6200);
-        //    user8.position = new LatLng(45.50523, -73.57642);
-        //    userList.Add(user1);
-        //    userList.Add(user2);
-        //    userList.Add(user3);
-        //    userList.Add(user4);
-        //    userList.Add(user5);
-        //    userList.Add(user6);
-        //    userList.Add(user7);
-        //    userList.Add(user8);
-        //}
-
         //Find users along a path
         public void findUsers()
         {
-            //createUserList();
-            userMarkers = new List<MarkerOptions>();
-            //List of found users
-            //List<User> foundUsers = new List<User>();
+            //Instantiate a new dictionary for the new destination
+            usersOnMap = new Dictionary<User, Marker>();
+
             if (requestList != null)
             {               
                 foreach (Request request in requestList)
                 {
                     Android.Gms.Maps.Model.MarkerOptions userMarker = new Android.Gms.Maps.Model.MarkerOptions();
                     string[] splitCoordinates = request.riderRequests.First().location.Split(',');
-                    userMarker.SetPosition(new LatLng(Double.Parse(splitCoordinates[0]), Double.Parse(splitCoordinates[1]))).SetTitle(request.riderRequests.First().rider.id.ToString())
+                    userMarker.SetPosition(new LatLng(Double.Parse(splitCoordinates[0]), Double.Parse(splitCoordinates[1]))).SetTitle(request.riderRequests.First().rider.firstName.ToString() + " " + request.riderRequests.First().rider.lastName.ToString())
                               .SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.userIcon2)).Anchor(0.5f, 0.5f);
-                    userMarkers.Add(userMarker);
+                    Marker marker = map.AddMarker(userMarker);
+                    usersOnMap.Add(request.riderRequests.First().rider, marker);                    
                 }
             }
         }
-
-        //This method finds the closest user given a position
-        //One degree on latitude/longitude is equivalent to 111 kilometers. 500m is around 0.0000045 degrees
-        //public List<User> getClosestUsers(List<User> userList, LatLng position)
-        //{
-        //    List<User> closestUsers = new List<User>();
-        //    if (userList != null)
-        //    {
-        //        foreach (User user in userList)
-        //        {
-        //            double distance = distanceBetweenTwoCoordinates(position, user.position);
-        //            if (distance < MATCH_DISTANCE)
-        //                closestUsers.Add(user);
-        //        }
-        //    }
-        //    return closestUsers;
-        //}
 
         //Calculates distance between two degree coordinates using the Haversine formula
         //public double distanceBetweenTwoCoordinates(LatLng latlng1, LatLng latlng2)
@@ -446,13 +404,19 @@ namespace mRides_app
                               "&key=" + googleApiKey);
 
             setDestinationData(pathURL);
-            //&waypoints=optimize:true|via:-37.81223%2C144.96254%7Cvia:-34.92788%2C138.60008
-            //Geocoder geocoder = new Geocoder(this);
+
+            //To add waypoints to the path
+            /**&waypoints=optimize:true|via:-37.81223%2C144.96254%7Cvia:-34.92788%2C138.60008 */
+
+            //To find the country code of the selection
+            /**Geocoder geocoder = new Geocoder(this);
             //IList<Address> addresses = null;
             //addresses = geocoder.GetFromLocation(place.LatLng.Latitude, place.LatLng.Longitude, 1);
-            //string countryCode = addresses[0].CountryCode;
+            //string countryCode = addresses[0].CountryCode;*/
         }
 
+
+        //Overriden method from interface of UserTypeFragment.cs
         public void updateUserSelection(string type, int number)
         {
             userType = type;
@@ -461,7 +425,5 @@ namespace mRides_app
             string str3 = GetString(Resource.String.number_of_people);
             Toast.MakeText(ApplicationContext, str2 + " : " + userType + " " + str3 + " : " + numberOfPeople, ToastLength.Long).Show();
         }
-
-
     }
 }
