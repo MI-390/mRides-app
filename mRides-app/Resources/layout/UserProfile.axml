@@ -27,8 +27,7 @@
             android:weightSum="100"
             android:layout_marginBottom="19.0dp">
             <TextView
-                android:text="@string/person_profile"
-                
+                android:text="Person"
                 android:padding="5dip"
                 android:id="@+id/userName"
                 android:layout_width="196.0dp"
@@ -62,7 +61,7 @@
         android:id="@+id/divider"
         android:layout_marginBottom="0.0dp" />
     <TextView
-        android:text="@string/ratings_reviews"
+        android:text="Ratings and Reviews"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/textView1"
         android:layout_width="match_parent"

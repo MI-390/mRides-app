@@ -121,13 +121,10 @@
     <Compile Include="PreferencesActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestMe.cs" />
     <Compile Include="UserProfileFeedbackAdapter.cs" />
     <Compile Include="UserRides.cs" />
     <Compile Include="UserTypeFragment.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="UserProfile.cs" />
-    <Compile Include="User.cs" />
     <Compile Include="UserProfileActivity.cs" />
     <Compile Include="Feedback\FeedbackTest.cs" />
     <Compile Include="Feedback\DriverReview.cs" />
