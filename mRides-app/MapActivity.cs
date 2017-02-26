@@ -25,6 +25,8 @@ using System.Net;
 using System.IO;
 using System.Json;
 using Newtonsoft.Json;
+using mRides_app.Models;
+using mRides_app.Mappers;
 
 namespace mRides_app
 {
@@ -44,21 +46,11 @@ namespace mRides_app
         private List<MarkerOptions> userMarkers;
         private List<User> userList;
         private List<LatLng> directionList;
-
+        private List<Request> requestList;
         private DestinationJSON destinationData;
         const string googleApiKey = "AIzaSyAz9p6O99w8ZWkFUbaREJXmnj01Mpm19dA";
         string userType;
         int numberOfPeople;
-
-        public void sendCoordinatesToServer()
-        {
-            List<string> destinationCoordinates = new List<string>();
-            for (int i = 0; i < directionList.Count; i += 10)
-            {
-                destinationCoordinates.Add(directionList[i].Latitude.ToString() + "," + directionList[i].Longitude.ToString());
-            }
-            //send destinationCoordinates to server
-        }
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -200,6 +192,7 @@ namespace mRides_app
                             {
                                 //Show the polyline directions on the map
                                 showDirections();
+                                sendCoordinatesToServer();
                                 //Update the camera position to the destination
                                 UpdateCameraPosition(new LatLng(destinationData.routes[0].legs[0].end_location.lat, destinationData.routes[0].legs[0].end_location.lng));
                             }
@@ -207,6 +200,26 @@ namespace mRides_app
                     }
                 }
             }
+        }
+
+        //Send coordinates to the server and get a list of users
+        public void sendCoordinatesToServer()
+        {
+            List<string> destinationCoordinates = new List<string>();
+            for (int i = 0; i < directionList.Count; i += 10)
+            {
+                destinationCoordinates.Add(directionList[i].Latitude.ToString() + "," + directionList[i].Longitude.ToString());
+            }
+
+            User.currentUser = UserMapper.getInstance().CreateUser(new User());
+            Request newRequest = new Request {
+                destinationCoordinates = destinationCoordinates,
+                destination= destinationCoordinates[destinationCoordinates.Count-1],
+                location= destinationCoordinates[0],
+                type="driver"
+        };
+            newRequest.destinationCoordinates = destinationCoordinates;
+            requestList = ConsoleMapper.getInstance().FindRiders(newRequest);
         }
 
         //Method to display the polyline path from the current user location to the destination
@@ -269,95 +282,64 @@ namespace mRides_app
         }
 
         //Temporary class for users REMOVE AFTER IMPLEMENTING SERVER
-        public class User
-        {
-            public LatLng position;
-            public string name;
-        }
+        //public class User
+        //{
+        //    public LatLng position;
+        //    public string name;
+        //}
 
-        //Hardcoded users REMOVE AFTER IMPLEMENTING SERVER
-        public void createUserList()
-        {
-            userList = new List<User>();
-            User user1 = new User();
-            User user2 = new User();
-            User user3 = new User();
-            User user4 = new User();
-            User user5 = new User();
-            User user6 = new User();
-            User user7 = new User();
-            User user8 = new User();
-            user1.name = "Aline One";
-            user2.name = "Aline Two";
-            user3.name = "Aline Three";
-            user4.name = "Aline Four";
-            user5.name = "Aline Five";
-            user6.name = "Aline Six";
-            user7.name = "Aline Seven";
-            user8.name = "Aline Eight";
-            user1.position = new LatLng(45.45834, -73.6398);
-            user2.position = new LatLng(45.4544, -73.6488);
-            user3.position = new LatLng(45.50000, -73.6408);
-            user4.position = new LatLng(45.45034, -73.6398);
-            user5.position = new LatLng(45.47834, -73.6308);
-            user6.position = new LatLng(45.45834, -73.6598);
-            user7.position = new LatLng(45.45900, -73.6200);
-            user8.position = new LatLng(45.50523, -73.57642);
-            userList.Add(user1);
-            userList.Add(user2);
-            userList.Add(user3);
-            userList.Add(user4);
-            userList.Add(user5);
-            userList.Add(user6);
-            userList.Add(user7);
-            userList.Add(user8);
-        }
+        ////Hardcoded users REMOVE AFTER IMPLEMENTING SERVER
+        //public void createUserList()
+        //{
+        //    userList = new List<User>();
+        //    User user1 = new User();
+        //    User user2 = new User();
+        //    User user3 = new User();
+        //    User user4 = new User();
+        //    User user5 = new User();
+        //    User user6 = new User();
+        //    User user7 = new User();
+        //    User user8 = new User();
+        //    user1.name = "Aline One";
+        //    user2.name = "Aline Two";
+        //    user3.name = "Aline Three";
+        //    user4.name = "Aline Four";
+        //    user5.name = "Aline Five";
+        //    user6.name = "Aline Six";
+        //    user7.name = "Aline Seven";
+        //    user8.name = "Aline Eight";
+        //    user1.position = new LatLng(45.45834, -73.6398);
+        //    user2.position = new LatLng(45.4544, -73.6488);
+        //    user3.position = new LatLng(45.50000, -73.6408);
+        //    user4.position = new LatLng(45.45034, -73.6398);
+        //    user5.position = new LatLng(45.47834, -73.6308);
+        //    user6.position = new LatLng(45.45834, -73.6598);
+        //    user7.position = new LatLng(45.45900, -73.6200);
+        //    user8.position = new LatLng(45.50523, -73.57642);
+        //    userList.Add(user1);
+        //    userList.Add(user2);
+        //    userList.Add(user3);
+        //    userList.Add(user4);
+        //    userList.Add(user5);
+        //    userList.Add(user6);
+        //    userList.Add(user7);
+        //    userList.Add(user8);
+        //}
 
         //Find users along a path
         public void findUsers()
         {
-            createUserList();
+            //createUserList();
             userMarkers = new List<MarkerOptions>();
             //List of found users
-            List<User> foundUsers = new List<User>();
-            if (directionList != null)
-            {
-                for(int i = 0; i < directionList.Count; i += 10)
-                {
-                    List<User> closestUsers = getClosestUsers(userList, directionList[i]);
-                    if (closestUsers.Count > 0)
-                    {
-                        if (foundUsers.Count == 0)
-                        {
-                            foreach (User user in closestUsers)
-                                foundUsers.Add(user);
-                        }
-                        else
-                        {
-                            foreach (User closestUser in closestUsers)
-                            {
-                                bool userInList = false;
-                                foreach (User foundUser in foundUsers)
-                                {
-                                    if ((closestUser.name).Equals(foundUser.name))
-                                    {
-                                        userInList = true;
-                                    }
-                                }
-                                if (!userInList)
-                                    foundUsers.Add(closestUser);
-                            }
-                        }
-                    }                                        
-                }
-            }
-
-            if (foundUsers.Count > 0)
-            {
-                foreach (User user in foundUsers)
+            //List<User> foundUsers = new List<User>();
+            if (requestList != null)
+            {               
+                foreach (Request request in requestList)
                 {
                     Android.Gms.Maps.Model.MarkerOptions userMarker = new Android.Gms.Maps.Model.MarkerOptions();
-                    userMarker.SetPosition(user.position).SetTitle(user.name)
+                    string[] splitCoordinates = request.location.Split(',');
+                    userMarker.SetPosition(new LatLng(Double.Parse(splitCoordinates[0]), Double.Parse(splitCoordinates[1]))).SetTitle(request.riderRequests.First().rider.firstName.ToString())
                               .SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.userIcon2)).Anchor(0.5f, 0.5f);
                     userMarkers.Add(userMarker);
                 }
@@ -366,40 +348,40 @@ namespace mRides_app
 
         //This method finds the closest user given a position
         //One degree on latitude/longitude is equivalent to 111 kilometers. 500m is around 0.0000045 degrees
-        public List<User> getClosestUsers(List<User> userList, LatLng position)
-        {
-            List<User> closestUsers = new List<User>();
-            if (userList != null)
-            {
-                foreach (User user in userList)
-                {
-                    double distance = distanceBetweenTwoCoordinates(position, user.position);
-                    if (distance < MATCH_DISTANCE)
-                        closestUsers.Add(user);
-                }
-            }
-            return closestUsers;
-        }
+        //public List<User> getClosestUsers(List<User> userList, LatLng position)
+        //{
+        //    List<User> closestUsers = new List<User>();
+        //    if (userList != null)
+        //    {
+        //        foreach (User user in userList)
+        //        {
+        //            double distance = distanceBetweenTwoCoordinates(position, user.position);
+        //            if (distance < MATCH_DISTANCE)
+        //                closestUsers.Add(user);
+        //        }
+        //    }
+        //    return closestUsers;
+        //}
 
         //Calculates distance between two degree coordinates using the Haversine formula
-        public double distanceBetweenTwoCoordinates(LatLng latlng1, LatLng latlng2)
-        {
-            //Mean radius of the earth in km
-            int earthRadius = 6371;
-            double dLat = degreeToRadians(latlng2.Latitude - latlng1.Latitude);
-            double dLng = degreeToRadians(latlng2.Longitude - latlng1.Longitude);
-            double a = Math.Pow(Math.Sin(dLat / 2), 2) +
-                       Math.Cos(degreeToRadians(latlng1.Latitude)) * Math.Cos(degreeToRadians(latlng2.Latitude)) *
-                       Math.Pow(Math.Sin(dLng / 2), 2);
-            double angle = 2 * Math.Asin(Math.Sqrt(a));
-            return angle * earthRadius;
-        }
+        //public double distanceBetweenTwoCoordinates(LatLng latlng1, LatLng latlng2)
+        //{
+        //    //Mean radius of the earth in km
+        //    int earthRadius = 6371;
+        //    double dLat = degreeToRadians(latlng2.Latitude - latlng1.Latitude);
+        //    double dLng = degreeToRadians(latlng2.Longitude - latlng1.Longitude);
+        //    double a = Math.Pow(Math.Sin(dLat / 2), 2) +
+        //               Math.Cos(degreeToRadians(latlng1.Latitude)) * Math.Cos(degreeToRadians(latlng2.Latitude)) *
+        //               Math.Pow(Math.Sin(dLng / 2), 2);
+        //    double angle = 2 * Math.Asin(Math.Sqrt(a));
+        //    return angle * earthRadius;
+        //}
 
-        //Transforms degrees to radians unit
-        public double degreeToRadians(double degree)
-        {
-            return degree * (Math.PI / 180);
-        }
+        ////Transforms degrees to radians unit
+        //public double degreeToRadians(double degree)
+        //{
+        //    return degree * (Math.PI / 180);
+        //}
         
 
         //Interface methods below
