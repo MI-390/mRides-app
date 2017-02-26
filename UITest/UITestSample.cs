@@ -44,8 +44,9 @@ namespace UITest
         [Test]
         public void FacebookLogin()
         {
+            // Start app only once, so that further test can continue
             app.Tap(c => c.Marked("loginButton"));
-            Thread.Sleep(5000);
+            Thread.Sleep(3000);
             app.Screenshot("Login");
             app.TapCoordinates(549, 900);
             app.EnterText("cvnewggbsc_1487629189@tfbnw.net");
@@ -76,6 +77,7 @@ namespace UITest
         //{
         //    app.WaitForElement(c => c.Marked("loginButton"));
         //    app.Invoke("StartActivityTwo");
+        //    app.Repl();
         //    app.DoubleTap(c => c.Marked("place_autocomplete_search_input"));
         //    app.TapCoordinates(100, 50);
         //    app.EnterText("test");
@@ -90,7 +92,7 @@ namespace UITest
             app.Tap(c => c.Marked("testFragment1"));
             app.Tap(c => c.Marked("riderOrDriverSwitch"));
             app.Tap(c => c.Marked("numOfPeople"));
-            app.TapCoordinates(760, 1200);
+            app.TapCoordinates(926, 550);
             app.Tap("Next");
             //app.Repl();
         }

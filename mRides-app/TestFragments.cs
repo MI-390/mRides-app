@@ -12,10 +12,9 @@ using Android.Widget;
 
 namespace mRides_app
 {
-    [Activity(Label = "UserTypeFragmentTest")]
+    [Activity(Label = "TestFragments")]
     public class TestFragments : Activity, IEditUserSelectionListener
     {
-
         string userType;
         int numberOfPeople;
         protected override void OnCreate(Bundle savedInstanceState)
