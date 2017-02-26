@@ -5,12 +5,44 @@ using Xamarin.Auth;
 using System;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
-
+using Android.Content;
+//cvnewggbsc_1487629189@tfbnw.net
+//mi-390
 namespace mRides_app
 {
+    //ggrrg
     [Activity(Label = "mRides_app", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
+        string userName;
+        // For UI testing
+        [Java.Interop.Export("StartActivityOne")]
+        public void StartActivityOne()
+        {
+            Intent i = new Intent(this, typeof(PreferencesActivity));
+            StartActivity(i);
+        }
+        [Java.Interop.Export("StartActivityTwo")]
+        public void StartActivityTwo()
+        {
+            Intent i = new Intent(this, typeof(MapActivity));
+            StartActivity(i);
+        }
+
+        [Java.Interop.Export("StartActivityThree")]
+        public void StartActivityThree()
+        {
+            Intent i = new Intent(this, typeof(TestFragments));
+            StartActivity(i);
+        }
+
+        [Java.Interop.Export("StartActivityFour")]
+        public void StartActivityFour()
+        {
+            Intent i = new Intent(this, typeof(Feedback.FeedbackTest));
+            StartActivity(i);
+        }
+
         void LoginToFacebook(bool allowCancel)
         {
             var auth = new OAuth2Authenticator(
@@ -19,58 +51,62 @@ namespace mRides_app
                 authorizeUrl: new Uri("https://m.facebook.com/dialog/oauth/"),
                 redirectUrl: new Uri("http://www.facebook.com/connect/login_success.html"));
 
+            auth.Completed += OnAuthenticationCompleted;
+
             auth.AllowCancel = allowCancel;
-
-            // If authorization succeeds or is canceled, .Completed will be fired.
-            auth.Completed += (s, ee) =>
-            {
-                if (!ee.IsAuthenticated)
-                {
-                    var builder = new AlertDialog.Builder(this);
-                    builder.SetMessage("Not Authenticated");
-                    builder.SetPositiveButton("Ok", (o, e) => { });
-                    builder.Create().Show();
-                    return;
-                }
-
-                // Now that we're logged in, make a OAuth2 request to get the user's info.
-                var request = new OAuth2Request("GET", new Uri("https://graph.facebook.com/me"), null, ee.Account);
-                request.GetResponseAsync().ContinueWith(t =>
-                {
-                    var builder = new AlertDialog.Builder(this);
-                    if (t.IsFaulted)
-                    {
-                        builder.SetTitle("Error");
-                        builder.SetMessage(t.Exception.Flatten().InnerException.ToString());
-                    }
-                    else if (t.IsCanceled)
-                        builder.SetTitle("Task Canceled");
-                    else
-                    {
-                        var obj = JObject.Parse(t.Result.GetResponseText());
-
-                        builder.SetTitle("Logged in");
-                        builder.SetMessage("Name: " + obj["name"]);
-                    }
-
-                    builder.SetPositiveButton("Ok", (o, e) => { });
-                    builder.Create().Show();
-                }, UIScheduler);
-            };
 
             var intent = auth.GetUI(this);
             StartActivity(intent);
         }
 
-        private static readonly TaskScheduler UIScheduler = TaskScheduler.FromCurrentSynchronizationContext();
+        async void OnAuthenticationCompleted(object sender, AuthenticatorCompletedEventArgs e)
+        {
+            if (e.IsAuthenticated)
+            {
+                var request = new OAuth2Request("GET", new Uri("https://graph.facebook.com/me"), null, e.Account);
+                var response = await request.GetResponseAsync();
+                if (response != null)
+                {
+                    var obj = JObject.Parse(response.GetResponseText());
+
+                    /** COMMENT THE FOLLOWING TO VIEW USER PROFILE ACTIVITY UPON LOGIN **/
+                    //userName = "Name: " + obj["name"].ToString();
+                    //var mapActivity = new Intent(this, typeof(MapActivity));
+                    //mapActivity.PutExtra("Profile Info", userName);
+                    //StartActivity(mapActivity);
+
+                    /** UNCOMMENT THE FOLLOWING TO VIEW USER PROFILE ACTIVITY UPON LOGIN **/
+                    //userName = "" + obj["name"].ToString();
+                    //var userProfileActivity = new Intent(this, typeof(UserProfile));
+                    //userProfileActivity.PutExtra("Profile Info", userName);
+                    //StartActivity(userProfileActivity);
+
+                    /** 
+                     * If we already know the user, instantiate the user object and skip the preference activity 
+                     * Otherwise, give the facebook ID to the preference activity (first time user)
+                     */
+                    userName = obj["name"].ToString();
+                    var preferencesActivity = new Intent(this, typeof(PreferencesActivity));
+                    preferencesActivity.PutExtra(GetString(Resource.String.ExtraData_FacebookId), obj["id"].ToString());
+                    preferencesActivity.PutExtra(GetString(Resource.String.ExtraData_UserName), userName);
+                    preferencesActivity.PutExtra(GetString(Resource.String.ExtraData_PreviousActivity), GetString(Resource.String.ActivityName_MainActivity));
+                    StartActivity(preferencesActivity);
+                }
+            }
+        }
+
+        // private static readonly TaskScheduler UIScheduler = TaskScheduler.FromCurrentSynchronizationContext();
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
 
-            var facebook = FindViewById<Button>(Resource.Id.button1);
-            facebook.Click += delegate { LoginToFacebook(true); };
+            var facebook = FindViewById<Button>(Resource.Id.loginButton);
+            facebook.Click += delegate {
+                LoginToFacebook(true);
+            };
+
 
             //var facebookNoCancel = FindViewById<Button>(Resource.Id.FacebookButtonNoCancel);
             // facebookNoCancel.Click += delegate { LoginToFacebook(false); };

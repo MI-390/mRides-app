@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="356.0dp"
+        android:layout_height="61.0dp"
+        android:layout_margin="10dp">
+        <TextView
+            android:text="@string/riderOrDriver"
+            android:layout_width="222.5dp"
+            android:layout_height="39.5dp"
+            android:id="@+id/textView2" />
+        <TextView
+            android:text="@string/r"
+            android:layout_width="wrap_content"
+            android:layout_height="21.0dp"
+            android:id="@+id/rider1"
+            android:paddingLeft="20dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp" />
+        <Switch
+            android:gravity="center"
+            android:id="@+id/riderOrDriverSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="0.0dp" />
+        <TextView
+            android:text="@string/d"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="11.0dp"
+            android:layout_height="19.0dp"
+            android:id="@+id/driver1"
+            android:layout_marginLeft="0dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="354.0dp"
+        android:layout_height="42.0dp"
+        android:layout_margin="10dp">
+        <TextView
+            android:text="@string/numberOfRiders"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="229.5dp"
+            android:layout_height="41.5dp"
+            android:id="@+id/textView3"
+            android:paddingRight="20dp"
+            android:layout_marginRight="26.0dp" />
+        <Spinner
+            android:layout_width="54.0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/numOfPeople"
+            android:clickable="true"
+            android:layout_marginLeft="0.0dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="360.0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="right"
+        android:layout_marginLeft="0dp">
+        <Button
+            android:text="@string/previous"
+            android:layout_width="109.5dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/CloseButton"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="4.0dp" />
+        <Button
+            android:text="@string/next"
+            android:layout_width="108.5dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/Next"
+            android:layout_marginRight="20dp" />
+    </LinearLayout>
+</LinearLayout>
