@@ -6,6 +6,8 @@ using System;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Android.Content;
+using mRides_app.Mappers;
+using mRides_app.Models;
 using System.Collections.Generic;
 //cvnewggbsc_1487629189@tfbnw.net
 //mi-390
@@ -71,34 +73,47 @@ namespace mRides_app
         {
             if (e.IsAuthenticated)
             {
-                var request = new OAuth2Request("GET", new Uri("https://graph.facebook.com/me"), null, e.Account);
+                var request = new OAuth2Request("GET", new Uri("https://graph.facebook.com/me?fields=email,first_name,last_name,gender,picture"), null, e.Account);
                 var response = await request.GetResponseAsync();
                 if (response != null)
                 {
+                    // Obtain the content from the response]
                     var obj = JObject.Parse(response.GetResponseText());
+                    long facebookId = Convert.ToInt64(obj["id"]);
+                    string facebookFirstName = obj["first_name"].ToString();
+                    string facebookLastName = obj["last_name"].ToString();
+                    // string facebookPicture = obj["picture"].ToString();
 
-                    /** COMMENT THE FOLLOWING TO VIEW USER PROFILE ACTIVITY UPON LOGIN **/
-                    //userName = "Name: " + obj["name"].ToString();
-                    //var mapActivity = new Intent(this, typeof(MapActivity));
-                    //mapActivity.PutExtra("Profile Info", userName);
-                    //StartActivity(mapActivity);
+                    // Try to obtain the user
+                    UserMapper userMapper = UserMapper.getInstance();
+                    User user = userMapper.GetUserByFacebookId(facebookId);                    
+                    
+                    // If the user already exists, set the current user to it
+                    // and go to map activity
+                    if (user != null)
+                    {
+                        User.currentUser = user;
+                        var mapActivity = new Intent(this, typeof(MapActivity));
+                        StartActivity(mapActivity);
+                    }
+                    // Otherwise, go to the preference activity
+                    else
+                    {
+                        var preferencesActivity = new Intent(this, typeof(PreferencesActivity));
+                        preferencesActivity.PutExtra(Constants.IntentExtraNames.UserFacebookId, obj["id"].ToString());
+                        preferencesActivity.PutExtra(Constants.IntentExtraNames.UserFacebookFirstName, facebookFirstName);
+                        preferencesActivity.PutExtra(Constants.IntentExtraNames.UserFacebookLastName, facebookLastName);
+                        preferencesActivity.PutExtra(Constants.IntentExtraNames.PreviousActivity, Constants.ActivityNames.MainActivity);
+                        StartActivity(preferencesActivity);
+                    }
+
 
                     /** UNCOMMENT THE FOLLOWING TO VIEW USER PROFILE ACTIVITY UPON LOGIN **/
                     //userName = "" + obj["name"].ToString();
                     //var userProfileActivity = new Intent(this, typeof(UserProfileActivity));
                     //userProfileActivity.PutExtra("Profile Info", userName);
                     //StartActivity(userProfileActivity);
-
-                    /** 
-                     * If we already know the user, instantiate the user object and skip the preference activity 
-                     * Otherwise, give the facebook ID to the preference activity (first time user)
-                     */
-                    userName = obj["name"].ToString();
-                    var preferencesActivity = new Intent(this, typeof(PreferencesActivity));
-                    preferencesActivity.PutExtra(GetString(Resource.String.ExtraData_FacebookId), obj["id"].ToString());
-                    preferencesActivity.PutExtra(GetString(Resource.String.ExtraData_UserName), userName);
-                    preferencesActivity.PutExtra(GetString(Resource.String.ExtraData_PreviousActivity), GetString(Resource.String.ActivityName_MainActivity));
-                    StartActivity(preferencesActivity);
+                    
                 }
             }
         }

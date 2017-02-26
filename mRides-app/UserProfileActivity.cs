@@ -9,6 +9,8 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using mRides_app.Models;
+using mRides_app.Mappers;
 
 namespace mRides_app
 {
@@ -18,14 +20,18 @@ namespace mRides_app
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
+            string idToGet = Intent.GetStringExtra("id") ?? GetString(Resource.String.ExtraData_DataNotAvailable);
+            int id = Int32.Parse(idToGet);
+            User user = UserMapper.getInstance().GetUser(id);
+            
             //Displaying username based on name sent after authentication
             //In the future, can be changed to get username from DB
             TextView usernameText;
-            String username = Intent.GetStringExtra("Profile Info") ?? "Data not available";
+
+            //String username = Intent.GetStringExtra("Profile Info") ?? "Data not available";
             SetContentView(Resource.Layout.UserProfile);
             usernameText = FindViewById<TextView>(Resource.Id.userName);
-            usernameText.Text = username;
+            usernameText.Text = user.firstName.ToString() + " " + user.lastName.ToString();
 
             //For testing
             FeedbackForNow fb = new FeedbackForNow();
