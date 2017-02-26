@@ -43,7 +43,7 @@ namespace UITest
         public void FacebookLogin()
         {
             // Start app only once, so that further test can continue
-            app.Tap(c => c.Marked("button1"));
+            app.Tap(c => c.Marked("loginButton"));
             Thread.Sleep(3000);
             app.Screenshot("Login");
             app.TapCoordinates(549, 900);
@@ -58,7 +58,7 @@ namespace UITest
         [Test]
         public void SelectPreferences()
         {
-            app.WaitForElement(c => c.Marked("button1"));
+            app.WaitForElement(c => c.Marked("loginButton"));
             app.Invoke("StartActivityOne");
             app.Tap(c => c.Marked("radioButtonNonSmoker"));
             app.Tap(c => c.Marked("radioButtonNoLuggage"));
@@ -73,8 +73,9 @@ namespace UITest
         //[Test]
         //public void ChooseDestination()
         //{
-        //    app.WaitForElement(c => c.Marked("button1"));
+        //    app.WaitForElement(c => c.Marked("loginButton"));
         //    app.Invoke("StartActivityTwo");
+        //    app.Repl();
         //    app.DoubleTap(c => c.Marked("place_autocomplete_search_input"));
         //    app.TapCoordinates(100, 50);
         //    app.EnterText("test");
@@ -83,13 +84,13 @@ namespace UITest
         [Test]
         public void SelectDriverOrRider()
         {
-            app.WaitForElement(c => c.Marked("button1"));
+            app.WaitForElement(c => c.Marked("loginButton"));
             app.Invoke("StartActivityThree");
             Thread.Sleep(3000);
             app.Tap(c => c.Marked("testFragment1"));
             app.Tap(c => c.Marked("riderOrDriverSwitch"));
             app.Tap(c => c.Marked("numOfPeople"));
-            app.TapCoordinates(760, 1200);
+            app.TapCoordinates(926, 550);
             app.Tap("Next");
             //app.Repl();
         }
@@ -97,7 +98,7 @@ namespace UITest
         [Test]
         public void GiveFeedbackToRider()
         {
-            app.WaitForElement(c => c.Marked("button1"));
+            app.WaitForElement(c => c.Marked("loginButton"));
             app.Invoke("StartActivityThree");
             app.Tap(c => c.Marked("testFragment2"));
             app.EnterText(c => c.Marked("driverReviewEdit"), "Best driver!");
