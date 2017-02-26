@@ -23,7 +23,7 @@ namespace mRides_app
     }
 
 
-    class UserProfileFeedbackAdapter : BaseAdapter
+    public class UserProfileFeedbackAdapter : BaseAdapter
     { 
         List<FeedbackForNow> fbfn;
         Activity context;
