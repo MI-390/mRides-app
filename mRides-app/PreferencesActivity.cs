@@ -20,24 +20,7 @@ namespace mRides_app
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            UserMapper userMapper = UserMapper.getInstance();
-
-            // If the previous activity is the main activity and the user already exists,
-            // skip this activity
-            long facebookId = Convert.ToInt64(Intent.GetStringExtra(GetString(Resource.String.ExtraData_FacebookId)));
-            User currentUser = userMapper.GetUserByFacebookId(facebookId);
-            string previousActivity = Intent.GetStringExtra(GetString(Resource.String.ExtraData_PreviousActivity));
-
-            // The user does not exist, create it
             string userName = Intent.GetStringExtra(GetString(Resource.String.ExtraData_UserName));
-            string[] names = userName.Split(new char[] { ' ' }, 2);
-            currentUser = new User
-            {
-                facebookID = facebookId,
-                firstName = names[0],
-                lastName = names[1]
-            };
-            User.currentUser = userMapper.CreateUser(currentUser);
 
             // Set the view to preferences layout
             SetContentView(Resource.Layout.Preferences);
@@ -106,11 +89,11 @@ namespace mRides_app
         {
             // TODO: Save the preferences
             Console.WriteLine("Smoker=" + smoker + ";Luggage=" + luggage + ";handicap=" + handicap + ";gender=" + gender + ";pet=" + pet);
-            User.currentUser.isSmoker = smoker;
-            User.currentUser.hasLuggage = luggage;
-            User.currentUser.isHandicap = handicap;
-            User.currentUser.genderPreference = gender;
-            User.currentUser.hasPet = pet;
+            //User.currentUser.isSmoker = smoker;
+            //User.currentUser.hasLuggage = luggage;
+            //User.currentUser.isHandicap = handicap;
+            //User.currentUser.genderPreference = gender;
+            //User.currentUser.hasPet = pet;
             //User.currentUser.save();
             
             this.Continue();
