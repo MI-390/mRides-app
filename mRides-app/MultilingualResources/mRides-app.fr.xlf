@@ -74,25 +74,9 @@
           <source>Done</source>
           <target state="translated" state-qualifier="tm-suggestion">Terminé</target>
         </trans-unit>
-        <trans-unit id="ExtraData_FacebookId" translate="yes" xml:space="preserve">
-          <source>facebookId</source>
-          <target state="translated" state-qualifier="mt-suggestion">facebookId</target>
-        </trans-unit>
-        <trans-unit id="ExtraData_UserName" translate="yes" xml:space="preserve">
-          <source>username</source>
-          <target state="translated" state-qualifier="tm-suggestion">nom d'utilisateur</target>
-        </trans-unit>
         <trans-unit id="ExtraData_DataNotAvailable" translate="yes" xml:space="preserve">
           <source>Data not available</source>
           <target state="translated" state-qualifier="tm-suggestion">Données non disponibles</target>
-        </trans-unit>
-        <trans-unit id="ExtraData_PreviousActivity" translate="yes" xml:space="preserve">
-          <source>previousActivity</source>
-          <target state="translated" state-qualifier="mt-suggestion">previousActivity</target>
-        </trans-unit>
-        <trans-unit id="ActivityName_MainActivity" translate="yes" xml:space="preserve">
-          <source>Main Activity</source>
-          <target state="new">Main Activity</target>
         </trans-unit>
         <trans-unit id="slogan" translate="yes" xml:space="preserve">
           <source>Travel together</source>
@@ -181,10 +165,6 @@
         <trans-unit id="numbers_array" translate="yes" xml:space="preserve">
           <source>""1"",""2"",""3"",""4"",""5"",""6""</source>
           <target state="new">""1"",""2"",""3"",""4"",""5"",""6""</target>
-        </trans-unit>
-        <trans-unit id="ExtraData_DataNotAvailable" translate="yes" xml:space="preserve">
-          <source>Data not available</source>
-          <target state="new">Data not available</target>
         </trans-unit>
       </group>
     </body>
