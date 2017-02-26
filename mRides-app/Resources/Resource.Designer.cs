@@ -813,9 +813,6 @@ namespace mRides_app
 			// aapt resource value: 0x7f060028
 			public const int Pref_Female = 2131099688;
 			
-			// aapt resource value: 0x7f06004b
-			public const int Pref_Gender = 2131099723;
-			
 			// aapt resource value: 0x7f06002b
 			public const int Pref_Handicap = 2131099691;
 			

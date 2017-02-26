@@ -5,9 +5,11 @@
     android:layout_height="wrap_content">
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="356.0dp"
+        android:layout_width="338.5dp"
         android:layout_height="61.0dp"
-        android:layout_margin="10dp">
+        android:layout_margin="10dp"
+        android:layout_marginRight="23.5dp"
+        android:id="@+id/linearLayout2">
         <TextView
             android:text="@string/riderOrDriver"
             android:layout_width="222.5dp"
@@ -35,7 +37,8 @@
             android:layout_width="11.0dp"
             android:layout_height="19.0dp"
             android:id="@+id/driver1"
-            android:layout_marginLeft="0dp" />
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="41.0dp" />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
@@ -76,6 +79,6 @@
             android:layout_width="108.5dp"
             android:layout_height="wrap_content"
             android:id="@+id/Next"
-            android:layout_marginRight="20dp" />
+            android:layout_marginRight="50.0dp" />
     </LinearLayout>
 </LinearLayout>

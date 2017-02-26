@@ -170,6 +170,18 @@
           <source>"Any","Male","Female"</source>
           <target state="translated" state-qualifier="mt-suggestion">"Cualquier", "hombre", "Mujer"</target>
         </trans-unit>
+        <trans-unit id="ExtraData_FacebookId" translate="yes" xml:space="preserve">
+          <source>facebookId</source>
+          <target state="new">facebookId</target>
+        </trans-unit>
+        <trans-unit id="ExtraData_PreviousActivity" translate="yes" xml:space="preserve">
+          <source>previousActivity</source>
+          <target state="new">previousActivity</target>
+        </trans-unit>
+        <trans-unit id="ActivityName_MainActivity" translate="yes" xml:space="preserve">
+          <source>Main Activity</source>
+          <target state="new">Main Activity</target>
+        </trans-unit>
       </group>
     </body>
   </file>
