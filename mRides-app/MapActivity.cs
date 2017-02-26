@@ -338,8 +338,8 @@ namespace mRides_app
                 foreach (Request request in requestList)
                 {
                     Android.Gms.Maps.Model.MarkerOptions userMarker = new Android.Gms.Maps.Model.MarkerOptions();
-                    string[] splitCoordinates = request.location.Split(',');
-                    userMarker.SetPosition(new LatLng(Double.Parse(splitCoordinates[0]), Double.Parse(splitCoordinates[1]))).SetTitle(request.riderRequests.First().rider.firstName.ToString())
+                    string[] splitCoordinates = request.riderRequests.First().location.Split(',');
+                    userMarker.SetPosition(new LatLng(Double.Parse(splitCoordinates[0]), Double.Parse(splitCoordinates[1]))).SetTitle(request.riderRequests.First().rider.id.ToString())
                               .SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.userIcon2)).Anchor(0.5f, 0.5f);
                     userMarkers.Add(userMarker);
                 }
