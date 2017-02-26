@@ -7,6 +7,8 @@ using Xamarin.UITest.Queries;
 using Xamarin.UITest.Android;
 using mRides_app;
 using System.Threading;
+using System.Collections.Generic;
+using System.Text;
 
 namespace UITest
 {
@@ -103,6 +105,53 @@ namespace UITest
             app.Tap(c => c.Marked("ratingBarDriver"));
             app.Tap("submitFeedback1");
         }
+
+        [Test]
+        public void isNameVisibleOnProfile()
+        {
+            app.WaitForElement(c => c.Marked("loginButton"));
+            app.Invoke("StartActivityThree");
+            app.Tap(c => c.Marked("testFragment3"));
+            app.Query(c => c.Marked("userName"));
+        }
+
+        [Test]
+        public void isGenderVisibleOnProfile()
+        {
+            app.WaitForElement(c => c.Marked("loginButton"));
+            app.Invoke("StartActivityThree");
+            app.Tap(c => c.Marked("testFragment3"));
+            app.Query(c => c.Marked("genderImage"));
+        }
+
+        [Test]
+        public void isProfilePhotoVisibleOnProfile()
+        {
+            app.WaitForElement(c => c.Marked("loginButton"));
+            app.Invoke("StartActivityThree");
+            app.Tap(c => c.Marked("testFragment3"));
+            app.Query(c => c.Marked("userPhoto"));
+        }
+
+        [Test]
+        public void isRatingsVisibleOnProfile()
+        {
+            app.WaitForElement(c => c.Marked("loginButton"));
+            app.Invoke("StartActivityThree");
+            app.Tap(c => c.Marked("testFragment3"));
+            app.Query(c => c.Marked("ratingBar"));
+        }
+
+        [Test]
+        public void isFeedbackVisibleOnProfile()
+        {
+            app.WaitForElement(c => c.Marked("loginButton"));
+            app.Invoke("StartActivityThree");
+            app.Tap(c => c.Marked("testFragment3"));
+            app.Query(c => c.Marked("userProfileListView"));
+            app.Query("feedbackFragmentReview");
+        }
+
     }
 }
 
