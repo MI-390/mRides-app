@@ -37,7 +37,7 @@ namespace UITest
  .Android
 // TODO: Update this path to point to your Android app and uncomment the
 // code if the app is not included in the solution.
-.ApkFile("C:/Users/Aline K/Source/Repos/mRides-app/mRides-app/bin/Release//mRides_app.mRides_app-Signed.apk") //CHANGE THIS APK PATH
+.ApkFile("D:/Projects/mi-390/mRides-app/bin/Release//mRides_app.mRides_app-Signed.apk") //CHANGE THIS APK PATH
 .EnableLocalScreenshots().StartApp();
         }
 
@@ -53,8 +53,9 @@ namespace UITest
             // app.EnterText(c => c.Marked("NoResourceEntry-42"), "cvnewggbsc_1487629189@tfbnw.net");
             app.ScrollDownTo(c => c.Css("input#u_0_2"));
             app.EnterText(c => c.Css("input#u_0_2"), "mi-390");
-            app.ScrollToVerticalStart();
-            app.TapCoordinates(549, 1300);
+            app.PressEnter();
+            //app.ScrollToVerticalStart();
+            //app.TapCoordinates(549, 1300);
             app.WaitForElement(c => c.Marked("radioButtonNonSmoker"));
         }
         [Test]
@@ -69,19 +70,16 @@ namespace UITest
             app.Tap(c => c.Marked("text1"));
             app.TapCoordinates(721, 1200);
             app.Tap(c => c.Marked("buttonDone"));
-            app.WaitForElement(c => c.Marked("place_autocomplete_search_input"));
         }
 
-        //[Test]
-        //public void ChooseDestination()
-        //{
-        //    app.WaitForElement(c => c.Marked("loginButton"));
-        //    app.Invoke("StartActivityTwo");
-        //    app.Repl();
-        //    app.DoubleTap(c => c.Marked("place_autocomplete_search_input"));
-        //    app.TapCoordinates(100, 50);
-        //    app.EnterText("test");
-        //}
+        [Test]
+        public void OpenMap()
+        {
+            app.WaitForElement(c => c.Marked("loginButton"));
+            app.Invoke("StartActivityTwo");
+            Thread.Sleep(5000);
+            app.WaitForElement(c => c.Marked("place_autocomplete_search_input"));
+        }
 
         [Test]
         public void SelectDriverOrRider()
@@ -91,10 +89,21 @@ namespace UITest
             Thread.Sleep(3000);
             app.Tap(c => c.Marked("testFragment1"));
             app.Tap(c => c.Marked("riderOrDriverSwitch"));
+            app.Tap("Next");
+        }
+
+        [Test]
+        public void SelectNumOfPeopleOrSeats()
+        {
+            app.WaitForElement(c => c.Marked("loginButton"));
+            app.Invoke("StartActivityThree");
+            app.Tap(c => c.Marked("testFragment1"));
+            app.Tap(c => c.Marked("numOfPeople"));
+            app.TapCoordinates(926, 550);
+            app.Tap(c => c.Marked("riderOrDriverSwitch"));
             app.Tap(c => c.Marked("numOfPeople"));
             app.TapCoordinates(926, 550);
             app.Tap("Next");
-            //app.Repl();
         }
 
         [Test]
