@@ -7,6 +7,8 @@ using Xamarin.UITest.Queries;
 using Xamarin.UITest.Android;
 using mRides_app;
 using System.Threading;
+using System.Collections.Generic;
+using System.Text;
 
 namespace UITest
 {
@@ -35,15 +37,16 @@ namespace UITest
  .Android
 // TODO: Update this path to point to your Android app and uncomment the
 // code if the app is not included in the solution.
-.ApkFile("D:/Projects/mi-390/mRides-app/bin/Release//mRides_app.mRides_app-Signed.apk") //CHANGE THIS APK PATH
+.ApkFile("C:/Users/Aline K/Source/Repos/mRides-app/mRides-app/bin/Release//mRides_app.mRides_app-Signed.apk") //CHANGE THIS APK PATH
 .EnableLocalScreenshots().StartApp();
         }
 
         [Test]
         public void FacebookLogin()
         {
+            // Start app only once, so that further test can continue
             app.Tap(c => c.Marked("loginButton"));
-            Thread.Sleep(5000);
+            Thread.Sleep(3000);
             app.Screenshot("Login");
             app.TapCoordinates(549, 900);
             app.EnterText("cvnewggbsc_1487629189@tfbnw.net");
@@ -57,7 +60,7 @@ namespace UITest
         [Test]
         public void SelectPreferences()
         {
-            app.WaitForElement(c => c.Marked("button1"));
+            app.WaitForElement(c => c.Marked("loginButton"));
             app.Invoke("StartActivityOne");
             app.Tap(c => c.Marked("radioButtonNonSmoker"));
             app.Tap(c => c.Marked("radioButtonNoLuggage"));
@@ -72,8 +75,9 @@ namespace UITest
         //[Test]
         //public void ChooseDestination()
         //{
-        //    app.WaitForElement(c => c.Marked("button1"));
+        //    app.WaitForElement(c => c.Marked("loginButton"));
         //    app.Invoke("StartActivityTwo");
+        //    app.Repl();
         //    app.DoubleTap(c => c.Marked("place_autocomplete_search_input"));
         //    app.TapCoordinates(100, 50);
         //    app.EnterText("test");
@@ -82,13 +86,13 @@ namespace UITest
         [Test]
         public void SelectDriverOrRider()
         {
-            app.WaitForElement(c => c.Marked("button1"));
+            app.WaitForElement(c => c.Marked("loginButton"));
             app.Invoke("StartActivityThree");
             Thread.Sleep(3000);
             app.Tap(c => c.Marked("testFragment1"));
             app.Tap(c => c.Marked("riderOrDriverSwitch"));
             app.Tap(c => c.Marked("numOfPeople"));
-            app.TapCoordinates(760, 1200);
+            app.TapCoordinates(926, 550);
             app.Tap("Next");
             //app.Repl();
         }
@@ -96,13 +100,60 @@ namespace UITest
         [Test]
         public void GiveFeedbackToRider()
         {
-            app.WaitForElement(c => c.Marked("button1"));
+            app.WaitForElement(c => c.Marked("loginButton"));
             app.Invoke("StartActivityThree");
             app.Tap(c => c.Marked("testFragment2"));
             app.EnterText(c => c.Marked("driverReviewEdit"), "Best driver!");
             app.Tap(c => c.Marked("ratingBarDriver"));
             app.Tap("submitFeedback1");
         }
+
+        [Test]
+        public void isNameVisibleOnProfile()
+        {
+            app.WaitForElement(c => c.Marked("loginButton"));
+            app.Invoke("StartActivityThree");
+            app.Tap(c => c.Marked("testFragment3"));
+            app.Query(c => c.Marked("userName"));
+        }
+
+        [Test]
+        public void isGenderVisibleOnProfile()
+        {
+            app.WaitForElement(c => c.Marked("loginButton"));
+            app.Invoke("StartActivityThree");
+            app.Tap(c => c.Marked("testFragment3"));
+            app.Query(c => c.Marked("genderImage"));
+        }
+
+        [Test]
+        public void isProfilePhotoVisibleOnProfile()
+        {
+            app.WaitForElement(c => c.Marked("loginButton"));
+            app.Invoke("StartActivityThree");
+            app.Tap(c => c.Marked("testFragment3"));
+            app.Query(c => c.Marked("userPhoto"));
+        }
+
+        [Test]
+        public void isRatingsVisibleOnProfile()
+        {
+            app.WaitForElement(c => c.Marked("loginButton"));
+            app.Invoke("StartActivityThree");
+            app.Tap(c => c.Marked("testFragment3"));
+            app.Query(c => c.Marked("ratingBar"));
+        }
+
+        [Test]
+        public void isFeedbackVisibleOnProfile()
+        {
+            app.WaitForElement(c => c.Marked("loginButton"));
+            app.Invoke("StartActivityThree");
+            app.Tap(c => c.Marked("testFragment3"));
+            app.Query(c => c.Marked("userProfileListView"));
+            app.Query("feedbackFragmentReview");
+        }
+
     }
 }
 
