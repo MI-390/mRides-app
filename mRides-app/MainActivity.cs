@@ -15,6 +15,33 @@ namespace mRides_app
     public class MainActivity : Activity
     {
         string userName;
+        // For UI testing
+        [Java.Interop.Export("StartActivityOne")]
+        public void StartActivityOne()
+        {
+            Intent i = new Intent(this, typeof(PreferencesActivity));
+            StartActivity(i);
+        }
+        [Java.Interop.Export("StartActivityTwo")]
+        public void StartActivityTwo()
+        {
+            Intent i = new Intent(this, typeof(MapActivity));
+            StartActivity(i);
+        }
+
+        [Java.Interop.Export("StartActivityThree")]
+        public void StartActivityThree()
+        {
+            Intent i = new Intent(this, typeof(TestFragments));
+            StartActivity(i);
+        }
+
+        [Java.Interop.Export("StartActivityFour")]
+        public void StartActivityFour()
+        {
+            Intent i = new Intent(this, typeof(Feedback.FeedbackTest));
+            StartActivity(i);
+        }
 
         void LoginToFacebook(bool allowCancel)
         {
@@ -54,23 +81,28 @@ namespace mRides_app
                     //userProfileActivity.PutExtra("Profile Info", userName);
                     //StartActivity(userProfileActivity);
 
-                    /** GO TO PREFERENCES */
-                    //userName = obj["name"].ToString();
-                    //var preferencesActivity = new Intent(this, typeof(PreferencesActivity));
-                    //preferencesActivity.PutExtra(GetString(Resource.String.ExtraData_UserName), userName);
-                    //StartActivity(preferencesActivity);
+                    /** 
+                     * If we already know the user, instantiate the user object and skip the preference activity 
+                     * Otherwise, give the facebook ID to the preference activity (first time user)
+                     */
+                    userName = obj["name"].ToString();
+                    var preferencesActivity = new Intent(this, typeof(PreferencesActivity));
+                    preferencesActivity.PutExtra(GetString(Resource.String.ExtraData_FacebookId), obj["id"].ToString());
+                    preferencesActivity.PutExtra(GetString(Resource.String.ExtraData_UserName), userName);
+                    preferencesActivity.PutExtra(GetString(Resource.String.ExtraData_PreviousActivity), GetString(Resource.String.ActivityName_MainActivity));
+                    StartActivity(preferencesActivity);
                 }
             }
         }
 
-       // private static readonly TaskScheduler UIScheduler = TaskScheduler.FromCurrentSynchronizationContext();
+        // private static readonly TaskScheduler UIScheduler = TaskScheduler.FromCurrentSynchronizationContext();
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
 
-            var facebook = FindViewById<Button>(Resource.Id.button1);
+            var facebook = FindViewById<Button>(Resource.Id.loginButton);
             facebook.Click += delegate {
                 LoginToFacebook(true);
             };

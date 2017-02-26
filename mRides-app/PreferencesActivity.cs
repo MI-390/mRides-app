@@ -9,21 +9,40 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using mRides_app.Models;
+using mRides_app.Mappers;
 
 namespace mRides_app
 {
     [Activity(Label = "PreferencesActivity")]
     public class PreferencesActivity : Activity
     {
-        private string userName;
-
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            UserMapper userMapper = UserMapper.getInstance();
+
+            // If the previous activity is the main activity and the user already exists,
+            // skip this activity
+            long facebookId = Convert.ToInt64(Intent.GetStringExtra(GetString(Resource.String.ExtraData_FacebookId)));
+            User currentUser = userMapper.GetUserByFacebookId(facebookId);
+            string previousActivity = Intent.GetStringExtra(GetString(Resource.String.ExtraData_PreviousActivity));
+
+            // The user does not exist, create it
+            string userName = Intent.GetStringExtra(GetString(Resource.String.ExtraData_UserName));
+            string[] names = userName.Split(new char[] { ' ' }, 2);
+            currentUser = new User
+            {
+                facebookID = facebookId,
+                firstName = names[0],
+                lastName = names[1]
+            };
+            User.currentUser = userMapper.CreateUser(currentUser);
+
+            // Set the view to preferences layout
             SetContentView(Resource.Layout.Preferences);
 
-            // TODO: Obtain the extra data passed, the username, and display it in the Hi message
-            this.userName = Intent.GetStringExtra(GetString(Resource.String.ExtraData_UserName)) ?? GetString(Resource.String.ExtraData_DataNotAvailable);
+            // Obtain the extra data passed, the username, and display it in the Hi message
             TextView textViewHi = FindViewById<TextView>(Resource.Id.textViewHi);
             string prefHi = GetString(Resource.String.Pref_Hi);
             textViewHi.Text = prefHi + " " + userName;
@@ -79,17 +98,29 @@ namespace mRides_app
 
             // Set the done button to save and continue to the next activity
             Button doneButton = FindViewById<Button>(Resource.Id.buttonDone);
-            doneButton.Click += delegate { this.SaveAndContinue(rbSmoker.Checked, rbLuggage.Checked, rbHandicap.Checked, rbPet.Checked, spinnerGender.SelectedItemId); };
+            doneButton.Click += delegate { this.SaveAndContinue(rbSmoker.Checked, rbLuggage.Checked, rbHandicap.Checked, rbPet.Checked, (int)spinnerGender.SelectedItemId); };
+            
         }
 
-        private void SaveAndContinue(Boolean smoker, Boolean luggage, Boolean handicap, Boolean pet, long gender)
+        private void SaveAndContinue(Boolean smoker, Boolean luggage, Boolean handicap, Boolean pet, int gender)
         {
             // TODO: Save the preferences
             Console.WriteLine("Smoker=" + smoker + ";Luggage=" + luggage + ";handicap=" + handicap + ";gender=" + gender + ";pet=" + pet);
+            User.currentUser.isSmoker = smoker;
+            User.currentUser.hasLuggage = luggage;
+            User.currentUser.isHandicap = handicap;
+            User.currentUser.genderPreference = gender;
+            User.currentUser.hasPet = pet;
+            //User.currentUser.save();
+            
+            this.Continue();
+        }
 
-            // TODO: Go to the next activity
+        private void Continue()
+        {
+            // Go to the next activity
             var mapActivity = new Intent(this, typeof(MapActivity));
-            mapActivity.PutExtra(GetString(Resource.String.ExtraData_UserName), this.userName);
+            mapActivity.PutExtras(Intent);
             StartActivity(mapActivity);
         }
 

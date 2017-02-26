@@ -22,16 +22,45 @@
     <item>Male</item>
     <item>Female</item>
   </string-array>
+  
   <string name="Pref_Back">Back</string>
   <string name="Pref_Done">Done</string>
 
   <!-- STRINGS FOR DATA SENT FROM ACTIVITY TO ACTIVITY -->
+  <string name="ExtraData_FacebookId">facebookId</string>
   <string name="ExtraData_UserName">username</string>
   <string name="ExtraData_DataNotAvailable">Data not available</string>
-  
+  <string name="ExtraData_PreviousActivity">previousActivity</string>
+
+  <!-- ACTIVITY NAMES -->
+  <string name="ActivityName_MainActivity">Main Activity</string>
+
+    
+  <string name="slogan">Travel together</string>
+  <string name="fblogin">To get started, sign in with a simple click:</string>
+  <string name="fb">Login with Facebook</string>
+  <string name="riderOrDriver">  Are you a Rider \nor Driver? </string>
+  <string name="r">R</string>
+  <string name="d">D</string>
+  <string name="seatsAvailable">How many available seats?</string>
+  <string name="numberOfRiders">How many are you?</string>
+  <string name="previous">Previous</string>
+  <string name="next">Next</string>
+
+  <string name="dest">Destination</string>
+  <string name="user_type">User type</string>
+  <string name="number_of_people">Number of people</string>
+  <string name="smoker">Smoker</string>
+  <string name="luggage">Luggage</string>
+  <string name="handicap">Handicap</string>
+  <string name="pet">Pet</string>
+  <string name="gender">Gender</string>
+
+  <!-- STRINGS FOR user profile ACTIVITY -->
+  <string name="person_profile">Person</string>
+  <string name="ratings_reviews">Ratings and Reviews</string>
   
 
-    <string name="ApplicationName">mRides-app</string>
   <string-array name="numbers_array">
     <item>"1"</item>
     <item>"2"</item>

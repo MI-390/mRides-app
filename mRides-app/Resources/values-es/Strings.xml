@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="ApplicationName">mRides-aplicación</string>
+  <string name="slogan">Viajar juntos</string>
+  <string name="fblogin">Para comenzar, inicia sesión con un simple clic:</string>
+  <string name="fb">Iniciar sesión con Facebook</string>
+  <string name="riderOrDriver">¿Eres un Pasajero \n o un Conductor?</string>
+  <string name="previous">Anterior</string>
+  <string name="next">Proximo</string>
+  <string name="r">P</string>
+  <string name="d">C</string>
+  <string name="seatsAvailable">¿Cuántas plazas disponibles?</string>
+  <string name="numberOfRiders">¿Cuantos son?</string>
+  <string name="dest">Destinación</string>
+  <string name="user_type">Tipo de usuario</string>
+  <string name="number_of_people">Número de personas</string>
+  <string name="Hello">Hola mundo, Click Me!</string>
+  <string name="Pref_Hi">Hola</string>
+  <string name="Pref_SetYourPreferences">Definir las preferencias</string>
+  <string name="Pref_Smoker">Fumador</string>
+  <string name="Pref_NonSmoker">No fumador</string>
+  <string name="Pref_Male">Masculino</string>
+  <string name="Pref_Female">Mujer</string>
+  <string name="Pref_Luggage">Equipaje</string>
+  <string name="Pref_NoLuggage">Sin equipaje</string>
+  <string name="Pref_Handicap">Discapacidad física</string>
+  <string name="Pref_NoHandicap">Sin discapacidad física</string>
+  <string name="Pref_Pet">Mascota</string>
+  <string name="Pref_NoPet">No mascotas</string>
+  <string name="Pref_Prompt_Gender">Género recomendado:</string>
+  <string name="Pref_Back">Atrás</string>
+  <string name="Pref_Done">Listo</string>
+  <string name="ExtraData_UserName">usuario</string>
+  <string name="ExtraData_DataNotAvailable">Datos no disponibles</string>
+  <string name="smoker">Fumador</string>
+  <string name="handicap">Discapacitado</string>
+  <string name="pet">Mascota</string>
+  <string name="gender">Sexo</string>
+  <string name="luggage">Equipaje</string>
+  <string name="person_profile">Persona</string>
+  <string name="ratings_reviews">Calificaciones y comentarios</string>
+  <string-array name="Pref_Gender">
+    <item>Cualquier</item>
+    <item>hombre</item>
+    <item>Mujer</item>
+  </string-array>
+</resources>
