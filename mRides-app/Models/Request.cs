@@ -26,6 +26,7 @@ namespace mRides_app.Models
         public int? driverID { get; set; }
         public User driver { get; set; }
         public List<RiderRequest> riderRequests { get; set; }
+        public List<string> destinationCoordinates { get; set; }
 
         // Default constructor
         public Request() { }

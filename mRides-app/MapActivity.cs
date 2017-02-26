@@ -50,6 +50,16 @@ namespace mRides_app
         string userType;
         int numberOfPeople;
 
+        public void sendCoordinatesToServer()
+        {
+            List<string> destinationCoordinates = new List<string>();
+            for (int i = 0; i < directionList.Count; i += 10)
+            {
+                destinationCoordinates.Add(directionList[i].Latitude.ToString() + "," + directionList[i].Longitude.ToString());
+            }
+            //send destinationCoordinates to server
+        }
+
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
