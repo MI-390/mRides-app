@@ -35,7 +35,7 @@ namespace UITest
  .Android
 // TODO: Update this path to point to your Android app and uncomment the
 // code if the app is not included in the solution.
-.ApkFile("D:/Projects/mi-390/mRides-app/bin/Release//mRides_app.mRides_app-Signed.apk") //CHANGE THIS APK PATH
+.ApkFile("C:/Users/Aline K/Source/Repos/mRides-app/mRides-app/bin/Release//mRides_app.mRides_app-Signed.apk") //CHANGE THIS APK PATH
 .EnableLocalScreenshots().StartApp();
         }
 
@@ -57,7 +57,7 @@ namespace UITest
         [Test]
         public void SelectPreferences()
         {
-            app.WaitForElement(c => c.Marked("button1"));
+            app.WaitForElement(c => c.Marked("loginButton"));
             app.Invoke("StartActivityOne");
             app.Tap(c => c.Marked("radioButtonNonSmoker"));
             app.Tap(c => c.Marked("radioButtonNoLuggage"));
@@ -72,7 +72,7 @@ namespace UITest
         //[Test]
         //public void ChooseDestination()
         //{
-        //    app.WaitForElement(c => c.Marked("button1"));
+        //    app.WaitForElement(c => c.Marked("loginButton"));
         //    app.Invoke("StartActivityTwo");
         //    app.DoubleTap(c => c.Marked("place_autocomplete_search_input"));
         //    app.TapCoordinates(100, 50);
@@ -82,7 +82,7 @@ namespace UITest
         [Test]
         public void SelectDriverOrRider()
         {
-            app.WaitForElement(c => c.Marked("button1"));
+            app.WaitForElement(c => c.Marked("loginButton"));
             app.Invoke("StartActivityThree");
             Thread.Sleep(3000);
             app.Tap(c => c.Marked("testFragment1"));
@@ -96,7 +96,7 @@ namespace UITest
         [Test]
         public void GiveFeedbackToRider()
         {
-            app.WaitForElement(c => c.Marked("button1"));
+            app.WaitForElement(c => c.Marked("loginButton"));
             app.Invoke("StartActivityThree");
             app.Tap(c => c.Marked("testFragment2"));
             app.EnterText(c => c.Marked("driverReviewEdit"), "Best driver!");
