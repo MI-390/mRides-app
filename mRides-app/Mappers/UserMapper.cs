@@ -11,6 +11,9 @@ using Android.Views;
 using Android.Widget;
 
 using mRides_app.Models;
+using RestSharp;
+using RestSharp.Authenticators;
+using Newtonsoft.Json;
 
 namespace mRides_app.Mappers
 {
@@ -45,7 +48,7 @@ namespace mRides_app.Mappers
          */
         public User GetUserByFacebookId(long userId)
         {
-            return SendGetWithUrlSegment<User>(ApiEndPointUrl.getUserByFacebookId, "id", userId.ToString());
+            return SendPost<User>(ApiEndPointUrl.getUserByFacebookId, userId.ToString(), false);
         }
 
         /**
@@ -57,11 +60,53 @@ namespace mRides_app.Mappers
         }
 
         /**
+         * Create a new review 
+         */
+        public void LeaveReview(int rideId, int revieweeId, int rating, string review)
+        {
+            object newReview = new
+            {
+                rideId = rideId,
+                revieweeId = revieweeId,
+                star = rating,
+                review = review
+            };
+            SendPost<object>(ApiEndPointUrl.leaveReview, newReview, true);
+        }
+
+        /**
          * Obtain reviews given to a user
          */
         public List<Models.Feedback> GetReviews(int userId)
         {
-            return SendGetWithUrlSegment<List<Models.Feedback>>(ApiEndPointUrl.getReviews, "id", userId.ToString());
+            // Create a new rest client
+            var client = new RestClient()
+            {
+                BaseUrl = new System.Uri(BaseUrl),
+                Authenticator = new HttpBasicAuthenticator(_accountSid, _secretKey)
+            };
+
+            // Serialize the object of interest into a JSON
+            var json = JsonConvert.SerializeObject(userId);
+
+            // Make a new request object
+            string url = ApiEndPointUrl.getReviews;
+            url = url.Replace("{id}", userId.ToString());
+            var request = new RestRequest(url, Method.GET);
+
+            // Execute the request and return the response
+            var response = client.Execute(request);
+            dynamic oFeedbacks = Newtonsoft.Json.JsonConvert.DeserializeObject(response.Content);
+
+            // Build the list of feedbacks to be returns
+            List<Models.Feedback> feedbacks = new List<Models.Feedback>();
+            foreach(dynamic oFeedback in oFeedbacks)
+            {
+                Models.Feedback feedback = JsonConvert.DeserializeObject<Models.Feedback>(oFeedback.ToString());
+                feedbacks.Add(feedback);
+            }
+
+            return feedbacks;
         }
     }
 }

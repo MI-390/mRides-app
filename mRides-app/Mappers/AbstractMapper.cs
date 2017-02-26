@@ -128,6 +128,7 @@ namespace mRides_app.Mappers
 
             // Execute the request and return the response
             var response = client.Execute<T>(request);
+            
             return response.Data;
         }
 
@@ -152,8 +153,8 @@ namespace mRides_app.Mappers
             //request.AddUrlSegment(segmentName, segmentValue);
 
             // Execute the request and return the response
-            var response = client.Execute<T>(request).Data;
-            return response;
+            var response = client.Execute<T>(request);
+            return response.Data;
         }
 
         /**
@@ -202,8 +203,9 @@ namespace mRides_app.Mappers
         // User related url
         public const string createUser = "User/createUser";
         public const string getUser = "User/getUser/{id}";
-        public const string getUserByFacebookId = "User/getUserByFacebookId/{id}";
+        public const string getUserByFacebookId = "User/getUserByFacebookId";
         public const string getReviews = "User/getReviews/{id}";
+        public const string leaveReview = "User/leaveReview";
 
     }
 }

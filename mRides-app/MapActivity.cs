@@ -69,7 +69,7 @@ namespace mRides_app
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Destination);
 
-            string text = Intent.GetStringExtra(GetString(Resource.String.ExtraData_UserName)) ?? GetString(Resource.String.ExtraData_DataNotAvailable);
+            string text = mRides_app.Models.User.currentUser.firstName;
             Toast.MakeText(ApplicationContext, "Hello " + text, ToastLength.Long).Show();
 
             // Retrieve the PlaceAutocompleteFragment.
