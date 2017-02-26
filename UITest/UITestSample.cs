@@ -43,7 +43,7 @@ namespace UITest
         [Test]
         public void FacebookLogin()
         {
-            app.Tap(c => c.Marked("button1"));
+            app.Tap(c => c.Marked("loginButton"));
             Thread.Sleep(5000);
             app.Screenshot("Login");
         }
