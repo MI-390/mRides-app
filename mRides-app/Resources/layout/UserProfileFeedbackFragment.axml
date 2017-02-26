@@ -16,7 +16,7 @@
             android:src="@drawable/divider"
             android:layout_width="match_parent"
             android:layout_height="9.0dp"
-            android:id="@+id/imageView1" />
+            android:id="@+id/feedbackPageDivider" />
         <TextView
             android:text="Date of feedback"
             android:layout_width="match_parent"

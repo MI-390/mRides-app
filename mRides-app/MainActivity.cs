@@ -6,6 +6,7 @@ using System;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Android.Content;
+using System.Collections.Generic;
 //cvnewggbsc_1487629189@tfbnw.net
 //mi-390
 namespace mRides_app
@@ -40,6 +41,13 @@ namespace mRides_app
         public void StartActivityFour()
         {
             Intent i = new Intent(this, typeof(Feedback.FeedbackTest));
+            StartActivity(i);
+        }
+
+        [Java.Interop.Export("StartActivityFive")]
+        public void StartActivityFive()
+        {
+            Intent i = new Intent(this, typeof(UserProfileActivity));
             StartActivity(i);
         }
 
