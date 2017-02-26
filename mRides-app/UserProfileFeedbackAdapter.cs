@@ -27,10 +27,17 @@ namespace mRides_app
     { 
         List<FeedbackForNow> fbfn;
         Activity context;
+        int counter = 0;
 
         public UserProfileFeedbackAdapter(Activity context, List<FeedbackForNow> fb) : base() { //change the FeedbackForNow parameter to Feedback later when it is implemented
-            this.context = context;
-            this.fbfn = fb;
+            if (counter == 0)
+            {
+                this.context = context;
+                this.fbfn = fb;
+                counter++;
+            }
+            else
+                this.context = context;
         }
 
         public UserProfileFeedbackAdapter(Activity activity)
@@ -64,8 +71,6 @@ namespace mRides_app
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
 
-            for (int i = 0; i < fbfn.Count; i++)
-            {
                 var view = convertView ?? context.LayoutInflater.Inflate(
                      Resource.Layout.UserProfileFeedbackFragment, parent, false);
                     
@@ -80,8 +85,7 @@ namespace mRides_app
                 reviewOfFeedback.Text = fbfn.ElementAt(position).review;
 
                 return view;
-            }
-            return null;
+
         }
 
     }

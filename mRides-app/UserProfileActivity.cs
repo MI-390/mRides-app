@@ -36,11 +36,11 @@ namespace mRides_app
             fb.username = "Nassim";
 
             FeedbackForNow fb2 = new FeedbackForNow();
-            fb.dateOfFeedback = DateTime.Now;
-            fb.rating = 5;
-            fb.review = "Cool";
-            fb.userIdForNow = 3;
-            fb.username = "Hannah";
+            fb2.dateOfFeedback = DateTime.Now;
+            fb2.rating = 5;
+            fb2.review = "Cool";
+            fb2.userIdForNow = 3;
+            fb2.username = "Hannah";
 
             List<FeedbackForNow> feedbackfornowlist = new List<FeedbackForNow>();
             feedbackfornowlist.Add(fb);
