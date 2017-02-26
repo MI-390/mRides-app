@@ -441,8 +441,11 @@ namespace mRides_app
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f090053
-			public const int CloseButton = 2131296339;
+			// aapt resource value: 0x7f090050
+			public const int CloseButton = 2131296336;
+			
+			// aapt resource value: 0x7f090051
+			public const int Next = 2131296337;
 			
 			// aapt resource value: 0x7f090054
 			public const int Next = 2131296340;
@@ -681,17 +684,17 @@ namespace mRides_app
 			// aapt resource value: 0x7f09003c
 			public const int userPhoto = 2131296316;
 			
-			// aapt resource value: 0x7f09004c
-			public const int userProfileFragmentDetour = 2131296332;
-			
-			// aapt resource value: 0x7f09004b
-			public const int userProfileFragmentName = 2131296331;
+			// aapt resource value: 0x7f090049
+			public const int userProfileFragmentName = 2131296329;
 			
 			// aapt resource value: 0x7f09003d
 			public const int userProfileLinearLayout2 = 2131296317;
 			
 			// aapt resource value: 0x7f090042
 			public const int userProfileListView = 2131296322;
+			
+			// aapt resource value: 0x7f09004a
+			public const int viewProfileFragmentButton = 2131296330;
 			
 			// aapt resource value: 0x7f090009
 			public const int wide = 2131296265;
