@@ -83,20 +83,28 @@ namespace UnitTests
         [Test]
         public void GetReviews()
         {
-            User reviewer = new User
-            {
-                firstName = "Reviewer"
-            };
-            User reviewee = new User
-            {
-                firstName = "Reviewee"
-            };
+            UserMapper userMapper = UserMapper.getInstance();
+            List<Feedback> reviews = userMapper.GetReviews(2);
 
-            reviewer = UserMapper.getInstance().CreateUser(reviewer);
-            reviewee = UserMapper.getInstance().CreateUser(reviewee);
+            // TODO: Make a better test to ensure that this user actually
+            // has a review.
+            Assert.True(reviews.Count > 0);
+        }
 
-            // TODO
-            Assert.True(false);
+        /**
+         * Test whether we are able to leave a review
+         */
+        [Test]
+        public void LeaveReview()
+        {
+            UserMapper userMapper = UserMapper.getInstance();
+
+            // Set a current user
+            User.currentUser = userMapper.GetUser(6);
+
+            // TODO: come up with tests that ensure that such rides exist
+            userMapper.LeaveReview(1, 1, 4, "Some test reviews");
+            Assert.True(true);
         }
     }
 }

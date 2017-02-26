@@ -26,7 +26,7 @@ namespace mRides_app.Models
         public bool isHandicap { get; set; }
         public bool hasLuggage { get; set; }
         public bool hasPet { get; set; }
-        public int genderPreference { get; set; }
+        public string genderPreference { get; set; }
         public int gsd { get; set; }
         public List<Ride> ridesAsDriver { get; set; }
         public List<UserRides> ridesAsRider { get; set; }

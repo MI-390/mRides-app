@@ -130,14 +130,6 @@
           <source>Done</source>
           <target state="final" state-qualifier="tm-suggestion">Terminé</target>
         </trans-unit>
-        <trans-unit id="ExtraData_UserName" translate="yes" xml:space="preserve">
-          <source>username</source>
-          <target state="final" state-qualifier="tm-suggestion">nom d'utilisateur</target>
-        </trans-unit>
-        <trans-unit id="ExtraData_DataNotAvailable" translate="yes" xml:space="preserve">
-          <source>Data not available</source>
-          <target state="final" state-qualifier="tm-suggestion">Données non disponibles</target>
-        </trans-unit>
         <trans-unit id="smoker" translate="yes" xml:space="preserve">
           <source>Smoker</source>
           <target state="final" state-qualifier="mt-suggestion">Fumeur</target>
@@ -169,6 +161,10 @@
         <trans-unit id="Pref_Gender" translate="yes" xml:space="preserve">
           <source>"Any","Male","Female"</source>
           <target state="final" state-qualifier="mt-suggestion">« Toute », « masculin », « Femelle »</target>
+        </trans-unit>
+        <trans-unit id="ExtraData_DataNotAvailable" translate="yes" xml:space="preserve">
+          <source>Data not available</source>
+          <target state="new">Data not available</target>
         </trans-unit>
       </group>
     </body>

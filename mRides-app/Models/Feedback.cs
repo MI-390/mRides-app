@@ -19,8 +19,9 @@ namespace mRides_app.Models
 
         public string feedback { get; set; }
         public string givenAs { get; set; }
-        public int givenBy { get; set; }
-        public int Ride { get; set; }
-        public int rating { get; set; }
+        public User givenBy { get; set; }
+        public int ride { get; set; }
+        public int stars { get; set; }
+        public string time { get; set; }
     }
 }

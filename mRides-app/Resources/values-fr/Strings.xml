@@ -30,8 +30,6 @@
   <string name="Pref_Prompt_Gender">Sexe préféré</string>
   <string name="Pref_Back">Retour</string>
   <string name="Pref_Done">Terminé</string>
-  <string name="ExtraData_UserName">nom d\'utilisateur</string>
-  <string name="ExtraData_DataNotAvailable">Données non disponibles</string>
   <string name="smoker">Fumeur</string>
   <string name="handicap">Handicapés</string>
   <string name="pet">Animal de compagnie</string>
