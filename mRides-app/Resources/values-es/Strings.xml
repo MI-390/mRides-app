@@ -42,4 +42,7 @@
     <item>hombre</item>
     <item>Mujer</item>
   </string-array>
+  <string name="hello_map">Hola</string>
+  <string name="user_driver">Conductor</string>
+  <string name="user_rider">Pasajero</string>
 </resources>

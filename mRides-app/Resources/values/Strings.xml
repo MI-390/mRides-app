@@ -38,7 +38,13 @@
   <string name="previous">Previous</string>
   <string name="next">Next</string>
 
+  <!-- STRINGS FOR map ACTIVITY -->
+  <string name="hello_map">Hello</string>
   <string name="dest">Destination</string>
+
+  <string name="user_driver">Driver</string>
+  <string name="user_rider">Rider</string>
+  
   <string name="user_type">User type</string>
   <string name="number_of_people">Number of people</string>
   <string name="smoker">Smoker</string>

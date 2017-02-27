@@ -3,7 +3,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center">
+    android:gravity="center"
+    android:background="@drawable/background_mrides">
     <TextView
         android:text="@string/Pref_Hi"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -42,13 +43,15 @@
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="@string/Pref_Smoker"
-                android:id="@+id/radioButtonSmoker" />
+                android:id="@+id/radioButtonSmoker"
+                android:textStyle="bold" />
             <RadioButton
                 android:layout_column="2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Pref_NonSmoker"
-                android:id="@+id/radioButtonNonSmoker" />
+                android:id="@+id/radioButtonNonSmoker"
+                android:textStyle="bold" />
         </TableRow>
         <TableRow
             android:id="@+id/tableRowLuggage"
@@ -62,13 +65,15 @@
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="@string/Pref_Luggage"
-                android:id="@+id/radioButtonLuggage" />
+                android:id="@+id/radioButtonLuggage"
+                android:textStyle="bold" />
             <RadioButton
                 android:layout_column="2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Pref_NoLuggage"
-                android:id="@+id/radioButtonNoLuggage" />
+                android:id="@+id/radioButtonNoLuggage"
+                android:textStyle="bold" />
         </TableRow>
         <TableRow
             android:id="@+id/tableRowHandicap"
@@ -82,13 +87,15 @@
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="@string/Pref_Handicap"
-                android:id="@+id/radioButtonHandicap" />
+                android:id="@+id/radioButtonHandicap"
+                android:textStyle="bold" />
             <RadioButton
                 android:layout_column="2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Pref_NoHandicap"
-                android:id="@+id/radioButtonNoHandicap" />
+                android:id="@+id/radioButtonNoHandicap"
+                android:textStyle="bold" />
         </TableRow>
         <TableRow
             android:id="@+id/tableRowHandicap"
@@ -102,13 +109,15 @@
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="@string/Pref_Pet"
-                android:id="@+id/radioButtonPet" />
+                android:id="@+id/radioButtonPet"
+                android:textStyle="bold" />
             <RadioButton
                 android:layout_column="2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Pref_NoPet"
-                android:id="@+id/radioButtonNoPet" />
+                android:id="@+id/radioButtonNoPet"
+                android:textStyle="bold" />
         </TableRow>
         <TableRow
             android:id="@+id/tableRowGender"
@@ -122,12 +131,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:id="@+id/textViewGenderPref" />
+                android:id="@+id/textViewGenderPref"
+                android:layout_marginTop="20.0dp"
+                android:textStyle="bold"
+                android:textColor="#ffffff" />
             <Spinner
                 android:layout_column="2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/spinnerGender" />
+                android:id="@+id/spinnerGender"
+                android:layout_marginTop="20.5dp" />
         </TableRow>
     </TableLayout>
     <LinearLayout
@@ -138,17 +151,23 @@
         android:layout_weight="1">
         <Button
             android:text="@string/Pref_Back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/buttonBack" />
+            android:layout_width="87.5dp"
+            android:layout_height="37.0dp"
+            android:id="@+id/buttonBack"
+            android:background="#ff5d55"
+            android:layout_marginLeft="37.5dp"
+            android:layout_marginBottom="5.5dp" />
         <Space
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
         <Button
             android:text="@string/Pref_Done"
-            android:layout_width="wrap_content"
+            android:layout_width="87.5dp"
             android:layout_height="wrap_content"
-            android:id="@+id/buttonDone" />
+            android:id="@+id/buttonDone"
+            android:backgroundTint="#ffff5d55"
+            android:layout_marginRight="38.0dp"
+            android:layout_marginBottom="4.0dp" />
     </LinearLayout>
 </LinearLayout>

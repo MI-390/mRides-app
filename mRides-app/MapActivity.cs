@@ -70,7 +70,8 @@ namespace mRides_app
             SetContentView(Resource.Layout.Destination);
 
             string text = mRides_app.Models.User.currentUser.firstName;
-            Toast.MakeText(ApplicationContext, "Hello " + text, ToastLength.Long).Show();
+            string str1 = GetString(Resource.String.hello_map);
+            Toast.MakeText(ApplicationContext, str1 + " " + text, ToastLength.Long).Show();
 
             // Retrieve the PlaceAutocompleteFragment.
             PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)FragmentManager.FindFragmentById(Resource.Id.place_autocomplete_fragment);
