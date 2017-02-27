@@ -230,8 +230,7 @@ namespace mRides_app
             {
                 destinationCoordinates.Add(directionList[i].Latitude.ToString() + "," + directionList[i].Longitude.ToString());
             }
-
-            User.currentUser = UserMapper.getInstance().CreateUser(new User());
+            
             Request newRequest = new Request {
                 destinationCoordinates = destinationCoordinates,
                 destination= destinationCoordinates[destinationCoordinates.Count-1],
