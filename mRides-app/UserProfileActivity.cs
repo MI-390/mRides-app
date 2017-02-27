@@ -32,28 +32,28 @@ namespace mRides_app
             SetContentView(Resource.Layout.UserProfile);
             usernameText = FindViewById<TextView>(Resource.Id.userName);
             usernameText.Text = user.firstName.ToString() + " " + user.lastName.ToString();
-
+            List<Models.Feedback> userFeedback = UserMapper.getInstance().GetReviews(id);
             //For testing
-            FeedbackForNow fb = new FeedbackForNow();
-            fb.dateOfFeedback = DateTime.Now;
-            fb.rating = 3;
-            fb.review = "Awesome";
-            fb.userIdForNow = 2;
-            fb.username = "Nassim";
+            //FeedbackForNow fb = new FeedbackForNow();
+            //fb.dateOfFeedback = DateTime.Now;
+            //fb.rating = 3;
+            //fb.review = "Awesome";
+            //fb.userIdForNow = 2;
+            //fb.username = "Nassim";
 
-            FeedbackForNow fb2 = new FeedbackForNow();
-            fb2.dateOfFeedback = DateTime.Now;
-            fb2.rating = 5;
-            fb2.review = "Cool";
-            fb2.userIdForNow = 3;
-            fb2.username = "Hannah";
+            //FeedbackForNow fb2 = new FeedbackForNow();
+            //fb2.dateOfFeedback = DateTime.Now;
+            //fb2.rating = 5;
+            //fb2.review = "Cool";
+            //fb2.userIdForNow = 3;
+            //fb2.username = "Hannah";
 
-            List<FeedbackForNow> feedbackfornowlist = new List<FeedbackForNow>();
-            feedbackfornowlist.Add(fb);
-            feedbackfornowlist.Add(fb2);
+            //List<FeedbackForNow> feedbackfornowlist = new List<FeedbackForNow>();
+            //feedbackfornowlist.Add(fb);
+            //feedbackfornowlist.Add(fb2);
 
             //put for loop later in the future
-            var userProfileFeedbackAdapter = new UserProfileFeedbackAdapter(this, feedbackfornowlist);
+            var userProfileFeedbackAdapter = new UserProfileFeedbackAdapter(this, userFeedback);
             //var feedbackAdapter = new UserProfileFeedbackAdapter(this);
             var feedbackListView = FindViewById<ListView>(Resource.Id.userProfileListView);
             feedbackListView.Adapter = userProfileFeedbackAdapter;

@@ -9,31 +9,21 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-
 namespace mRides_app
 {
 
-    public class FeedbackForNow
-    {
-        public String review { get; set; }
-        public int rating { get; set; }
-        public int userIdForNow { get; set; }
-        public String username { get; set; }
-        public DateTime dateOfFeedback { get; set; }
-    }
-
 
     public class UserProfileFeedbackAdapter : BaseAdapter
-    { 
-        List<FeedbackForNow> fbfn;
+    {
+        List<Models.Feedback> feedbackList;
         Activity context;
         int counter = 0;
 
-        public UserProfileFeedbackAdapter(Activity context, List<FeedbackForNow> fb) : base() { //change the FeedbackForNow parameter to Feedback later when it is implemented
+        public UserProfileFeedbackAdapter(Activity context, List<Models.Feedback> fbList) : base() { //change the FeedbackForNow parameter to Feedback later when it is implemented
             if (counter == 0)
             {
                 this.context = context;
-                this.fbfn = fb;
+                this.feedbackList = fbList;
                 counter++;
             }
             else
@@ -53,7 +43,7 @@ namespace mRides_app
 
         public override int Count
         {
-            get { return fbfn.Count; }
+            get { return feedbackList.Count; }
         }
 
         public override Java.Lang.Object GetItem(int position)
@@ -65,29 +55,25 @@ namespace mRides_app
 
         public override long GetItemId(int position)
         {
-            return fbfn[position].userIdForNow;
+            return feedbackList[position].givenBy.id;
         }
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
 
-                var view = convertView ?? context.LayoutInflater.Inflate(
-                     Resource.Layout.UserProfileFeedbackFragment, parent, false);
-                    
-                var dateOfFeedback = view.FindViewById<TextView>(Resource.Id.feedbackDateProfileFragment);
-                var userNameGivingFeedback = view.FindViewById<TextView>(Resource.Id.feedbackFragmentUserName);
-                var ratingBarOfFeedback = view.FindViewById<RatingBar>(Resource.Id.feedbackFragmentRatingBar);
-                var reviewOfFeedback = view.FindViewById<TextView>(Resource.Id.feedbackFragmentReview);
+                var view = convertView ?? context.LayoutInflater.Inflate(Resource.Layout.UserProfileFeedbackFragment, parent, false);
 
-                userNameGivingFeedback.Text = fbfn.ElementAt(position).username;
-                dateOfFeedback.Text = fbfn.ElementAt(position).dateOfFeedback.ToString();
-                ratingBarOfFeedback.NumStars = fbfn.ElementAt(position).rating;
-                reviewOfFeedback.Text = fbfn.ElementAt(position).review;
+            var dateOfFeedback = view.FindViewById<TextView>(Resource.Id.feedbackDateProfileFragment);
+            var userNameGivingFeedback = view.FindViewById<TextView>(Resource.Id.feedbackFragmentUserName);
+            var ratingBarOfFeedback = view.FindViewById<RatingBar>(Resource.Id.feedbackFragmentRatingBar);
+            var reviewOfFeedback = view.FindViewById<TextView>(Resource.Id.feedbackFragmentReview);
 
-                return view;
+            userNameGivingFeedback.Text = feedbackList.ElementAt(position).givenBy.firstName;
+            dateOfFeedback.Text = feedbackList.ElementAt(position).time;
+            ratingBarOfFeedback.NumStars = feedbackList.ElementAt(position).stars;
+            reviewOfFeedback.Text = feedbackList.ElementAt(position).feedback;
 
+            return view;
         }
-
     }
-
 }

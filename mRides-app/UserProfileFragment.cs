@@ -32,7 +32,7 @@ namespace mRides_app
             viewProfile = view.FindViewById<Button>(Resource.Id.viewProfileFragmentButton);
             reviewButton = view.FindViewById<Button>(Resource.Id.reviewFragmentButton);
             viewProfile.Click += ViewProfileButtonClicked;
-           //reviewButton.Click += ReviewButtonClicked;
+            reviewButton.Click += ReviewButtonClicked;
             return view;
         }
 
@@ -52,9 +52,14 @@ namespace mRides_app
 
         void ReviewButtonClicked(object sender, EventArgs e)
         {
-            //Intent i = new Intent(Context, typeof(Review));
-            //i.PutExtra("id", userID);
-            //Context.StartActivity(i);
+
+            Bundle args = new Bundle();
+            args.PutString("id", userID);
+            LeaveReviewFragment dialog = new LeaveReviewFragment();
+            dialog.Arguments = args;
+            FragmentTransaction transaction = FragmentManager.BeginTransaction();
+            dialog.Show(transaction, "Leave review fragment");
+            Dismiss();
         }
 
     }
