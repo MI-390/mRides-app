@@ -166,6 +166,18 @@
           <source>""1"",""2"",""3"",""4"",""5"",""6""</source>
           <target state="new">""1"",""2"",""3"",""4"",""5"",""6""</target>
         </trans-unit>
+        <trans-unit id="hello_map" translate="yes" xml:space="preserve">
+          <source>Hello</source>
+          <target state="translated" state-qualifier="tm-suggestion">Bonjour</target>
+        </trans-unit>
+        <trans-unit id="user_driver" translate="yes" xml:space="preserve">
+          <source>Driver</source>
+          <target state="translated">Conducteur</target>
+        </trans-unit>
+        <trans-unit id="user_rider" translate="yes" xml:space="preserve">
+          <source>Rider</source>
+          <target state="translated" state-qualifier="mt-suggestion">Rider</target>
+        </trans-unit>
       </group>
     </body>
   </file>

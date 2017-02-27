@@ -166,6 +166,18 @@
           <source>Data not available</source>
           <target state="new">Data not available</target>
         </trans-unit>
+        <trans-unit id="hello_map" translate="yes" xml:space="preserve">
+          <source>Hello</source>
+          <target state="final" state-qualifier="tm-suggestion">Hola</target>
+        </trans-unit>
+        <trans-unit id="user_driver" translate="yes" xml:space="preserve">
+          <source>Driver</source>
+          <target state="translated">Conductor</target>
+        </trans-unit>
+        <trans-unit id="user_rider" translate="yes" xml:space="preserve">
+          <source>Rider</source>
+          <target state="translated">Pasajero</target>
+        </trans-unit>
       </group>
     </body>
   </file>
