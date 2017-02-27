@@ -50,14 +50,11 @@ namespace UITest
             app.Screenshot("Login");
             app.TapCoordinates(549, 900);
             app.EnterText("cvnewggbsc_1487629189@tfbnw.net");
-            // app.EnterText(c => c.Marked("NoResourceEntry-42"), "cvnewggbsc_1487629189@tfbnw.net");
             app.ScrollDownTo(c => c.Css("input#u_0_2"));
             app.EnterText(c => c.Css("input#u_0_2"), "mi-390");
             app.PressEnter();
-            //app.ScrollToVerticalStart();
-            //app.TapCoordinates(549, 1300);
-            app.WaitForElement(c => c.Marked("radioButtonNonSmoker"));
         }
+
         [Test]
         public void SelectPreferences()
         {
@@ -70,15 +67,6 @@ namespace UITest
             app.Tap(c => c.Marked("text1"));
             app.TapCoordinates(721, 1200);
             app.Tap(c => c.Marked("buttonDone"));
-        }
-
-        [Test]
-        public void OpenMap()
-        {
-            app.WaitForElement(c => c.Marked("loginButton"));
-            app.Invoke("StartActivityTwo");
-            Thread.Sleep(5000);
-            app.WaitForElement(c => c.Marked("place_autocomplete_search_input"));
         }
 
         [Test]
@@ -107,7 +95,7 @@ namespace UITest
         }
 
         [Test]
-        public void GiveFeedbackToRider()
+        public void GiveFeedbackToUser()
         {
             app.WaitForElement(c => c.Marked("loginButton"));
             app.Invoke("StartActivityThree");
@@ -161,6 +149,19 @@ namespace UITest
             app.Tap(c => c.Marked("testFragment3"));
             app.Query(c => c.Marked("userProfileListView"));
             app.Query("feedbackFragmentReview");
+        }
+
+        [Test]
+        public void openMap()
+        {
+            app.Tap(c => c.Marked("loginButton"));
+            Thread.Sleep(3000);
+            app.Screenshot("Login");
+            app.TapCoordinates(549, 900);
+            app.EnterText("cvnewggbsc_1487629189@tfbnw.net");
+            app.ScrollDownTo(c => c.Css("input#u_0_2"));
+            app.EnterText(c => c.Css("input#u_0_2"), "mi-390");
+            app.PressEnter();
         }
 
     }
