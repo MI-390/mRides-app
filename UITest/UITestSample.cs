@@ -66,7 +66,8 @@ namespace UITest
             app.Tap(c => c.Marked("radioButtonNoPet"));
             app.Tap(c => c.Marked("text1"));
             app.TapCoordinates(721, 1200);
-            app.Tap(c => c.Marked("buttonDone"));
+            app.Tap(c => c.Marked("buttonBack"));
+            app.WaitForElement(c => c.Marked("loginButton"));
         }
 
         [Test]
@@ -106,62 +107,18 @@ namespace UITest
         }
 
         [Test]
-        public void isNameVisibleOnProfile()
-        {
-            app.WaitForElement(c => c.Marked("loginButton"));
-            app.Invoke("StartActivityThree");
-            app.Tap(c => c.Marked("testFragment3"));
-            app.Query(c => c.Marked("userName"));
-        }
-
-        [Test]
-        public void isGenderVisibleOnProfile()
-        {
-            app.WaitForElement(c => c.Marked("loginButton"));
-            app.Invoke("StartActivityThree");
-            app.Tap(c => c.Marked("testFragment3"));
-            app.Query(c => c.Marked("genderImage"));
-        }
-
-        [Test]
-        public void isProfilePhotoVisibleOnProfile()
-        {
-            app.WaitForElement(c => c.Marked("loginButton"));
-            app.Invoke("StartActivityThree");
-            app.Tap(c => c.Marked("testFragment3"));
-            app.Query(c => c.Marked("userPhoto"));
-        }
-
-        [Test]
-        public void isRatingsVisibleOnProfile()
-        {
-            app.WaitForElement(c => c.Marked("loginButton"));
-            app.Invoke("StartActivityThree");
-            app.Tap(c => c.Marked("testFragment3"));
-            app.Query(c => c.Marked("ratingBar"));
-        }
-
-        [Test]
-        public void isFeedbackVisibleOnProfile()
-        {
-            app.WaitForElement(c => c.Marked("loginButton"));
-            app.Invoke("StartActivityThree");
-            app.Tap(c => c.Marked("testFragment3"));
-            app.Query(c => c.Marked("userProfileListView"));
-            app.Query("feedbackFragmentReview");
-        }
-
-        [Test]
         public void openMap()
         {
+            app.WaitForElement(c => c.Marked("loginButton"));
             app.Tap(c => c.Marked("loginButton"));
             Thread.Sleep(3000);
-            app.Screenshot("Login");
             app.TapCoordinates(549, 900);
             app.EnterText("cvnewggbsc_1487629189@tfbnw.net");
             app.ScrollDownTo(c => c.Css("input#u_0_2"));
             app.EnterText(c => c.Css("input#u_0_2"), "mi-390");
             app.PressEnter();
+            Thread.Sleep(10000);
+            app.Tap(c => c.Marked("place_autocomplete_search_input"));
         }
 
     }
