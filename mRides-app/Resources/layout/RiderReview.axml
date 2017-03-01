@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/ratingBarRider"
         android:numStars="5"
-        android:stepSize="1.0"
+        android:stepSize="0.1"
         android:progressTint="#00ff00"
         android:layout_gravity="center" />
     <EditText
