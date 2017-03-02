@@ -29,6 +29,21 @@ namespace mRides_app.Models
         public int driverStars { get; set; }
         public int riderStars { get; set; }
 
-
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public UserRides()
+        {
+            this.RiderId = 0;
+            this.Rider = new User();
+            this.RideId = 0;
+            this.Ride = new Ride();
+            this.location = "";
+            this.destinaion = "";
+            this.driverFeedback = "";
+            this.riderFeedback = "";
+            this.driverStars = 0;
+            this.riderStars = 0;
+        }
     }
 }

@@ -28,5 +28,21 @@ namespace mRides_app.Models
         //Many Riders through an association table
         public ICollection<UserRides> UserRides { get; set; }
 
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public Ride ()
+        {
+            this.ID = 0;
+            this.destination = "";
+            this.location = "";
+            this.dateTime = DateTime.Now;
+            this.isWeekly = false;
+            this.DriverID = 0;
+            this.Driver = new User();
+            this.UserRides = new List<UserRides>();
+        }
+
     }
 }

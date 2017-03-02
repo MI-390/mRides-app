@@ -20,5 +20,15 @@ namespace mRides_app.Models
         public int requestID { get; set; }
         public string location { get; set; }
         public string destination { get; set; }
+
+        public RiderRequest()
+        {
+            this.id = 0;
+            this.riderID = 0;
+            this.rider = new Models.User();
+            this.requestID = 0;
+            this.location = "";
+            this.destination = "";
+        }
     }
 }

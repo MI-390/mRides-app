@@ -28,18 +28,36 @@ namespace mRides_app.Models
         public List<RiderRequest> riderRequests { get; set; }
         public List<string> destinationCoordinates { get; set; }
 
-        // Default constructor
-        public Request() { }
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public Request()
+        {
+            this.type = TYPE_RIDER;
+            this.ID = 0;
+            this.destination = "";
+            this.location = "";
+            this.dateTime = DateTime.Now;
+            this.isWeekly = false;
+            this.driverID = 0;
+            this.driver = new User();
+            this.riderRequests = new List<RiderRequest>();
+            this.destinationCoordinates = new List<string>();
+        }
 
         // Constructor to send a request
         public Request(int ID, string destination, string location, DateTime dateTime, Boolean isWeekly, string type)
         {
+            this.type = type;
             this.ID = ID;
             this.destination = destination;
             this.location = location;
             this.dateTime = dateTime;
             this.isWeekly = isWeekly;
-            this.type = type;
+            this.driverID = 0;
+            this.driver = new User();
+            this.riderRequests = new List<RiderRequest>();
+            this.destinationCoordinates = new List<string>();
         }
     }
 }

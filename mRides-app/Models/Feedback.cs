@@ -23,5 +23,18 @@ namespace mRides_app.Models
         public int ride { get; set; }
         public int stars { get; set; }
         public string time { get; set; }
+
+        /// <summary>
+        /// Default Constructor
+        /// </summary>
+        public Feedback()
+        {
+            this.feedback = "";
+            this.givenAs = GIVEN_AS_RIDER;
+            this.givenBy = new Models.User();
+            this.ride = 0;
+            this.stars = 0;
+            this.time = "";
+        }
     }
 }
