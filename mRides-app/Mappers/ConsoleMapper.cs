@@ -43,6 +43,10 @@ namespace mRides_app.Mappers
          */
         public List<Request> FindDrivers(Request newRequest)
         {
+            // Ensure that the new request does not have extra unnecessary variables initialized
+            newRequest.riderRequests = null;
+            newRequest.ID = 0;
+
             dynamic response = SendPost<dynamic>(ApiEndPointUrl.findDrivers, newRequest, true);
 
             // The response consists of a list:
@@ -61,6 +65,12 @@ namespace mRides_app.Mappers
           */
         public List<Request> FindRiders(Request newRequest)
         {
+            // Ensure that the new request does not have extra unnecessary variables initialized
+            newRequest.driver = null;
+            newRequest.driverID = null;
+            newRequest.riderRequests = null;
+            newRequest.ID = 0;
+
             // Create a new rest client
             var client = new RestClient()
             {

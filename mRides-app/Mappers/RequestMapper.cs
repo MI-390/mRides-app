@@ -40,7 +40,10 @@ namespace mRides_app.Mappers
          */
         public void CreateRequest(Request newRequest)
         {
+            // Verify the attributes before creating a new request
             newRequest.driverID = null;
+            newRequest.riderRequests = null;
+            newRequest.driver = null;
             SendPost<Request>(ApiEndPointUrl.createRequest, newRequest, true);
         }
     }

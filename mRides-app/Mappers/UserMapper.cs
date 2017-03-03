@@ -56,6 +56,13 @@ namespace mRides_app.Mappers
          */
         public User CreateUser(User newUser)
         {
+            // Verify the variable of the newUser before sending a request
+            newUser.id = 0;
+            newUser.requestAsRider = null;
+            newUser.requestsAsDriver = null;
+            newUser.ridesAsRider = null;
+            newUser.ridesAsDriver = null;
+
             return SendPost<User>(ApiEndPointUrl.createUser, newUser, false);
         }
 
