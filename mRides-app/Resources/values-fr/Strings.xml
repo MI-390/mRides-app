@@ -45,4 +45,13 @@
   <string name="hello_map">Bonjour</string>
   <string name="user_driver">Conducteur</string>
   <string name="user_rider">Rider</string>
+  <string name="ratingsAndReviews">Notes et commentaires</string>
+  <string name="personUser">Personne</string>
+  <string name="leaveReviewForUser">Laisser un commentaire pour cet utilisateur :</string>
+  <string name="reviewSubmit">Envoyer</string>
+  <string name="dateOfFeedback">Date de retour</string>
+  <string name=" p_erson">Personne</string>
+  <string name="user_review">Révision</string>
+  <string name="viewUserProfile">Afficher le profil</string>
+  <string name="reviewUser">Révision</string>
 </resources>

@@ -927,6 +927,9 @@ namespace mRides_app
 			// aapt resource value: 0x7f060038
 			public const int d = 2131099704;
 			
+			// aapt resource value: 0x7f06004c
+			public const int dateOfFeedback = 2131099724;
+			
 			// aapt resource value: 0x7f06003e
 			public const int dest = 2131099710;
 			
@@ -945,6 +948,9 @@ namespace mRides_app
 			// aapt resource value: 0x7f06003d
 			public const int hello_map = 2131099709;
 			
+			// aapt resource value: 0x7f06004d
+			public const int leaveReviewForUser = 2131099725;
+			
 			// aapt resource value: 0x7f060044
 			public const int luggage = 2131099716;
 			
@@ -956,6 +962,9 @@ namespace mRides_app
 			
 			// aapt resource value: 0x7f060042
 			public const int number_of_people = 2131099714;
+			
+			// aapt resource value: 0x7f06004b
+			public const int personUser = 2131099723;
 			
 			// aapt resource value: 0x7f060048
 			public const int person_profile = 2131099720;
@@ -975,8 +984,14 @@ namespace mRides_app
 			// aapt resource value: 0x7f060037
 			public const int r = 2131099703;
 			
+			// aapt resource value: 0x7f06004a
+			public const int ratingsAndReviews = 2131099722;
+			
 			// aapt resource value: 0x7f060049
 			public const int ratings_reviews = 2131099721;
+			
+			// aapt resource value: 0x7f06004e
+			public const int reviewSubmit = 2131099726;
 			
 			// aapt resource value: 0x7f060036
 			public const int riderOrDriver = 2131099702;

@@ -77,15 +77,15 @@ namespace mRides_app
             {
                 Log.Debug("Driver", "I am a driver woohoo");
                 // Open a session as a Driver?
-                string str = GetString(Resource.String.seatsAvailable);
-                tv1.SetText(str, TextView.BufferType.Normal);
+                string availableSeats = GetString(Resource.String.seatsAvailable);
+                tv1.SetText(availableSeats, TextView.BufferType.Normal);
             }
             else
             {
                 Log.Debug("Rider", "I am a rider woohoo");
                 // Open a session as a Rider
-                string str1 = GetString(Resource.String.numberOfRiders);
-                tv1.SetText(str1, TextView.BufferType.Normal);
+                string numRiders = GetString(Resource.String.numberOfRiders);
+                tv1.SetText(numRiders, TextView.BufferType.Normal);
             }
 
             driver = !driver;
