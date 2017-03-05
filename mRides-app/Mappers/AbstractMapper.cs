@@ -207,5 +207,9 @@ namespace mRides_app.Mappers
         public const string getReviews = "User/getReviews/{id}";
         public const string leaveReview = "User/leaveReview";
 
+        // Ride related url
+        public const string createRide = "Ride/createRide";
+        public const string addRiderToRide = "Ride/addRiderToRide";
+        public const string getRide = "Ride/getRide/{id}";
     }
 }
