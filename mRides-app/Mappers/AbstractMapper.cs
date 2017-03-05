@@ -188,7 +188,7 @@ namespace mRides_app.Mappers
     // AVAILABLE URLS
     // ---------------------------------------------------------------------------
 
-    class ApiEndPointUrl
+    public class ApiEndPointUrl
     {
         // Console related url
         public const string findDrivers = "Console/findDrivers";
