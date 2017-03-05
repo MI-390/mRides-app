@@ -30,8 +30,6 @@
   <string name="Pref_Prompt_Gender">Género recomendado:</string>
   <string name="Pref_Back">Atrás</string>
   <string name="Pref_Done">Listo</string>
-  <string name="ExtraData_UserName">usuario</string>
-  <string name="ExtraData_DataNotAvailable">Datos no disponibles</string>
   <string name="smoker">Fumador</string>
   <string name="handicap">Discapacitado</string>
   <string name="pet">Mascota</string>
@@ -44,4 +42,7 @@
     <item>hombre</item>
     <item>Mujer</item>
   </string-array>
+  <string name="hello_map">Hola</string>
+  <string name="user_driver">Conductor</string>
+  <string name="user_rider">Pasajero</string>
 </resources>

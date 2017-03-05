@@ -130,14 +130,6 @@
           <source>Done</source>
           <target state="final" state-qualifier="tm-suggestion">Listo</target>
         </trans-unit>
-        <trans-unit id="ExtraData_UserName" translate="yes" xml:space="preserve">
-          <source>username</source>
-          <target state="final">usuario</target>
-        </trans-unit>
-        <trans-unit id="ExtraData_DataNotAvailable" translate="yes" xml:space="preserve">
-          <source>Data not available</source>
-          <target state="final" state-qualifier="tm-suggestion">Datos no disponibles</target>
-        </trans-unit>
         <trans-unit id="smoker" translate="yes" xml:space="preserve">
           <source>Smoker</source>
           <target state="final" state-qualifier="mt-suggestion">Fumador</target>
@@ -169,6 +161,22 @@
         <trans-unit id="Pref_Gender" translate="yes" xml:space="preserve">
           <source>"Any","Male","Female"</source>
           <target state="translated" state-qualifier="mt-suggestion">"Cualquier", "hombre", "Mujer"</target>
+        </trans-unit>
+        <trans-unit id="ExtraData_DataNotAvailable" translate="yes" xml:space="preserve">
+          <source>Data not available</source>
+          <target state="new">Data not available</target>
+        </trans-unit>
+        <trans-unit id="hello_map" translate="yes" xml:space="preserve">
+          <source>Hello</source>
+          <target state="final" state-qualifier="tm-suggestion">Hola</target>
+        </trans-unit>
+        <trans-unit id="user_driver" translate="yes" xml:space="preserve">
+          <source>Driver</source>
+          <target state="translated">Conductor</target>
+        </trans-unit>
+        <trans-unit id="user_rider" translate="yes" xml:space="preserve">
+          <source>Rider</source>
+          <target state="translated">Pasajero</target>
         </trans-unit>
       </group>
     </body>

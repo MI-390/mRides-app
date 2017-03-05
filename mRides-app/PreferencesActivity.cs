@@ -12,6 +12,8 @@ using Android.Widget;
 using mRides_app.Models;
 using mRides_app.Mappers;
 
+using mRides_app.Constants;
+
 namespace mRides_app
 {
     [Activity(Label = "PreferencesActivity")]
@@ -20,24 +22,7 @@ namespace mRides_app
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            UserMapper userMapper = UserMapper.getInstance();
-
-            // If the previous activity is the main activity and the user already exists,
-            // skip this activity
-            long facebookId = Convert.ToInt64(Intent.GetStringExtra(GetString(Resource.String.ExtraData_FacebookId)));
-            User currentUser = userMapper.GetUserByFacebookId(facebookId);
-            string previousActivity = Intent.GetStringExtra(GetString(Resource.String.ExtraData_PreviousActivity));
-
-            // The user does not exist, create it
-            string userName = Intent.GetStringExtra(GetString(Resource.String.ExtraData_UserName));
-            string[] names = userName.Split(new char[] { ' ' }, 2);
-            currentUser = new User
-            {
-                facebookID = facebookId,
-                firstName = names[0],
-                lastName = names[1]
-            };
-            User.currentUser = userMapper.CreateUser(currentUser);
+            string facebookFirstName = Intent.GetStringExtra(IntentExtraNames.UserFacebookFirstName);
 
             // Set the view to preferences layout
             SetContentView(Resource.Layout.Preferences);
@@ -45,7 +30,7 @@ namespace mRides_app
             // Obtain the extra data passed, the username, and display it in the Hi message
             TextView textViewHi = FindViewById<TextView>(Resource.Id.textViewHi);
             string prefHi = GetString(Resource.String.Pref_Hi);
-            textViewHi.Text = prefHi + " " + userName;
+            textViewHi.Text = prefHi + " " + facebookFirstName;
 
             // Set the back button to go back to the previous activity
             Button backButton = FindViewById<Button>(Resource.Id.buttonBack);
@@ -98,30 +83,66 @@ namespace mRides_app
 
             // Set the done button to save and continue to the next activity
             Button doneButton = FindViewById<Button>(Resource.Id.buttonDone);
-            doneButton.Click += delegate { this.SaveAndContinue(rbSmoker.Checked, rbLuggage.Checked, rbHandicap.Checked, rbPet.Checked, (int)spinnerGender.SelectedItemId); };
+            string genderPreference = "";
+            int selectedGenderPref = (int)spinnerGender.SelectedItemId;
+            if (selectedGenderPref == 0)
+            {
+                genderPreference = "any";
+            }
+            else if (selectedGenderPref == 1)
+            {
+                genderPreference = "male";
+            }
+            else
+            {
+                genderPreference = "female";
+            }
+            doneButton.Click += delegate { this.SaveAndContinue(rbSmoker.Checked, rbLuggage.Checked, rbHandicap.Checked, rbPet.Checked, genderPreference); };
             
         }
 
-        private void SaveAndContinue(Boolean smoker, Boolean luggage, Boolean handicap, Boolean pet, int gender)
+        private void SaveAndContinue(Boolean smoker, Boolean luggage, Boolean handicap, Boolean pet, string gender)
         {
-            // TODO: Save the preferences
-            Console.WriteLine("Smoker=" + smoker + ";Luggage=" + luggage + ";handicap=" + handicap + ";gender=" + gender + ";pet=" + pet);
-            User.currentUser.isSmoker = smoker;
-            User.currentUser.hasLuggage = luggage;
-            User.currentUser.isHandicap = handicap;
-            User.currentUser.genderPreference = gender;
-            User.currentUser.hasPet = pet;
-            //User.currentUser.save();
-            
-            this.Continue();
-        }
+            // If the current user is null and the previous activity is the main, 
+            // create a new user using the preferences
+            string previousActivity = Intent.GetStringExtra(Constants.IntentExtraNames.PreviousActivity);
+            if (User.currentUser == null && previousActivity.Equals(Constants.ActivityNames.MainActivity)) {
+                long facebookID = Convert.ToInt64(Intent.GetStringExtra(Constants.IntentExtraNames.UserFacebookId));
+                string facebookFirstName = Intent.GetStringExtra(Constants.IntentExtraNames.UserFacebookFirstName);
+                string facebookLastName = Intent.GetStringExtra(Constants.IntentExtraNames.UserFacebookLastName);
+                User newUser = new User
+                {
+                    facebookID = facebookID,
+                    firstName = facebookFirstName,
+                    lastName = facebookLastName,
+                    isSmoker = smoker,
+                    hasLuggage = luggage,
+                    isHandicap = handicap,
+                    hasPet = pet,
+                    genderPreference = gender
+                };
+                User.currentUser = UserMapper.getInstance().CreateUser(newUser);
 
-        private void Continue()
-        {
-            // Go to the next activity
-            var mapActivity = new Intent(this, typeof(MapActivity));
-            mapActivity.PutExtras(Intent);
-            StartActivity(mapActivity);
+                // Go to the next activity
+                var mapActivity = new Intent(this, typeof(MapActivity));
+                mapActivity.PutExtras(Intent);
+                StartActivity(mapActivity);
+            }
+
+            // Otherwise, the user already exists, update it, and save those changes on
+            // the server
+            else
+            {
+                User.currentUser.isSmoker = smoker;
+                User.currentUser.hasLuggage = luggage;
+                User.currentUser.isHandicap = handicap;
+                User.currentUser.genderPreference = gender;
+                User.currentUser.hasPet = pet;
+                //UserMapper.getInstance().UpdateUser(User.currentUser);
+
+                // Go back to the previous activity
+                this.Finish();
+            }
         }
 
         /**

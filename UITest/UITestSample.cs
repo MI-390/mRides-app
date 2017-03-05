@@ -7,6 +7,8 @@ using Xamarin.UITest.Queries;
 using Xamarin.UITest.Android;
 using mRides_app;
 using System.Threading;
+using System.Collections.Generic;
+using System.Text;
 
 namespace UITest
 {
@@ -43,22 +45,20 @@ namespace UITest
         public void FacebookLogin()
         {
             // Start app only once, so that further test can continue
-            app.Tap(c => c.Marked("button1"));
+            app.Tap(c => c.Marked("loginButton"));
             Thread.Sleep(3000);
             app.Screenshot("Login");
             app.TapCoordinates(549, 900);
             app.EnterText("cvnewggbsc_1487629189@tfbnw.net");
-            // app.EnterText(c => c.Marked("NoResourceEntry-42"), "cvnewggbsc_1487629189@tfbnw.net");
             app.ScrollDownTo(c => c.Css("input#u_0_2"));
             app.EnterText(c => c.Css("input#u_0_2"), "mi-390");
-            app.ScrollToVerticalStart();
-            app.TapCoordinates(549, 1300);
-            app.WaitForElement(c => c.Marked("radioButtonNonSmoker"));
+            app.PressEnter();
         }
+
         [Test]
         public void SelectPreferences()
         {
-            app.WaitForElement(c => c.Marked("button1"));
+            app.WaitForElement(c => c.Marked("loginButton"));
             app.Invoke("StartActivityOne");
             app.Tap(c => c.Marked("radioButtonNonSmoker"));
             app.Tap(c => c.Marked("radioButtonNoLuggage"));
@@ -66,44 +66,61 @@ namespace UITest
             app.Tap(c => c.Marked("radioButtonNoPet"));
             app.Tap(c => c.Marked("text1"));
             app.TapCoordinates(721, 1200);
-            app.Tap(c => c.Marked("buttonDone"));
-            app.WaitForElement(c => c.Marked("place_autocomplete_search_input"));
+            app.Tap(c => c.Marked("buttonBack"));
+            app.WaitForElement(c => c.Marked("loginButton"));
         }
-
-        //[Test]
-        //public void ChooseDestination()
-        //{
-        //    app.WaitForElement(c => c.Marked("button1"));
-        //    app.Invoke("StartActivityTwo");
-        //    app.DoubleTap(c => c.Marked("place_autocomplete_search_input"));
-        //    app.TapCoordinates(100, 50);
-        //    app.EnterText("test");
-        //}
 
         [Test]
         public void SelectDriverOrRider()
         {
-            app.WaitForElement(c => c.Marked("button1"));
+            app.WaitForElement(c => c.Marked("loginButton"));
             app.Invoke("StartActivityThree");
             Thread.Sleep(3000);
             app.Tap(c => c.Marked("testFragment1"));
             app.Tap(c => c.Marked("riderOrDriverSwitch"));
-            app.Tap(c => c.Marked("numOfPeople"));
-            app.TapCoordinates(760, 1200);
             app.Tap("Next");
-            //app.Repl();
         }
 
         [Test]
-        public void GiveFeedbackToRider()
+        public void SelectNumOfPeopleOrSeats()
         {
-            app.WaitForElement(c => c.Marked("button1"));
+            app.WaitForElement(c => c.Marked("loginButton"));
+            app.Invoke("StartActivityThree");
+            app.Tap(c => c.Marked("testFragment1"));
+            app.Tap(c => c.Marked("numOfPeople"));
+            app.TapCoordinates(926, 550);
+            app.Tap(c => c.Marked("riderOrDriverSwitch"));
+            app.Tap(c => c.Marked("numOfPeople"));
+            app.TapCoordinates(926, 550);
+            app.Tap("Next");
+        }
+
+        [Test]
+        public void GiveFeedbackToUser()
+        {
+            app.WaitForElement(c => c.Marked("loginButton"));
             app.Invoke("StartActivityThree");
             app.Tap(c => c.Marked("testFragment2"));
             app.EnterText(c => c.Marked("driverReviewEdit"), "Best driver!");
             app.Tap(c => c.Marked("ratingBarDriver"));
             app.Tap("submitFeedback1");
         }
+
+        [Test]
+        public void openMap()
+        {
+            app.WaitForElement(c => c.Marked("loginButton"));
+            app.Tap(c => c.Marked("loginButton"));
+            Thread.Sleep(3000);
+            app.TapCoordinates(549, 900);
+            app.EnterText("cvnewggbsc_1487629189@tfbnw.net");
+            app.ScrollDownTo(c => c.Css("input#u_0_2"));
+            app.EnterText(c => c.Css("input#u_0_2"), "mi-390");
+            app.PressEnter();
+            Thread.Sleep(10000);
+            app.Tap(c => c.Marked("place_autocomplete_search_input"));
+        }
+
     }
 }
 

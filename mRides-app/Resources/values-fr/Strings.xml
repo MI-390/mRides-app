@@ -1,20 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="ApplicationName">mRides-app</string>
-  <string name="slogan">Voyager ensemble</string>
-  <string name="fblogin">Pour commencer, connectez-vous à l’aide d’un simple clic :</string>
-  <string name="fb">Connexion avec Facebook</string>
-  <string name="riderOrDriver">Vous êtes un Passager \nou un Conducteur ?</string>
-  <string name="previous">Précédent</string>
-  <string name="next">Suivant</string>
-  <string name="r">P</string>
-  <string name="d">C</string>
-  <string name="seatsAvailable">Le nombre de sièges disponible ?</string>
-  <string name="numberOfRiders">Combien êtes-vous ?</string>
-  <string name="dest">Destination</string>
-  <string name="user_type">Type d\'utilisateur</string>
-  <string name="number_of_people">Nombre de personnes</string>
-  <string name="Hello">Bonjour monde, cliquez-moi !</string>
   <string name="Pref_Hi">Salut</string>
   <string name="Pref_SetYourPreferences">Définir vos préférences</string>
   <string name="Pref_Smoker">Fumeur</string>
@@ -30,14 +16,33 @@
   <string name="Pref_Prompt_Gender">Sexe préféré</string>
   <string name="Pref_Back">Retour</string>
   <string name="Pref_Done">Terminé</string>
-  <string name="ExtraData_UserName">nom d\'utilisateur</string>
   <string name="ExtraData_DataNotAvailable">Données non disponibles</string>
+  <string name="slogan">Voyager ensemble</string>
+  <string name="fblogin">Pour commencer, connectez-vous à l’aide d’un simple clic :</string>
+  <string name="fb">Connexion avec Facebook</string>
+  <string name="riderOrDriver">  Vous êtes un Rider \nor Driver ? </string>
+  <string name="r">P</string>
+  <string name="d">C</string>
+  <string name="seatsAvailable">Le nombre de sièges disponible ?</string>
+  <string name="numberOfRiders">Combien êtes-vous ?</string>
+  <string name="previous">Précédent</string>
+  <string name="next">Suivant</string>
+  <string name="dest">Destination</string>
+  <string name="user_type">Type d\'utilisateur</string>
+  <string name="number_of_people">Nombre de personnes</string>
   <string name="smoker">Fumeur</string>
+  <string name="luggage">Bagages</string>
   <string name="handicap">Handicapés</string>
   <string name="pet">Animal de compagnie</string>
   <string name="gender">Sexe</string>
-  <string name="luggage">Bagages</string>
   <string name="person_profile">Personne</string>
   <string name="ratings_reviews">Notes et commentaires</string>
-  <string name="Pref_Gender">« Toute », « masculin », « Femelle »</string>
+  <string-array name="Pref_Gender">
+    <item>Toute</item>
+    <item>masculin</item>
+    <item>Femelle</item>
+  </string-array>
+  <string name="hello_map">Bonjour</string>
+  <string name="user_driver">Conducteur</string>
+  <string name="user_rider">Rider</string>
 </resources>

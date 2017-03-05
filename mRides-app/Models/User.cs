@@ -19,19 +19,19 @@ namespace mRides_app.Models
 
         public int id { get; set; }
         public long facebookID { get; set; }
-        public object lastName { get; set; }
-        public object firstName { get; set; }
-        public object prefferedLanguage { get; set; }
+        public string lastName { get; set; }
+        public string firstName { get; set; }
+        public string prefferedLanguage { get; set; }
         public bool isSmoker { get; set; }
         public bool isHandicap { get; set; }
         public bool hasLuggage { get; set; }
         public bool hasPet { get; set; }
-        public int genderPreference { get; set; }
+        public string genderPreference { get; set; }
         public int gsd { get; set; }
-        public object ridesAsDriver { get; set; }
-        public object ridesAsRider { get; set; }
-        public object requestsAsDriver { get; set; }
-        public List<object> requestAsRider { get; set; }
+        public List<Ride> ridesAsDriver { get; set; }
+        public List<UserRides> ridesAsRider { get; set; }
+        public List<Request> requestsAsDriver { get; set; }
+        public List<RiderRequest> requestAsRider { get; set; }
 
     }
 }
