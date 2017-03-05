@@ -939,6 +939,9 @@ namespace mRides_app
 			// aapt resource value: 0x7f060034
 			public const int fblogin = 2131099700;
 			
+			// aapt resource value: 0x7f060053
+			public const int feedbackPopup = 2131099731;
+			
 			// aapt resource value: 0x7f060047
 			public const int gender = 2131099719;
 			
@@ -948,8 +951,8 @@ namespace mRides_app
 			// aapt resource value: 0x7f06003d
 			public const int hello_map = 2131099709;
 			
-			// aapt resource value: 0x7f06004d
-			public const int leaveReviewForUser = 2131099725;
+			// aapt resource value: 0x7f06004f
+			public const int leaveReviewForUser = 2131099727;
 			
 			// aapt resource value: 0x7f060044
 			public const int luggage = 2131099716;
@@ -962,6 +965,9 @@ namespace mRides_app
 			
 			// aapt resource value: 0x7f060042
 			public const int number_of_people = 2131099714;
+			
+			// aapt resource value: 0x7f06004d
+			public const int p_erson = 2131099725;
 			
 			// aapt resource value: 0x7f06004b
 			public const int personUser = 2131099723;
@@ -990,8 +996,11 @@ namespace mRides_app
 			// aapt resource value: 0x7f060049
 			public const int ratings_reviews = 2131099721;
 			
-			// aapt resource value: 0x7f06004e
-			public const int reviewSubmit = 2131099726;
+			// aapt resource value: 0x7f060050
+			public const int reviewSubmit = 2131099728;
+			
+			// aapt resource value: 0x7f060052
+			public const int reviewUser = 2131099730;
 			
 			// aapt resource value: 0x7f060036
 			public const int riderOrDriver = 2131099702;
@@ -1008,11 +1017,17 @@ namespace mRides_app
 			// aapt resource value: 0x7f06003f
 			public const int user_driver = 2131099711;
 			
+			// aapt resource value: 0x7f06004e
+			public const int user_review = 2131099726;
+			
 			// aapt resource value: 0x7f060040
 			public const int user_rider = 2131099712;
 			
 			// aapt resource value: 0x7f060041
 			public const int user_type = 2131099713;
+			
+			// aapt resource value: 0x7f060051
+			public const int viewUserProfile = 2131099729;
 			
 			static String()
 			{
