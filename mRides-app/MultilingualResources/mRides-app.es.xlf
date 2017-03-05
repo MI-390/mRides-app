@@ -216,7 +216,7 @@
         </trans-unit>
         <trans-unit id="feedbackPopup" translate="yes" xml:space="preserve">
           <source>Click for Feedback popup!</source>
-          <target state="new">Click for Feedback popup!</target>
+          <target state="translated" state-qualifier="mt-suggestion">¡Haga clic para popup de comentarios!</target>
         </trans-unit>
       </group>
     </body>

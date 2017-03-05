@@ -50,7 +50,7 @@
   <string name="leaveReviewForUser">Laisser un commentaire pour cet utilisateur :</string>
   <string name="reviewSubmit">Envoyer</string>
   <string name="dateOfFeedback">Date de retour</string>
-  <string name=" p_erson">Personne</string>
+  <string name="p_erson">Personne</string>
   <string name="user_review">Révision</string>
   <string name="viewUserProfile">Afficher le profil</string>
   <string name="reviewUser">Révision</string>
