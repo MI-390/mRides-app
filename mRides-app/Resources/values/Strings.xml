@@ -75,7 +75,7 @@
   
     <!-- STRINGS FOR USER PROFILE FEEDBACK FRAGMENT -->
    <string name="dateOfFeedback">Date of feedback</string>
-  <string name=" p_erson">Person</string>
+  <string name="p_erson">Person</string>
  <string name="user_review">Review</string>
 
   <!-- STRINGS FOR DRIVER REVIEW -->

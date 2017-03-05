@@ -20,7 +20,7 @@
   <string name="slogan">Voyager ensemble</string>
   <string name="fblogin">Pour commencer, connectez-vous à l’aide d’un simple clic :</string>
   <string name="fb">Connexion avec Facebook</string>
-  <string name="riderOrDriver">  Vous êtes un Rider \nor Driver ? </string>
+  <string name="riderOrDriver">  Vous êtes un Passager \nor Conducteur ? </string>
   <string name="r">P</string>
   <string name="d">C</string>
   <string name="seatsAvailable">Le nombre de sièges disponible ?</string>
@@ -44,14 +44,14 @@
   </string-array>
   <string name="hello_map">Bonjour</string>
   <string name="user_driver">Conducteur</string>
-  <string name="user_rider">Rider</string>
+  <string name="user_rider">Passager</string>
   <string name="ratingsAndReviews">Notes et commentaires</string>
   <string name="personUser">Personne</string>
   <string name="leaveReviewForUser">Laisser un commentaire pour cet utilisateur :</string>
   <string name="reviewSubmit">Envoyer</string>
   <string name="dateOfFeedback">Date de retour</string>
-  <string name="p_erson">Personne</string>
   <string name="user_review">Révision</string>
   <string name="viewUserProfile">Afficher le profil</string>
   <string name="reviewUser">Révision</string>
+  <string name="feedbackPopup">Cliquez pour popup Feedback !</string>
 </resources>

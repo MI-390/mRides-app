@@ -198,10 +198,6 @@
           <source>Date of feedback</source>
           <target state="translated" state-qualifier="mt-suggestion">Fecha de retroalimentación</target>
         </trans-unit>
-        <trans-unit id=" p_erson" translate="yes" xml:space="preserve">
-          <source>Person</source>
-          <target state="translated" state-qualifier="tm-suggestion">Persona</target>
-        </trans-unit>
         <trans-unit id="user_review" translate="yes" xml:space="preserve">
           <source>Review</source>
           <target state="translated" state-qualifier="tm-suggestion">Revisar</target>
@@ -217,6 +213,10 @@
         <trans-unit id="feedbackPopup" translate="yes" xml:space="preserve">
           <source>Click for Feedback popup!</source>
           <target state="translated" state-qualifier="mt-suggestion">¡Haga clic para popup de comentarios!</target>
+        </trans-unit>
+        <trans-unit id="p_erson" translate="yes" xml:space="preserve">
+          <source>Person</source>
+          <target state="new">Person</target>
         </trans-unit>
       </group>
     </body>

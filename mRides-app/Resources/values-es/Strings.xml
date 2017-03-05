@@ -50,8 +50,8 @@
   <string name="leaveReviewForUser">Deja un comentario para este usuario:</string>
   <string name="reviewSubmit">Enviar</string>
   <string name="dateOfFeedback">Fecha de retroalimentación</string>
-  <string name=" p_erson">Persona</string>
   <string name="user_review">Revisar</string>
   <string name="viewUserProfile">Ver perfil</string>
   <string name="reviewUser">Revisar</string>
+  <string name="feedbackPopup">¡Haga clic para popup de comentarios!</string>
 </resources>
