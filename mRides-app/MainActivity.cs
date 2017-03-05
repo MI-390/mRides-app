@@ -90,22 +90,22 @@ namespace mRides_app
                     
                     // If the user already exists, set the current user to it
                     // and go to map activity
-                    if (user != null)
-                    {
-                        User.currentUser = user;
-                        var mapActivity = new Intent(this, typeof(MapActivity));
-                        StartActivity(mapActivity);
-                    }
+                   // if (user != null)
+                   // {
+                    //    User.currentUser = user;
+                     //   var mapActivity = new Intent(this, typeof(MapActivity));
+                     //   StartActivity(mapActivity);
+                   // }
                     // Otherwise, go to the preference activity
-                    else
-                    {
+                   // else
+                   // {
                         var preferencesActivity = new Intent(this, typeof(PreferencesActivity));
                         preferencesActivity.PutExtra(Constants.IntentExtraNames.UserFacebookId, obj["id"].ToString());
                         preferencesActivity.PutExtra(Constants.IntentExtraNames.UserFacebookFirstName, facebookFirstName);
                         preferencesActivity.PutExtra(Constants.IntentExtraNames.UserFacebookLastName, facebookLastName);
                         preferencesActivity.PutExtra(Constants.IntentExtraNames.PreviousActivity, Constants.ActivityNames.MainActivity);
                         StartActivity(preferencesActivity);
-                    }
+                  //  }
 
 
                     /** UNCOMMENT THE FOLLOWING TO VIEW USER PROFILE ACTIVITY UPON LOGIN **/

@@ -18,7 +18,7 @@
             android:layout_height="9.0dp"
             android:id="@+id/feedbackPageDivider" />
         <TextView
-            android:text="Date of feedback"
+            android:text="@string/dateOfFeedback"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/feedbackDateProfileFragment"
@@ -28,7 +28,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginBottom="4dp" />
         <TextView
-            android:text="Person"
+            android:text="@string/p_erson"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
             android:layout_marginBottom="4dp"
             android:layout_gravity="center" />
         <TextView
-            android:text="Review"
+            android:text="@string/user_review"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

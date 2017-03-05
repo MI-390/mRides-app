@@ -27,18 +27,30 @@
 
   <string name="ExtraData_DataNotAvailable">Data not available</string>
   
+  
+    <!--LOGIN-RELATED STRINGS-->
   <string name="slogan">Travel together</string>
   <string name="fblogin">To get started, sign in with a simple click:</string>
   <string name="fb">Login with Facebook</string>
+  
+    <!--RIDER OR DRIVER-RELATED STRINGS-->
   <string name="riderOrDriver">  Are you a Rider \nor Driver? </string>
   <string name="r">R</string>
   <string name="d">D</string>
   <string name="seatsAvailable">How many available seats?</string>
   <string name="numberOfRiders">How many are you?</string>
+   <string-array name="numbers_array">
+    <item>"1"</item>
+    <item>"2"</item>
+    <item>"3"</item>
+    <item>"4"</item>
+    <item>"5"</item>
+    <item>"6"</item>
+  </string-array>
   <string name="previous">Previous</string>
   <string name="next">Next</string>
 
-  <!-- STRINGS FOR map ACTIVITY -->
+  <!-- STRINGS FOR MAP ACTIVITY -->
   <string name="hello_map">Hello</string>
   <string name="dest">Destination</string>
 
@@ -57,13 +69,31 @@
   <string name="person_profile">Person</string>
   <string name="ratings_reviews">Ratings and Reviews</string>
   
+  <string name="ratingsAndReviews">Ratings and Reviews</string>
+  <string name="personUser">Person</string>
+  
+  
+    <!-- STRINGS FOR USER PROFILE FEEDBACK FRAGMENT -->
+   <string name="dateOfFeedback">Date of feedback</string>
+  <string name=" p_erson">Person</string>
+ <string name="user_review">Review</string>
 
-  <string-array name="numbers_array">
-    <item>"1"</item>
-    <item>"2"</item>
-    <item>"3"</item>
-    <item>"4"</item>
-    <item>"5"</item>
-    <item>"6"</item>
-  </string-array>
+  <!-- STRINGS FOR DRIVER REVIEW -->
+   <string name="leaveReviewForUser">Leave a review for this user:</string>
+  <string name="reviewSubmit">Submit</string>
+  
+   <!-- STRINGS FOR USER PROFILE FRAGMENT  --> 
+  <string name="viewUserProfile">View Profile</string>
+  <string name ="reviewUser">Review</string>
+  
+  
+  
+  <string name="feedbackPopup">Click for Feedback popup!</string>
+
+ 
+  
+ 
+   
+
+
 </resources>
