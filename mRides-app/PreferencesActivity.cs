@@ -110,11 +110,13 @@ namespace mRides_app
                 long facebookID = Convert.ToInt64(Intent.GetStringExtra(Constants.IntentExtraNames.UserFacebookId));
                 string facebookFirstName = Intent.GetStringExtra(Constants.IntentExtraNames.UserFacebookFirstName);
                 string facebookLastName = Intent.GetStringExtra(Constants.IntentExtraNames.UserFacebookLastName);
+                string facebookPicture = Intent.GetStringExtra(Constants.IntentExtraNames.UserFacebookPictureUrl);
                 User newUser = new User
                 {
                     facebookID = facebookID,
                     firstName = facebookFirstName,
                     lastName = facebookLastName,
+                    facebookPictureUrl = facebookPicture,
                     isSmoker = smoker,
                     hasLuggage = luggage,
                     isHandicap = handicap,

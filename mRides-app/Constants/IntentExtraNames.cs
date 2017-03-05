@@ -10,6 +10,7 @@ namespace mRides_app.Constants
         public static string UserFacebookId { get { return "UserId"; } }
         public static string UserFacebookFirstName { get { return "UserFacebookFirstName"; } }
         public static string UserFacebookLastName { get { return "UserFacebookLastName"; } }
+        public static string UserFacebookPictureUrl { get { return "UserFacebookPictureUrl"; } }
         public static string PreviousActivity { get { return "PreviousActivity"; } }
     }
 }

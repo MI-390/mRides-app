@@ -21,6 +21,7 @@ namespace mRides_app.Models
         public long facebookID { get; set; }
         public string lastName { get; set; }
         public string firstName { get; set; }
+        public string facebookPictureUrl { get; set; }
         public string prefferedLanguage { get; set; }
         public bool isSmoker { get; set; }
         public bool isHandicap { get; set; }
