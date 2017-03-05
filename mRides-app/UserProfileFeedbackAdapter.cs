@@ -33,12 +33,6 @@ namespace mRides_app
         public UserProfileFeedbackAdapter(Activity activity)
         {
             context = activity;
-            FillFeedbacks();
-        }
-
-        void FillFeedbacks()
-        {
-
         }
 
         public override int Count
