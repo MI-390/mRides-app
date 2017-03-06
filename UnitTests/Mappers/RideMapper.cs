@@ -35,7 +35,7 @@ namespace UnitTests.Mappers
         /// <summary>
         /// Used to obtain the instance of this class, since it is a singleton.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Instance of the ride mapper</returns>
         public static RideMapper getInstance()
         {
             if (_instance == null)
@@ -49,21 +49,24 @@ namespace UnitTests.Mappers
         /// Method is used to create ride, mainly to setup the preconditions of the unit tests.
         /// </summary>
         /// <param name="ride">Ride object to be created on the server side</param>
+        /// <returns>The newly created Ride</returns>
+        public Ride CreateRide(Ride ride)
         {
+            return SendPost<Ride>(ApiEndPointUrl.createRide, ride, true);
         }
 
         /// <summary>
-        /// Method is used to add a rider to a ride, mainly to setup the preconditions of the unit tests.
+        /// Method is used to add a rider (currrent user) to a ride, mainly to setup the preconditions of the unit tests.
         /// </summary>
         /// <param name="rideId">ID of the ride to which a rider will be added</param>
-        /// <param name="userid">ID of the user to be added to the ride</param>
+        /// <returns>The ride to which the rider has been added</returns>
+        public Ride AddRiderToRide(int rideid)
         {
             object request = new
             {
-                rideid = rideid,
-                userid = userid
+                rideId = rideid
             };
-            SendPost<object>(ApiEndPointUrl.addRiderToRide, request, true);
+            return SendPost<Ride>(ApiEndPointUrl.addRiderToRide, request, true);
         }
 
         /// <summary>
@@ -71,6 +74,7 @@ namespace UnitTests.Mappers
         /// </summary>
         /// <param name="rideId">ID of the ride to be obtained</param>
         /// <returns>Ride associated with the given ID</returns>
+        public Ride GetRide(int rideId)
         {
             return SendGetWithUrlSegment<Ride>(ApiEndPointUrl.getRide, "id", rideId.ToString());
         }
