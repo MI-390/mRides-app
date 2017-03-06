@@ -132,7 +132,7 @@ namespace UnitTests
             rider = userMapper.CreateUser(rider);
 
             // Create a ride
-            User.currentUser = rider;
+            User.currentUser = driver;
             RideMapper rideMapper = RideMapper.getInstance();
             Ride ride = new Ride
             {
@@ -145,10 +145,11 @@ namespace UnitTests
                 type = "driver"
             };
             ride = rideMapper.CreateRide(ride);
-            ride = rideMapper.AddRiderToRide(ride.ID);
+            ride = rideMapper.AddRiderToRide(ride.ID, rider.id);
 
 
             // Test the leave review by the driver
+            User.currentUser = driver;
             userMapper.LeaveReview(ride.ID, rider.id, 4, "Review from driver " + driver.id);
             List<Feedback> riderReviews = userMapper.GetReviews(rider.id);
             bool successDriverToRiderFeedback = false;
