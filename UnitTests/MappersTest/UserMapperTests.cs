@@ -145,7 +145,10 @@ namespace UnitTests
                 type = "driver"
             };
             ride = rideMapper.CreateRide(ride);
-            ride = rideMapper.AddRiderToRide(ride.ID, rider.id);
+
+            // Add the rider to the ride
+            User.currentUser = rider;
+            ride = rideMapper.AddRiderToRide(ride.ID);
 
 
             // Test the leave review by the driver
