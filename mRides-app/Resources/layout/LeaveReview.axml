@@ -6,29 +6,30 @@
     android:minWidth="25px"
     android:minHeight="25px">
     <TextView
-        android:text="Leave a review for this user:"
+        android:text="@string/leaveReviewForUser"
         android:textSize="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/riderReviewText"
+        android:id="@+id/reviewText1"
         android:padding="10dp" />
     <RatingBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/ratingBarRider"
+        android:id="@+id/reviewRatingBar1"
         android:numStars="5"
-        android:stepSize="0.1"
+        android:stepSize="1"
+        android:clickable="true"
         android:progressTint="#00ff00"
         android:layout_gravity="center" />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:id="@+id/riderReviewEdit"
+        android:id="@+id/reviewEdit1"
         android:textColor="#ffffff" />
     <Button
-        android:text="Submit"
+        android:text="@string/reviewSubmit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/submitFeedback2" />
+        android:id="@+id/submitFeedback1" />
 </LinearLayout>
