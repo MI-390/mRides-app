@@ -130,8 +130,6 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="UserProfileActivity.cs" />
     <Compile Include="Feedback\FeedbackTest.cs" />
-    <Compile Include="Feedback\DriverReview.cs" />
-    <Compile Include="Feedback\RiderReview.cs" />
     <Compile Include="TestFragments.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -154,8 +152,7 @@
     <AndroidResource Include="Resources\layout\Preferences.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\DriverReview.axml" />
-    <AndroidResource Include="Resources\layout\RiderReview.axml" />
+    <AndroidResource Include="Resources\layout\LeaveReview.axml" />
     <AndroidResource Include="Resources\layout\UserProfileFragment.axml">
       <SubType>Designer</SubType>
     </AndroidResource>

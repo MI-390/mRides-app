@@ -37,8 +37,8 @@ namespace mRides_app
             f2.Click += (sender, args) =>
             {
                 FragmentTransaction transaction = FragmentManager.BeginTransaction();
-                DriverReview dialog = new DriverReview();
-                dialog.Show(transaction, "Driver Review Fragment");
+                LeaveReviewFragment dialog = new LeaveReviewFragment();
+                dialog.Show(transaction, "Review Fragment");
             };
 
             f3.Click += (sender, args) =>
