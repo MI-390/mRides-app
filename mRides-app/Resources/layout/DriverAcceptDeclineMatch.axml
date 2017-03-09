@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@drawable/background_mrides">
+    <TextView
+        android:text="@string/going_to_destination"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="98.0dp"
+        android:gravity="center"
+        android:textAllCaps="true"
+        android:id="@+id/textViewGoingToDestination"
+        android:paddingTop="30dp"
+        android:layout_marginBottom="94.5dp" />
+    <TableLayout
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/tableLayout1">
+        <TableRow
+            android:id="@+id/tableRowHandicap"
+            android:gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+            <TextView
+                android:layout_column="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="2017/01/06"
+                android:id="@+id/radioButtonPet"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_column="2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Pref_NoPet"
+                android:id="@+id/radioButtonNoPet"
+                android:textStyle="bold" />
+        </TableRow>
+        <TableRow
+            android:id="@+id/tableRowGender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal">
+            <TextView
+                android:layout_column="1"
+                android:text="Destination"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/textViewGenderPref"
+                android:layout_marginTop="20.0dp"
+                android:textStyle="bold"
+                android:textColor="#ffffff" />
+            <TextView
+                android:layout_column="2"
+                android:text="Destination"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinnerGender"
+                android:layout_marginTop="20.5dp" />
+        </TableRow>
+    </TableLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:layout_weight="1">
+        <Button
+            android:text="@string/driverMatchAccept"
+            android:layout_width="87.5dp"
+            android:layout_height="37.0dp"
+            android:id="@+id/driverMatchButtonAccept"
+            android:background="#92d36e"
+            android:layout_marginLeft="93.0dp"
+            android:layout_marginBottom="5.5dp" />
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+        <Button
+            android:text="@string/driverMatchDecline"
+            android:layout_width="87.5dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/driverMatchButtonDecline"
+            android:backgroundTint="#92d36e"
+            android:layout_marginRight="93.0dp"
+            android:layout_marginBottom="4.0dp"
+            android:layout_marginLeft="0dp" />
+    </LinearLayout>
+</LinearLayout>

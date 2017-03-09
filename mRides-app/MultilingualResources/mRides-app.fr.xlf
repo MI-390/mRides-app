@@ -198,10 +198,6 @@
           <source>Date of feedback</source>
           <target state="translated" state-qualifier="mt-suggestion">Date de retour</target>
         </trans-unit>
-        <trans-unit id=" p_erson" translate="yes" xml:space="preserve">
-          <source>Person</source>
-          <target state="translated" state-qualifier="tm-suggestion">Personne</target>
-        </trans-unit>
         <trans-unit id="user_review" translate="yes" xml:space="preserve">
           <source>Review</source>
           <target state="translated" state-qualifier="tm-suggestion">Révision</target>
@@ -217,6 +213,22 @@
         <trans-unit id="feedbackPopup" translate="yes" xml:space="preserve">
           <source>Click for Feedback popup!</source>
           <target state="new">Click for Feedback popup!</target>
+        </trans-unit>
+        <trans-unit id="driverMatchAccept" translate="yes" xml:space="preserve">
+          <source>Accept</source>
+          <target state="new">Accept</target>
+        </trans-unit>
+        <trans-unit id="driverMatchDecline" translate="yes" xml:space="preserve">
+          <source>Decline</source>
+          <target state="new">Decline</target>
+        </trans-unit>
+        <trans-unit id="p_erson" translate="yes" xml:space="preserve">
+          <source>Person</source>
+          <target state="new">Person</target>
+        </trans-unit>
+        <trans-unit id="going_to_destination" translate="yes" xml:space="preserve">
+          <source>GOINT TO</source>
+          <target state="new">GOINT TO</target>
         </trans-unit>
       </group>
     </body>

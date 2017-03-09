@@ -75,7 +75,7 @@
   
     <!-- STRINGS FOR USER PROFILE FEEDBACK FRAGMENT -->
    <string name="dateOfFeedback">Date of feedback</string>
-  <string name=" p_erson">Person</string>
+  <string name="p_erson">Person</string>
  <string name="user_review">Review</string>
 
   <!-- STRINGS FOR DRIVER REVIEW -->
@@ -90,7 +90,12 @@
   
   <string name="feedbackPopup">Click for Feedback popup!</string>
 
- 
+
+  <!-- STRINGS FOR DRIVER ACCEPT/DECLINE MATCH -->
+
+  <string name="driverMatchAccept">Accept</string>
+  <string name="driverMatchDecline">Decline</string>
+  <string name="going_to_destination">GOINT TO</string>
   
  
    

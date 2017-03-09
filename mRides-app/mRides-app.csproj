@@ -122,6 +122,7 @@
     <Compile Include="Mappers\RequestMapper.cs" />
     <Compile Include="Mappers\UserMapper.cs" />
     <Compile Include="PreferencesActivity.cs" />
+    <Compile Include="Resources\DriverAcceptDeclineMatchActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserProfileFeedbackAdapter.cs" />
@@ -164,6 +165,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\TestFragments.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\DriverAcceptDeclineMatch.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
