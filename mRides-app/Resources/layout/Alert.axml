@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <Button
-        android:text="Click for Feedback popup!"
+        android:text="@string/feedbackPopup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/openFeedbackAlert" />

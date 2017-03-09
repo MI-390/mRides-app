@@ -70,8 +70,9 @@ namespace mRides_app
             SetContentView(Resource.Layout.Destination);
 
             string text = mRides_app.Models.User.currentUser.firstName;
-            string str1 = GetString(Resource.String.hello_map);
-            Toast.MakeText(ApplicationContext, str1 + " " + text, ToastLength.Long).Show();
+
+            string helloMap = GetString(Resource.String.hello_map);
+            Toast.MakeText(ApplicationContext, helloMap + " " + text, ToastLength.Long).Show();
 
             // Retrieve the PlaceAutocompleteFragment.
             PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)FragmentManager.FindFragmentById(Resource.Id.place_autocomplete_fragment);
@@ -389,8 +390,8 @@ namespace mRides_app
         public void OnPlaceSelected(IPlace place)
         {
             destination = place.NameFormatted.ToString();
-            string str1 = GetString(Resource.String.dest);
-            Toast.MakeText(ApplicationContext, str1 + " : " + destination, ToastLength.Long).Show();
+            string usr_destination = GetString(Resource.String.dest);
+            Toast.MakeText(ApplicationContext, usr_destination + " : " + destination, ToastLength.Long).Show();
 
            
         
@@ -421,9 +422,9 @@ namespace mRides_app
         {
             userType = type;
             numberOfPeople = number;
-            string str2 = GetString(Resource.String.user_type);
-            string str3 = GetString(Resource.String.number_of_people);
-            Toast.MakeText(ApplicationContext, str2 + " : " + userType + " " + str3 + " : " + numberOfPeople, ToastLength.Long).Show();
+            string usrType = GetString(Resource.String.user_type);
+            string numOfPeople = GetString(Resource.String.number_of_people);
+            Toast.MakeText(ApplicationContext, usrType + " : " + userType + " " + numOfPeople + " : " + numberOfPeople, ToastLength.Long).Show();
         }
     }
 }
