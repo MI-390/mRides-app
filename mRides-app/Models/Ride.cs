@@ -26,7 +26,7 @@ namespace mRides_app.Models
         public User Driver { get; set; }
 
         //Many Riders through an association table
-        public ICollection<UserRides> UserRides { get; set; }
+        public List<UserRides> UserRides { get; set; }
 
     }
 }
