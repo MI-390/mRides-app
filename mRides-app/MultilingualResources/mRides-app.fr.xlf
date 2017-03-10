@@ -92,7 +92,7 @@
         </trans-unit>
         <trans-unit id="riderOrDriver" translate="yes" xml:space="preserve">
           <source>  Are you a Rider \nor Driver? </source>
-          <target state="translated" state-qualifier="mt-suggestion">  Vous êtes un Rider \nor Driver ? </target>
+          <target state="translated">  Vous êtes un Passager \nor Conducteur ? </target>
         </trans-unit>
         <trans-unit id="r" translate="yes" xml:space="preserve">
           <source>R</source>
@@ -176,7 +176,47 @@
         </trans-unit>
         <trans-unit id="user_rider" translate="yes" xml:space="preserve">
           <source>Rider</source>
-          <target state="translated" state-qualifier="mt-suggestion">Rider</target>
+          <target state="translated">Passager</target>
+        </trans-unit>
+        <trans-unit id="ratingsAndReviews" translate="yes" xml:space="preserve">
+          <source>Ratings and Reviews</source>
+          <target state="translated" state-qualifier="mt-suggestion">Notes et commentaires</target>
+        </trans-unit>
+        <trans-unit id="personUser" translate="yes" xml:space="preserve">
+          <source>Person</source>
+          <target state="translated" state-qualifier="tm-suggestion">Personne</target>
+        </trans-unit>
+        <trans-unit id="leaveReviewForUser" translate="yes" xml:space="preserve">
+          <source>Leave a review for this user:</source>
+          <target state="translated" state-qualifier="mt-suggestion">Laisser un commentaire pour cet utilisateur :</target>
+        </trans-unit>
+        <trans-unit id="reviewSubmit" translate="yes" xml:space="preserve">
+          <source>Submit</source>
+          <target state="translated" state-qualifier="tm-suggestion">Envoyer</target>
+        </trans-unit>
+        <trans-unit id="dateOfFeedback" translate="yes" xml:space="preserve">
+          <source>Date of feedback</source>
+          <target state="translated" state-qualifier="mt-suggestion">Date de retour</target>
+        </trans-unit>
+        <trans-unit id="user_review" translate="yes" xml:space="preserve">
+          <source>Review</source>
+          <target state="translated" state-qualifier="tm-suggestion">Révision</target>
+        </trans-unit>
+        <trans-unit id="viewUserProfile" translate="yes" xml:space="preserve">
+          <source>View Profile</source>
+          <target state="translated" state-qualifier="tm-suggestion">Afficher le profil</target>
+        </trans-unit>
+        <trans-unit id="reviewUser" translate="yes" xml:space="preserve">
+          <source>Review</source>
+          <target state="translated" state-qualifier="tm-suggestion">Révision</target>
+        </trans-unit>
+        <trans-unit id="feedbackPopup" translate="yes" xml:space="preserve">
+          <source>Click for Feedback popup!</source>
+          <target state="translated" state-qualifier="mt-suggestion">Cliquez pour popup Feedback !</target>
+        </trans-unit>
+        <trans-unit id="p_erson" translate="yes" xml:space="preserve">
+          <source>Person</source>
+          <target state="new">Person</target>
         </trans-unit>
       </group>
     </body>
