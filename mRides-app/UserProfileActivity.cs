@@ -37,8 +37,7 @@ namespace mRides_app
             usernameText.Text = user.firstName.ToString() + " " + user.lastName.ToString();
             List<Models.Feedback> userFeedback = UserMapper.getInstance().GetReviews(id);
             
-            //var facebookPictureBitMap = GetImageBitmapFromUrl(user.facebookPictureUrl);
-            //TODO: use the real link once the server is updated to contain the user profile picture
+            // Obtain the user's profile picture from facebook
             UserMapper userMapper = UserMapper.getInstance();
             var facebookPictureBitMap = userMapper.GetUserFacebookProfilePicture(user.facebookID);
             if(facebookPictureBitMap != null)

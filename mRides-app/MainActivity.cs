@@ -82,7 +82,6 @@ namespace mRides_app
                     long facebookId = Convert.ToInt64(obj["id"]);
                     string facebookFirstName = obj["first_name"].ToString();
                     string facebookLastName = obj["last_name"].ToString();
-                    string facebookPicture = obj["picture"]["data"]["url"].ToString();
 
                     // Try to obtain the user
                     UserMapper userMapper = UserMapper.getInstance();
@@ -103,7 +102,6 @@ namespace mRides_app
                         preferencesActivity.PutExtra(Constants.IntentExtraNames.UserFacebookId, obj["id"].ToString());
                         preferencesActivity.PutExtra(Constants.IntentExtraNames.UserFacebookFirstName, facebookFirstName);
                         preferencesActivity.PutExtra(Constants.IntentExtraNames.UserFacebookLastName, facebookLastName);
-                        preferencesActivity.PutExtra(Constants.IntentExtraNames.UserFacebookPictureUrl, facebookPicture);
                         preferencesActivity.PutExtra(Constants.IntentExtraNames.PreviousActivity, Constants.ActivityNames.MainActivity);
                         StartActivity(preferencesActivity);
                    }
