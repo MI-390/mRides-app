@@ -28,6 +28,7 @@ using Newtonsoft.Json;
 using mRides_app.Models;
 using mRides_app.Mappers;
 
+
 namespace mRides_app
 {
     [Activity(Label = "MapActivity")]
@@ -105,30 +106,31 @@ namespace mRides_app
         //When the user clicks on a marker
         private void OnMarkerClick(object sender, Android.Gms.Maps.GoogleMap.MarkerClickEventArgs e)
         {
-            if (e.Marker.Equals(destinationMarker))
-            {
-                FragmentTransaction transaction = FragmentManager.BeginTransaction();
-                UserTypeFragment dialog = new UserTypeFragment();
-                dialog.Show(transaction, "User type fragment");
-                findUsers();
-            }
-            else
-            {
-                foreach (KeyValuePair<User, Marker> option in usersOnMap)
-                {
-                    if (e.Marker.Equals(option.Value))
-                    {
-                        Bundle args = new Bundle();
-                        args.PutString("name", e.Marker.Title);
-                        args.PutString("id", option.Key.id.ToString());
-                        FragmentTransaction transaction = FragmentManager.BeginTransaction();
-                        UserProfileFragment dialog = new UserProfileFragment();
-                        dialog.Arguments = args;
-                        dialog.Show(transaction, "User profile fragment");
-                        //e.Marker.ShowInfoWindow();
-                    }
-                }
-            }
+            //if (e.Marker.Equals(destinationMarker))
+            //{
+            //    FragmentTransaction transaction = FragmentManager.BeginTransaction();
+            //    UserTypeFragment dialog = new UserTypeFragment();
+            //    dialog.Show(transaction, "User type fragment");
+            //    findUsers();
+            //}
+            //else
+            //{
+            //    foreach (KeyValuePair<User, Marker> option in usersOnMap)
+            //    {
+            //        if (e.Marker.Equals(option.Value))
+            //        {
+            //            Bundle args = new Bundle();
+            //            args.PutString("name", e.Marker.Title);
+            //            args.PutString("id", option.Key.id.ToString());
+            //            FragmentTransaction transaction = FragmentManager.BeginTransaction();
+            //            UserProfileFragment dialog = new UserProfileFragment();
+            //            dialog.Arguments = args;
+            //            dialog.Show(transaction, "User profile fragment");
+            //            //e.Marker.ShowInfoWindow();
+            //        }
+            //    }
+            //}
+            enterDriverMode();
         }
 
         //When the user clicks on a polyline
@@ -322,6 +324,17 @@ namespace mRides_app
             }
         }
 
+        public void enterDriverMode()
+        {
+            if (destinationData != null)
+            {
+                Intent intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse("http://maps.google.com/maps?" + "saddr=" + destinationData.routes[0].legs[0].start_location.lat + "," +
+                    destinationData.routes[0].legs[0].start_location.lng + "&daddr=" + destinationData.routes[0].legs[0].end_location.lat + "," + destinationData.routes[0].legs[0].end_location.lng));
+                intent.SetClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+                StartActivity(intent);
+            }
+        }
+
         //Calculates distance between two degree coordinates using the Haversine formula
         //public double distanceBetweenTwoCoordinates(LatLng latlng1, LatLng latlng2)
         //{
@@ -391,9 +404,7 @@ namespace mRides_app
         {
             destination = place.NameFormatted.ToString();
             string usr_destination = GetString(Resource.String.dest);
-            Toast.MakeText(ApplicationContext, usr_destination + " : " + destination, ToastLength.Long).Show();
-
-           
+            Toast.MakeText(ApplicationContext, usr_destination + " : " + destination, ToastLength.Long).Show();         
         
             if (destinationMarker != null)
                 map.Clear();
