@@ -12,12 +12,19 @@ using Android.Widget;
 
 namespace mRides_app
 {
+    public interface IStartDrivingModeListener
+    {
+        void enterDriverMode(string id);
+    }
+
     class UserProfileFragment : DialogFragment
     {
 
         Button viewProfile;
         Button reviewButton;
+        Button pickUpButton;
         TextView username;
+        IStartDrivingModeListener listener;
         string userID;
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -31,14 +38,17 @@ namespace mRides_app
             userID = (args.GetString("id"));
             viewProfile = view.FindViewById<Button>(Resource.Id.viewProfileFragmentButton);
             reviewButton = view.FindViewById<Button>(Resource.Id.reviewFragmentButton);
+            pickUpButton = view.FindViewById<Button>(Resource.Id.pickUpButton);
             viewProfile.Click += ViewProfileButtonClicked;
             reviewButton.Click += ReviewButtonClicked;
+            pickUpButton.Click += PickUpButtonClicked;
             return view;
         }
 
         public override void OnAttach(Activity activity)
         {
             base.OnAttach(activity);
+            listener = (IStartDrivingModeListener)activity;
         }
 
         // Load a new activity and transfer the data to the new one
@@ -59,6 +69,12 @@ namespace mRides_app
             dialog.Arguments = args;
             FragmentTransaction transaction = FragmentManager.BeginTransaction();
             dialog.Show(transaction, "Leave review fragment");
+            Dismiss();
+        }
+
+        void PickUpButtonClicked(object sender, EventArgs e)
+        {
+            listener.enterDriverMode(userID);
             Dismiss();
         }
 

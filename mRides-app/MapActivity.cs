@@ -33,7 +33,8 @@ namespace mRides_app
 {
     [Activity(Label = "MapActivity")]
     public class MapActivity : Activity, IOnMapReadyCallback, Android.Gms.Location.ILocationListener,
-        GoogleApiClient.IConnectionCallbacks, GoogleApiClient.IOnConnectionFailedListener, IPlaceSelectionListener, IEditUserSelectionListener
+        GoogleApiClient.IConnectionCallbacks, GoogleApiClient.IOnConnectionFailedListener, IPlaceSelectionListener,
+        IEditUserSelectionListener, IStartDrivingModeListener
     {
         private const double MATCH_DISTANCE = 1.0;
         private Android.Gms.Maps.GoogleMap map;
@@ -48,6 +49,8 @@ namespace mRides_app
         private List<LatLng> directionList;
         private List<Request> requestList;
         private DestinationJSON destinationData;
+        private List<LatLng> wayPoints;
+        private Android.Gms.Maps.Model.Polyline polyline;
         const string googleApiKey = "AIzaSyAz9p6O99w8ZWkFUbaREJXmnj01Mpm19dA";
         string userType;
         int numberOfPeople;
@@ -92,7 +95,7 @@ namespace mRides_app
         {
             map = googleMap;
             map.MarkerClick += OnMarkerClick;
-           //map.PolylineClick += OnPolylineClick;
+            map.PolylineClick += OnPolylineClick;
             if (locationPermissionGranted)
             {
                 map.MyLocationEnabled = true;
@@ -106,44 +109,56 @@ namespace mRides_app
         //When the user clicks on a marker
         private void OnMarkerClick(object sender, Android.Gms.Maps.GoogleMap.MarkerClickEventArgs e)
         {
-            //if (e.Marker.Equals(destinationMarker))
-            //{
-            //    FragmentTransaction transaction = FragmentManager.BeginTransaction();
-            //    UserTypeFragment dialog = new UserTypeFragment();
-            //    dialog.Show(transaction, "User type fragment");
-            //    findUsers();
-            //}
-            //else
-            //{
-            //    foreach (KeyValuePair<User, Marker> option in usersOnMap)
-            //    {
-            //        if (e.Marker.Equals(option.Value))
-            //        {
-            //            Bundle args = new Bundle();
-            //            args.PutString("name", e.Marker.Title);
-            //            args.PutString("id", option.Key.id.ToString());
-            //            FragmentTransaction transaction = FragmentManager.BeginTransaction();
-            //            UserProfileFragment dialog = new UserProfileFragment();
-            //            dialog.Arguments = args;
-            //            dialog.Show(transaction, "User profile fragment");
-            //            //e.Marker.ShowInfoWindow();
-            //        }
-            //    }
-            //}
-            enterDriverMode();
+            if (e.Marker.Equals(destinationMarker))
+            {
+                FragmentTransaction transaction = FragmentManager.BeginTransaction();
+                UserTypeFragment dialog = new UserTypeFragment();
+                dialog.Show(transaction, "User type fragment");
+                findUsers();
+            }
+            else
+            {
+                foreach (KeyValuePair<User, Marker> option in usersOnMap)
+                {
+                    if (e.Marker.Equals(option.Value))
+                    {
+                        Bundle args = new Bundle();
+                        args.PutString("name", e.Marker.Title);
+                        args.PutString("id", option.Key.id.ToString());
+                        FragmentTransaction transaction = FragmentManager.BeginTransaction();
+                        UserProfileFragment dialog = new UserProfileFragment();
+                        dialog.Arguments = args;
+                        dialog.Show(transaction, "User profile fragment");
+                        //e.Marker.ShowInfoWindow();
+                    }
+                }
+            }
+            // enterDriverMode();
         }
 
         //When the user clicks on a polyline
-        //private void OnPolylineClick(object sender, Android.Gms.Maps.GoogleMap.PolylineClickEventArgs e)
-        //{
-        //    findUsers();
-        //    if (usersOnMap != null)
-        //    {
-        //        foreach (KeyValuePair<User, MarkerOptions> option in usersOnMap)
-        //            map.AddMarker(option.Value);
-                
-        //    }
-        //}
+        private void OnPolylineClick(object sender, Android.Gms.Maps.GoogleMap.PolylineClickEventArgs e)
+        {
+            if (usersOnMap != null)
+            {
+                string waypointString = "&waypoints=optimize:true";
+                foreach (KeyValuePair<User, Marker> option in usersOnMap)
+                {
+                    waypointString += "|" + option.Value.Position.Latitude + "," + option.Value.Position.Longitude;
+                }
+
+                string pathURL = ("https://maps.googleapis.com/maps/api/directions/json?" +
+                "origin=" + lastUserLocation.Latitude + "," + lastUserLocation.Longitude +
+                "&destination=" + destinationData.routes[0].legs[destinationData.routes[0].legs.Count - 1].end_location.lat + "," + destinationData.routes[0].legs[destinationData.routes[0].legs.Count - 1].end_location.lng +
+                waypointString +
+                "&key=" + googleApiKey);
+
+                setDestinationData(pathURL);
+
+                //To add waypoints to the path
+                /**&waypoints=optimize:true|via:-37.81223%2C144.96254%7Cvia:-34.92788%2C138.60008 */
+            }
+        }
 
         private void OnMyLocationButtonClick(object sender, Android.Gms.Maps.GoogleMap.MyLocationButtonClickEventArgs e)
         {
@@ -259,7 +274,9 @@ namespace mRides_app
                 polylineOptions.Add(start, destination);
             }
 
-            Android.Gms.Maps.Model.Polyline polyline = map.AddPolyline(polylineOptions);
+            if (polyline != null)
+                polyline.Remove();
+            polyline = map.AddPolyline(polylineOptions);
         }
 
         // Decodes an encoded polyline path string into a list of LatLngs. This code is from the com.google.maps.android:android-maps-utils library
@@ -324,12 +341,22 @@ namespace mRides_app
             }
         }
 
-        public void enterDriverMode()
+
+        //Used to start Google Maps Navigation to have real-time navigation system to pick up the selected user
+        public void enterDriverMode(string id)
         {
-            if (destinationData != null)
+            int userID = Int32.Parse(id);
+            LatLng pickUpLocation = null;
+            foreach (KeyValuePair<User, Marker> option in usersOnMap)
             {
-                Intent intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse("http://maps.google.com/maps?" + "saddr=" + destinationData.routes[0].legs[0].start_location.lat + "," +
-                    destinationData.routes[0].legs[0].start_location.lng + "&daddr=" + destinationData.routes[0].legs[0].end_location.lat + "," + destinationData.routes[0].legs[0].end_location.lng));
+                if (option.Key.id == userID)
+                    pickUpLocation = option.Value.Position;
+            }
+
+            if (destinationData != null && pickUpLocation != null)
+            {
+                Intent intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse("http://maps.google.com/maps?" + "saddr=" + lastUserLocation.Latitude + "," +
+                    lastUserLocation.Longitude + "&daddr=" + pickUpLocation.Latitude + "," + pickUpLocation.Longitude));
                 intent.SetClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
                 StartActivity(intent);
             }
