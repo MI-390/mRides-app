@@ -333,158 +333,179 @@ namespace mRides_app
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f040001
-			public const int ApplicationName = 2130968577;
-			
-			// aapt resource value: 0x7f040011
-			public const int ExtraData_DataNotAvailable = 2130968593;
-			
-			// aapt resource value: 0x7f040000
-			public const int Hello = 2130968576;
-			
-			// aapt resource value: 0x7f04000f
-			public const int Pref_Back = 2130968591;
-			
-			// aapt resource value: 0x7f040010
-			public const int Pref_Done = 2130968592;
-			
-			// aapt resource value: 0x7f040007
-			public const int Pref_Female = 2130968583;
-			
-			// aapt resource value: 0x7f04000a
-			public const int Pref_Handicap = 2130968586;
-			
-			// aapt resource value: 0x7f040002
-			public const int Pref_Hi = 2130968578;
-			
 			// aapt resource value: 0x7f040008
-			public const int Pref_Luggage = 2130968584;
-			
-			// aapt resource value: 0x7f040006
-			public const int Pref_Male = 2130968582;
-			
-			// aapt resource value: 0x7f04000b
-			public const int Pref_NoHandicap = 2130968587;
-			
-			// aapt resource value: 0x7f040009
-			public const int Pref_NoLuggage = 2130968585;
-			
-			// aapt resource value: 0x7f04000d
-			public const int Pref_NoPet = 2130968589;
-			
-			// aapt resource value: 0x7f040005
-			public const int Pref_NonSmoker = 2130968581;
-			
-			// aapt resource value: 0x7f04000c
-			public const int Pref_Pet = 2130968588;
-			
-			// aapt resource value: 0x7f04000e
-			public const int Pref_Prompt_Gender = 2130968590;
-			
-			// aapt resource value: 0x7f040003
-			public const int Pref_SetYourPreferences = 2130968579;
-			
-			// aapt resource value: 0x7f040004
-			public const int Pref_Smoker = 2130968580;
-			
-			// aapt resource value: 0x7f040017
-			public const int d = 2130968599;
-			
-			// aapt resource value: 0x7f04002b
-			public const int dateOfFeedback = 2130968619;
-			
-			// aapt resource value: 0x7f04001d
-			public const int dest = 2130968605;
-			
-			// aapt resource value: 0x7f040014
-			public const int fb = 2130968596;
-			
-			// aapt resource value: 0x7f040013
-			public const int fblogin = 2130968595;
-			
-			// aapt resource value: 0x7f040032
-			public const int feedbackPopup = 2130968626;
-			
-			// aapt resource value: 0x7f040026
-			public const int gender = 2130968614;
-			
-			// aapt resource value: 0x7f040024
-			public const int handicap = 2130968612;
-			
-			// aapt resource value: 0x7f04001c
-			public const int hello_map = 2130968604;
-			
-			// aapt resource value: 0x7f04002e
-			public const int leaveReviewForUser = 2130968622;
-			
-			// aapt resource value: 0x7f040023
-			public const int luggage = 2130968611;
-			
-			// aapt resource value: 0x7f04001b
-			public const int next = 2130968603;
-			
-			// aapt resource value: 0x7f040019
-			public const int numberOfRiders = 2130968601;
-			
-			// aapt resource value: 0x7f040021
-			public const int number_of_people = 2130968609;
-			
-			// aapt resource value: 0x7f04002c
-			public const int p_erson = 2130968620;
-			
-			// aapt resource value: 0x7f04002a
-			public const int personUser = 2130968618;
-			
-			// aapt resource value: 0x7f040027
-			public const int person_profile = 2130968615;
-			
-			// aapt resource value: 0x7f040025
-			public const int pet = 2130968613;
-			
-			// aapt resource value: 0x7f04001a
-			public const int previous = 2130968602;
-			
-			// aapt resource value: 0x7f040016
-			public const int r = 2130968598;
-			
-			// aapt resource value: 0x7f040029
-			public const int ratingsAndReviews = 2130968617;
-			
-			// aapt resource value: 0x7f040028
-			public const int ratings_reviews = 2130968616;
-			
-			// aapt resource value: 0x7f04002f
-			public const int reviewSubmit = 2130968623;
-			
-			// aapt resource value: 0x7f040031
-			public const int reviewUser = 2130968625;
-			
-			// aapt resource value: 0x7f040015
-			public const int riderOrDriver = 2130968597;
+			public const int ApplicationName = 2130968584;
 			
 			// aapt resource value: 0x7f040018
-			public const int seatsAvailable = 2130968600;
+			public const int ExtraData_DataNotAvailable = 2130968600;
+			
+			// aapt resource value: 0x7f040007
+			public const int Hello = 2130968583;
+			
+			// aapt resource value: 0x7f040016
+			public const int Pref_Back = 2130968598;
+			
+			// aapt resource value: 0x7f040017
+			public const int Pref_Done = 2130968599;
+			
+			// aapt resource value: 0x7f04000e
+			public const int Pref_Female = 2130968590;
+			
+			// aapt resource value: 0x7f040011
+			public const int Pref_Handicap = 2130968593;
+			
+			// aapt resource value: 0x7f040009
+			public const int Pref_Hi = 2130968585;
+			
+			// aapt resource value: 0x7f04000f
+			public const int Pref_Luggage = 2130968591;
+			
+			// aapt resource value: 0x7f04000d
+			public const int Pref_Male = 2130968589;
 			
 			// aapt resource value: 0x7f040012
-			public const int slogan = 2130968594;
+			public const int Pref_NoHandicap = 2130968594;
 			
-			// aapt resource value: 0x7f040022
-			public const int smoker = 2130968610;
+			// aapt resource value: 0x7f040010
+			public const int Pref_NoLuggage = 2130968592;
+			
+			// aapt resource value: 0x7f040014
+			public const int Pref_NoPet = 2130968596;
+			
+			// aapt resource value: 0x7f04000c
+			public const int Pref_NonSmoker = 2130968588;
+			
+			// aapt resource value: 0x7f040013
+			public const int Pref_Pet = 2130968595;
+			
+			// aapt resource value: 0x7f040015
+			public const int Pref_Prompt_Gender = 2130968597;
+			
+			// aapt resource value: 0x7f04000a
+			public const int Pref_SetYourPreferences = 2130968586;
+			
+			// aapt resource value: 0x7f04000b
+			public const int Pref_Smoker = 2130968587;
 			
 			// aapt resource value: 0x7f04001e
-			public const int user_driver = 2130968606;
+			public const int d = 2130968606;
+			
+			// aapt resource value: 0x7f040032
+			public const int dateOfFeedback = 2130968626;
+			
+			// aapt resource value: 0x7f040002
+			public const int default_web_client_id = 2130968578;
+			
+			// aapt resource value: 0x7f040024
+			public const int dest = 2130968612;
+			
+			// aapt resource value: 0x7f04001b
+			public const int fb = 2130968603;
+			
+			// aapt resource value: 0x7f04001a
+			public const int fblogin = 2130968602;
+			
+			// aapt resource value: 0x7f040039
+			public const int feedbackPopup = 2130968633;
+			
+			// aapt resource value: 0x7f040003
+			public const int firebase_database_url = 2130968579;
+			
+			// aapt resource value: 0x7f040000
+			public const int gcm_defaultSenderId = 2130968576;
 			
 			// aapt resource value: 0x7f04002d
-			public const int user_review = 2130968621;
+			public const int gender = 2130968621;
 			
-			// aapt resource value: 0x7f04001f
-			public const int user_rider = 2130968607;
+			// aapt resource value: 0x7f040004
+			public const int google_api_key = 2130968580;
+			
+			// aapt resource value: 0x7f040001
+			public const int google_app_id = 2130968577;
+			
+			// aapt resource value: 0x7f040005
+			public const int google_crash_reporting_api_key = 2130968581;
+			
+			// aapt resource value: 0x7f040006
+			public const int google_storage_bucket = 2130968582;
+			
+			// aapt resource value: 0x7f04002b
+			public const int handicap = 2130968619;
+			
+			// aapt resource value: 0x7f040023
+			public const int hello_map = 2130968611;
+			
+			// aapt resource value: 0x7f040035
+			public const int leaveReviewForUser = 2130968629;
+			
+			// aapt resource value: 0x7f04002a
+			public const int luggage = 2130968618;
+			
+			// aapt resource value: 0x7f040022
+			public const int next = 2130968610;
 			
 			// aapt resource value: 0x7f040020
-			public const int user_type = 2130968608;
+			public const int numberOfRiders = 2130968608;
+			
+			// aapt resource value: 0x7f040028
+			public const int number_of_people = 2130968616;
+			
+			// aapt resource value: 0x7f040033
+			public const int p_erson = 2130968627;
+			
+			// aapt resource value: 0x7f040031
+			public const int personUser = 2130968625;
+			
+			// aapt resource value: 0x7f04002e
+			public const int person_profile = 2130968622;
+			
+			// aapt resource value: 0x7f04002c
+			public const int pet = 2130968620;
+			
+			// aapt resource value: 0x7f040021
+			public const int previous = 2130968609;
+			
+			// aapt resource value: 0x7f04001d
+			public const int r = 2130968605;
 			
 			// aapt resource value: 0x7f040030
-			public const int viewUserProfile = 2130968624;
+			public const int ratingsAndReviews = 2130968624;
+			
+			// aapt resource value: 0x7f04002f
+			public const int ratings_reviews = 2130968623;
+			
+			// aapt resource value: 0x7f040036
+			public const int reviewSubmit = 2130968630;
+			
+			// aapt resource value: 0x7f040038
+			public const int reviewUser = 2130968632;
+			
+			// aapt resource value: 0x7f04001c
+			public const int riderOrDriver = 2130968604;
+			
+			// aapt resource value: 0x7f04001f
+			public const int seatsAvailable = 2130968607;
+			
+			// aapt resource value: 0x7f040019
+			public const int slogan = 2130968601;
+			
+			// aapt resource value: 0x7f040029
+			public const int smoker = 2130968617;
+			
+			// aapt resource value: 0x7f040025
+			public const int user_driver = 2130968613;
+			
+			// aapt resource value: 0x7f040034
+			public const int user_review = 2130968628;
+			
+			// aapt resource value: 0x7f040026
+			public const int user_rider = 2130968614;
+			
+			// aapt resource value: 0x7f040027
+			public const int user_type = 2130968615;
+			
+			// aapt resource value: 0x7f040037
+			public const int viewUserProfile = 2130968631;
 			
 			static String()
 			{
