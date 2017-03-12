@@ -20,12 +20,29 @@ namespace mRides_app
     public class MessagingActivity : Activity
     {
         TextView msgText;
+        const string TAG = "MessagingActivity";
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Messaging);
             msgText = FindViewById<TextView>(Resource.Id.msgText1);
+            // When the user taps a notification issued from FCMClient, any data accompanying that notification message is made available in Intent extras.
+            if (Intent.Extras != null)
+            {
+                foreach (var key in Intent.Extras.KeySet())
+                {
+                    var value = Intent.Extras.GetString(key);
+                    Log.Debug(TAG, "Key: {0} Value: {1}", key, value);
+                }
+            }
+
             IsPlayServicesAvailable();
+
+            // Logs the current token to the output window when the Log Token button is clicked
+            var logTokenButton = FindViewById<Button>(Resource.Id.logTokenButton);
+            logTokenButton.Click += delegate {
+                Log.Debug(TAG, "InstanceID token: " + FirebaseInstanceId.Instance.Token);
+            };
         }
 
         public bool IsPlayServicesAvailable()
