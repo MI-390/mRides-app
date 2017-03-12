@@ -31,11 +31,11 @@ namespace mRides_app
 		public partial class Array
 		{
 			
-			// aapt resource value: 0x7f070000
-			public const int Pref_Gender = 2131165184;
+			// aapt resource value: 0x7f080000
+			public const int Pref_Gender = 2131230720;
 			
-			// aapt resource value: 0x7f070001
-			public const int numbers_array = 2131165185;
+			// aapt resource value: 0x7f080001
+			public const int numbers_array = 2131230721;
 			
 			static Array()
 			{
@@ -150,35 +150,53 @@ namespace mRides_app
 		public partial class Color
 		{
 			
-			// aapt resource value: 0x7f060008
-			public const int common_google_signin_btn_text_dark = 2131099656;
+			// aapt resource value: 0x7f04000e
+			public const int common_google_signin_btn_text_dark = 2130968590;
 			
-			// aapt resource value: 0x7f060000
-			public const int common_google_signin_btn_text_dark_default = 2131099648;
+			// aapt resource value: 0x7f040006
+			public const int common_google_signin_btn_text_dark_default = 2130968582;
 			
-			// aapt resource value: 0x7f060001
-			public const int common_google_signin_btn_text_dark_disabled = 2131099649;
+			// aapt resource value: 0x7f040007
+			public const int common_google_signin_btn_text_dark_disabled = 2130968583;
 			
-			// aapt resource value: 0x7f060002
-			public const int common_google_signin_btn_text_dark_focused = 2131099650;
+			// aapt resource value: 0x7f040008
+			public const int common_google_signin_btn_text_dark_focused = 2130968584;
 			
-			// aapt resource value: 0x7f060003
-			public const int common_google_signin_btn_text_dark_pressed = 2131099651;
+			// aapt resource value: 0x7f040009
+			public const int common_google_signin_btn_text_dark_pressed = 2130968585;
 			
-			// aapt resource value: 0x7f060009
-			public const int common_google_signin_btn_text_light = 2131099657;
+			// aapt resource value: 0x7f04000f
+			public const int common_google_signin_btn_text_light = 2130968591;
 			
-			// aapt resource value: 0x7f060004
-			public const int common_google_signin_btn_text_light_default = 2131099652;
+			// aapt resource value: 0x7f04000a
+			public const int common_google_signin_btn_text_light_default = 2130968586;
 			
-			// aapt resource value: 0x7f060005
-			public const int common_google_signin_btn_text_light_disabled = 2131099653;
+			// aapt resource value: 0x7f04000b
+			public const int common_google_signin_btn_text_light_disabled = 2130968587;
 			
-			// aapt resource value: 0x7f060006
-			public const int common_google_signin_btn_text_light_focused = 2131099654;
+			// aapt resource value: 0x7f04000c
+			public const int common_google_signin_btn_text_light_focused = 2130968588;
 			
-			// aapt resource value: 0x7f060007
-			public const int common_google_signin_btn_text_light_pressed = 2131099655;
+			// aapt resource value: 0x7f04000d
+			public const int common_google_signin_btn_text_light_pressed = 2130968589;
+			
+			// aapt resource value: 0x7f040000
+			public const int place_autocomplete_prediction_primary_text = 2130968576;
+			
+			// aapt resource value: 0x7f040001
+			public const int place_autocomplete_prediction_primary_text_highlight = 2130968577;
+			
+			// aapt resource value: 0x7f040002
+			public const int place_autocomplete_prediction_secondary_text = 2130968578;
+			
+			// aapt resource value: 0x7f040003
+			public const int place_autocomplete_search_hint = 2130968579;
+			
+			// aapt resource value: 0x7f040004
+			public const int place_autocomplete_search_text = 2130968580;
+			
+			// aapt resource value: 0x7f040005
+			public const int place_autocomplete_separator = 2130968581;
 			
 			static Color()
 			{
@@ -186,6 +204,49 @@ namespace mRides_app
 			}
 			
 			private Color()
+			{
+			}
+		}
+		
+		public partial class Dimension
+		{
+			
+			// aapt resource value: 0x7f050000
+			public const int place_autocomplete_button_padding = 2131034112;
+			
+			// aapt resource value: 0x7f050001
+			public const int place_autocomplete_powered_by_google_height = 2131034113;
+			
+			// aapt resource value: 0x7f050002
+			public const int place_autocomplete_powered_by_google_start = 2131034114;
+			
+			// aapt resource value: 0x7f050003
+			public const int place_autocomplete_prediction_height = 2131034115;
+			
+			// aapt resource value: 0x7f050004
+			public const int place_autocomplete_prediction_horizontal_margin = 2131034116;
+			
+			// aapt resource value: 0x7f050005
+			public const int place_autocomplete_prediction_primary_text = 2131034117;
+			
+			// aapt resource value: 0x7f050006
+			public const int place_autocomplete_prediction_secondary_text = 2131034118;
+			
+			// aapt resource value: 0x7f050007
+			public const int place_autocomplete_progress_horizontal_margin = 2131034119;
+			
+			// aapt resource value: 0x7f050008
+			public const int place_autocomplete_progress_size = 2131034120;
+			
+			// aapt resource value: 0x7f050009
+			public const int place_autocomplete_separator_start = 2131034121;
+			
+			static Dimension()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Dimension()
 			{
 			}
 		}
@@ -275,7 +336,19 @@ namespace mRides_app
 			public const int mrides_logo = 2130837530;
 			
 			// aapt resource value: 0x7f02001b
-			public const int userIcon2 = 2130837531;
+			public const int places_ic_clear = 2130837531;
+			
+			// aapt resource value: 0x7f02001c
+			public const int places_ic_search = 2130837532;
+			
+			// aapt resource value: 0x7f02001d
+			public const int powered_by_google_dark = 2130837533;
+			
+			// aapt resource value: 0x7f02001e
+			public const int powered_by_google_light = 2130837534;
+			
+			// aapt resource value: 0x7f02001f
+			public const int userIcon2 = 2130837535;
 			
 			static Drawable()
 			{
@@ -290,221 +363,245 @@ namespace mRides_app
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f080046
-			public const int CloseButton = 2131230790;
+			// aapt resource value: 0x7f09004e
+			public const int CloseButton = 2131296334;
 			
-			// aapt resource value: 0x7f080047
-			public const int Next = 2131230791;
+			// aapt resource value: 0x7f09004f
+			public const int Next = 2131296335;
 			
-			// aapt resource value: 0x7f080005
-			public const int adjust_height = 2131230725;
+			// aapt resource value: 0x7f090005
+			public const int adjust_height = 2131296261;
 			
-			// aapt resource value: 0x7f080006
-			public const int adjust_width = 2131230726;
+			// aapt resource value: 0x7f090006
+			public const int adjust_width = 2131296262;
 			
-			// aapt resource value: 0x7f08000a
-			public const int auto = 2131230730;
+			// aapt resource value: 0x7f09000a
+			public const int auto = 2131296266;
 			
-			// aapt resource value: 0x7f08002c
-			public const int buttonBack = 2131230764;
+			// aapt resource value: 0x7f090034
+			public const int buttonBack = 2131296308;
 			
-			// aapt resource value: 0x7f08002d
-			public const int buttonDone = 2131230765;
+			// aapt resource value: 0x7f090035
+			public const int buttonDone = 2131296309;
 			
-			// aapt resource value: 0x7f08000b
-			public const int dark = 2131230731;
+			// aapt resource value: 0x7f09000b
+			public const int dark = 2131296267;
 			
-			// aapt resource value: 0x7f080036
-			public const int divider = 2131230774;
+			// aapt resource value: 0x7f09003e
+			public const int divider = 2131296318;
 			
-			// aapt resource value: 0x7f080044
-			public const int driver1 = 2131230788;
+			// aapt resource value: 0x7f09004c
+			public const int driver1 = 2131296332;
 			
-			// aapt resource value: 0x7f08003a
-			public const int feedbackDateProfileFragment = 2131230778;
+			// aapt resource value: 0x7f090042
+			public const int feedbackDateProfileFragment = 2131296322;
 			
-			// aapt resource value: 0x7f080038
-			public const int feedbackFragmentLinearLayout1 = 2131230776;
+			// aapt resource value: 0x7f090040
+			public const int feedbackFragmentLinearLayout1 = 2131296320;
 			
-			// aapt resource value: 0x7f08003c
-			public const int feedbackFragmentRatingBar = 2131230780;
+			// aapt resource value: 0x7f090044
+			public const int feedbackFragmentRatingBar = 2131296324;
 			
-			// aapt resource value: 0x7f08003d
-			public const int feedbackFragmentReview = 2131230781;
+			// aapt resource value: 0x7f090045
+			public const int feedbackFragmentReview = 2131296325;
 			
-			// aapt resource value: 0x7f08003b
-			public const int feedbackFragmentUserName = 2131230779;
+			// aapt resource value: 0x7f090043
+			public const int feedbackFragmentUserName = 2131296323;
 			
-			// aapt resource value: 0x7f080039
-			public const int feedbackPageDivider = 2131230777;
+			// aapt resource value: 0x7f090041
+			public const int feedbackPageDivider = 2131296321;
 			
-			// aapt resource value: 0x7f080034
-			public const int genderImage = 2131230772;
+			// aapt resource value: 0x7f09003c
+			public const int genderImage = 2131296316;
 			
-			// aapt resource value: 0x7f080000
-			public const int hybrid = 2131230720;
+			// aapt resource value: 0x7f090000
+			public const int hybrid = 2131296256;
 			
-			// aapt resource value: 0x7f080007
-			public const int icon_only = 2131230727;
+			// aapt resource value: 0x7f090007
+			public const int icon_only = 2131296263;
 			
-			// aapt resource value: 0x7f080016
-			public const int imageView2 = 2131230742;
+			// aapt resource value: 0x7f090016
+			public const int imageView2 = 2131296278;
 			
-			// aapt resource value: 0x7f08000c
-			public const int light = 2131230732;
+			// aapt resource value: 0x7f09000c
+			public const int light = 2131296268;
 			
-			// aapt resource value: 0x7f08000f
-			public const int linearLayout1 = 2131230735;
+			// aapt resource value: 0x7f09000f
+			public const int linearLayout1 = 2131296271;
 			
-			// aapt resource value: 0x7f08003e
-			public const int linearLayout2 = 2131230782;
+			// aapt resource value: 0x7f090046
+			public const int linearLayout2 = 2131296326;
 			
-			// aapt resource value: 0x7f080019
-			public const int loginButton = 2131230745;
+			// aapt resource value: 0x7f090019
+			public const int loginButton = 2131296281;
 			
-			// aapt resource value: 0x7f08000e
-			public const int map = 2131230734;
+			// aapt resource value: 0x7f09000e
+			public const int map = 2131296270;
 			
-			// aapt resource value: 0x7f08001a
-			public const int msgText1 = 2131230746;
+			// aapt resource value: 0x7f09001a
+			public const int msgText1 = 2131296282;
 			
-			// aapt resource value: 0x7f080001
-			public const int none = 2131230721;
+			// aapt resource value: 0x7f090001
+			public const int none = 2131296257;
 			
-			// aapt resource value: 0x7f080002
-			public const int normal = 2131230722;
+			// aapt resource value: 0x7f090002
+			public const int normal = 2131296258;
 			
-			// aapt resource value: 0x7f080045
-			public const int numOfPeople = 2131230789;
+			// aapt resource value: 0x7f09004d
+			public const int numOfPeople = 2131296333;
 			
-			// aapt resource value: 0x7f08000d
-			public const int openFeedbackAlert = 2131230733;
+			// aapt resource value: 0x7f09000d
+			public const int openFeedbackAlert = 2131296269;
 			
-			// aapt resource value: 0x7f080010
-			public const int place_autocomplete_fragment = 2131230736;
+			// aapt resource value: 0x7f09001d
+			public const int place_autocomplete_clear_button = 2131296285;
 			
-			// aapt resource value: 0x7f080025
-			public const int radioButtonHandicap = 2131230757;
+			// aapt resource value: 0x7f090010
+			public const int place_autocomplete_fragment = 2131296272;
 			
-			// aapt resource value: 0x7f080022
-			public const int radioButtonLuggage = 2131230754;
+			// aapt resource value: 0x7f09001f
+			public const int place_autocomplete_powered_by_google = 2131296287;
 			
-			// aapt resource value: 0x7f080026
-			public const int radioButtonNoHandicap = 2131230758;
+			// aapt resource value: 0x7f090021
+			public const int place_autocomplete_prediction_primary_text = 2131296289;
 			
-			// aapt resource value: 0x7f080023
-			public const int radioButtonNoLuggage = 2131230755;
+			// aapt resource value: 0x7f090022
+			public const int place_autocomplete_prediction_secondary_text = 2131296290;
 			
-			// aapt resource value: 0x7f080028
-			public const int radioButtonNoPet = 2131230760;
+			// aapt resource value: 0x7f090020
+			public const int place_autocomplete_progress = 2131296288;
 			
-			// aapt resource value: 0x7f080020
-			public const int radioButtonNonSmoker = 2131230752;
+			// aapt resource value: 0x7f09001b
+			public const int place_autocomplete_search_button = 2131296283;
 			
-			// aapt resource value: 0x7f080027
-			public const int radioButtonPet = 2131230759;
+			// aapt resource value: 0x7f09001c
+			public const int place_autocomplete_search_input = 2131296284;
 			
-			// aapt resource value: 0x7f08001f
-			public const int radioButtonSmoker = 2131230751;
+			// aapt resource value: 0x7f09001e
+			public const int place_autocomplete_separator = 2131296286;
 			
-			// aapt resource value: 0x7f080035
-			public const int ratingBar = 2131230773;
+			// aapt resource value: 0x7f09002d
+			public const int radioButtonHandicap = 2131296301;
 			
-			// aapt resource value: 0x7f080013
-			public const int reviewEdit1 = 2131230739;
+			// aapt resource value: 0x7f09002a
+			public const int radioButtonLuggage = 2131296298;
 			
-			// aapt resource value: 0x7f080041
-			public const int reviewFragmentButton = 2131230785;
+			// aapt resource value: 0x7f09002e
+			public const int radioButtonNoHandicap = 2131296302;
 			
-			// aapt resource value: 0x7f080012
-			public const int reviewRatingBar1 = 2131230738;
+			// aapt resource value: 0x7f09002b
+			public const int radioButtonNoLuggage = 2131296299;
 			
-			// aapt resource value: 0x7f080011
-			public const int reviewText1 = 2131230737;
+			// aapt resource value: 0x7f090030
+			public const int radioButtonNoPet = 2131296304;
 			
-			// aapt resource value: 0x7f080042
-			public const int rider1 = 2131230786;
+			// aapt resource value: 0x7f090028
+			public const int radioButtonNonSmoker = 2131296296;
 			
-			// aapt resource value: 0x7f080043
-			public const int riderOrDriverSwitch = 2131230787;
+			// aapt resource value: 0x7f09002f
+			public const int radioButtonPet = 2131296303;
 			
-			// aapt resource value: 0x7f080003
-			public const int satellite = 2131230723;
+			// aapt resource value: 0x7f090027
+			public const int radioButtonSmoker = 2131296295;
 			
-			// aapt resource value: 0x7f08002b
-			public const int spinnerGender = 2131230763;
+			// aapt resource value: 0x7f09003d
+			public const int ratingBar = 2131296317;
 			
-			// aapt resource value: 0x7f080008
-			public const int standard = 2131230728;
+			// aapt resource value: 0x7f090013
+			public const int reviewEdit1 = 2131296275;
 			
-			// aapt resource value: 0x7f080014
-			public const int submitFeedback1 = 2131230740;
+			// aapt resource value: 0x7f090049
+			public const int reviewFragmentButton = 2131296329;
 			
-			// aapt resource value: 0x7f08001d
-			public const int tableLayout1 = 2131230749;
+			// aapt resource value: 0x7f090012
+			public const int reviewRatingBar1 = 2131296274;
 			
-			// aapt resource value: 0x7f080029
-			public const int tableRowGender = 2131230761;
+			// aapt resource value: 0x7f090011
+			public const int reviewText1 = 2131296273;
 			
-			// aapt resource value: 0x7f080024
-			public const int tableRowHandicap = 2131230756;
+			// aapt resource value: 0x7f09004a
+			public const int rider1 = 2131296330;
 			
-			// aapt resource value: 0x7f080021
-			public const int tableRowLuggage = 2131230753;
+			// aapt resource value: 0x7f09004b
+			public const int riderOrDriverSwitch = 2131296331;
 			
-			// aapt resource value: 0x7f08001e
-			public const int tableRowSmoker = 2131230750;
+			// aapt resource value: 0x7f090003
+			public const int satellite = 2131296259;
 			
-			// aapt resource value: 0x7f080004
-			public const int terrain = 2131230724;
+			// aapt resource value: 0x7f090033
+			public const int spinnerGender = 2131296307;
 			
-			// aapt resource value: 0x7f08002e
-			public const int testFragment1 = 2131230766;
+			// aapt resource value: 0x7f090008
+			public const int standard = 2131296264;
 			
-			// aapt resource value: 0x7f08002f
-			public const int testFragment2 = 2131230767;
+			// aapt resource value: 0x7f090014
+			public const int submitFeedback1 = 2131296276;
 			
-			// aapt resource value: 0x7f080030
-			public const int testFragment3 = 2131230768;
+			// aapt resource value: 0x7f090025
+			public const int tableLayout1 = 2131296293;
 			
-			// aapt resource value: 0x7f080015
-			public const int textView1 = 2131230741;
+			// aapt resource value: 0x7f090031
+			public const int tableRowGender = 2131296305;
 			
-			// aapt resource value: 0x7f080017
-			public const int textView2 = 2131230743;
+			// aapt resource value: 0x7f09002c
+			public const int tableRowHandicap = 2131296300;
 			
-			// aapt resource value: 0x7f080018
-			public const int textView3 = 2131230744;
+			// aapt resource value: 0x7f090029
+			public const int tableRowLuggage = 2131296297;
 			
-			// aapt resource value: 0x7f08002a
-			public const int textViewGenderPref = 2131230762;
+			// aapt resource value: 0x7f090026
+			public const int tableRowSmoker = 2131296294;
 			
-			// aapt resource value: 0x7f08001b
-			public const int textViewHi = 2131230747;
+			// aapt resource value: 0x7f090004
+			public const int terrain = 2131296260;
 			
-			// aapt resource value: 0x7f08001c
-			public const int textViewSetYourPreferences = 2131230748;
+			// aapt resource value: 0x7f090036
+			public const int testFragment1 = 2131296310;
 			
-			// aapt resource value: 0x7f080033
-			public const int userName = 2131230771;
+			// aapt resource value: 0x7f090037
+			public const int testFragment2 = 2131296311;
 			
-			// aapt resource value: 0x7f080031
-			public const int userPhoto = 2131230769;
+			// aapt resource value: 0x7f090038
+			public const int testFragment3 = 2131296312;
 			
-			// aapt resource value: 0x7f08003f
-			public const int userProfileFragmentName = 2131230783;
+			// aapt resource value: 0x7f090015
+			public const int textView1 = 2131296277;
 			
-			// aapt resource value: 0x7f080032
-			public const int userProfileLinearLayout2 = 2131230770;
+			// aapt resource value: 0x7f090017
+			public const int textView2 = 2131296279;
 			
-			// aapt resource value: 0x7f080037
-			public const int userProfileListView = 2131230775;
+			// aapt resource value: 0x7f090018
+			public const int textView3 = 2131296280;
 			
-			// aapt resource value: 0x7f080040
-			public const int viewProfileFragmentButton = 2131230784;
+			// aapt resource value: 0x7f090032
+			public const int textViewGenderPref = 2131296306;
 			
-			// aapt resource value: 0x7f080009
-			public const int wide = 2131230729;
+			// aapt resource value: 0x7f090023
+			public const int textViewHi = 2131296291;
+			
+			// aapt resource value: 0x7f090024
+			public const int textViewSetYourPreferences = 2131296292;
+			
+			// aapt resource value: 0x7f09003b
+			public const int userName = 2131296315;
+			
+			// aapt resource value: 0x7f090039
+			public const int userPhoto = 2131296313;
+			
+			// aapt resource value: 0x7f090047
+			public const int userProfileFragmentName = 2131296327;
+			
+			// aapt resource value: 0x7f09003a
+			public const int userProfileLinearLayout2 = 2131296314;
+			
+			// aapt resource value: 0x7f09003f
+			public const int userProfileListView = 2131296319;
+			
+			// aapt resource value: 0x7f090048
+			public const int viewProfileFragmentButton = 2131296328;
+			
+			// aapt resource value: 0x7f090009
+			public const int wide = 2131296265;
 			
 			static Id()
 			{
@@ -519,8 +616,8 @@ namespace mRides_app
 		public partial class Integer
 		{
 			
-			// aapt resource value: 0x7f040000
-			public const int google_play_services_version = 2130968576;
+			// aapt resource value: 0x7f070000
+			public const int google_play_services_version = 2131165184;
 			
 			static Integer()
 			{
@@ -551,22 +648,34 @@ namespace mRides_app
 			public const int Messaging = 2130903044;
 			
 			// aapt resource value: 0x7f030005
-			public const int Preferences = 2130903045;
+			public const int place_autocomplete_fragment = 2130903045;
 			
 			// aapt resource value: 0x7f030006
-			public const int TestFragments = 2130903046;
+			public const int place_autocomplete_item_powered_by_google = 2130903046;
 			
 			// aapt resource value: 0x7f030007
-			public const int UserProfile = 2130903047;
+			public const int place_autocomplete_item_prediction = 2130903047;
 			
 			// aapt resource value: 0x7f030008
-			public const int UserProfileFeedbackFragment = 2130903048;
+			public const int place_autocomplete_progress = 2130903048;
 			
 			// aapt resource value: 0x7f030009
-			public const int UserProfileFragment = 2130903049;
+			public const int Preferences = 2130903049;
 			
 			// aapt resource value: 0x7f03000a
-			public const int UserTypeFragment = 2130903050;
+			public const int TestFragments = 2130903050;
+			
+			// aapt resource value: 0x7f03000b
+			public const int UserProfile = 2130903051;
+			
+			// aapt resource value: 0x7f03000c
+			public const int UserProfileFeedbackFragment = 2130903052;
+			
+			// aapt resource value: 0x7f03000d
+			public const int UserProfileFragment = 2130903053;
+			
+			// aapt resource value: 0x7f03000e
+			public const int UserTypeFragment = 2130903054;
 			
 			static Layout()
 			{
@@ -581,230 +690,236 @@ namespace mRides_app
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f050019
-			public const int ApplicationName = 2131034137;
+			// aapt resource value: 0x7f06001b
+			public const int ApplicationName = 2131099675;
 			
-			// aapt resource value: 0x7f050029
-			public const int ExtraData_DataNotAvailable = 2131034153;
+			// aapt resource value: 0x7f06002b
+			public const int ExtraData_DataNotAvailable = 2131099691;
 			
-			// aapt resource value: 0x7f050018
-			public const int Hello = 2131034136;
+			// aapt resource value: 0x7f06001a
+			public const int Hello = 2131099674;
 			
-			// aapt resource value: 0x7f050027
-			public const int Pref_Back = 2131034151;
+			// aapt resource value: 0x7f060029
+			public const int Pref_Back = 2131099689;
 			
-			// aapt resource value: 0x7f050028
-			public const int Pref_Done = 2131034152;
+			// aapt resource value: 0x7f06002a
+			public const int Pref_Done = 2131099690;
 			
-			// aapt resource value: 0x7f05001f
-			public const int Pref_Female = 2131034143;
+			// aapt resource value: 0x7f060021
+			public const int Pref_Female = 2131099681;
 			
-			// aapt resource value: 0x7f050022
-			public const int Pref_Handicap = 2131034146;
+			// aapt resource value: 0x7f060024
+			public const int Pref_Handicap = 2131099684;
 			
-			// aapt resource value: 0x7f05001a
-			public const int Pref_Hi = 2131034138;
+			// aapt resource value: 0x7f06001c
+			public const int Pref_Hi = 2131099676;
 			
-			// aapt resource value: 0x7f050020
-			public const int Pref_Luggage = 2131034144;
+			// aapt resource value: 0x7f060022
+			public const int Pref_Luggage = 2131099682;
 			
-			// aapt resource value: 0x7f05001e
-			public const int Pref_Male = 2131034142;
+			// aapt resource value: 0x7f060020
+			public const int Pref_Male = 2131099680;
 			
-			// aapt resource value: 0x7f050023
-			public const int Pref_NoHandicap = 2131034147;
+			// aapt resource value: 0x7f060025
+			public const int Pref_NoHandicap = 2131099685;
 			
-			// aapt resource value: 0x7f050021
-			public const int Pref_NoLuggage = 2131034145;
+			// aapt resource value: 0x7f060023
+			public const int Pref_NoLuggage = 2131099683;
 			
-			// aapt resource value: 0x7f050025
-			public const int Pref_NoPet = 2131034149;
+			// aapt resource value: 0x7f060027
+			public const int Pref_NoPet = 2131099687;
 			
-			// aapt resource value: 0x7f05001d
-			public const int Pref_NonSmoker = 2131034141;
+			// aapt resource value: 0x7f06001f
+			public const int Pref_NonSmoker = 2131099679;
 			
-			// aapt resource value: 0x7f050024
-			public const int Pref_Pet = 2131034148;
+			// aapt resource value: 0x7f060026
+			public const int Pref_Pet = 2131099686;
 			
-			// aapt resource value: 0x7f050026
-			public const int Pref_Prompt_Gender = 2131034150;
+			// aapt resource value: 0x7f060028
+			public const int Pref_Prompt_Gender = 2131099688;
 			
-			// aapt resource value: 0x7f05001b
-			public const int Pref_SetYourPreferences = 2131034139;
+			// aapt resource value: 0x7f06001d
+			public const int Pref_SetYourPreferences = 2131099677;
 			
-			// aapt resource value: 0x7f05001c
-			public const int Pref_Smoker = 2131034140;
+			// aapt resource value: 0x7f06001e
+			public const int Pref_Smoker = 2131099678;
 			
-			// aapt resource value: 0x7f050001
-			public const int common_google_play_services_enable_button = 2131034113;
+			// aapt resource value: 0x7f060002
+			public const int common_google_play_services_enable_button = 2131099650;
 			
-			// aapt resource value: 0x7f050002
-			public const int common_google_play_services_enable_text = 2131034114;
+			// aapt resource value: 0x7f060003
+			public const int common_google_play_services_enable_text = 2131099651;
 			
-			// aapt resource value: 0x7f050003
-			public const int common_google_play_services_enable_title = 2131034115;
+			// aapt resource value: 0x7f060004
+			public const int common_google_play_services_enable_title = 2131099652;
 			
-			// aapt resource value: 0x7f050004
-			public const int common_google_play_services_install_button = 2131034116;
+			// aapt resource value: 0x7f060005
+			public const int common_google_play_services_install_button = 2131099653;
 			
-			// aapt resource value: 0x7f050005
-			public const int common_google_play_services_install_text = 2131034117;
+			// aapt resource value: 0x7f060006
+			public const int common_google_play_services_install_text = 2131099654;
 			
-			// aapt resource value: 0x7f050006
-			public const int common_google_play_services_install_title = 2131034118;
+			// aapt resource value: 0x7f060007
+			public const int common_google_play_services_install_title = 2131099655;
 			
-			// aapt resource value: 0x7f050007
-			public const int common_google_play_services_notification_ticker = 2131034119;
+			// aapt resource value: 0x7f060008
+			public const int common_google_play_services_notification_ticker = 2131099656;
 			
-			// aapt resource value: 0x7f050000
-			public const int common_google_play_services_unknown_issue = 2131034112;
+			// aapt resource value: 0x7f060012
+			public const int common_google_play_services_unknown_issue = 2131099666;
 			
-			// aapt resource value: 0x7f050008
-			public const int common_google_play_services_unsupported_text = 2131034120;
+			// aapt resource value: 0x7f060009
+			public const int common_google_play_services_unsupported_text = 2131099657;
 			
-			// aapt resource value: 0x7f050009
-			public const int common_google_play_services_update_button = 2131034121;
+			// aapt resource value: 0x7f06000a
+			public const int common_google_play_services_update_button = 2131099658;
 			
-			// aapt resource value: 0x7f05000a
-			public const int common_google_play_services_update_text = 2131034122;
+			// aapt resource value: 0x7f06000b
+			public const int common_google_play_services_update_text = 2131099659;
 			
-			// aapt resource value: 0x7f05000b
-			public const int common_google_play_services_update_title = 2131034123;
+			// aapt resource value: 0x7f06000c
+			public const int common_google_play_services_update_title = 2131099660;
 			
-			// aapt resource value: 0x7f05000c
-			public const int common_google_play_services_updating_text = 2131034124;
+			// aapt resource value: 0x7f06000d
+			public const int common_google_play_services_updating_text = 2131099661;
 			
-			// aapt resource value: 0x7f05000d
-			public const int common_google_play_services_wear_update_text = 2131034125;
+			// aapt resource value: 0x7f06000e
+			public const int common_google_play_services_wear_update_text = 2131099662;
 			
-			// aapt resource value: 0x7f05000e
-			public const int common_open_on_phone = 2131034126;
+			// aapt resource value: 0x7f06000f
+			public const int common_open_on_phone = 2131099663;
 			
-			// aapt resource value: 0x7f05000f
-			public const int common_signin_button_text = 2131034127;
+			// aapt resource value: 0x7f060010
+			public const int common_signin_button_text = 2131099664;
 			
-			// aapt resource value: 0x7f050010
-			public const int common_signin_button_text_long = 2131034128;
+			// aapt resource value: 0x7f060011
+			public const int common_signin_button_text_long = 2131099665;
 			
-			// aapt resource value: 0x7f05002f
-			public const int d = 2131034159;
+			// aapt resource value: 0x7f060031
+			public const int d = 2131099697;
 			
-			// aapt resource value: 0x7f050043
-			public const int dateOfFeedback = 2131034179;
+			// aapt resource value: 0x7f060045
+			public const int dateOfFeedback = 2131099717;
 			
-			// aapt resource value: 0x7f050013
-			public const int default_web_client_id = 2131034131;
+			// aapt resource value: 0x7f060015
+			public const int default_web_client_id = 2131099669;
 			
-			// aapt resource value: 0x7f050035
-			public const int dest = 2131034165;
+			// aapt resource value: 0x7f060037
+			public const int dest = 2131099703;
 			
-			// aapt resource value: 0x7f05002c
-			public const int fb = 2131034156;
+			// aapt resource value: 0x7f06002e
+			public const int fb = 2131099694;
 			
-			// aapt resource value: 0x7f05002b
-			public const int fblogin = 2131034155;
+			// aapt resource value: 0x7f06002d
+			public const int fblogin = 2131099693;
 			
-			// aapt resource value: 0x7f05004a
-			public const int feedbackPopup = 2131034186;
+			// aapt resource value: 0x7f06004c
+			public const int feedbackPopup = 2131099724;
 			
-			// aapt resource value: 0x7f050014
-			public const int firebase_database_url = 2131034132;
+			// aapt resource value: 0x7f060016
+			public const int firebase_database_url = 2131099670;
 			
-			// aapt resource value: 0x7f050011
-			public const int gcm_defaultSenderId = 2131034129;
+			// aapt resource value: 0x7f060013
+			public const int gcm_defaultSenderId = 2131099667;
 			
-			// aapt resource value: 0x7f05003e
-			public const int gender = 2131034174;
+			// aapt resource value: 0x7f060040
+			public const int gender = 2131099712;
 			
-			// aapt resource value: 0x7f050015
-			public const int google_api_key = 2131034133;
+			// aapt resource value: 0x7f060017
+			public const int google_api_key = 2131099671;
 			
-			// aapt resource value: 0x7f050012
-			public const int google_app_id = 2131034130;
+			// aapt resource value: 0x7f060014
+			public const int google_app_id = 2131099668;
 			
-			// aapt resource value: 0x7f050016
-			public const int google_crash_reporting_api_key = 2131034134;
+			// aapt resource value: 0x7f060018
+			public const int google_crash_reporting_api_key = 2131099672;
 			
-			// aapt resource value: 0x7f050017
-			public const int google_storage_bucket = 2131034135;
+			// aapt resource value: 0x7f060019
+			public const int google_storage_bucket = 2131099673;
 			
-			// aapt resource value: 0x7f05003c
-			public const int handicap = 2131034172;
+			// aapt resource value: 0x7f06003e
+			public const int handicap = 2131099710;
 			
-			// aapt resource value: 0x7f050034
-			public const int hello_map = 2131034164;
+			// aapt resource value: 0x7f060036
+			public const int hello_map = 2131099702;
 			
-			// aapt resource value: 0x7f050046
-			public const int leaveReviewForUser = 2131034182;
+			// aapt resource value: 0x7f060048
+			public const int leaveReviewForUser = 2131099720;
 			
-			// aapt resource value: 0x7f05003b
-			public const int luggage = 2131034171;
+			// aapt resource value: 0x7f06003d
+			public const int luggage = 2131099709;
 			
-			// aapt resource value: 0x7f050033
-			public const int next = 2131034163;
+			// aapt resource value: 0x7f060035
+			public const int next = 2131099701;
 			
-			// aapt resource value: 0x7f050031
-			public const int numberOfRiders = 2131034161;
+			// aapt resource value: 0x7f060033
+			public const int numberOfRiders = 2131099699;
 			
-			// aapt resource value: 0x7f050039
-			public const int number_of_people = 2131034169;
+			// aapt resource value: 0x7f06003b
+			public const int number_of_people = 2131099707;
 			
-			// aapt resource value: 0x7f050044
-			public const int p_erson = 2131034180;
+			// aapt resource value: 0x7f060046
+			public const int p_erson = 2131099718;
 			
-			// aapt resource value: 0x7f050042
-			public const int personUser = 2131034178;
+			// aapt resource value: 0x7f060044
+			public const int personUser = 2131099716;
 			
-			// aapt resource value: 0x7f05003f
-			public const int person_profile = 2131034175;
+			// aapt resource value: 0x7f060041
+			public const int person_profile = 2131099713;
 			
-			// aapt resource value: 0x7f05003d
-			public const int pet = 2131034173;
+			// aapt resource value: 0x7f06003f
+			public const int pet = 2131099711;
 			
-			// aapt resource value: 0x7f050032
-			public const int previous = 2131034162;
+			// aapt resource value: 0x7f060000
+			public const int place_autocomplete_clear_button = 2131099648;
 			
-			// aapt resource value: 0x7f05002e
-			public const int r = 2131034158;
+			// aapt resource value: 0x7f060001
+			public const int place_autocomplete_search_hint = 2131099649;
 			
-			// aapt resource value: 0x7f050041
-			public const int ratingsAndReviews = 2131034177;
+			// aapt resource value: 0x7f060034
+			public const int previous = 2131099700;
 			
-			// aapt resource value: 0x7f050040
-			public const int ratings_reviews = 2131034176;
+			// aapt resource value: 0x7f060030
+			public const int r = 2131099696;
 			
-			// aapt resource value: 0x7f050047
-			public const int reviewSubmit = 2131034183;
+			// aapt resource value: 0x7f060043
+			public const int ratingsAndReviews = 2131099715;
 			
-			// aapt resource value: 0x7f050049
-			public const int reviewUser = 2131034185;
+			// aapt resource value: 0x7f060042
+			public const int ratings_reviews = 2131099714;
 			
-			// aapt resource value: 0x7f05002d
-			public const int riderOrDriver = 2131034157;
+			// aapt resource value: 0x7f060049
+			public const int reviewSubmit = 2131099721;
 			
-			// aapt resource value: 0x7f050030
-			public const int seatsAvailable = 2131034160;
+			// aapt resource value: 0x7f06004b
+			public const int reviewUser = 2131099723;
 			
-			// aapt resource value: 0x7f05002a
-			public const int slogan = 2131034154;
+			// aapt resource value: 0x7f06002f
+			public const int riderOrDriver = 2131099695;
 			
-			// aapt resource value: 0x7f05003a
-			public const int smoker = 2131034170;
+			// aapt resource value: 0x7f060032
+			public const int seatsAvailable = 2131099698;
 			
-			// aapt resource value: 0x7f050036
-			public const int user_driver = 2131034166;
+			// aapt resource value: 0x7f06002c
+			public const int slogan = 2131099692;
 			
-			// aapt resource value: 0x7f050045
-			public const int user_review = 2131034181;
+			// aapt resource value: 0x7f06003c
+			public const int smoker = 2131099708;
 			
-			// aapt resource value: 0x7f050037
-			public const int user_rider = 2131034167;
+			// aapt resource value: 0x7f060038
+			public const int user_driver = 2131099704;
 			
-			// aapt resource value: 0x7f050038
-			public const int user_type = 2131034168;
+			// aapt resource value: 0x7f060047
+			public const int user_review = 2131099719;
 			
-			// aapt resource value: 0x7f050048
-			public const int viewUserProfile = 2131034184;
+			// aapt resource value: 0x7f060039
+			public const int user_rider = 2131099705;
+			
+			// aapt resource value: 0x7f06003a
+			public const int user_type = 2131099706;
+			
+			// aapt resource value: 0x7f06004a
+			public const int viewUserProfile = 2131099722;
 			
 			static String()
 			{
