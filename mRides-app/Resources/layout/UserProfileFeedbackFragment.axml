@@ -27,6 +27,12 @@
             android:gravity="center"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="4dp" />
+        <ImageView
+            android:src="@android:drawable/ic_menu_gallery"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/feedbackFragmentUserProfilePicture"
+            android:layout_gravity="center" />
         <TextView
             android:text="@string/p_erson"
             android:textAppearance="?android:attr/textAppearanceLarge"
