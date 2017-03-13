@@ -206,6 +206,7 @@ namespace mRides_app.Mappers
         public const string getUserByFacebookId = "User/getUserByFacebookId";
         public const string getReviews = "User/getReviews/{id}";
         public const string leaveReview = "User/leaveReview";
+        public const string registerFcmToken = "User/registerFcmToken";
 
         // Ride related url
         public const string createRide = "Ride/createRide";
