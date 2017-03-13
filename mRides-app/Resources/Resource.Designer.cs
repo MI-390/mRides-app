@@ -330,25 +330,28 @@ namespace mRides_app
 			public const int girl = 2130837528;
 			
 			// aapt resource value: 0x7f020019
-			public const int Icon = 2130837529;
+			public const int ic_stat_ic_notification = 2130837529;
 			
 			// aapt resource value: 0x7f02001a
-			public const int mrides_logo = 2130837530;
+			public const int Icon = 2130837530;
 			
 			// aapt resource value: 0x7f02001b
-			public const int places_ic_clear = 2130837531;
+			public const int mrides_logo = 2130837531;
 			
 			// aapt resource value: 0x7f02001c
-			public const int places_ic_search = 2130837532;
+			public const int places_ic_clear = 2130837532;
 			
 			// aapt resource value: 0x7f02001d
-			public const int powered_by_google_dark = 2130837533;
+			public const int places_ic_search = 2130837533;
 			
 			// aapt resource value: 0x7f02001e
-			public const int powered_by_google_light = 2130837534;
+			public const int powered_by_google_dark = 2130837534;
 			
 			// aapt resource value: 0x7f02001f
-			public const int userIcon2 = 2130837535;
+			public const int powered_by_google_light = 2130837535;
+			
+			// aapt resource value: 0x7f020020
+			public const int userIcon2 = 2130837536;
 			
 			static Drawable()
 			{

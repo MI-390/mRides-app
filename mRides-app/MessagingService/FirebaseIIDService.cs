@@ -3,10 +3,10 @@ using Android.App;
 using Firebase.Iid;
 using Android.Util;
 
-namespace mRides_app
+namespace mRides_app.MessagingService
 {
     /// <summary>
-    /// Class to maintain the receiver services
+    /// Implementation of the Firebase Instance ID Service class to maintain receiver services
     /// </summary>
     [Service]
     [IntentFilter(new[] { "com.google.firebase.INSTANCE_ID_EVENT" })]
