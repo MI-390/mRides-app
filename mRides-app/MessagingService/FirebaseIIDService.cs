@@ -2,6 +2,7 @@ using System;
 using Android.App;
 using Firebase.Iid;
 using Android.Util;
+using mRides_app.Mappers;
 
 namespace mRides_app.MessagingService
 {
@@ -32,7 +33,7 @@ namespace mRides_app.MessagingService
         /// <param name="token"></param>
         void SendRegistrationToServer(string token)
         {
-            // Add custom implementation, as needed.
+            UserMapper.getInstance().updateFcmToken(token);
         }
     }
 }
