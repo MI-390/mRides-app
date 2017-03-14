@@ -58,6 +58,17 @@ namespace mRides_app.Mappers
         {
             return SendPost<User>(ApiEndPointUrl.createUser, newUser, false);
         }
+        /**
+         * Update fcm token for a user
+         */
+        public void updateFcmToken(string fcmToken)
+        {
+            object fcmTokenObject = new
+            {
+                fcmToken = fcmToken
+            };
+            SendPost<object>(ApiEndPointUrl.registerFcmToken, fcmTokenObject, true);
+        }
 
         /**
          * Create a new review 
