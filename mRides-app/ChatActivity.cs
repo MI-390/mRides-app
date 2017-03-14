@@ -22,6 +22,7 @@ using Android.Util;
 
 namespace mRides_app
 {
+
     /// <summary>
     /// Implementation of the chat activity
     /// </summary>
@@ -33,8 +34,9 @@ namespace mRides_app
         private ListView listChat;
         private EditText editChat;
         private Button sendButton;
+        string chatName;
 
-        private String userName = "Ideawin";
+        private String userName = Models.User.currentUser.firstName;
 
         public int MyResultCode = 1;
 
@@ -47,10 +49,10 @@ namespace mRides_app
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Chat);
-
+            chatName = Intent.GetStringExtra("ChatName");
             firebase = new FirebaseClient(GetString(Resource.String.firebase_database_url));
             // adding listener to "chats" everytime this activity is run
-            FirebaseDatabase.Instance.GetReference("NIMCHAT").AddValueEventListener(this);
+            FirebaseDatabase.Instance.GetReference(chatName).AddValueEventListener(this);
 
             sendButton = FindViewById<Button>(Resource.Id.sendMsgButton);
             editChat = FindViewById<EditText>(Resource.Id.chatMsg);
@@ -71,7 +73,7 @@ namespace mRides_app
         private async void PostMessage()
         {
             // Post a message to "chats" specifically by creating a new MessageContent which takes a username and a text as parameters
-            var items = await firebase.Child("NIMCHAT").PostAsync(new MessagingService.MessageContent(userName, editChat.Text));
+            var items = await firebase.Child(chatName).PostAsync(new MessagingService.MessageContent(userName, editChat.Text));
             editChat.Text = ""; // empty the text field
         }
 
@@ -95,7 +97,7 @@ namespace mRides_app
         private async void DisplayChatMessage()
         {
             listMessage.Clear();
-            var items = await firebase.Child("NIMCHAT")
+            var items = await firebase.Child(chatName)
                 .OnceAsync<MessagingService.MessageContent>();
 
             foreach (var item in items)
