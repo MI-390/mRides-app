@@ -9,6 +9,7 @@ using Android.Content;
 using mRides_app.Mappers;
 using mRides_app.Models;
 using System.Collections.Generic;
+using Firebase.Iid;
 //cvnewggbsc_1487629189@tfbnw.net
 //mi-390
 namespace mRides_app
@@ -93,6 +94,7 @@ namespace mRides_app
                     if (user != null)
                     {
                         User.currentUser = user;
+                        UserMapper.getInstance().updateFcmToken(FirebaseInstanceId.Instance.Token);
                         var mapActivity = new Intent(this, typeof(MapActivity));
                         StartActivity(mapActivity);
                     }
