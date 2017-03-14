@@ -68,9 +68,9 @@ namespace mRides_app
             }
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Destination);
-            var toolbar = FindViewById<Toolbar>(Resource.Id.toolbarTop);
+            var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
             SetActionBar(toolbar);
-            ActionBar.Title = "My Toolbar";
+            ActionBar.Title = "mRides";
 
             string text = mRides_app.Models.User.currentUser.firstName;
 

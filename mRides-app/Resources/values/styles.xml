@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Resource>
+<resources>
   <style name="mRidesTheme" parent="@android:style/Theme.Material.Light.DarkActionBar">
       <item name="android:windowNoTitle">true</item>
       <!--Replace action bar with toolbar-->
@@ -7,11 +7,11 @@
       <!-- colorPrimary is used for the default action bar background -->
       <item name="android:colorPrimary">#EF5350</item>
       <!-- colorPrimaryDark is used for the status bar -->
-      <item name="android:colorPrimaryDark">#1976D2</item>
+      <item name="android:colorPrimaryDark">#EF5350</item>
       <!-- colorAccent is used as the default value for colorControlActivated
            which is used to tint widgets -->
       <item name="android:colorAccent">#FF4081</item>
   	  <!-- You can also set colorControlNormal, colorControlActivated
            colorControlHighlight and colorSwitchThumbNormal. -->
     </style>
-</Resource>
+</resources>
