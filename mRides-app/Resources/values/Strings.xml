@@ -87,7 +87,7 @@
   <!-- STRINGS FOR USER PROFILE FRAGMENT  --> 
   <string name="viewUserProfile">View Profile</string>
   <string name ="reviewUser">Review</string>
-  <string name="message">Message</string>
+  <string name="message">Chat</string>
   
   
   

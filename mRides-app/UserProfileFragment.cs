@@ -9,6 +9,8 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using mRides_app.Mappers;
+using mRides_app.Models;
 
 namespace mRides_app
 {
@@ -17,6 +19,7 @@ namespace mRides_app
 
         Button viewProfile;
         Button reviewButton;
+        Button chatButton;
         TextView username;
         string userID;
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -29,10 +32,14 @@ namespace mRides_app
             username = view.FindViewById<TextView>(Resource.Id.userProfileFragmentName);
             username.Text = args.GetString("name");
             userID = (args.GetString("id"));
+            //BUtton assignments
             viewProfile = view.FindViewById<Button>(Resource.Id.viewProfileFragmentButton);
             reviewButton = view.FindViewById<Button>(Resource.Id.reviewFragmentButton);
+            chatButton = view.FindViewById<Button>(Resource.Id.chatActivityButton);
+            //Click Delegation
             viewProfile.Click += ViewProfileButtonClicked;
             reviewButton.Click += ReviewButtonClicked;
+            chatButton.Click += ChatButtonClicked;
             return view;
         }
 
@@ -61,7 +68,22 @@ namespace mRides_app
             dialog.Show(transaction, "Leave review fragment");
             Dismiss();
         }
-        
+        void ChatButtonClicked(object sender, EventArgs e)
+        {
+            Bundle args = new Bundle();
+            args.PutString("ChatName",)
+        }
+
+        string createChatName()
+        {
+            int intUserId = Convert.ToInt32(userID);
+            int currentUser = User.currentUser.id;
+            if (currentUser < intUserId)
+            {
+                return currentUser + " & " + userID;
+            }
+            return userID + " & " + currentUser;
+        }
 
     }
 }

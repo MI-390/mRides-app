@@ -2049,7 +2049,7 @@ namespace mRides_app
 			public const int cancel_action = 2131361914;
 			
 			// aapt resource value: 0x7f0a00bc
-			public const int chatButtonActivity = 2131361980;
+			public const int chatActivityButton = 2131361980;
 			
 			// aapt resource value: 0x7f0a0063
 			public const int chatMsg = 2131361891;

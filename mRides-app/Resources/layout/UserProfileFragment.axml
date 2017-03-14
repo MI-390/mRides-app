@@ -47,6 +47,6 @@
             android:text="@string/message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/chatButtonActivity" />
+            android:id="@+id/chatActivityButton" />
     </LinearLayout>
 </LinearLayout>
