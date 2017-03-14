@@ -6,6 +6,9 @@
     android:background="@android:color/white"
     android:minWidth="25px"
     android:minHeight="25px">
+    <include
+        android:id="@+id/toolbarTop"
+        layout="@layout/toolbarTop" />
     <fragment
         android:name="com.google.android.gms.maps.MapFragment"
         android:id="@+id/map"
