@@ -82,9 +82,12 @@
    <string name="leaveReviewForUser">Leave a review for this user:</string>
   <string name="reviewSubmit">Submit</string>
   
-   <!-- STRINGS FOR USER PROFILE FRAGMENT  --> 
+
+
+  <!-- STRINGS FOR USER PROFILE FRAGMENT  --> 
   <string name="viewUserProfile">View Profile</string>
   <string name ="reviewUser">Review</string>
+  <string name="message">Message</string>
   
   
   

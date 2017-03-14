@@ -1946,11 +1946,11 @@ namespace mRides_app
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f0a00c0
-			public const int CloseButton = 2131361984;
-			
 			// aapt resource value: 0x7f0a00c1
-			public const int Next = 2131361985;
+			public const int CloseButton = 2131361985;
+			
+			// aapt resource value: 0x7f0a00c2
+			public const int Next = 2131361986;
 			
 			// aapt resource value: 0x7f0a0079
 			public const int action0 = 2131361913;
@@ -2048,6 +2048,9 @@ namespace mRides_app
 			// aapt resource value: 0x7f0a007a
 			public const int cancel_action = 2131361914;
 			
+			// aapt resource value: 0x7f0a00bc
+			public const int chatButtonActivity = 2131361980;
+			
 			// aapt resource value: 0x7f0a0063
 			public const int chatMsg = 2131361891;
 			
@@ -2084,8 +2087,8 @@ namespace mRides_app
 			// aapt resource value: 0x7f0a00b0
 			public const int divider = 2131361968;
 			
-			// aapt resource value: 0x7f0a00be
-			public const int driver1 = 2131361982;
+			// aapt resource value: 0x7f0a00bf
+			public const int driver1 = 2131361983;
 			
 			// aapt resource value: 0x7f0a0054
 			public const int edit_query = 2131361876;
@@ -2225,8 +2228,8 @@ namespace mRides_app
 			// aapt resource value: 0x7f0a007e
 			public const int notification_main_column_container = 2131361918;
 			
-			// aapt resource value: 0x7f0a00bf
-			public const int numOfPeople = 2131361983;
+			// aapt resource value: 0x7f0a00c0
+			public const int numOfPeople = 2131361984;
 			
 			// aapt resource value: 0x7f0a0061
 			public const int openFeedbackAlert = 2131361889;
@@ -2309,11 +2312,11 @@ namespace mRides_app
 			// aapt resource value: 0x7f0a0068
 			public const int reviewText1 = 2131361896;
 			
-			// aapt resource value: 0x7f0a00bc
-			public const int rider1 = 2131361980;
-			
 			// aapt resource value: 0x7f0a00bd
-			public const int riderOrDriverSwitch = 2131361981;
+			public const int rider1 = 2131361981;
+			
+			// aapt resource value: 0x7f0a00be
+			public const int riderOrDriverSwitch = 2131361982;
 			
 			// aapt resource value: 0x7f0a0084
 			public const int right_icon = 2131361924;
@@ -2987,8 +2990,8 @@ namespace mRides_app
 			// aapt resource value: 0x7f05004e
 			public const int fblogin = 2131034190;
 			
-			// aapt resource value: 0x7f05006d
-			public const int feedbackPopup = 2131034221;
+			// aapt resource value: 0x7f05006e
+			public const int feedbackPopup = 2131034222;
 			
 			// aapt resource value: 0x7f050037
 			public const int firebase_database_url = 2131034167;
@@ -3022,6 +3025,9 @@ namespace mRides_app
 			
 			// aapt resource value: 0x7f05005e
 			public const int luggage = 2131034206;
+			
+			// aapt resource value: 0x7f05006d
+			public const int message = 2131034221;
 			
 			// aapt resource value: 0x7f050056
 			public const int next = 2131034198;
