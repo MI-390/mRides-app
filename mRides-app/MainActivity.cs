@@ -14,7 +14,7 @@ using System.Collections.Generic;
 namespace mRides_app
 {
     //ggrrg
-    [Activity(Label = "mRides_app", Icon = "@drawable/icon")]
+    [Activity(Label = "mRides_app",MainLauncher =true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
         string userName;
