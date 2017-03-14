@@ -50,7 +50,7 @@ namespace mRides_app
 
             firebase = new FirebaseClient(GetString(Resource.String.firebase_database_url));
             // adding listener to "chats" everytime this activity is run
-            FirebaseDatabase.Instance.GetReference("chats").AddValueEventListener(this);
+            FirebaseDatabase.Instance.GetReference("NIMCHAT").AddValueEventListener(this);
 
             sendButton = FindViewById<Button>(Resource.Id.sendMsgButton);
             editChat = FindViewById<EditText>(Resource.Id.chatMsg);
@@ -71,7 +71,7 @@ namespace mRides_app
         private async void PostMessage()
         {
             // Post a message to "chats" specifically by creating a new MessageContent which takes a username and a text as parameters
-            var items = await firebase.Child("chats").PostAsync(new MessagingService.MessageContent(userName, editChat.Text));
+            var items = await firebase.Child("NIMCHAT").PostAsync(new MessagingService.MessageContent(userName, editChat.Text));
             editChat.Text = ""; // empty the text field
         }
 
@@ -95,7 +95,7 @@ namespace mRides_app
         private async void DisplayChatMessage()
         {
             listMessage.Clear();
-            var items = await firebase.Child("chats")
+            var items = await firebase.Child("NIMCHAT")
                 .OnceAsync<MessagingService.MessageContent>();
 
             foreach (var item in items)
