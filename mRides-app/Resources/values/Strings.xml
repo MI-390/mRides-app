@@ -90,7 +90,7 @@
   
   <string name="feedbackPopup">Click for Feedback popup!</string>
 
- 
+ <string name="firebase_database_url">https://mrides-155403.firebaseio.com/</string>
   
  
    

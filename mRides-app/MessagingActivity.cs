@@ -16,7 +16,7 @@ using Android.Util;
 
 namespace mRides_app
 {
-    [Activity(Label = "MessagingActivity", MainLauncher = true)]
+    [Activity(Label = "MessagingActivity")]
     public class MessagingActivity : Activity
     {
         TextView msgText;
