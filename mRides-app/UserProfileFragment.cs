@@ -70,8 +70,11 @@ namespace mRides_app
         }
         void ChatButtonClicked(object sender, EventArgs e)
         {
-            Bundle args = new Bundle();
-            args.PutString("ChatName",)
+            Intent i = new Intent(Context, typeof(ChatActivity));
+            i.PutExtra("ChatName", createChatName());
+            i.PutExtra("id", userID);
+            Context.StartActivity(i);
+            Dismiss();
         }
 
         string createChatName()
