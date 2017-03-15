@@ -17,6 +17,10 @@ namespace mRides_app
     {
         void updateUserSelection(string type, int num);
     }
+
+    /// <summary>
+    /// Fragment class for the options of selecting whether user is a driver/rider and number of people
+    /// </summary>
     public class UserTypeFragment : DialogFragment
     {
         Button previous;
@@ -99,23 +103,14 @@ namespace mRides_app
         void NextButtonClicked(object sender, EventArgs e)
         {
             string userType = "";
-            string usr_driver = GetString(Resource.String.user_driver);
-            string usr_rider = GetString(Resource.String.user_rider);
 
             if (driver)
             {
-                
-                userType = usr_driver;
-                //Intent myIntent1 = new Intent(view.Context, typeof(DriverMode));
-                //myIntent1.PutExtra("numOfSeats", num);
-                //view.Context.StartActivity(myIntent1);
+                userType = "driver";
             }
             else
             {
-                userType = usr_rider;
-                //Intent myIntent2 = new Intent(view.Context, typeof(RiderMode));
-                //myIntent2.PutExtra("numOfPeople", num);
-                //view.Context.StartActivity(myIntent2);
+                userType = "rider";
             }
 
             listener.updateUserSelection(userType, num);

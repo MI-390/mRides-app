@@ -434,11 +434,26 @@ namespace mRides_app
         //Overriden method from interface of UserTypeFragment.cs
         public void updateUserSelection(string type, int number)
         {
-            userType = type;
+            userType = type; // Must send this to the server: "driver" or "rider"
             numberOfPeople = number;
+            string typeDisplayed = "";
+
+            // For multilingual
             string usrType = GetString(Resource.String.user_type);
+            string userDriver = GetString(Resource.String.user_driver);
+            string userRider = GetString(Resource.String.user_rider);
+
+            if (type == "driver")
+            {
+                typeDisplayed = userDriver;
+            }
+            else if (type == "rider")
+            {
+                typeDisplayed = userRider;
+            }
+
             string numOfPeople = GetString(Resource.String.number_of_people);
-            Toast.MakeText(ApplicationContext, usrType + " : " + userType + " " + numOfPeople + " : " + numberOfPeople, ToastLength.Long).Show();
+            Toast.MakeText(ApplicationContext, usrType + " : " + typeDisplayed + " " + numOfPeople + " : " + numberOfPeople, ToastLength.Long).Show();
         }
 
         
