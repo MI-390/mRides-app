@@ -60,12 +60,11 @@ namespace UnitTests.Mappers
         /// </summary>
         /// <param name="rideId">ID of the ride to which a rider will be added</param>
         /// <returns>The ride to which the rider has been added</returns>
-        public Ride AddRiderToRide(int rideid, int userid)
+        public Ride AddRiderToRide(int rideId)
         {
             object request = new
             {
-                rideid = rideid,
-                userid = userid
+                rideId = rideId
             };
             return SendPost<Ride>(ApiEndPointUrl.addRiderToRide, request, true);
         }

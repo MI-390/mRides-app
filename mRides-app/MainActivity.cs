@@ -82,7 +82,6 @@ namespace mRides_app
                     long facebookId = Convert.ToInt64(obj["id"]);
                     string facebookFirstName = obj["first_name"].ToString();
                     string facebookLastName = obj["last_name"].ToString();
-                    // string facebookPicture = obj["picture"].ToString();
 
                     // Try to obtain the user
                     UserMapper userMapper = UserMapper.getInstance();
