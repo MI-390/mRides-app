@@ -3,6 +3,7 @@ using mRides_app.Models;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using UnitTests.Mappers;
 
 namespace UnitTests
 {

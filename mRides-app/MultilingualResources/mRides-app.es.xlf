@@ -212,7 +212,11 @@
         </trans-unit>
         <trans-unit id="feedbackPopup" translate="yes" xml:space="preserve">
           <source>Click for Feedback popup!</source>
-          <target state="new">Click for Feedback popup!</target>
+          <target state="translated" state-qualifier="mt-suggestion">¡Haga clic para popup de comentarios!</target>
+        </trans-unit>
+        <trans-unit id="p_erson" translate="yes" xml:space="preserve">
+          <source>Person</source>
+          <target state="new">Person</target>
         </trans-unit>
         <trans-unit id="driverMatchAccept" translate="yes" xml:space="preserve">
           <source>Accept</source>

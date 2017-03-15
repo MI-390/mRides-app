@@ -53,4 +53,5 @@
   <string name="user_review">Revisar</string>
   <string name="viewUserProfile">Ver perfil</string>
   <string name="reviewUser">Revisar</string>
+  <string name="feedbackPopup">¡Haga clic para popup de comentarios!</string>
 </resources>
