@@ -27,11 +27,12 @@ using System.Json;
 using Newtonsoft.Json;
 using mRides_app.Models;
 using mRides_app.Mappers;
+using BottomNavigationBar;
 
 namespace mRides_app
 {
     [Activity(Label = "MapActivity")]
-    public class MapActivity : Activity, IOnMapReadyCallback, Android.Gms.Location.ILocationListener,
+    public class MapActivity : Activity, IOnMenuTabClickListener, IOnMapReadyCallback, Android.Gms.Location.ILocationListener,
         GoogleApiClient.IConnectionCallbacks, GoogleApiClient.IOnConnectionFailedListener, IPlaceSelectionListener, IEditUserSelectionListener
     {
         private const double MATCH_DISTANCE = 1.0;
@@ -50,6 +51,7 @@ namespace mRides_app
         const string googleApiKey = "AIzaSyAz9p6O99w8ZWkFUbaREJXmnj01Mpm19dA";
         string userType;
         int numberOfPeople;
+        private BottomBar _bottomBar;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -71,6 +73,12 @@ namespace mRides_app
             var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
             SetActionBar(toolbar);
             ActionBar.Title = "mRides";
+
+            _bottomBar = BottomBar.Attach(this, bundle);
+            _bottomBar.SetItems(Resource.Menu.bottombar_menu);
+            _bottomBar.SetOnMenuTabClickListener(this);
+
+
 
             string text = mRides_app.Models.User.currentUser.firstName;
 
