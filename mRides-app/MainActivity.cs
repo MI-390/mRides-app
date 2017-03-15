@@ -80,7 +80,7 @@ namespace mRides_app
                 {
                     // Obtain the content from the response]
                     var obj = JObject.Parse(response.GetResponseText());
-                    long facebookId = Convert.ToInt64(obj["id"]);
+                    long facebookId = Convert.ToInt64(obj["id"].ToString());
                     string facebookFirstName = obj["first_name"].ToString();
                     string facebookLastName = obj["last_name"].ToString();
                     // string facebookPicture = obj["picture"].ToString();
