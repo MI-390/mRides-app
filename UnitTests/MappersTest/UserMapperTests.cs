@@ -1,4 +1,5 @@
-﻿using mRides_app.Mappers;
+﻿using Android.Graphics;
+using mRides_app.Mappers;
 using mRides_app.Models;
 using NUnit.Framework;
 using System;
@@ -180,6 +181,25 @@ namespace UnitTests
                 }
             }
             Assert.True(successRiderToDriverFeedback);
+        }
+
+        /// <summary>
+        /// Ensure that the user profile picture of a user can be retrieved from facebook.
+        /// This test assumes that the GetUser() works.
+        /// </summary>
+        [Test]
+        public void UserProfilePicture()
+        {
+            UserMapper userMapper = UserMapper.getInstance();
+
+            // Set myself as David, the test user (ID = 8)
+            User.currentUser = userMapper.GetUser(8);
+
+            // Try to obtain the bitmap
+            Bitmap fbPicture = userMapper.GetUserFacebookProfilePicture(User.currentUser.facebookID);
+
+            // Assert that the bitmap is not null to ensure that the picture has been successfully obtained
+            Assert.True(fbPicture != null);
         }
     }
 }

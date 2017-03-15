@@ -37,7 +37,7 @@ namespace UITest
  .Android
 // TODO: Update this path to point to your Android app and uncomment the
 // code if the app is not included in the solution.
-.ApkFile("D:/Projects/mi-390/mRides-app/bin/Release//mRides_app.mRides_app-Signed.apk") //CHANGE THIS APK PATH
+.ApkFile("C:/Users/lim-p/Documents/GitHub/mRides-app/mRides-app/bin/Release//mRides_app.mRides_app-Signed.apk") //CHANGE THIS APK PATH
 .EnableLocalScreenshots().StartApp();
         }
 
@@ -121,6 +121,12 @@ namespace UITest
             app.Tap(c => c.Marked("place_autocomplete_search_input"));
         }
 
+        [Test]
+        public void UserProfilePicture()
+        {
+            app.Invoke("StartActivityFiveWithUserId");
+            app.WaitForElement(c => c.Marked("userPhoto"));
+        }
     }
 }
 

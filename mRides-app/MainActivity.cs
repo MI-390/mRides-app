@@ -53,6 +53,14 @@ namespace mRides_app
             StartActivity(i);
         }
 
+        [Java.Interop.Export("StartActivityFiveWithUserId")]
+        public void StartActivityFiveWithUserId()
+        {
+            Intent i = new Intent(this, typeof(UserProfileActivity));
+            i.PutExtra("id", "8");
+            StartActivity(i);
+        }
+
         void LoginToFacebook(bool allowCancel)
         {
             var auth = new OAuth2Authenticator(
@@ -125,10 +133,10 @@ namespace mRides_app
             SetContentView(Resource.Layout.Main);
 
             var facebook = FindViewById<Button>(Resource.Id.loginButton);
-            facebook.Click += delegate {
+            facebook.Click += delegate
+            {
                 LoginToFacebook(true);
             };
-
 
             //var facebookNoCancel = FindViewById<Button>(Resource.Id.FacebookButtonNoCancel);
             // facebookNoCancel.Click += delegate { LoginToFacebook(false); };
