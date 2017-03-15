@@ -4,7 +4,8 @@
   <item
       android:id="@+id/menu_calendar"
       android:icon="@drawable/calendar"
-      android:title="Calendar" />
+      android:showAsAction="always"
+      android:title="Upcoming Rides"/>
   <item
       android:id="@+id/menu_user"
       android:icon="@drawable/user"
