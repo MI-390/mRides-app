@@ -28,6 +28,7 @@ using Newtonsoft.Json;
 using mRides_app.Models;
 using mRides_app.Mappers;
 using BottomNavigationBar;
+using BottomNavigationBar.Listeners;
 
 namespace mRides_app
 {
@@ -75,7 +76,7 @@ namespace mRides_app
             ActionBar.Title = "mRides";
 
             _bottomBar = BottomBar.Attach(this, bundle);
-            _bottomBar.SetItems(Resource.Menu.bottombar_menu);
+            _bottomBar.SetItems(Resource.Menu.bottombar);
             _bottomBar.SetOnMenuTabClickListener(this);
 
 
@@ -437,6 +438,16 @@ namespace mRides_app
             string usrType = GetString(Resource.String.user_type);
             string numOfPeople = GetString(Resource.String.number_of_people);
             Toast.MakeText(ApplicationContext, usrType + " : " + userType + " " + numOfPeople + " : " + numberOfPeople, ToastLength.Long).Show();
+        }
+
+        public void OnMenuTabSelected(int menuItemId)
+        {
+            
+        }
+
+        public void OnMenuTabReSelected(int menuItemId)
+        {
+           
         }
     }
 }
