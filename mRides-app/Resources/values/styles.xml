@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <resources>
-  <style name="mRidesTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+  <style name="mRidesTheme" parent="@android:style/Theme.Material.Light.DarkActionBar">
       <item name="android:windowNoTitle">true</item>
       <!--Replace action bar with toolbar-->
       <item name="android:windowActionBar">false</item>
@@ -10,7 +10,7 @@
       <item name="android:colorPrimaryDark">#EF5350</item>
       <!-- colorAccent is used as the default value for colorControlActivated
            which is used to tint widgets -->
-      <item name="android:colorAccent">#EF5350</item>
+      <item name="android:colorAccent">#FF4081</item>
   	  <!-- You can also set colorControlNormal, colorControlActivated
            colorControlHighlight and colorSwitchThumbNormal. -->
     </style>

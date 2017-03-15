@@ -100,8 +100,8 @@ namespace mRides_app
             var items = await firebase.Child(chatName)
                 .OnceAsync<MessagingService.MessageContent>();
 
-            foreach (var item in items)
-                listMessage.Add(item.Object);
+            foreach (var ImageButton in items)
+                listMessage.Add(ImageButton.Object);
 
             // create a new adapter that takes the list of messages
             MessagingService.ListViewAdapter adapter = new MessagingService.ListViewAdapter(this, listMessage);
