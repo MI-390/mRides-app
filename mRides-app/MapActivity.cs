@@ -27,7 +27,8 @@ using System.Json;
 using Newtonsoft.Json;
 using mRides_app.Models;
 using mRides_app.Mappers;
-
+using Android.Support.Design.Widget;
+using Android.Support.V7.App;
 
 namespace mRides_app
 {
@@ -74,9 +75,9 @@ namespace mRides_app
             SetActionBar(toolbar);
             ActionBar.Title = "mRides";
 
-            var toolbar_bot = FindViewById<Toolbar>(Resource.Id.toolbar_bot);
-            toolbar_bot.InflateMenu(Resource.Menu.bottombar);
-
+            //var toolbar_bot = FindViewById<BottomNavigationView>(Resource.Id.toolbar_bot);
+            //toolbar_bot.InflateMenu(Resource.Menu.bottombar);
+            
 
 
 

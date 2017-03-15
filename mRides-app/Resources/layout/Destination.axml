@@ -33,13 +33,15 @@
             android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
             android:layout_width="match_parent"
             android:layout_height="46.0dp" />
-        <Toolbar
+      
+     
+            
+    </LinearLayout>
+  <android.support.design.widget.BottomNavigationView
             android:id="@+id/toolbar_bot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="?android:attr/actionBarSize"
-            android:background="?android:attr/colorAccent"
-            android:theme="@android:style/ThemeOverlay.Material.Dark.ActionBar"
-            android:layout_alignParentBottom="true" />
-    </LinearLayout>
+            android:layout_alignParentBottom="true"
+            local:itemBackground="?android:attr/colorPrimary"
+            local:menu="@menu/bottombar"/>
 </RelativeLayout>
