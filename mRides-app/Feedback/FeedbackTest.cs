@@ -22,6 +22,7 @@ namespace mRides_app.Feedback
             SetContentView(Resource.Layout.Alert);
             var feedbackButton = FindViewById<Button>(Resource.Id.openFeedbackAlert);
 
+            // To be used when adding reviews at the end of a ride
             feedbackButton.Click += (sender, args) =>
             {
                 Android.App.AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -32,10 +33,7 @@ namespace mRides_app.Feedback
                 // Positive
                 ad.SetButton("Yes", (s, e) => {
                     Console.WriteLine("Yes button clicked, alert dismissed");
-                    //if driver
-                    openDriverFragment();
-                    //if rider
-                    //openRiderFragment();
+                    openLeaveReviewFragment();
                 });
                 // Negative
                 ad.SetButton2("No", (s, e) => { Console.WriteLine("No button clicked, alert dismissed"); });
@@ -46,20 +44,11 @@ namespace mRides_app.Feedback
         }
 
         // Method to open the driver fragment to make a review for a Driver
-        void openDriverFragment()
+        void openLeaveReviewFragment()
         {
             FragmentTransaction transaction = FragmentManager.BeginTransaction();
-            DriverReview dialog = new DriverReview();
-            dialog.Show(transaction, "Driver Review Fragment");
-        }
-
-
-        // Method to open the rider fragment to make a review for a Rider
-        void openRiderFragment()
-        {
-            FragmentTransaction transaction = FragmentManager.BeginTransaction();
-            RiderReview dialog = new RiderReview();
-            dialog.Show(transaction, "Rider Review Fragment");
+            LeaveReviewFragment dialog = new LeaveReviewFragment();
+            dialog.Show(transaction, "Review Fragment");
         }
     }
 }

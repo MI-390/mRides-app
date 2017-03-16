@@ -9,6 +9,8 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using mRides_app.Mappers;
+
 namespace mRides_app
 {
 
@@ -33,12 +35,6 @@ namespace mRides_app
         public UserProfileFeedbackAdapter(Activity activity)
         {
             context = activity;
-            FillFeedbacks();
-        }
-
-        void FillFeedbacks()
-        {
-
         }
 
         public override int Count
@@ -72,6 +68,15 @@ namespace mRides_app
             dateOfFeedback.Text = feedbackList.ElementAt(position).time;
             ratingBarOfFeedback.NumStars = feedbackList.ElementAt(position).stars;
             reviewOfFeedback.Text = feedbackList.ElementAt(position).feedback;
+
+            // Get the picture of the reviewer from the mapper
+            UserMapper userMapper = UserMapper.getInstance();
+            var facebookPictureBitMap = userMapper.GetUserFacebookProfilePicture(feedbackList.ElementAt(position).givenBy.facebookID);
+            if(facebookPictureBitMap != null)
+            {
+                var reviewerProfilePicture = view.FindViewById<ImageView>(Resource.Id.feedbackFragmentUserProfilePicture);
+                reviewerProfilePicture.SetImageBitmap(facebookPictureBitMap);
+            }
 
             return view;
         }

@@ -11,13 +11,14 @@ using Android.Views;
 using Android.Widget;
 
 using mRides_app.Models;
+using mRides_app.Mappers;
 
-namespace mRides_app.Mappers
+namespace UnitTests.Mappers
 {
     /**
      * This mapper class is only used for testing purposes in order to populate requests.
      * It should never be used by the activities in the app.
-     */ 
+     */
     public class RequestMapper : AbstractMapper
     {
         private RequestMapper() { }

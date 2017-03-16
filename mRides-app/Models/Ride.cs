@@ -19,14 +19,14 @@ namespace mRides_app.Models
         public string location { get; set; }
         public DateTime dateTime { get; set; }
         public Boolean isWeekly { get; set; }
-
+        public string type;
 
         //1 Driver per Ride
         public int? DriverID { get; set; }
         public User Driver { get; set; }
 
         //Many Riders through an association table
-        public ICollection<UserRides> UserRides { get; set; }
+        public List<UserRides> UserRides { get; set; }
 
 
         /// <summary>
