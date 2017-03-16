@@ -7,6 +7,7 @@
     android:background="@drawable/background_mrides"
     android:minWidth="25px"
     android:minHeight="25px">
+<!--My Rides-->
     <LinearLayout
         android:orientation="vertical"
         android:minWidth="25px"
@@ -24,6 +25,7 @@
             android:layout_marginTop="39.5dp"
             android:textColor="#ffffff" />
     </LinearLayout>
+<!--Message displayed to tell user to cancel rides (if desired)-->
     <LinearLayout
         android:orientation="vertical"
         android:minWidth="25px"
@@ -52,6 +54,7 @@
         android:background="#6E6767"
         android:alpha="0.58">
         <TableRow>
+        <!--First column of first row : Riders-->
             <FrameLayout
                 android:layout_height="wrap_content"
                 android:layout_width="0dp"
@@ -73,6 +76,7 @@
                     android:textStyle="bold"
                     android:textColor="#ffffff" />
             </FrameLayout>
+        <!--Second column of first row : Pick-up location of riders-->
             <FrameLayout
                 android:layout_height="wrap_content"
                 android:layout_width="0dp"
@@ -95,6 +99,7 @@
                     android:textStyle="bold"
                     android:fontFamily="helvetica" />
             </FrameLayout>
+        <!--Third column of first row: Driver decides what ride he/she wishes to cancel by checking the box-->
             <FrameLayout
                 android:layout_height="wrap_content"
                 android:layout_width="0dp"
