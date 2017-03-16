@@ -393,6 +393,12 @@ namespace mRides_app
 			// aapt resource value: 0x7f04001d
 			public const int dest = 2130968605;
 			
+			// aapt resource value: 0x7f040033
+			public const int driverMatchAccept = 2130968627;
+			
+			// aapt resource value: 0x7f040034
+			public const int driverMatchDecline = 2130968628;
+			
 			// aapt resource value: 0x7f040014
 			public const int fb = 2130968596;
 			
@@ -404,6 +410,9 @@ namespace mRides_app
 			
 			// aapt resource value: 0x7f040026
 			public const int gender = 2130968614;
+			
+			// aapt resource value: 0x7f040035
+			public const int going_to_destination = 2130968629;
 			
 			// aapt resource value: 0x7f040024
 			public const int handicap = 2130968612;
