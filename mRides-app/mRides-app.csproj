@@ -290,6 +290,8 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\List_Item.axml">
+	  <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\DriverAcceptDeclineMatch.axml">
       <SubType>Designer</SubType>
     </AndroidResource>

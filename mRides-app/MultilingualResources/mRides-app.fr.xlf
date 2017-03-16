@@ -230,7 +230,23 @@
           <source>""1"",""2"",""3"",""4"",""5"",""6""</source>
           <target state="new">""1"",""2"",""3"",""4"",""5"",""6""</target>
         </trans-unit>
+        <trans-unit id="message" translate="yes" xml:space="preserve">
+          <source>Chat</source>
+          <target state="new">Chat</target>
+        </trans-unit>
+        <trans-unit id="firebase_database_url" translate="yes" xml:space="preserve">
+          <source>https://mrides-155403.firebaseio.com/</source>
+          <target state="new">https://mrides-155403.firebaseio.com/</target>
+        </trans-unit>
       </group>
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="fr" original="MRIDES-APP/RESOURCES/VALUES/STYLES.XML" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1795.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="MRIDES-APP/RESOURCES/VALUES/STYLES.XML" datatype="resx" />
     </body>
   </file>
 </xliff>
