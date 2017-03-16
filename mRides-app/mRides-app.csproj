@@ -220,6 +220,7 @@
     <Compile Include="MessagingService\ListViewAdapter.cs" />
     <Compile Include="MessagingService\MessageContent.cs" />
     <Compile Include="MessagingService\FirebaseIIDService.cs" />
+    <Compile Include="DriverAcceptDeclineMatchActivity.cs" />
     <Compile Include="LeaveReviewFragment.cs" />
     <Compile Include="MapActivity.cs" />
     <Compile Include="Authentication\Facebook.cs" />
@@ -289,6 +290,7 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\List_Item.axml">
+    <AndroidResource Include="Resources\layout\DriverAcceptDeclineMatch.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -382,6 +384,16 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\map.png" />
+    <AndroidResource Include="Resources\drawable\loyolaTest.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\mcgill_test.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\smsicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\smsicongray.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.Xamarin.Android.targets" Label="MultilingualAppToolkit" Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\v$(MultilingualAppToolkitVersion)\Microsoft.Multilingual.Xamarin.Android.targets')" />
