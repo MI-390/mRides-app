@@ -7,10 +7,10 @@
       <!-- colorPrimary is used for the default action bar background -->
       <item name="android:colorPrimary">#EF5350</item>
       <!-- colorPrimaryDark is used for the status bar -->
-      <item name="android:colorPrimaryDark">#EF5350</item>
+      <item name="android:colorPrimaryDark">#ba3c39</item>
       <!-- colorAccent is used as the default value for colorControlActivated
            which is used to tint widgets -->
-      <item name="android:colorAccent">#FF4081</item>
+      <item name="android:colorAccent">#ffffff</item>
   	  <!-- You can also set colorControlNormal, colorControlActivated
            colorControlHighlight and colorSwitchThumbNormal. -->
     </style>
