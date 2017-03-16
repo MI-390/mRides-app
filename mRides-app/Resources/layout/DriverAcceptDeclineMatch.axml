@@ -88,7 +88,7 @@
             android:src="@android:drawable/ic_menu_gallery"
             android:layout_width="match_parent"
             android:layout_height="43.5dp"
-            android:id="@+id/imageView1"
+            android:id="@+id/driverAcceptDeclineMatchRiderPicture"
             android:layout_marginTop="5.5dp" />
         <TextView
             android:text="Thomas Grey"
