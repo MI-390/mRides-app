@@ -14,7 +14,7 @@ namespace mRides_app
 {
     public interface IStartDrivingModeListener
     {
-        void enterDriverMode(string id);
+        void enterDriverMode(double latitude, double longitude);
     }
 
     class UserProfileFragment : DialogFragment
@@ -26,6 +26,7 @@ namespace mRides_app
         TextView username;
         IStartDrivingModeListener listener;
         string userID;
+        string location;
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             // Use this to return your custom view for this Fragment
@@ -36,6 +37,7 @@ namespace mRides_app
             username = view.FindViewById<TextView>(Resource.Id.userProfileFragmentName);
             username.Text = args.GetString("name");
             userID = (args.GetString("id"));
+            location = args.GetString("location");
             viewProfile = view.FindViewById<Button>(Resource.Id.viewProfileFragmentButton);
             reviewButton = view.FindViewById<Button>(Resource.Id.reviewFragmentButton);
             pickUpButton = view.FindViewById<Button>(Resource.Id.pickUpButton);
@@ -74,8 +76,8 @@ namespace mRides_app
 
         void PickUpButtonClicked(object sender, EventArgs e)
         {
-            listener.enterDriverMode(userID);
-            Dismiss();
+            string[] splitCoordinates = location.Split(',');
+            listener.enterDriverMode(Double.Parse(splitCoordinates[0]), Double.Parse(splitCoordinates[1]));
         }
 
     }
