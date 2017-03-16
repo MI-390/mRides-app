@@ -35,37 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="46.0dp" />
     </LinearLayout>
-    <LinearLayout
-        android:id="@+id/topBorderedLayout"
-        android:layout_height="44dp"
-        android:layout_width="match_parent"
-        android:layout_alignParentBottom="true"
-        android:gravity="bottom"
-        android:orientation="vertical">
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#D3D3D3"
-            android:id="@+id/view_toolbar" />
-        <Toolbar
-            android:gravity="center"
-            android:id="@+id/toolbar_bot"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#ffffff"
-            android:theme="@android:style/ThemeOverlay.Material.Dark.ActionBar">
-            <LinearLayout
-                android:gravity="center"
-                local:contentInsetLeft="0dp"
-                local:contentInsetStart="0dp"
-                android:layout_width="fill_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:background="@drawable/top_border">
-                <include
-                    android:id="@+id/toolbar111"
-                    layout="@menu/bottombar" />
-            </LinearLayout>
-        </Toolbar>
-    </LinearLayout>
+    <include
+        android:id="@+id/toolbar_bottom"
+        layout="@layout/toolbar_bottom" />
 </RelativeLayout>
