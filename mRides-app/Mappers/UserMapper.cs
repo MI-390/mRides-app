@@ -14,6 +14,8 @@ using mRides_app.Models;
 using RestSharp;
 using RestSharp.Authenticators;
 using Newtonsoft.Json;
+using Android.Graphics;
+using System.Net;
 
 namespace mRides_app.Mappers
 {
@@ -118,6 +120,60 @@ namespace mRides_app.Mappers
             }
 
             return feedbacks;
+        }
+
+
+        // ---------------------------------------------------------------------------
+        // CALLS TO FACEBOOK
+        // ---------------------------------------------------------------------------
+
+        /// <summary>
+        /// Given the facebook ID of a user, this method will retrieve the profile picture of 
+        /// the user, and return a bitmap of that image, or null if any exceptions occur
+        /// while attempting to retrieve or convert the image, most likely because the provided
+        /// ID is wrong.
+        /// </summary>
+        /// <param name="facebookId">Facebook ID of the user for which we want the profile picture</param>
+        /// <returns>Bitmap object representing the picture</returns>
+        public Bitmap GetUserFacebookProfilePicture(long facebookId)
+        {
+            Bitmap facebookPicture;
+            try
+            {
+                facebookPicture = GetImageBitmapFromUrl("http://graph.facebook.com/" + facebookId + "/picture?type=large");
+            }
+            catch(Exception e)
+            {
+                facebookPicture = null;
+            }
+            return facebookPicture;
+        }
+
+
+        // ---------------------------------------------------------------------------
+        // HELPER METHODS
+        // ---------------------------------------------------------------------------
+
+        /// <summary>
+        /// This method takes in the URL that goes to an image, and converts
+        /// the image into a bitmap to be returned.
+        /// </summary>
+        /// <param name="url">URL representing the image</param>
+        /// <returns>Bitmap of the image</returns>
+        private Bitmap GetImageBitmapFromUrl(string url)
+        {
+            Bitmap imageBitmap = null;
+
+            using (var webClient = new WebClient())
+            {
+                var imageBytes = webClient.DownloadData(url);
+                if (imageBytes != null && imageBytes.Length > 0)
+                {
+                    imageBitmap = BitmapFactory.DecodeByteArray(imageBytes, 0, imageBytes.Length);
+                }
+            }
+
+            return imageBitmap;
         }
     }
 }
