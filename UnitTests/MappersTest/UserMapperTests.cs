@@ -4,6 +4,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using UnitTests.Mappers;
+using System.Threading;
 
 namespace UnitTests
 {
@@ -180,6 +181,37 @@ namespace UnitTests
                 }
             }
             Assert.True(successRiderToDriverFeedback);
+        }
+
+        /**
+        * Test whether we are able to successfully get the reviews of a user
+        * NOT RUN YET
+        */
+        [Test]
+        public void GetGSDTest()
+        {
+            UserMapper userMapper = UserMapper.getInstance();
+
+            // Create a test user
+            User testUser = new User
+            {
+                id = 666,
+                firstName = "Test",
+                lastName = "User",
+                genderPreference = "male",
+                gsd = 15,
+                hasLuggage = false,
+                isHandicap = false,
+                isSmoker = false,
+                hasPet = false,
+                prefferedLanguage = "en-ca"
+            };
+      
+            testUser = userMapper.CreateUser(testUser);
+
+            Thread.Sleep(5000);
+
+            Assert.AreEqual(userMapper.GetGSD(666), 888);
         }
 
     }

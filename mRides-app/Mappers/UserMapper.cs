@@ -112,7 +112,7 @@ namespace mRides_app.Mappers
         /**
         * Obtain a user's GSD amount
         */
-        public long GetUserGSD(int userId)
+        public long GetGSD(int userId)
         {
             return SendGetWithUrlSegment<long>(ApiEndPointUrl.getGSD, "id", userId.ToString());
         }
@@ -122,7 +122,9 @@ namespace mRides_app.Mappers
         */
         public long setGSD(int userId, long amountGSD)
         {
-            User u = SendGetWithUrlSegment<User>(ApiEndPointUrl.getUser, "id", userId.ToString());
+            UserMapper um = UserMapper.getInstance();
+            User u = um.GetUser(userId);
+            //User u = SendGetWithUrlSegment<User>(ApiEndPointUrl.getUser, "id", userId.ToString());
             SendPost<long>(ApiEndPointUrl.setGSD, u, true);
             return u.gsd;
         }
