@@ -29,7 +29,7 @@ namespace mRides_app
     /// <summary>
     /// Implementation of the chat activity
     /// </summary>
-    [Activity(Label = "ChatListActivity", MainLauncher = true, Icon = "@drawable/icon", Theme = "@style/Theme.AppCompat.Light.NoActionBar")]
+    [Activity(Label = "ChatListActivity", Icon = "@drawable/icon", Theme = "@style/Theme.AppCompat.Light.NoActionBar")]
     public class ChatListActivity : AppCompatActivity
     {
         private FirebaseClient firebase;
@@ -39,14 +39,25 @@ namespace mRides_app
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Chats);
+            var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
+            SetActionBar(toolbar);
+            ActionBar.Title = "mRides";
 
-            
             getFirebase();
 
             listView = FindViewById<ListView>(Resource.Id.List); // get reference to the ListView in the layout
                                                                  // populate the listview with data
             listView.Adapter = new ChatAdapter(this, chatList);
             listView.ItemClick += OnListItemClick;  // to be defined
+
+
+            //Menu bar
+            var chatMenuButton = FindViewById<ImageButton>(Resource.Id.menu_map);
+            chatMenuButton.Click += delegate
+            {
+                Intent i = new Intent(this, typeof(MapActivity));
+                StartActivity(i);
+            };
 
         }
         void OnListItemClick(object sender, AdapterView.ItemClickEventArgs e)
