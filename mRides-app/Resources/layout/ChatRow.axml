@@ -1,36 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
-   android:layout_width="fill_parent"
-   android:layout_height="wrap_content"
-   android:background="#ffffff"
-   android:padding="8dp">
-  <ImageView
-     android:id="@+id/Image"
-     android:layout_width="48dp"
-     android:layout_height="48dp"
-     android:padding="5dp"
-     android:src="@drawable/icon"
-     android:layout_alignParentLeft="true" />
-  <LinearLayout android:id="@+id/Text"
-     android:orientation="vertical"
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     android:paddingLeft="10dip">
-    <TextView
-     android:id="@+id/Text1"
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     android:textColor="?android:attr/colorPrimary"
-     android:textSize="20dip"
-     android:textStyle="italic"
-         />
-    <TextView
-     android:id="@+id/Text2"
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     android:textSize="14dip"
-     android:textColor="#808080"
-         />
-  </LinearLayout>
- 
-</RelativeLayout >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:padding="8dp">
+    <ImageView
+        android:id="@+id/Image"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:padding="5dp"
+        android:src="@drawable/icon"
+        android:layout_alignParentLeft="true" />
+    <LinearLayout
+        android:id="@+id/Text"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dip">
+        <TextView
+            android:id="@+id/Text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#A9A9A9"
+            android:text="ddddd"
+            android:textSize="20dip"
+            android:paddingLeft="38dip"/>
+        
+    </LinearLayout>
+</RelativeLayout>

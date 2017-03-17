@@ -228,6 +228,7 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="MessagingActivity.cs" />
     <Compile Include="MessagingService\FirebaseMessagingService.cs" />
+    <Compile Include="Models\ChatList.cs" />
     <Compile Include="Models\Feedback.cs" />
     <Compile Include="Models\Request.cs" />
     <Compile Include="Models\Ride.cs" />

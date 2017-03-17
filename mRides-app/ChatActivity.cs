@@ -58,7 +58,7 @@ namespace mRides_app
             sendButton = FindViewById<Button>(Resource.Id.sendMsgButton);
             editChat = FindViewById<EditText>(Resource.Id.chatMsg);
             listChat = FindViewById<ListView>(Resource.Id.list_of_messages);
-
+            createMetaFields();
             DisplayChatMessage();
             Log.Debug("CHAT", "InstanceID token: " + FirebaseInstanceId.Instance.Token);
             sendButton.Click += delegate
@@ -69,8 +69,8 @@ namespace mRides_app
         private async void createMetaFields()
         {
             int userId = Convert.ToInt32(Intent.GetStringExtra("id"));
-            await firebase.Child(chatName + "/user1").PostAsync(User.currentUser);
-            await firebase.Child(chatName + "/user2").PostAsync(UserMapper.getInstance().GetUser(userId));
+            await firebase.Child(chatName + "/user1").PatchAsync(User.currentUser);
+            await firebase.Child(chatName + "/user2").PatchAsync(UserMapper.getInstance().GetUser(userId));
         }
         /// <summary>
         /// Method to send a message to the chat interface
