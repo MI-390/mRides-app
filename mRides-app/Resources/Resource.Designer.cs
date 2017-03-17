@@ -453,11 +453,11 @@ namespace mRides_app
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f090061
-			public const int CloseButton = 2131296353;
-			
 			// aapt resource value: 0x7f090062
-			public const int Next = 2131296354;
+			public const int CloseButton = 2131296354;
+			
+			// aapt resource value: 0x7f090063
+			public const int Next = 2131296355;
 			
 			// aapt resource value: 0x7f090025
 			public const int acceptDeclineSpace = 2131296293;
@@ -498,8 +498,8 @@ namespace mRides_app
 			// aapt resource value: 0x7f090051
 			public const int divider = 2131296337;
 			
-			// aapt resource value: 0x7f09005f
-			public const int driver1 = 2131296351;
+			// aapt resource value: 0x7f090060
+			public const int driver1 = 2131296352;
 			
 			// aapt resource value: 0x7f090024
 			public const int driverMatchButtonAccept = 2131296292;
@@ -582,11 +582,14 @@ namespace mRides_app
 			// aapt resource value: 0x7f090002
 			public const int normal = 2131296258;
 			
-			// aapt resource value: 0x7f090060
-			public const int numOfPeople = 2131296352;
+			// aapt resource value: 0x7f090061
+			public const int numOfPeople = 2131296353;
 			
 			// aapt resource value: 0x7f09000d
 			public const int openFeedbackAlert = 2131296269;
+			
+			// aapt resource value: 0x7f09005d
+			public const int pickUpButton = 2131296349;
 			
 			// aapt resource value: 0x7f090030
 			public const int place_autocomplete_clear_button = 2131296304;
@@ -657,11 +660,11 @@ namespace mRides_app
 			// aapt resource value: 0x7f090027
 			public const int reviewText1 = 2131296295;
 			
-			// aapt resource value: 0x7f09005d
-			public const int rider1 = 2131296349;
-			
 			// aapt resource value: 0x7f09005e
-			public const int riderOrDriverSwitch = 2131296350;
+			public const int rider1 = 2131296350;
+			
+			// aapt resource value: 0x7f09005f
+			public const int riderOrDriverSwitch = 2131296351;
 			
 			// aapt resource value: 0x7f090003
 			public const int satellite = 2131296259;
