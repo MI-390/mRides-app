@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <item
+      android:id="@+id/menu_calendar"
+      android:icon="@drawable/calendar"
+      android:showAsAction="always"
+      android:title="Upcoming Rides"/>
+  <item
+      android:id="@+id/menu_user"
+      android:icon="@drawable/user"
+      android:showAsAction="always"
+      android:title="Profile" />
+  <item
+      android:id="@+id/menu_map"
+      android:icon="@drawable/map"
+      android:showAsAction="always"
+      android:title="Map"/>
+  <item
+      android:id="@+id/menu_chat"
+      android:icon="@drawable/chat"
+      android:showAsAction="always"
+      android:title="Chat"/>
+  <item
+      android:id="@+id/menu_settings"
+      android:icon="@drawable/settings"
+      android:showAsAction="always"
+      android:title="Settings" />
+</menu>

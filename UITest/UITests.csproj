@@ -50,9 +50,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UITestSample.cs" />
+    <Compile Include="TestFeedback.cs" />
+    <Compile Include="TestRideInformationcs.cs" />
+    <Compile Include="TestUserProfile.cs" />
+    <Compile Include="TestFacebookAuthentication.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
