@@ -19,6 +19,8 @@ using Android.Gms.Common; // For FCM
 using Firebase.Messaging;
 using Firebase.Iid;
 using Android.Util;
+using mRides_app.Models;
+using mRides_app.Mappers;
 
 namespace mRides_app
 {
@@ -52,7 +54,7 @@ namespace mRides_app
             chatName = Intent.GetStringExtra("ChatName");
             firebase = new FirebaseClient(GetString(Resource.String.firebase_database_url));
             // adding listener to "chats" everytime this activity is run
-            FirebaseDatabase.Instance.GetReference(chatName).AddValueEventListener(this);
+            FirebaseDatabase.Instance.GetReference(chatName+"/messages").AddValueEventListener(this);
             sendButton = FindViewById<Button>(Resource.Id.sendMsgButton);
             editChat = FindViewById<EditText>(Resource.Id.chatMsg);
             listChat = FindViewById<ListView>(Resource.Id.list_of_messages);
@@ -64,7 +66,12 @@ namespace mRides_app
                 PostMessage();
             };
         }
-
+        private async void createMetaFields()
+        {
+            int userId = Convert.ToInt32(Intent.GetStringExtra("id"));
+            await firebase.Child(chatName + "/user1").PostAsync(User.currentUser);
+            await firebase.Child(chatName + "/user2").PostAsync(UserMapper.getInstance().GetUser(userId));
+        }
         /// <summary>
         /// Method to send a message to the chat interface
         /// ***We will have to get the user's name and replace it 
@@ -72,7 +79,7 @@ namespace mRides_app
         private async void PostMessage()
         {
             // Post a message to "chats" specifically by creating a new MessageContent which takes a username and a text as parameters
-            var items = await firebase.Child(chatName).PostAsync(new MessagingService.MessageContent(userName, editChat.Text));
+            var items = await firebase.Child(chatName+"/messages").PostAsync(new MessagingService.MessageContent(userName, editChat.Text));
             editChat.Text = ""; // empty the text field
         }
 
@@ -96,7 +103,7 @@ namespace mRides_app
         private async void DisplayChatMessage()
         {
             listMessage.Clear();
-            var items = await firebase.Child(chatName)
+            var items = await firebase.Child(chatName+"/messages")
                 .OnceAsync<MessagingService.MessageContent>();
             
             foreach (var ImageButton in items)
