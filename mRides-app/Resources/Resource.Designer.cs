@@ -432,7 +432,13 @@ namespace mRides_app
 			public const int powered_by_google_light = 2130837557;
 			
 			// aapt resource value: 0x7f020036
-			public const int userIcon2 = 2130837558;
+			public const int smsicon = 2130837558;
+			
+			// aapt resource value: 0x7f020037
+			public const int smsicongray = 2130837559;
+			
+			// aapt resource value: 0x7f020038
+			public const int userIcon2 = 2130837560;
 			
 			static Drawable()
 			{
@@ -447,11 +453,14 @@ namespace mRides_app
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f090060
-			public const int CloseButton = 2131296352;
-			
 			// aapt resource value: 0x7f090061
-			public const int Next = 2131296353;
+			public const int CloseButton = 2131296353;
+			
+			// aapt resource value: 0x7f090062
+			public const int Next = 2131296354;
+			
+			// aapt resource value: 0x7f090025
+			public const int acceptDeclineSpace = 2131296293;
 			
 			// aapt resource value: 0x7f090005
 			public const int adjust_height = 2131296261;
@@ -462,11 +471,14 @@ namespace mRides_app
 			// aapt resource value: 0x7f09000a
 			public const int auto = 2131296266;
 			
-			// aapt resource value: 0x7f090046
-			public const int buttonBack = 2131296326;
+			// aapt resource value: 0x7f090022
+			public const int button1 = 2131296290;
 			
 			// aapt resource value: 0x7f090047
-			public const int buttonDone = 2131296327;
+			public const int buttonBack = 2131296327;
+			
+			// aapt resource value: 0x7f090048
+			public const int buttonDone = 2131296328;
 			
 			// aapt resource value: 0x7f09000b
 			public const int dark = 2131296267;
@@ -483,44 +495,41 @@ namespace mRides_app
 			// aapt resource value: 0x7f09001b
 			public const int displayTime = 2131296283;
 			
-			// aapt resource value: 0x7f090050
-			public const int divider = 2131296336;
+			// aapt resource value: 0x7f090051
+			public const int divider = 2131296337;
 			
-			// aapt resource value: 0x7f09005e
-			public const int driver1 = 2131296350;
-			
-			// aapt resource value: 0x7f09001d
-			public const int driverAcceptDeclineMatchRiderPicture = 2131296285;
+			// aapt resource value: 0x7f09005f
+			public const int driver1 = 2131296351;
 			
 			// aapt resource value: 0x7f090024
 			public const int driverMatchButtonAccept = 2131296292;
 			
-			// aapt resource value: 0x7f090025
-			public const int driverMatchButtonDecline = 2131296293;
-			
-			// aapt resource value: 0x7f090054
-			public const int feedbackDateProfileFragment = 2131296340;
-			
-			// aapt resource value: 0x7f090052
-			public const int feedbackFragmentLinearLayout1 = 2131296338;
-			
-			// aapt resource value: 0x7f090057
-			public const int feedbackFragmentRatingBar = 2131296343;
-			
-			// aapt resource value: 0x7f090058
-			public const int feedbackFragmentReview = 2131296344;
-			
-			// aapt resource value: 0x7f090056
-			public const int feedbackFragmentUserName = 2131296342;
+			// aapt resource value: 0x7f090026
+			public const int driverMatchButtonDecline = 2131296294;
 			
 			// aapt resource value: 0x7f090055
-			public const int feedbackFragmentUserProfilePicture = 2131296341;
+			public const int feedbackDateProfileFragment = 2131296341;
 			
 			// aapt resource value: 0x7f090053
-			public const int feedbackPageDivider = 2131296339;
+			public const int feedbackFragmentLinearLayout1 = 2131296339;
 			
-			// aapt resource value: 0x7f09004e
-			public const int genderImage = 2131296334;
+			// aapt resource value: 0x7f090058
+			public const int feedbackFragmentRatingBar = 2131296344;
+			
+			// aapt resource value: 0x7f090059
+			public const int feedbackFragmentReview = 2131296345;
+			
+			// aapt resource value: 0x7f090057
+			public const int feedbackFragmentUserName = 2131296343;
+			
+			// aapt resource value: 0x7f090056
+			public const int feedbackFragmentUserProfilePicture = 2131296342;
+			
+			// aapt resource value: 0x7f090054
+			public const int feedbackPageDivider = 2131296340;
+			
+			// aapt resource value: 0x7f09004f
+			public const int genderImage = 2131296335;
 			
 			// aapt resource value: 0x7f090000
 			public const int hybrid = 2131296256;
@@ -528,8 +537,11 @@ namespace mRides_app
 			// aapt resource value: 0x7f090007
 			public const int icon_only = 2131296263;
 			
-			// aapt resource value: 0x7f09002a
-			public const int imageView2 = 2131296298;
+			// aapt resource value: 0x7f09001d
+			public const int imageView1 = 2131296285;
+			
+			// aapt resource value: 0x7f09002b
+			public const int imageView2 = 2131296299;
 			
 			// aapt resource value: 0x7f09000c
 			public const int light = 2131296268;
@@ -558,11 +570,8 @@ namespace mRides_app
 			// aapt resource value: 0x7f090020
 			public const int linearLayout8 = 2131296288;
 			
-			// aapt resource value: 0x7f090022
-			public const int linearLayout9 = 2131296290;
-			
-			// aapt resource value: 0x7f09002c
-			public const int loginButton = 2131296300;
+			// aapt resource value: 0x7f09002d
+			public const int loginButton = 2131296301;
 			
 			// aapt resource value: 0x7f09000e
 			public const int map = 2131296270;
@@ -573,125 +582,125 @@ namespace mRides_app
 			// aapt resource value: 0x7f090002
 			public const int normal = 2131296258;
 			
-			// aapt resource value: 0x7f09005f
-			public const int numOfPeople = 2131296351;
+			// aapt resource value: 0x7f090060
+			public const int numOfPeople = 2131296352;
 			
 			// aapt resource value: 0x7f09000d
 			public const int openFeedbackAlert = 2131296269;
 			
-			// aapt resource value: 0x7f09002f
-			public const int place_autocomplete_clear_button = 2131296303;
+			// aapt resource value: 0x7f090030
+			public const int place_autocomplete_clear_button = 2131296304;
 			
 			// aapt resource value: 0x7f090010
 			public const int place_autocomplete_fragment = 2131296272;
 			
-			// aapt resource value: 0x7f090031
-			public const int place_autocomplete_powered_by_google = 2131296305;
-			
-			// aapt resource value: 0x7f090033
-			public const int place_autocomplete_prediction_primary_text = 2131296307;
+			// aapt resource value: 0x7f090032
+			public const int place_autocomplete_powered_by_google = 2131296306;
 			
 			// aapt resource value: 0x7f090034
-			public const int place_autocomplete_prediction_secondary_text = 2131296308;
+			public const int place_autocomplete_prediction_primary_text = 2131296308;
 			
-			// aapt resource value: 0x7f090032
-			public const int place_autocomplete_progress = 2131296306;
+			// aapt resource value: 0x7f090035
+			public const int place_autocomplete_prediction_secondary_text = 2131296309;
 			
-			// aapt resource value: 0x7f09002d
-			public const int place_autocomplete_search_button = 2131296301;
+			// aapt resource value: 0x7f090033
+			public const int place_autocomplete_progress = 2131296307;
 			
 			// aapt resource value: 0x7f09002e
-			public const int place_autocomplete_search_input = 2131296302;
+			public const int place_autocomplete_search_button = 2131296302;
 			
-			// aapt resource value: 0x7f090030
-			public const int place_autocomplete_separator = 2131296304;
+			// aapt resource value: 0x7f09002f
+			public const int place_autocomplete_search_input = 2131296303;
 			
-			// aapt resource value: 0x7f09003f
-			public const int radioButtonHandicap = 2131296319;
-			
-			// aapt resource value: 0x7f09003c
-			public const int radioButtonLuggage = 2131296316;
+			// aapt resource value: 0x7f090031
+			public const int place_autocomplete_separator = 2131296305;
 			
 			// aapt resource value: 0x7f090040
-			public const int radioButtonNoHandicap = 2131296320;
+			public const int radioButtonHandicap = 2131296320;
 			
 			// aapt resource value: 0x7f09003d
-			public const int radioButtonNoLuggage = 2131296317;
-			
-			// aapt resource value: 0x7f090042
-			public const int radioButtonNoPet = 2131296322;
-			
-			// aapt resource value: 0x7f09003a
-			public const int radioButtonNonSmoker = 2131296314;
+			public const int radioButtonLuggage = 2131296317;
 			
 			// aapt resource value: 0x7f090041
-			public const int radioButtonPet = 2131296321;
+			public const int radioButtonNoHandicap = 2131296321;
 			
-			// aapt resource value: 0x7f090039
-			public const int radioButtonSmoker = 2131296313;
+			// aapt resource value: 0x7f09003e
+			public const int radioButtonNoLuggage = 2131296318;
 			
-			// aapt resource value: 0x7f09004f
-			public const int ratingBar = 2131296335;
+			// aapt resource value: 0x7f090043
+			public const int radioButtonNoPet = 2131296323;
+			
+			// aapt resource value: 0x7f09003b
+			public const int radioButtonNonSmoker = 2131296315;
+			
+			// aapt resource value: 0x7f090042
+			public const int radioButtonPet = 2131296322;
+			
+			// aapt resource value: 0x7f09003a
+			public const int radioButtonSmoker = 2131296314;
+			
+			// aapt resource value: 0x7f090050
+			public const int ratingBar = 2131296336;
 			
 			// aapt resource value: 0x7f090021
 			public const int ratingBarRiderDestinationMatch = 2131296289;
 			
-			// aapt resource value: 0x7f090028
-			public const int reviewEdit1 = 2131296296;
-			
-			// aapt resource value: 0x7f09005b
-			public const int reviewFragmentButton = 2131296347;
-			
-			// aapt resource value: 0x7f090027
-			public const int reviewRatingBar1 = 2131296295;
-			
-			// aapt resource value: 0x7f090026
-			public const int reviewText1 = 2131296294;
+			// aapt resource value: 0x7f090029
+			public const int reviewEdit1 = 2131296297;
 			
 			// aapt resource value: 0x7f09005c
-			public const int rider1 = 2131296348;
+			public const int reviewFragmentButton = 2131296348;
+			
+			// aapt resource value: 0x7f090028
+			public const int reviewRatingBar1 = 2131296296;
+			
+			// aapt resource value: 0x7f090027
+			public const int reviewText1 = 2131296295;
 			
 			// aapt resource value: 0x7f09005d
-			public const int riderOrDriverSwitch = 2131296349;
+			public const int rider1 = 2131296349;
+			
+			// aapt resource value: 0x7f09005e
+			public const int riderOrDriverSwitch = 2131296350;
 			
 			// aapt resource value: 0x7f090003
 			public const int satellite = 2131296259;
 			
-			// aapt resource value: 0x7f090045
-			public const int spinnerGender = 2131296325;
+			// aapt resource value: 0x7f090046
+			public const int spinnerGender = 2131296326;
 			
 			// aapt resource value: 0x7f090008
 			public const int standard = 2131296264;
 			
-			// aapt resource value: 0x7f090029
-			public const int submitFeedback1 = 2131296297;
-			
-			// aapt resource value: 0x7f090037
-			public const int tableLayout1 = 2131296311;
-			
-			// aapt resource value: 0x7f090043
-			public const int tableRowGender = 2131296323;
-			
-			// aapt resource value: 0x7f09003e
-			public const int tableRowHandicap = 2131296318;
-			
-			// aapt resource value: 0x7f09003b
-			public const int tableRowLuggage = 2131296315;
+			// aapt resource value: 0x7f09002a
+			public const int submitFeedback1 = 2131296298;
 			
 			// aapt resource value: 0x7f090038
-			public const int tableRowSmoker = 2131296312;
+			public const int tableLayout1 = 2131296312;
+			
+			// aapt resource value: 0x7f090044
+			public const int tableRowGender = 2131296324;
+			
+			// aapt resource value: 0x7f09003f
+			public const int tableRowHandicap = 2131296319;
+			
+			// aapt resource value: 0x7f09003c
+			public const int tableRowLuggage = 2131296316;
+			
+			// aapt resource value: 0x7f090039
+			public const int tableRowSmoker = 2131296313;
 			
 			// aapt resource value: 0x7f090004
 			public const int terrain = 2131296260;
 			
-			// aapt resource value: 0x7f090048
-			public const int testFragment1 = 2131296328;
-			
 			// aapt resource value: 0x7f090049
-			public const int testFragment2 = 2131296329;
+			public const int testFragment1 = 2131296329;
 			
 			// aapt resource value: 0x7f09004a
-			public const int testFragment3 = 2131296330;
+			public const int testFragment2 = 2131296330;
+			
+			// aapt resource value: 0x7f09004b
+			public const int testFragment3 = 2131296331;
 			
 			// aapt resource value: 0x7f090012
 			public const int textView1 = 2131296274;
@@ -702,8 +711,8 @@ namespace mRides_app
 			// aapt resource value: 0x7f090013
 			public const int textView2 = 2131296275;
 			
-			// aapt resource value: 0x7f09002b
-			public const int textView3 = 2131296299;
+			// aapt resource value: 0x7f09002c
+			public const int textView3 = 2131296300;
 			
 			// aapt resource value: 0x7f09001e
 			public const int textView6 = 2131296286;
@@ -711,32 +720,32 @@ namespace mRides_app
 			// aapt resource value: 0x7f09001c
 			public const int textView9 = 2131296284;
 			
-			// aapt resource value: 0x7f090044
-			public const int textViewGenderPref = 2131296324;
-			
-			// aapt resource value: 0x7f090035
-			public const int textViewHi = 2131296309;
+			// aapt resource value: 0x7f090045
+			public const int textViewGenderPref = 2131296325;
 			
 			// aapt resource value: 0x7f090036
-			public const int textViewSetYourPreferences = 2131296310;
+			public const int textViewHi = 2131296310;
 			
-			// aapt resource value: 0x7f09004d
-			public const int userName = 2131296333;
+			// aapt resource value: 0x7f090037
+			public const int textViewSetYourPreferences = 2131296311;
 			
-			// aapt resource value: 0x7f09004b
-			public const int userPhoto = 2131296331;
-			
-			// aapt resource value: 0x7f090059
-			public const int userProfileFragmentName = 2131296345;
+			// aapt resource value: 0x7f09004e
+			public const int userName = 2131296334;
 			
 			// aapt resource value: 0x7f09004c
-			public const int userProfileLinearLayout2 = 2131296332;
-			
-			// aapt resource value: 0x7f090051
-			public const int userProfileListView = 2131296337;
+			public const int userPhoto = 2131296332;
 			
 			// aapt resource value: 0x7f09005a
-			public const int viewProfileFragmentButton = 2131296346;
+			public const int userProfileFragmentName = 2131296346;
+			
+			// aapt resource value: 0x7f09004d
+			public const int userProfileLinearLayout2 = 2131296333;
+			
+			// aapt resource value: 0x7f090052
+			public const int userProfileListView = 2131296338;
+			
+			// aapt resource value: 0x7f09005b
+			public const int viewProfileFragmentButton = 2131296347;
 			
 			// aapt resource value: 0x7f090009
 			public const int wide = 2131296265;

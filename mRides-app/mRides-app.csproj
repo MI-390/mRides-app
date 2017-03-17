@@ -210,13 +210,6 @@
     <AndroidResource Include="Resources\drawable\mrides_logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <XliffResource Include="MultilingualResources\mRides-app.es.xlf" />
-    <XliffResource Include="MultilingualResources\mRides-app.fr.xlf" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\values-es\Strings.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\divider.png" />
   </ItemGroup>
   <ItemGroup>
@@ -229,13 +222,23 @@
     <AndroidResource Include="Resources\drawable\userIcon2.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\values-fr\Strings.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\loyolaTest.PNG" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\mcgill_test.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\smsicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\smsicongray.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\values-fr\Strings.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <XliffResource Include="MultilingualResources\mRides-app.fr.xlf" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.GooglePlayServices.Basement.29.0.0.2\build\Xamarin.GooglePlayServices.Basement.targets" Condition="Exists('..\packages\Xamarin.GooglePlayServices.Basement.29.0.0.2\build\Xamarin.GooglePlayServices.Basement.targets')" />

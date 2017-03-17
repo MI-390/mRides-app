@@ -1,12 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="ApplicationName">mRides-app</string>
   <string name="Pref_Hi">Salut</string>
   <string name="Pref_SetYourPreferences">Définir vos préférences</string>
   <string name="Pref_Smoker">Fumeur</string>
   <string name="Pref_NonSmoker">Non fumeur</string>
   <string name="Pref_Male">masculin</string>
-  <string name="Pref_Female">féminin</string>
+  <string name="Pref_Female">Femme</string>
   <string name="Pref_Luggage">Bagages</string>
   <string name="Pref_NoLuggage">Aucun bagage</string>
   <string name="Pref_Handicap">Déficience physique</string>
@@ -16,18 +15,20 @@
   <string name="Pref_Prompt_Gender">Sexe préféré</string>
   <string name="Pref_Back">Retour</string>
   <string name="Pref_Done">Terminé</string>
-  <string name="ExtraData_DataNotAvailable">Données non disponibles</string>
   <string name="slogan">Voyager ensemble</string>
   <string name="fblogin">Pour commencer, connectez-vous à l’aide d’un simple clic :</string>
   <string name="fb">Connexion avec Facebook</string>
-  <string name="riderOrDriver">  Vous êtes un Passager \nor Conducteur ? </string>
+  <string name="riderOrDriver">  Vous êtes un Passager \nou Conducteur ? </string>
   <string name="r">P</string>
   <string name="d">C</string>
   <string name="seatsAvailable">Le nombre de sièges disponible ?</string>
   <string name="numberOfRiders">Combien êtes-vous ?</string>
   <string name="previous">Précédent</string>
   <string name="next">Suivant</string>
+  <string name="hello_map">Bonjour</string>
   <string name="dest">Destination</string>
+  <string name="user_driver">Conducteur</string>
+  <string name="user_rider">Passager</string>
   <string name="user_type">Type d\'utilisateur</string>
   <string name="number_of_people">Nombre de personnes</string>
   <string name="smoker">Fumeur</string>
@@ -36,22 +37,18 @@
   <string name="pet">Animal de compagnie</string>
   <string name="gender">Sexe</string>
   <string name="person_profile">Personne</string>
-  <string name="ratings_reviews">Notes et commentaires</string>
-  <string-array name="Pref_Gender">
-    <item>Toute</item>
-    <item>masculin</item>
-    <item>Femelle</item>
-  </string-array>
-  <string name="hello_map">Bonjour</string>
-  <string name="user_driver">Conducteur</string>
-  <string name="user_rider">Passager</string>
-  <string name="ratingsAndReviews">Notes et commentaires</string>
-  <string name="personUser">Personne</string>
+  <string name="user_review">Commentaire</string>
   <string name="leaveReviewForUser">Laisser un commentaire pour cet utilisateur :</string>
   <string name="reviewSubmit">Envoyer</string>
-  <string name="dateOfFeedback">Date de retour</string>
-  <string name="user_review">Révision</string>
   <string name="viewUserProfile">Afficher le profil</string>
-  <string name="reviewUser">Révision</string>
+  <string name="reviewUser">Commentaire</string>
   <string name="feedbackPopup">Cliquez pour popup Feedback !</string>
+  <string name="driverMatchAccept">Accepter</string>
+  <string name="driverMatchDecline">Refuser</string>
+  <string name="going_to_destination">DESTINATION</string>
+  <string-array name="Pref_Gender">
+    <item>N\'importe lequel</item>
+    <item>Male</item>
+    <item>Femme</item>
+  </string-array>
 </resources>
