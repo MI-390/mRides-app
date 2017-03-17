@@ -30,7 +30,7 @@ namespace mRides_app
     /// </summary>
     // [Activity(Label = "ChatActivity", Icon = "@drawable/icon", Theme = "@style/Theme.AppCompat.Light.NoActionBar")]
     [Activity(Label = "ChatActivity", Icon = "@drawable/icon")]
-    public class ChatActivity : AppCompatActivity, IValueEventListener
+    public class ChatActivity : Activity, IValueEventListener
     {
         private FirebaseClient firebase;
         private List<MessagingService.MessageContent> listMessage = new List<MessagingService.MessageContent>();

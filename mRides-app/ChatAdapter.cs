@@ -50,7 +50,7 @@ namespace mRides_app
                 if (view == null) // no view to re-use, create new
                     view = context.LayoutInflater.Inflate(Resource.Layout.ChatRow, null);
                 view.FindViewById<TextView>(Resource.Id.Text1).Text = item.user2.firstName+" "+item.user2.lastName;
-                //view.FindViewById<ImageView>(Resource.Id.Image).SetImageBitmap(UserMapper.getInstance().)
+                view.FindViewById<ImageView>(Resource.Id.Image).SetImageBitmap(UserMapper.getInstance().GetUserFacebookProfilePicture(item.user2.facebookID));
                 //view.FindViewById<TextView>(Resource.Id.Text2).Text = item.SubHeading;
                 //view.FindViewById<ImageView>(Resource.Id.Image).SetImageResource(item.ImageResourceId);
                 return view;
@@ -58,8 +58,10 @@ namespace mRides_app
             if (view == null) // no view to re-use, create new
                 view = context.LayoutInflater.Inflate(Resource.Layout.ChatRow, null);
             view.FindViewById<TextView>(Resource.Id.Text1).Text = item.user1.firstName+" "+item.user1.lastName;
+            view.FindViewById<ImageView>(Resource.Id.Image).SetImageBitmap(UserMapper.getInstance().GetUserFacebookProfilePicture(item.user1.facebookID));
+
             //view.FindViewById<TextView>(Resource.Id.Text2).Text = item.SubHeading;
-           // view.FindViewById<ImageView>(Resource.Id.Image).SetImageResource(item.ImageResourceId);
+            // view.FindViewById<ImageView>(Resource.Id.Image).SetImageResource(item.ImageResourceId);
             return view;
 
         }
