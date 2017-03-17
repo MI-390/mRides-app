@@ -213,7 +213,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChatListActivity.cs" />
     <Compile Include="ChatActivity.cs" />
+    <Compile Include="ChatAdapter.cs" />
     <Compile Include="Constants\ActivityNames.cs" />
     <Compile Include="Constants\IntentExtraNames.cs" />
     <Compile Include="DestinationJSON.cs" />

@@ -53,7 +53,6 @@ namespace mRides_app
             firebase = new FirebaseClient(GetString(Resource.String.firebase_database_url));
             // adding listener to "chats" everytime this activity is run
             FirebaseDatabase.Instance.GetReference(chatName).AddValueEventListener(this);
-
             sendButton = FindViewById<Button>(Resource.Id.sendMsgButton);
             editChat = FindViewById<EditText>(Resource.Id.chatMsg);
             listChat = FindViewById<ListView>(Resource.Id.list_of_messages);
@@ -99,7 +98,7 @@ namespace mRides_app
             listMessage.Clear();
             var items = await firebase.Child(chatName)
                 .OnceAsync<MessagingService.MessageContent>();
-
+            
             foreach (var ImageButton in items)
                 listMessage.Add(ImageButton.Object);
 
