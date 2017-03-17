@@ -23,10 +23,6 @@ namespace mRides_app
         {
             this.context = context;
             this.items = items;
-
-            User.currentUser = new User {
-                id = 93
-                };
         }
         public override long GetItemId(int position)
         {

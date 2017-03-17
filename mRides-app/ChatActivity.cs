@@ -38,7 +38,7 @@ namespace mRides_app
         private Button sendButton;
         string chatName;
 
-        private String userName = Models.User.currentUser.firstName;
+        private String userName = Models.User.currentUser.firstName+Models.User.currentUser.lastName;
 
         public int MyResultCode = 1;
 

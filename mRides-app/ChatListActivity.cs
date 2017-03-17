@@ -72,7 +72,7 @@ namespace mRides_app
             var f = 2;
             foreach(dynamic allObject in allObjects.Result)
             {
-                if (allObject.Object.user1.id == 93 || allObject.Object.user2.id==93)
+                if (allObject.Object.user1.id == User.currentUser.id || allObject.Object.user2.id==User.currentUser.id)
                 {
                     ChatList cl = allObject.Object;
                     cl.ChatName = allObject.Key;
