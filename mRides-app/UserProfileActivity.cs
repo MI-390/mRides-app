@@ -11,6 +11,9 @@ using Android.Views;
 using Android.Widget;
 using mRides_app.Models;
 using mRides_app.Mappers;
+using Android.Graphics;
+using System.Net;
+using Xamarin.Auth;
 
 namespace mRides_app
 {
@@ -33,6 +36,17 @@ namespace mRides_app
             usernameText = FindViewById<TextView>(Resource.Id.userName);
             usernameText.Text = user.firstName.ToString() + " " + user.lastName.ToString();
             List<Models.Feedback> userFeedback = UserMapper.getInstance().GetReviews(id);
+            
+            // Obtain the user's profile picture from facebook
+            UserMapper userMapper = UserMapper.getInstance();
+            var facebookPictureBitMap = userMapper.GetUserFacebookProfilePicture(user.facebookID);
+            if(facebookPictureBitMap != null)
+            {
+                ImageView facebookPicture = FindViewById<ImageView>(Resource.Id.userPhoto);
+                facebookPicture.SetImageBitmap(facebookPictureBitMap);
+            }
+            
+
             //For testing
             //FeedbackForNow fb = new FeedbackForNow();
             //fb.dateOfFeedback = DateTime.Now;
@@ -59,5 +73,6 @@ namespace mRides_app
             feedbackListView.Adapter = userProfileFeedbackAdapter;
 
         }
+        
     }
 }

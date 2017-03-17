@@ -28,7 +28,8 @@ namespace mRides_app
     /// <summary>
     /// Implementation of the chat activity
     /// </summary>
-    [Activity(Label = "ChatActivity", Icon = "@drawable/icon", Theme = "@style/Theme.AppCompat.Light.NoActionBar")]
+    // [Activity(Label = "ChatActivity", Icon = "@drawable/icon", Theme = "@style/Theme.AppCompat.Light.NoActionBar")]
+    [Activity(Label = "ChatActivity", Icon = "@drawable/icon")]
     public class ChatActivity : AppCompatActivity, IValueEventListener
     {
         private FirebaseClient firebase;

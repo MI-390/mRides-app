@@ -21,18 +21,20 @@ namespace mRides_app
         string userName;
         // For UI testing
         [Java.Interop.Export("StartActivityOne")]
+        // Test PreferencesActivity
         public void StartActivityOne()
         {
             Intent i = new Intent(this, typeof(PreferencesActivity));
             StartActivity(i);
         }
+        //Test MapActivity
         [Java.Interop.Export("StartActivityTwo")]
         public void StartActivityTwo()
         {
             Intent i = new Intent(this, typeof(MapActivity));
             StartActivity(i);
         }
-
+        //For testing fragments, an activity is used that contains buttons to open those fragments
         [Java.Interop.Export("StartActivityThree")]
         public void StartActivityThree()
         {
@@ -43,14 +45,8 @@ namespace mRides_app
         [Java.Interop.Export("StartActivityFour")]
         public void StartActivityFour()
         {
-            Intent i = new Intent(this, typeof(Feedback.FeedbackTest));
-            StartActivity(i);
-        }
-
-        [Java.Interop.Export("StartActivityFive")]
-        public void StartActivityFive()
-        {
             Intent i = new Intent(this, typeof(UserProfileActivity));
+            i.PutExtra("id", "8");
             StartActivity(i);
         }
 
@@ -83,7 +79,6 @@ namespace mRides_app
                     long facebookId = Convert.ToInt64(obj["id"].ToString());
                     string facebookFirstName = obj["first_name"].ToString();
                     string facebookLastName = obj["last_name"].ToString();
-                    // string facebookPicture = obj["picture"].ToString();
 
                     // Try to obtain the user
                     UserMapper userMapper = UserMapper.getInstance();

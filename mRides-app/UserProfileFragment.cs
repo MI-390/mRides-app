@@ -14,14 +14,22 @@ using mRides_app.Models;
 
 namespace mRides_app
 {
+    public interface IStartDrivingModeListener
+    {
+        void enterDriverMode(double latitude, double longitude);
+    }
+
     class UserProfileFragment : DialogFragment
     {
 
         Button viewProfile;
         Button reviewButton;
         Button chatButton;
+        Button pickUpButton;
         TextView username;
+        IStartDrivingModeListener listener;
         string userID;
+        string location;
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             // Use this to return your custom view for this Fragment
@@ -32,13 +40,14 @@ namespace mRides_app
             username = view.FindViewById<TextView>(Resource.Id.userProfileFragmentName);
             username.Text = args.GetString("name");
             userID = (args.GetString("id"));
-            //BUtton assignments
+            location = args.GetString("location");
             viewProfile = view.FindViewById<Button>(Resource.Id.viewProfileFragmentButton);
             reviewButton = view.FindViewById<Button>(Resource.Id.reviewFragmentButton);
+            pickUpButton = view.FindViewById<Button>(Resource.Id.pickUpButton);
             chatButton = view.FindViewById<Button>(Resource.Id.chatActivityButton);
-            //Click Delegation
             viewProfile.Click += ViewProfileButtonClicked;
             reviewButton.Click += ReviewButtonClicked;
+            pickUpButton.Click += PickUpButtonClicked;
             chatButton.Click += ChatButtonClicked;
             return view;
         }
@@ -46,6 +55,7 @@ namespace mRides_app
         public override void OnAttach(Activity activity)
         {
             base.OnAttach(activity);
+            listener = (IStartDrivingModeListener)activity;
         }
 
         // Load a new activity and transfer the data to the new one
@@ -86,6 +96,12 @@ namespace mRides_app
                 return currentUser + " & " + userID;
             }
             return userID + " & " + currentUser;
+        }
+
+        void PickUpButtonClicked(object sender, EventArgs e)
+        {
+            string[] splitCoordinates = location.Split(',');
+            listener.enterDriverMode(Double.Parse(splitCoordinates[0]), Double.Parse(splitCoordinates[1]));
         }
 
     }
