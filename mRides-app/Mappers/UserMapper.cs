@@ -114,7 +114,7 @@ namespace mRides_app.Mappers
         */
         public long GetGSD(int userId)
         {
-            return SendGetWithUrlSegment<long>(ApiEndPointUrl.getGSD, "id", userId.ToString());
+            return SendGetWithUrlSegment<long>(ApiEndPointUrl.getGSD, "userId", userId.ToString());
         }
 
         /**

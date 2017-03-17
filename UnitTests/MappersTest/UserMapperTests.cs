@@ -184,18 +184,16 @@ namespace UnitTests
         }
 
         /**
-        * Test whether we are able to successfully get the reviews of a user
-        * NOT RUN YET
+        * Test whether we are able to successfully get the GSD of a user
         */
         [Test]
         public void GetGSDTest()
         {
             UserMapper userMapper = UserMapper.getInstance();
-
             // Create a test user
-            User testUser = new User
+            User aline = new User
             {
-                id = 666,
+                id = 88888,
                 firstName = "Test",
                 lastName = "User",
                 genderPreference = "male",
@@ -207,12 +205,42 @@ namespace UnitTests
                 prefferedLanguage = "en-ca"
             };
       
-            testUser = userMapper.CreateUser(testUser);
-
-            Thread.Sleep(5000);
-
-            Assert.AreEqual(userMapper.GetGSD(666), 888);
+            userMapper.CreateUser(aline);
+            //Thread.Sleep(5000);
+            long testGSD = userMapper.GetGSD(88888);
+            Assert.AreEqual(testGSD, 15);
         }
+
+        /**
+        * Test whether we are able to successfully set the GSD of a user
+        */
+        [Test]
+        public void SetGSDTest()
+        {
+            UserMapper userMapper = UserMapper.getInstance();
+            // Create a test user
+            User aline = new User
+            {
+                id = 9999,
+                firstName = "Test",
+                lastName = "User",
+                genderPreference = "male",
+                gsd = 15,
+                hasLuggage = false,
+                isHandicap = false,
+                isSmoker = false,
+                hasPet = false,
+                prefferedLanguage = "en-ca"
+            };
+
+            userMapper.CreateUser(aline);
+            //Thread.Sleep(5000);
+            userMapper.setGSD(9999, 150);
+            long testGSD = userMapper.GetGSD(9999);
+            Assert.AreEqual(testGSD, 150);
+        }
+
+
 
     }
 }
