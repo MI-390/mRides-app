@@ -453,11 +453,11 @@ namespace mRides_app
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f090061
-			public const int CloseButton = 2131296353;
-			
 			// aapt resource value: 0x7f090062
-			public const int Next = 2131296354;
+			public const int CloseButton = 2131296354;
+			
+			// aapt resource value: 0x7f090063
+			public const int Next = 2131296355;
 			
 			// aapt resource value: 0x7f090025
 			public const int acceptDeclineSpace = 2131296293;
@@ -498,8 +498,8 @@ namespace mRides_app
 			// aapt resource value: 0x7f090051
 			public const int divider = 2131296337;
 			
-			// aapt resource value: 0x7f09005f
-			public const int driver1 = 2131296351;
+			// aapt resource value: 0x7f090060
+			public const int driver1 = 2131296352;
 			
 			// aapt resource value: 0x7f090024
 			public const int driverMatchButtonAccept = 2131296292;
@@ -582,11 +582,14 @@ namespace mRides_app
 			// aapt resource value: 0x7f090002
 			public const int normal = 2131296258;
 			
-			// aapt resource value: 0x7f090060
-			public const int numOfPeople = 2131296352;
+			// aapt resource value: 0x7f090061
+			public const int numOfPeople = 2131296353;
 			
 			// aapt resource value: 0x7f09000d
 			public const int openFeedbackAlert = 2131296269;
+			
+			// aapt resource value: 0x7f09005d
+			public const int pickUpButton = 2131296349;
 			
 			// aapt resource value: 0x7f090030
 			public const int place_autocomplete_clear_button = 2131296304;
@@ -657,74 +660,11 @@ namespace mRides_app
 			// aapt resource value: 0x7f090027
 			public const int reviewText1 = 2131296295;
 			
-			// aapt resource value: 0x7f09004b
-			public const int rider1 = 2131296331;
-			
-			// aapt resource value: 0x7f09004c
-			public const int riderOrDriverSwitch = 2131296332;
-			
-			// aapt resource value: 0x7f090020
-			public const int place_autocomplete_prediction_primary_text = 2131296288;
-			
-			// aapt resource value: 0x7f090021
-			public const int place_autocomplete_prediction_secondary_text = 2131296289;
-			
-			// aapt resource value: 0x7f09001f
-			public const int place_autocomplete_progress = 2131296287;
-			
-			// aapt resource value: 0x7f09001a
-			public const int place_autocomplete_search_button = 2131296282;
-			
-			// aapt resource value: 0x7f09001b
-			public const int place_autocomplete_search_input = 2131296283;
-			
-			// aapt resource value: 0x7f09001d
-			public const int place_autocomplete_separator = 2131296285;
-			
-			// aapt resource value: 0x7f09002c
-			public const int radioButtonHandicap = 2131296300;
-			
-			// aapt resource value: 0x7f090029
-			public const int radioButtonLuggage = 2131296297;
-			
-			// aapt resource value: 0x7f09002d
-			public const int radioButtonNoHandicap = 2131296301;
-			
-			// aapt resource value: 0x7f09002a
-			public const int radioButtonNoLuggage = 2131296298;
-			
-			// aapt resource value: 0x7f09002f
-			public const int radioButtonNoPet = 2131296303;
-			
-			// aapt resource value: 0x7f090027
-			public const int radioButtonNonSmoker = 2131296295;
-			
-			// aapt resource value: 0x7f09002e
-			public const int radioButtonPet = 2131296302;
-			
-			// aapt resource value: 0x7f090026
-			public const int radioButtonSmoker = 2131296294;
-			
-			// aapt resource value: 0x7f09003c
-			public const int ratingBar = 2131296316;
-			
-			// aapt resource value: 0x7f090013
-			public const int reviewEdit1 = 2131296275;
-			
-			// aapt resource value: 0x7f090049
-			public const int reviewFragmentButton = 2131296329;
-			
-			// aapt resource value: 0x7f090012
-			public const int reviewRatingBar1 = 2131296274;
-			
-			// aapt resource value: 0x7f090011
-			public const int reviewText1 = 2131296273;
-			
-			// aapt resource value: 0x7f09004a
-			public const int rider1 = 2131296330;
-			
 			// aapt resource value: 0x7f09005e
-			public const int riderOrDriverSwitch = 2131296350;
+			public const int rider1 = 2131296350;
+			
+			// aapt resource value: 0x7f09005f
+			public const int riderOrDriverSwitch = 2131296351;
 			
 			// aapt resource value: 0x7f090003
 			public const int satellite = 2131296259;
