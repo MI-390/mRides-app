@@ -40,6 +40,7 @@ namespace mRides_app
         private LocationRequest locationRequest;
         private Location lastUserLocation;
         private bool locationPermissionGranted;
+        private Marker originMarker;
         private Marker destinationMarker;
         private Dictionary<User, Marker> usersOnMap;
         private List<LatLng> directionList;
@@ -74,15 +75,13 @@ namespace mRides_app
 
             // Retrieve the PlaceAutocompleteFragment.
             PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)FragmentManager.FindFragmentById(Resource.Id.place_autocomplete_fragment);
-            AutocompleteFilter typeFilter = new AutocompleteFilter.Builder().SetTypeFilter(AutocompleteFilter.TypeFilterEstablishment).Build();
+            AutocompleteFilter typeFilterDestination = new AutocompleteFilter.Builder().SetTypeFilter(AutocompleteFilter.TypeFilterEstablishment).Build();
             autocompleteFragment.SetHint("Destination?");
-            autocompleteFragment.SetFilter(typeFilter);
+            autocompleteFragment.SetFilter(typeFilterDestination);
+
 
             // Register a listener to receive callbacks when a place has been selected or an error has occurred.
             autocompleteFragment.SetOnPlaceSelectedListener(this);
-
-            string userType;
-            int numberOfPeople;
         }
 
         public void OnMapReady(Android.Gms.Maps.GoogleMap googleMap)
@@ -153,6 +152,7 @@ namespace mRides_app
         private void OnMyLocationButtonClick(object sender, Android.Gms.Maps.GoogleMap.MyLocationButtonClickEventArgs e)
         {
             LatLng position = new LatLng(User.currentUser.latitude, User.currentUser.longitude);
+            getCurrentLocation();
             PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)FragmentManager.FindFragmentById(Resource.Id.place_autocomplete_fragment);
             UpdateCameraPosition(position);
         }
@@ -425,6 +425,11 @@ namespace mRides_app
                               "&key=" + googleApiKey);
 
             setDestinationData(pathURL);
+        }
+
+        public void OnOriginSelected(IPlace place)
+        {
+
         }
 
 
