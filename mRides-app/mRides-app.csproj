@@ -296,7 +296,13 @@
     <AndroidResource Include="Resources\layout\Chats.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+
     <AndroidResource Include="Resources\layout\ChatRow.axml">
+
+    <AndroidResource Include="Resources\layout\DriverAcceptDeclineMatch.axml">
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\UserCancelRide.axml">
+
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
