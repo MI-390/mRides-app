@@ -34,8 +34,9 @@ namespace mRides_app
 
             TextView gsdText;
             gsdText = FindViewById<TextView>(Resource.Id.userProfileGSD);
-            //we don't have this implemented yet in the mappers
-            //int userGSD = UserMapper.getInstance().getGSD(); 
+            long userGSD = UserMapper.getInstance().GetGSD(id);
+            gsdText.Text = "$ " + userGSD.ToString() + " GSD";
+
 
             List<Models.Feedback> userFeedback = UserMapper.getInstance().GetReviews(id);
             var userProfileFeedbackAdapter = new UserProfileFeedbackAdapter(this, userFeedback);
