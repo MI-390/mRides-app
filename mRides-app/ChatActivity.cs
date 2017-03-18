@@ -19,6 +19,8 @@ using Android.Gms.Common; // For FCM
 using Firebase.Messaging;
 using Firebase.Iid;
 using Android.Util;
+using mRides_app.Models;
+using mRides_app.Mappers;
 
 namespace mRides_app
 {
@@ -28,7 +30,7 @@ namespace mRides_app
     /// </summary>
     // [Activity(Label = "ChatActivity", Icon = "@drawable/icon", Theme = "@style/Theme.AppCompat.Light.NoActionBar")]
     [Activity(Label = "ChatActivity", Icon = "@drawable/icon")]
-    public class ChatActivity : AppCompatActivity, IValueEventListener
+    public class ChatActivity : Activity, IValueEventListener
     {
         private FirebaseClient firebase;
         private List<MessagingService.MessageContent> listMessage = new List<MessagingService.MessageContent>();
@@ -37,7 +39,7 @@ namespace mRides_app
         private Button sendButton;
         string chatName;
 
-        private String userName = Models.User.currentUser.firstName;
+        private String userName = Models.User.currentUser.firstName+Models.User.currentUser.lastName;
 
         public int MyResultCode = 1;
 
@@ -53,12 +55,11 @@ namespace mRides_app
             chatName = Intent.GetStringExtra("ChatName");
             firebase = new FirebaseClient(GetString(Resource.String.firebase_database_url));
             // adding listener to "chats" everytime this activity is run
-            FirebaseDatabase.Instance.GetReference(chatName).AddValueEventListener(this);
-
+            FirebaseDatabase.Instance.GetReference(chatName+"/messages").AddValueEventListener(this);
             sendButton = FindViewById<Button>(Resource.Id.sendMsgButton);
             editChat = FindViewById<EditText>(Resource.Id.chatMsg);
             listChat = FindViewById<ListView>(Resource.Id.list_of_messages);
-
+            createMetaFields();
             DisplayChatMessage();
             Log.Debug("CHAT", "InstanceID token: " + FirebaseInstanceId.Instance.Token);
             sendButton.Click += delegate
@@ -66,7 +67,12 @@ namespace mRides_app
                 PostMessage();
             };
         }
-
+        private async void createMetaFields()
+        {
+            int userId = Convert.ToInt32(Intent.GetStringExtra("id"));
+            await firebase.Child(chatName + "/user1").PatchAsync(User.currentUser);
+            await firebase.Child(chatName + "/user2").PatchAsync(UserMapper.getInstance().GetUser(userId));
+        }
         /// <summary>
         /// Method to send a message to the chat interface
         /// ***We will have to get the user's name and replace it 
@@ -74,7 +80,7 @@ namespace mRides_app
         private async void PostMessage()
         {
             // Post a message to "chats" specifically by creating a new MessageContent which takes a username and a text as parameters
-            var items = await firebase.Child(chatName).PostAsync(new MessagingService.MessageContent(userName, editChat.Text));
+            var items = await firebase.Child(chatName+"/messages").PostAsync(new MessagingService.MessageContent(userName, editChat.Text));
             editChat.Text = ""; // empty the text field
         }
 
@@ -98,11 +104,11 @@ namespace mRides_app
         private async void DisplayChatMessage()
         {
             listMessage.Clear();
-            var items = await firebase.Child(chatName)
+            var items = await firebase.Child(chatName+"/messages")
                 .OnceAsync<MessagingService.MessageContent>();
-
-            foreach (var item in items)
-                listMessage.Add(item.Object);
+            
+            foreach (var ImageButton in items)
+                listMessage.Add(ImageButton.Object);
 
             // create a new adapter that takes the list of messages
             MessagingService.ListViewAdapter adapter = new MessagingService.ListViewAdapter(this, listMessage);
