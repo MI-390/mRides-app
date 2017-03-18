@@ -231,11 +231,7 @@ namespace mRides_app
         //Send coordinates to the server and get a list of users
         public void findNearbyUsers(List<LatLng> directionList)
         {
-            List<string> destinationCoordinates = new List<string>();
-            for (int i = 0; i < directionList.Count; i += 10)
-            {
-                destinationCoordinates.Add(directionList[i].Latitude.ToString() + "," + directionList[i].Longitude.ToString());
-            }
+            List<string> destinationCoordinates = getFormattedDirectionList();
             
             Request newRequest = new Request {
                 destinationCoordinates = destinationCoordinates,
@@ -245,6 +241,20 @@ namespace mRides_app
         };
             newRequest.destinationCoordinates = destinationCoordinates;
             User.currentUser.requestsAsDriver = ConsoleMapper.getInstance().FindRiders(newRequest);
+        }
+
+        /// <summary>
+        /// Obtain the formatted list of coordinates.
+        /// </summary>
+        /// <returns>List of string representing the coordinates of the directions</returns>
+        public List<string> getFormattedDirectionList()
+        {
+            List<string> destinationCoordinates = new List<string>();
+            for (int i = 0; i < directionList.Count; i += 10)
+            {
+                destinationCoordinates.Add(directionList[i].Latitude.ToString() + "," + directionList[i].Longitude.ToString());
+            }
+            return destinationCoordinates;
         }
 
         //Method to display the polyline path from the current user location to the destination
@@ -436,6 +446,17 @@ namespace mRides_app
             string usrType = GetString(Resource.String.user_type);
             string numOfPeople = GetString(Resource.String.number_of_people);
             Toast.MakeText(ApplicationContext, usrType + " : " + User.currentUser.currentType + " " + numOfPeople + " : " + numberOfPeople, ToastLength.Long).Show();
+
+            // Start the driver matching session
+            if (type == mRides_app.Models.Request.TYPE_DRIVER)
+            {
+                List<string> destinationCoordinates = this.getFormattedDirectionList();
+
+                Intent driverAcceptDeclineMatch = new Intent(this, typeof(DriverAcceptDeclineMatchActivity));
+                driverAcceptDeclineMatch.PutExtra(Constants.IntentExtraNames.RouteCoordinatesJson, JsonConvert.SerializeObject(destinationCoordinates));
+                StartActivity(driverAcceptDeclineMatch);
+            }
+            
         }
     }
 }

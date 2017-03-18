@@ -18,6 +18,10 @@ using Newtonsoft.Json;
 
 namespace mRides_app
 {
+    /// <summary>
+    /// This activity takes in the intent a list of strings representing mulitple coordinates
+    /// which makes up a route.
+    /// </summary>
     [Activity(Label ="DriverAcceptDeclineMatchActivity")]
     public class DriverAcceptDeclineMatchActivity : Activity
     {
@@ -28,8 +32,11 @@ namespace mRides_app
         private ImageView riderPicture;
         private Button acceptButton;
         private Button declineButton;
-        private RiderRequest riderRequest;
+        private List<Request> matchedRequests;
         private Request driverRequest;
+
+        // Keeps track of the index of the rider request currently displayed
+        private int currentRiderRequestIndex;
 
         private UserMapper userMapper;
         private ConsoleMapper consoleMapper; 
@@ -38,39 +45,66 @@ namespace mRides_app
         {
             base.OnCreate(bundle);
 
-            SetContentView(Resource.Layout.DriverAcceptDeclineMatch);
-
             // Obtain the mapper instances
             this.userMapper = UserMapper.getInstance();
             this.consoleMapper = ConsoleMapper.getInstance();
 
-            // Deserialize the rider request and driver request from the json sent in the intent
-            this.riderRequest = JsonConvert.DeserializeObject<RiderRequest>(Intent.GetStringExtra(IntentExtraNames.RiderRequestJson));
-            this.driverRequest = JsonConvert.DeserializeObject<Request>(Intent.GetStringExtra(IntentExtraNames.DriverRequestJson));
+            // Deserialize the list of coordinates
+            string json = Intent.GetStringExtra(IntentExtraNames.RouteCoordinatesJson);
+            List <string> coordinates = JsonConvert.DeserializeObject<List<string>>(Intent.GetStringExtra(IntentExtraNames.RouteCoordinatesJson));
 
-            // Capture View elements
-            this.show_time = FindViewById<TextView>(Resource.Id.displayTime);
-            this.riderPicture = FindViewById<ImageView>(Resource.Id.driverAcceptDeclineMatchRiderPicture);
+            // Send the request to the server
+            Request newDriverRequest = new Request
+            {
+                destinationCoordinates = coordinates,
+                destination = coordinates[coordinates.Count - 1],
+                location = coordinates[0],
+                type = Request.TYPE_DRIVER
+            };
+            this.matchedRequests = consoleMapper.FindRiders(newDriverRequest);
 
-            // Capture the button accept button
-            this.acceptButton = FindViewById<Button>(Resource.Id.driverMatchButtonAccept);
-            acceptButton.Click += delegate { this.Accept(); };
-            // Get the current time
-            hour = DateTime.Now.Hour;
-            minute = DateTime.Now.Minute;
+            // Start giving the driver choices of riders
+            this.currentRiderRequestIndex = 0;
+            this.UpdateDisplay();
 
-            // Display the current date
-            UpdateDisplay();
+            // Update the display
+            if(this.matchedRequests.Count > 0)
+            {
+                UpdateDisplay();
+            }
+            else
+            {
+                // TODO: Display some message to the user
+                Toast.MakeText(ApplicationContext, "No rider requests found", ToastLength.Long).Show();
+            }
         }
 
         // Updates the time we display in the TextView
         private void UpdateDisplay()
         {
+            // Get the rider to display
+            Request request = this.matchedRequests[this.currentRiderRequestIndex];
+            RiderRequest riderRequest = request.riderRequests.First();
+
+            // Display
+            SetContentView(Resource.Layout.DriverAcceptDeclineMatch);
+
+            // Capture various elements from the view
+            this.show_time = FindViewById<TextView>(Resource.Id.displayTime);
+            this.riderPicture = FindViewById<ImageView>(Resource.Id.driverAcceptDeclineMatchRiderPicture);
+            this.acceptButton = FindViewById<Button>(Resource.Id.driverMatchButtonAccept);
+
+            // Capture the button accept button
+            acceptButton.Click += delegate { this.Accept(); };
+
+            // Set the current time
+            hour = request.dateTime.Hour;
+            minute = request.dateTime.Minute;
             string time = string.Format("{0}:{1}", hour, minute.ToString().PadLeft(2, '0'));
             this.show_time.Text = time;
 
             // Update the profile picture of the rider
-            Bitmap userPicture = userMapper.GetUserFacebookProfilePicture(this.riderRequest.rider.facebookID);
+            Bitmap userPicture = userMapper.GetUserFacebookProfilePicture(riderRequest.rider.facebookID);
             if(userPicture != null)
             {
                 this.riderPicture.SetImageBitmap(userPicture);
@@ -82,8 +116,21 @@ namespace mRides_app
         /// </summary>
         private void Accept()
         {
-            // Return to the caller activity once the driver accepted
-            if(consoleMapper.AcceptConfirmation(this.riderRequest.id, this.driverRequest.ID))
+            // Go to next rider
+            if(++this.currentRiderRequestIndex < this.matchedRequests.Count)
+            {
+                // TODO: Display confirmation or error
+                if(consoleMapper.AcceptConfirmation(this.matchedRequests[currentRiderRequestIndex].riderRequests.First().id, this.driverRequest.ID))
+                {
+                    Toast.MakeText(ApplicationContext, "A request has been sent to this rider", ToastLength.Long).Show();
+                    this.UpdateDisplay();
+                }
+                else
+                {
+                    Toast.MakeText(ApplicationContext, "An error has occurred while sending the request", ToastLength.Long).Show();
+                }
+            }
+            else
             {
                 this.Finish();
             }

@@ -174,9 +174,6 @@
             android:layout_marginBottom="5.5dp"
             android:layout_marginRight="0dp"
             android:stateListAnimator="@null" />
-        <Space
-            android:layout_width="10dp"
-            android:id="@+id/acceptDeclineSpace" />
         <Button
             android:text="@string/driverMatchDecline"
             android:layout_width="87.5dp"

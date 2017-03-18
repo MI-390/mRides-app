@@ -106,6 +106,7 @@
     <Compile Include="Constants\ActivityNames.cs" />
     <Compile Include="Constants\IntentExtraNames.cs" />
     <Compile Include="DestinationJSON.cs" />
+    <Compile Include="DriverAcceptDeclineMatchActivity.cs" />
     <Compile Include="LeaveReviewFragment.cs" />
     <Compile Include="MapActivity.cs" />
     <Compile Include="Authentication\Facebook.cs" />
@@ -165,6 +166,7 @@
     <AndroidResource Include="Resources\layout\UserCancelRide.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\DriverAcceptDeclineMatch.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">

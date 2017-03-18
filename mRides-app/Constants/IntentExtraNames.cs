@@ -11,8 +11,7 @@ namespace mRides_app.Constants
         public static string UserFacebookFirstName { get { return "UserFacebookFirstName"; } }
         public static string UserFacebookLastName { get { return "UserFacebookLastName"; } }
         public static string PreviousActivity { get { return "PreviousActivity"; } }
-
-        public static string RiderRequestJson { get { return "RiderRequest"; } }
-        public static string DriverRequestJson { get { return "DriverRequest"; } }
+        
+        public static string RouteCoordinatesJson { get { return "RouteCoordinatesJson"; } }
     }
 }

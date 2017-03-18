@@ -77,9 +77,17 @@ namespace mRides_app.Mappers
             request.AddParameter("text/json", json, ParameterType.RequestBody);
 
             // Execute the request and return the response
-            var response = client.Execute<FindRidersJson>(request).Data;
-            newRequest.ID = response.driverRequestID;
-            return response.requests;
+            var response = client.Execute<FindRidersJson>(request);
+            var responseData = response == null ? null : response.Data;
+            if(responseData == null)
+            {
+                return new List<Request>();
+            }
+            else
+            {
+                newRequest.ID = responseData.driverRequestID;
+                return responseData.requests;
+            }
         }
 
         /**

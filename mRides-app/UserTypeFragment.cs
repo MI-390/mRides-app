@@ -99,8 +99,8 @@ namespace mRides_app
         void NextButtonClicked(object sender, EventArgs e)
         {
             string userType = "";
-            string usr_driver = GetString(Resource.String.user_driver);
-            string usr_rider = GetString(Resource.String.user_rider);
+            string usr_driver = mRides_app.Models.Request.TYPE_DRIVER;
+            string usr_rider = mRides_app.Models.Request.TYPE_RIDER;
 
             if (driver)
             {
