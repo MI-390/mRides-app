@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "385885391885",
+    "firebase_url": "https://mrides-155403.firebaseio.com",
+    "project_id": "mrides-155403",
+    "storage_bucket": "mrides-155403.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:385885391885:android:252044faa60e9de2",
+        "android_client_info": {
+          "package_name": "mRides_app.mRides_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "385885391885-n46tue4kga0io6e9vbbotm9sjs959h07.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBn9izodkGcVfhoEawxr3b1ov2TPI21LE8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

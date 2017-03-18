@@ -22,7 +22,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
         <Button
-            android:text="@string/viewUserProfile" 
+            android:text="@string/viewUserProfile"
             android:id="@+id/viewProfileFragmentButton"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -35,6 +35,23 @@
         <Button
             android:text="@string/reviewUser"
             android:id="@+id/reviewFragmentButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+<!--To translate-->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:text="@string/message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/chatActivityButton" />
+            android:text="Pick Up"
+            android:id="@+id/pickUpButton"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1" />

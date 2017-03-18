@@ -28,6 +28,12 @@ namespace mRides_app.Models
         public bool hasPet { get; set; }
         public string genderPreference { get; set; }
         public int gsd { get; set; }
+
+
+
+        public double latitude { get; set; }
+        public double longitude { get; set; }
+        public string currentType { get; set; }
         public List<Ride> ridesAsDriver { get; set; }
         public List<UserRides> ridesAsRider { get; set; }
         public List<Request> requestsAsDriver { get; set; }
