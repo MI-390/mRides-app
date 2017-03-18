@@ -15,7 +15,7 @@ using Firebase.Iid;
 namespace mRides_app
 {
     //ggrrg
-    [Activity(Label = "mRides_app",MainLauncher =true, Icon = "@drawable/icon")]
+    [Activity(Label = "mRides_app", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
         string userName;
@@ -116,7 +116,11 @@ namespace mRides_app
         }
 
         // private static readonly TaskScheduler UIScheduler = TaskScheduler.FromCurrentSynchronizationContext();
-
+        protected override void OnResume()
+        {
+            base.OnResume();
+          
+        }
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);

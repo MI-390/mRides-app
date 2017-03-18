@@ -378,6 +378,14 @@ namespace mRides_app
             base.OnResume();
             if (googleApiClient.IsConnected)
                 getCurrentLocation();
+
+            //MenuBar
+            var chatMenuButton = FindViewById<ImageButton>(Resource.Id.menu_chat);
+            chatMenuButton.Click += delegate
+            {
+                Intent i = new Intent(this, typeof(ChatListActivity));
+                StartActivity(i);
+            };
         }
 
         //When Google API Client is connected
