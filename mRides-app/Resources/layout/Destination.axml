@@ -10,7 +10,7 @@
         android:name="com.google.android.gms.maps.MapFragment"
         android:id="@+id/map"
         android:layout_width="match_parent"
-        android:layout_height="485.5dp"
+        android:layout_height="524.0dp"
         android:layout_marginTop="0.0dp"
         android:layout_marginBottom="0.0dp">
         <Button
@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center|top"
             android:id="@+id/mapButton"
-            android:text="Choose destination"
+            android:text="Click to change origin"
             android:padding="10dp"
             android:layout_marginTop="20dp"
             android:paddingRight="10dp" />
@@ -31,6 +31,6 @@
             android:id="@+id/place_autocomplete_fragment"
             android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
             android:layout_width="match_parent"
-            android:layout_height="65.0dp" />
+            android:layout_height="27.0dp" />
     </LinearLayout>
 </LinearLayout>

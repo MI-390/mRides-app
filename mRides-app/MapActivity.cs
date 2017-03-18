@@ -42,10 +42,13 @@ namespace mRides_app
         private bool locationPermissionGranted;
         private Marker originMarker;
         private Marker destinationMarker;
+        private Button mapButton;
+        private bool mapButtonClicked;
         private Dictionary<User, Marker> usersOnMap;
         private List<LatLng> directionList;
         private List<Request> requestList;
         private DestinationJSON destinationData;
+        private PlaceAutocompleteFragment autocompleteFragment;
         private Android.Gms.Maps.Model.Polyline polyline;
         private const string googleApiKey = "AIzaSyAz9p6O99w8ZWkFUbaREJXmnj01Mpm19dA";
         int numberOfPeople;
@@ -72,16 +75,33 @@ namespace mRides_app
 
             string helloMap = GetString(Resource.String.hello_map);
             Toast.MakeText(ApplicationContext, helloMap + " " + text, ToastLength.Long).Show();
-
-            // Retrieve the PlaceAutocompleteFragment.
-            PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)FragmentManager.FindFragmentById(Resource.Id.place_autocomplete_fragment);
-            AutocompleteFilter typeFilterDestination = new AutocompleteFilter.Builder().SetTypeFilter(AutocompleteFilter.TypeFilterEstablishment).Build();
+            mapButton = (Button)FindViewById(Resource.Id.mapButton);
+            mapButtonClicked = false;
+            mapButton.Click += OnMapButtonClick;
+            //Retrieve the PlaceAutocompleteFragment.
+            autocompleteFragment = (PlaceAutocompleteFragment)FragmentManager.FindFragmentById(Resource.Id.place_autocomplete_fragment);
             autocompleteFragment.SetHint("Destination?");
-            autocompleteFragment.SetFilter(typeFilterDestination);
 
-
+            //AutocompleteFilter typeFilterDestination = new AutocompleteFilter.Builder().SetTypeFilter(AutocompleteFilter.TypeFilterEstablishment).Build();
+            //autocompleteFragment.SetFilter(typeFilterDestination);
             // Register a listener to receive callbacks when a place has been selected or an error has occurred.
             autocompleteFragment.SetOnPlaceSelectedListener(this);
+        }
+
+        void OnMapButtonClick(object sender, EventArgs e)
+        {
+            if (!mapButtonClicked)
+            {
+                mapButtonClicked = true;
+                mapButton.Text = "Click to choose destination";
+                autocompleteFragment.SetHint("Origin?");
+            }
+            else
+            {
+                mapButtonClicked = false;
+                mapButton.Text = "Click to choose origin";
+                autocompleteFragment.SetHint("Destination?");
+            }
         }
 
         public void OnMapReady(Android.Gms.Maps.GoogleMap googleMap)
@@ -110,6 +130,11 @@ namespace mRides_app
                 showNearbyUsers();
             }
             else
+            if (e.Marker.Equals(originMarker))
+            {
+                //
+            }
+            else
             {
                 foreach (KeyValuePair<User, Marker> option in usersOnMap)
                 {
@@ -133,19 +158,34 @@ namespace mRides_app
         {
             if (usersOnMap != null)
             {
-                string waypointString = "&waypoints=optimize:true";
-                foreach (KeyValuePair<User, Marker> option in usersOnMap)
+                if (usersOnMap.Count > 0)
                 {
-                    waypointString += "|" + option.Value.Position.Latitude + "," + option.Value.Position.Longitude;
+                    string pathURL;
+                    string waypointString = "&waypoints=optimize:true";
+                    foreach (KeyValuePair<User, Marker> option in usersOnMap)
+                    {
+                        waypointString += "|" + option.Value.Position.Latitude + "," + option.Value.Position.Longitude;
+                    }
+
+                    if (originMarker != null)
+                    {
+                        pathURL = ("https://maps.googleapis.com/maps/api/directions/json?" +
+                       "origin=" + originMarker.Position.Latitude + "," + originMarker.Position.Longitude +
+                       "&destination=" + destinationData.routes[0].legs[destinationData.routes[0].legs.Count - 1].end_location.lat + "," +
+                       destinationData.routes[0].legs[destinationData.routes[0].legs.Count - 1].end_location.lng + waypointString +
+                       "&key=" + googleApiKey);
+                    }
+                    else
+                    {
+                        pathURL = ("https://maps.googleapis.com/maps/api/directions/json?" +
+                            "origin=" + User.currentUser.latitude + "," + User.currentUser.longitude +
+                            "&destination=" + destinationData.routes[0].legs[destinationData.routes[0].legs.Count - 1].end_location.lat + "," +
+                            destinationData.routes[0].legs[destinationData.routes[0].legs.Count - 1].end_location.lng + waypointString +
+                            "&key=" + googleApiKey);
+                    }
+
+                    setDestinationData(pathURL);
                 }
-
-                string pathURL = ("https://maps.googleapis.com/maps/api/directions/json?" +
-                "origin=" + User.currentUser.latitude + "," + User.currentUser.longitude +
-                "&destination=" + destinationData.routes[0].legs[destinationData.routes[0].legs.Count - 1].end_location.lat + "," +
-                destinationData.routes[0].legs[destinationData.routes[0].legs.Count - 1].end_location.lng + waypointString +
-                "&key=" + googleApiKey);
-
-                setDestinationData(pathURL);
             }
         }
 
@@ -153,7 +193,6 @@ namespace mRides_app
         {
             LatLng position = new LatLng(User.currentUser.latitude, User.currentUser.longitude);
             getCurrentLocation();
-            PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)FragmentManager.FindFragmentById(Resource.Id.place_autocomplete_fragment);
             UpdateCameraPosition(position);
         }
 
@@ -395,7 +434,6 @@ namespace mRides_app
             User.currentUser.latitude = location.Latitude;
             User.currentUser.longitude = location.Longitude;
 
-            PlaceAutocompleteFragment autocompleteFragment = FragmentManager.FindFragmentById<PlaceAutocompleteFragment>(Resource.Id.place_autocomplete_fragment);
             autocompleteFragment.SetBoundsBias(new LatLngBounds(new LatLng(User.currentUser.latitude - 0.2, User.currentUser.longitude - 0.2),
                                                                 new LatLng(User.currentUser.latitude + 0.2, User.currentUser.longitude + 0.2)));
         }
@@ -411,20 +449,60 @@ namespace mRides_app
 
         public void OnPlaceSelected(IPlace place)
         {
-            string destination = place.NameFormatted.ToString();
-            string usr_destination = GetString(Resource.String.dest);
-            Toast.MakeText(ApplicationContext, usr_destination + " : " + destination, ToastLength.Long).Show();         
-        
-            if (destinationMarker != null)
-                map.Clear();
-            destinationMarker = map.AddMarker(new MarkerOptions().SetPosition(place.LatLng).SetTitle(destination));
+            if (!mapButtonClicked)
+            {
+                string destination = place.NameFormatted.ToString();
+                string usr_destination = GetString(Resource.String.dest);
+                string pathURL;
 
-            string pathURL = ("https://maps.googleapis.com/maps/api/directions/json?" +
-                              "origin=" + User.currentUser.latitude + "," + User.currentUser.longitude +
-                              "&destination=" + place.LatLng.Latitude + "," + place.LatLng.Longitude +
+                Toast.MakeText(ApplicationContext, usr_destination + " : " + destination, ToastLength.Long).Show();
+
+                if (destinationMarker != null)
+                {
+                    destinationMarker.Position = place.LatLng;
+                    destinationMarker.Title = destination;
+                }                  
+                else
+                    destinationMarker = map.AddMarker(new MarkerOptions().SetPosition(place.LatLng).SetTitle(destination));
+                if (originMarker != null)
+                   pathURL = ("https://maps.googleapis.com/maps/api/directions/json?" +
+                                "origin=" + originMarker.Position.Latitude + "," + originMarker.Position.Longitude +
+                                "&destination=" + place.LatLng.Latitude + "," + place.LatLng.Longitude +
+                                "&key=" + googleApiKey);
+                else
+                    pathURL = ("https://maps.googleapis.com/maps/api/directions/json?" +
+                                  "origin=" + User.currentUser.latitude + "," + User.currentUser.longitude +
+                                  "&destination=" + place.LatLng.Latitude + "," + place.LatLng.Longitude +
+                                  "&key=" + googleApiKey);
+
+                setDestinationData(pathURL);
+            }
+
+            if (mapButtonClicked)
+            {
+                string origin = place.NameFormatted.ToString();
+                string pathURL;
+                Toast.MakeText(ApplicationContext, "Origin" + " : " + origin, ToastLength.Long).Show();
+
+                if (originMarker != null)
+                {
+                    originMarker.Position = place.LatLng;
+                    originMarker.Title = origin;
+                }
+                else
+                    originMarker = map.AddMarker(new MarkerOptions().SetPosition(place.LatLng).SetTitle(origin));
+
+                UpdateCameraPosition(originMarker.Position);
+
+                if (destinationMarker != null)
+                {
+                    pathURL = ("https://maps.googleapis.com/maps/api/directions/json?" +
+                              "origin=" + originMarker.Position.Latitude + "," + originMarker.Position.Longitude +
+                              "&destination=" + destinationMarker.Position.Latitude + "," + destinationMarker.Position.Longitude +
                               "&key=" + googleApiKey);
-
-            setDestinationData(pathURL);
+                    setDestinationData(pathURL);                   
+                }
+            }
         }
 
         public void OnOriginSelected(IPlace place)
