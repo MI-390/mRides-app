@@ -2478,9 +2478,6 @@ namespace mRides_app
 			// aapt resource value: 0x7f0b0082
 			public const int Text = 2131427458;
 			
-			// aapt resource value: 0x7f0b0083
-			public const int Text1 = 2131427459;
-			
 			// aapt resource value: 0x7f0b00a8
 			public const int action0 = 2131427496;
 			
@@ -2594,6 +2591,9 @@ namespace mRides_app
 			
 			// aapt resource value: 0x7f0b007f
 			public const int chatMsg = 2131427455;
+			
+			// aapt resource value: 0x7f0b0083
+			public const int chat_name = 2131427459;
 			
 			// aapt resource value: 0x7f0b0065
 			public const int checkbox = 2131427429;
