@@ -114,18 +114,22 @@ namespace mRides_app.Mappers
         */
         public long GetGSD(int userId)
         {
-            return SendGetWithUrlSegment<long>(ApiEndPointUrl.getGSD, "userId", userId.ToString());
+            return SendGetWithUrlSegment<long>(ApiEndPointUrl.getGSD, "id", userId.ToString());
         }
 
         /**
         * Change a user's GSD amount
         */
-        public long setGSD(int userId, long amountGSD)
+        public long setGSD(int id, long gsdAmount)
         {
             UserMapper um = UserMapper.getInstance();
-            User u = um.GetUser(userId);
+            User u = um.GetUser(id);
+            var objectSent = new
+            {
+                amountGSD = gsdAmount
+            };
             //User u = SendGetWithUrlSegment<User>(ApiEndPointUrl.getUser, "id", userId.ToString());
-            SendPost<long>(ApiEndPointUrl.setGSD, u, true);
+            SendPost<long>(ApiEndPointUrl.setGSD, objectSent, true);
             return u.gsd;
         }
 

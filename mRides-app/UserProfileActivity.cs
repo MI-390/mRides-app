@@ -23,7 +23,7 @@ namespace mRides_app
             string idToGet = Intent.GetStringExtra("id") ?? GetString(Resource.String.ExtraData_DataNotAvailable);
             int id = Int32.Parse(idToGet);
             User user = UserMapper.getInstance().GetUser(id);
-            
+
             //Displaying username based on name sent after authentication
             //In the future, can be changed to get username from DB
             TextView usernameText;
