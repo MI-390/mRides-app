@@ -59,8 +59,6 @@ namespace mRides_app
             long userGSD = UserMapper.getInstance().GetGSD(id);
             gsdText.Text = "$ " + userGSD.ToString() + " GSD";
 
-
-            List<Models.Feedback> userFeedback = UserMapper.getInstance().GetReviews(id);
             var userProfileFeedbackAdapter = new UserProfileFeedbackAdapter(this, userFeedback);
             var feedbackListView = FindViewById<ListView>(Resource.Id.userProfileListView);
             feedbackListView.Adapter = userProfileFeedbackAdapter;
