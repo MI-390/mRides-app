@@ -45,10 +45,14 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
         <Button
-            android:text="Pick Up"
+            android:text="@string/message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/chatActivityButton" />
+          <Button android:text="Pick Up"
             android:id="@+id/pickUpButton"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+          android:layout_height="wrap_content"
             android:layout_weight="1" />
     </LinearLayout>
 </LinearLayout>

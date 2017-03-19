@@ -17,6 +17,10 @@ namespace mRides_app
     {
         void updateUserSelection(string type, int num);
     }
+
+    /// <summary>
+    /// Fragment class for the options of selecting whether user is a driver/rider and number of people
+    /// </summary>
     public class UserTypeFragment : DialogFragment
     {
         Button previous;
