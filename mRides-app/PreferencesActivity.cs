@@ -87,15 +87,15 @@ namespace mRides_app
             int selectedGenderPref = (int)spinnerGender.SelectedItemId;
             if (selectedGenderPref == 0)
             {
-                genderPreference = "any";
+                genderPreference = User.PREFERENCE_GENDER_ANY;
             }
             else if (selectedGenderPref == 1)
             {
-                genderPreference = "male";
+                genderPreference = User.PREFERENCE_GENDER_MALE;
             }
             else
             {
-                genderPreference = "female";
+                genderPreference = User.PREFERENCE_GENDER_FEMALE;
             }
             doneButton.Click += delegate { this.SaveAndContinue(rbSmoker.Checked, rbLuggage.Checked, rbHandicap.Checked, rbPet.Checked, genderPreference); };
 
