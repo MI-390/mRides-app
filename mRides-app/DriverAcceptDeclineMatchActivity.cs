@@ -227,7 +227,7 @@ namespace mRides_app
             string[] splitCoordinates = currentRiderRequest.location.Split(',');
             LatLng riderCoordinates = new LatLng(Double.Parse(splitCoordinates[0]), Double.Parse(splitCoordinates[1]));
             userMarker.SetPosition(riderCoordinates)
-                                  .SetTitle(currentRiderRequest.rider.firstName.ToString() + " " + currentRiderRequest.rider.lastName.ToString())
+                                  .SetTitle(currentRiderRequest.rider.firstName?.ToString() + " " + currentRiderRequest.rider.lastName?.ToString())
                                   .SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.userIcon2)).Anchor(0.5f, 0.5f);
             this.riderLocationMap.AddMarker(userMarker);
 
