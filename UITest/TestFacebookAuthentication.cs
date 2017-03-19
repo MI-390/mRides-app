@@ -35,7 +35,7 @@ namespace UITest
             // and select the app projects that should be tested.
             app = ConfigureApp
             .Android
-            .ApkFile("D:/Projects/mRides-app/mRides-app/bin/Release//mRides_app.mRides_app-Signed.apk") //CHANGE THIS APK PATH
+            .ApkFile("D:/Projects/mRides/mRides-app/bin/Release//mRides_app.mRides_app-Signed.apk") //CHANGE THIS APK PATH
             .EnableLocalScreenshots().StartApp();
             // Set up the user to David
             UserMapper userMapper = UserMapper.getInstance();
@@ -50,7 +50,7 @@ namespace UITest
             app.Tap(c => c.Marked("loginButton"));
             Thread.Sleep(3000);
             app.Screenshot("Login");
-            app.TapCoordinates(549, 900);
+            app.TapCoordinates(549, 700);
             Thread.Sleep(3000);
             app.EnterText("cvnewggbsc_1487629189@tfbnw.net");
             app.ScrollDownTo(c => c.Css("input#u_0_2"));
