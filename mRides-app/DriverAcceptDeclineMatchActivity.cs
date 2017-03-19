@@ -194,7 +194,7 @@ namespace mRides_app
             // Send confirmation message to the server if driver accepted
             if(accept)
             {
-                consoleMapper.Confirm(this.matchedRequests[currentRiderRequestIndex].riderRequests.First().id, this.driverRequest.ID);
+                consoleMapper.Confirm(this.matchedRequests[currentRiderRequestIndex].riderRequests.First().requestID, this.driverRequest.ID);
                 Toast.MakeText(ApplicationContext, Resources.GetString(Resource.String.driverMatchRequestSent), ToastLength.Long).Show();
             }
 
