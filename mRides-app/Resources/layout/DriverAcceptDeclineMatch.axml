@@ -110,7 +110,7 @@
             android:text="Thomas Grey"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView6"
+            android:id="@+id/driverMatchingRiderName"
             android:gravity="center"
             android:textColor="#FFFFFF" />
     </LinearLayout>
@@ -159,7 +159,7 @@
         android:stateListAnimator="@null" />
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="182.0dp"
+        android:layout_width="280.0dp"
         android:layout_height="103.0dp"
         android:gravity="center"
         android:layout_weight="1"
@@ -174,11 +174,27 @@
             android:layout_marginBottom="5.5dp"
             android:layout_marginRight="0dp"
             android:stateListAnimator="@null" />
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
         <Button
             android:text="@string/driverMatchDecline"
             android:layout_width="87.5dp"
             android:layout_height="25.0dp"
             android:id="@+id/driverMatchButtonDecline"
+            android:background="#92d36e"
+            android:layout_marginBottom="5.5dp"
+            android:stateListAnimator="@null" />
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+        <Button
+            android:text="@string/driverMatchDone"
+            android:layout_width="87.5dp"
+            android:layout_height="25.0dp"
+            android:id="@+id/driverMatchButtonDone"
             android:background="#92d36e"
             android:layout_marginBottom="5.5dp"
             android:stateListAnimator="@null" />

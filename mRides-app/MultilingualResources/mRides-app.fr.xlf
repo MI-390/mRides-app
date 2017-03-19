@@ -219,8 +219,9 @@
           <target state="needs-review-translation" state-qualifier="tm-suggestion">Refuser</target>
         </trans-unit>
         <trans-unit id="going_to_destination" translate="yes" xml:space="preserve">
-          <source>GOINT TO</source>
-          <target state="translated">DESTINATION</target>
+          <source>GOING TO</source>
+          <target state="needs-review-translation">DESTINATION</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Pref_Gender" translate="yes" xml:space="preserve">
           <source>"Any","Male","Female"</source>
@@ -229,6 +230,22 @@
         <trans-unit id="numbers_array" translate="yes" xml:space="preserve">
           <source>""1"",""2"",""3"",""4"",""5"",""6""</source>
           <target state="new">""1"",""2"",""3"",""4"",""5"",""6""</target>
+        </trans-unit>
+        <trans-unit id="driverMatchRequestSent" translate="yes" xml:space="preserve">
+          <source>A request has been sent to this rider</source>
+          <target state="new">A request has been sent to this rider</target>
+        </trans-unit>
+        <trans-unit id="driverMatchNoMoreMatch" translate="yes" xml:space="preserve">
+          <source>No more match</source>
+          <target state="new">No more match</target>
+        </trans-unit>
+        <trans-unit id="driverMatchNoMatchFound" translate="yes" xml:space="preserve">
+          <source>No more match found</source>
+          <target state="new">No more match found</target>
+        </trans-unit>
+        <trans-unit id="driverMatchDone" translate="yes" xml:space="preserve">
+          <source>Done</source>
+          <target state="new">Done</target>
         </trans-unit>
       </group>
     </body>

@@ -27,11 +27,16 @@ namespace mRides_app
     {
 
         private TextView show_time;
+        private TextView riderName;
         private int hour;
         private int minute;
         private ImageView riderPicture;
         private Button acceptButton;
         private Button declineButton;
+        private Button doneButton;
+        private RatingBar riderRating;
+
+
         private List<Request> matchedRequests;
         private Request driverRequest;
 
@@ -54,14 +59,14 @@ namespace mRides_app
             List <string> coordinates = JsonConvert.DeserializeObject<List<string>>(Intent.GetStringExtra(IntentExtraNames.RouteCoordinatesJson));
 
             // Send the request to the server
-            Request newDriverRequest = new Request
+            this.driverRequest = new Request
             {
                 destinationCoordinates = coordinates,
                 destination = coordinates[coordinates.Count - 1],
                 location = coordinates[0],
                 type = Request.TYPE_DRIVER
             };
-            this.matchedRequests = consoleMapper.FindRiders(newDriverRequest);
+            this.matchedRequests = consoleMapper.FindRiders(this.driverRequest);
 
             // Start giving the driver choices of riders
             this.currentRiderRequestIndex = 0;
@@ -70,12 +75,14 @@ namespace mRides_app
             // Update the display
             if(this.matchedRequests.Count > 0)
             {
-                UpdateDisplay();
+                
+
+                this.UpdateDisplay();
             }
             else
             {
-                // TODO: Display some message to the user
-                Toast.MakeText(ApplicationContext, "No rider requests found", ToastLength.Long).Show();
+                // Display some message to the user
+                Toast.MakeText(ApplicationContext, Resources.GetString(Resource.String.driverMatchNoMatchFound), ToastLength.Long).Show();
             }
         }
 
@@ -89,49 +96,74 @@ namespace mRides_app
             // Display
             SetContentView(Resource.Layout.DriverAcceptDeclineMatch);
 
-            // Capture various elements from the view
-            this.show_time = FindViewById<TextView>(Resource.Id.displayTime);
-            this.riderPicture = FindViewById<ImageView>(Resource.Id.driverAcceptDeclineMatchRiderPicture);
+            // Capture the accept button
             this.acceptButton = FindViewById<Button>(Resource.Id.driverMatchButtonAccept);
+            this.acceptButton.Click += delegate { this.Proceed(true); };
 
-            // Capture the button accept button
-            acceptButton.Click += delegate { this.Accept(); };
+            // Capture the decline button
+            this.declineButton = FindViewById<Button>(Resource.Id.driverMatchButtonDecline);
+            this.declineButton.Click += delegate { this.Proceed(false); };
 
-            // Set the current time
+            // Capture the done button
+            this.doneButton = FindViewById<Button>(Resource.Id.driverMatchButtonDone);
+            this.doneButton.Click += delegate { this.Finish(); };
+            
+
+            // Set the profile picture
+            this.riderPicture = FindViewById<ImageView>(Resource.Id.driverAcceptDeclineMatchRiderPicture);
+            Bitmap userPicture = userMapper.GetUserFacebookProfilePicture(riderRequest.rider.facebookID);
+            if (userPicture != null)
+            {
+                this.riderPicture.SetImageBitmap(userPicture);
+            }
+
+            // Set the time of the rider's request
+            this.show_time = FindViewById<TextView>(Resource.Id.displayTime);
             hour = request.dateTime.Hour;
             minute = request.dateTime.Minute;
             string time = string.Format("{0}:{1}", hour, minute.ToString().PadLeft(2, '0'));
             this.show_time.Text = time;
 
-            // Update the profile picture of the rider
-            Bitmap userPicture = userMapper.GetUserFacebookProfilePicture(riderRequest.rider.facebookID);
-            if(userPicture != null)
+            // Display the rider's name
+            this.riderName = FindViewById<TextView>(Resource.Id.driverMatchingRiderName);
+            riderName.Text = riderRequest.rider.firstName + " " + riderRequest.rider.lastName;
+
+            // Update the rating bar to the average rating the rider received
+            this.riderRating = FindViewById<RatingBar>(Resource.Id.ratingBarRiderDestinationMatch);
+            List<Models.Feedback> riderFeedbacks = UserMapper.getInstance().GetReviews(riderRequest.rider.id);
+            if(riderFeedbacks.Count > 0)
             {
-                this.riderPicture.SetImageBitmap(userPicture);
+                int sumStars = 0;
+                double averageStars = 0;
+                foreach (Models.Feedback feedback in riderFeedbacks)
+                {
+                    sumStars = feedback.stars;
+                }
+                averageStars = (double)sumStars / riderFeedbacks.Count;
+                this.riderRating.NumStars = (int)Math.Round(averageStars);
             }
         }
 
         /// <summary>
-        /// Method invoked when the driver accepts the match with the suggested rider.
+        /// Method invoked when the driver either accepts or declines a match
         /// </summary>
-        private void Accept()
+        private void Proceed(bool accept)
         {
-            // Go to next rider
-            if(++this.currentRiderRequestIndex < this.matchedRequests.Count)
+            // Send confirmation message to the server if driver accepted
+            if(accept)
             {
-                // TODO: Display confirmation or error
-                if(consoleMapper.AcceptConfirmation(this.matchedRequests[currentRiderRequestIndex].riderRequests.First().id, this.driverRequest.ID))
-                {
-                    Toast.MakeText(ApplicationContext, "A request has been sent to this rider", ToastLength.Long).Show();
-                    this.UpdateDisplay();
-                }
-                else
-                {
-                    Toast.MakeText(ApplicationContext, "An error has occurred while sending the request", ToastLength.Long).Show();
-                }
+                consoleMapper.Confirm(this.matchedRequests[currentRiderRequestIndex].riderRequests.First().id, this.driverRequest.ID);
+                Toast.MakeText(ApplicationContext, Resources.GetString(Resource.String.driverMatchRequestSent), ToastLength.Long).Show();
+            }
+
+            // Update to the view if there is a next one, otherwise finish this activity
+            if (++this.currentRiderRequestIndex < this.matchedRequests.Count)
+            {
+                this.UpdateDisplay();
             }
             else
             {
+                Toast.MakeText(ApplicationContext, Resources.GetString(Resource.String.driverMatchNoMoreMatch), ToastLength.Long).Show();
                 this.Finish();
             }
         }
