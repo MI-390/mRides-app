@@ -14,6 +14,11 @@ namespace mRides_app.Models
 {
     public class User
     {
+        // Constant settings for the values of the gender preferences 
+        public const string PREFERENCE_GENDER_MALE = "male";
+        public const string PREFERENCE_GENDER_FEMALE = "female";
+        public const string PREFERENCE_GENDER_ANY = "any";
+
         // The user object representing the user using the application
         public static User currentUser { get; set; }
 
