@@ -28,7 +28,7 @@
         android:text="Mcgill University"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView2"
+        android:id="@+id/driverMatchingRiderGoingTo"
         android:textColor="#FFFFFF"
         android:fontFamily="Helvetica" />
     <LinearLayout
@@ -47,17 +47,24 @@
             android:layout_marginTop="0.0dp"
             android:layout_marginRight="10.0dp"
             android:layout_marginLeft="10.0dp"
-            android:id="@+id/driverMatchingMapPlaceHolder">
-        </LinearLayout>
+            android:id="@+id/driverMatchingMapPlaceHolder" />
         <Space
             android:layout_width="match_parent"
             android:layout_height="20dp"
             android:id="@+id/destinationSpaceButtom" />
-        <TextView
-            android:text="From: Loyola Campus"
+      <TextView
+            android:text="From"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView10"
+            android:id="@+id/driverMatchingRiderFromIndicator"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:fontFamily="Helvetica" />
+        <TextView
+            android:text="Loyola Campus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/driverMatchingRiderFrom"
             android:gravity="center"
             android:textColor="#FFFFFF"
             android:fontFamily="Helvetica" />
@@ -87,7 +94,7 @@
     <!--Rider description -->
         <TextView
             android:text="Rider"
-            android:layout_width="383.0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView9"
             android:gravity="center"
@@ -149,7 +156,7 @@
     </LinearLayout>
     <Button
         android:layout_height="38.0dp"
-        android:id="@+id/button1"
+        android:id="@+id/driverMatchingChatButton"
         android:background="@drawable/smsicon"
         android:scaleX="0.6"
         android:scaleY="0.9"

@@ -17,6 +17,9 @@ using Android.Graphics;
 using Newtonsoft.Json;
 using Android.Gms.Maps;
 using Android.Gms.Maps.Model;
+using System.Net;
+using RestSharp;
+using Newtonsoft.Json.Linq;
 
 namespace mRides_app
 {
@@ -30,12 +33,15 @@ namespace mRides_app
 
         private TextView show_time;
         private TextView riderName;
+        private TextView riderFrom;
+        private TextView riderGoingTo;
         private int hour;
         private int minute;
         private ImageView riderPicture;
         private Button acceptButton;
         private Button declineButton;
         private Button doneButton;
+        private Button chatButton;
         private RatingBar riderRating;
         private GoogleMap riderLocationMap;
         private MapFragment mapFragment;
@@ -78,8 +84,6 @@ namespace mRides_app
             // Update the display
             if(this.matchedRequests.Count > 0)
             {
-                
-
                 this.UpdateDisplay();
             }
             else
@@ -89,7 +93,11 @@ namespace mRides_app
             }
         }
 
-        // Updates the time we display in the TextView
+        /// <summary>
+        /// Updates the view of this activity with the information related to the current
+        /// request defined by the attributes list of requests and by the current index of
+        /// that list. Provides a way to loop through all the list.
+        /// </summary>
         private void UpdateDisplay()
         {
             // Get the rider to display
@@ -110,6 +118,10 @@ namespace mRides_app
             // Capture the done button
             this.doneButton = FindViewById<Button>(Resource.Id.driverMatchButtonDone);
             this.doneButton.Click += delegate { this.Finish(); };
+
+            // Capture the chat button
+            this.chatButton = FindViewById<Button>(Resource.Id.driverMatchingChatButton);
+            this.chatButton.Click += delegate { this.Chat(); };
 
             // Put the map fragment programatically
             this.mapFragment = MapFragment.NewInstance();
@@ -138,6 +150,22 @@ namespace mRides_app
             this.riderName = FindViewById<TextView>(Resource.Id.driverMatchingRiderName);
             riderName.Text = riderRequest.rider.firstName + " " + riderRequest.rider.lastName;
 
+            // Obtain the rider's from/going
+            string[] riderFromCoordinates = riderRequest.location.Split(',');
+            if(riderFromCoordinates.Length > 1)
+            {
+                this.riderFrom = FindViewById<TextView>(Resource.Id.driverMatchingRiderFrom);
+                this.riderFrom.Text = ReverseGeoCode(riderFromCoordinates[0], riderFromCoordinates[1]);
+            }
+            
+            string[] riderGoingToCoordinates = riderRequest.destination.Split(',');
+            if(riderGoingToCoordinates.Length > 1)
+            {
+                this.riderGoingTo = FindViewById<TextView>(Resource.Id.driverMatchingRiderGoingTo);
+                this.riderGoingTo.Text = ReverseGeoCode(riderGoingToCoordinates[0], riderGoingToCoordinates[1]);
+            }
+            
+
             // Update the rating bar to the average rating the rider received
             this.riderRating = FindViewById<RatingBar>(Resource.Id.ratingBarRiderDestinationMatch);
             List<Models.Feedback> riderFeedbacks = UserMapper.getInstance().GetReviews(riderRequest.rider.id);
@@ -151,12 +179,15 @@ namespace mRides_app
                     sumStars = feedback.stars;
                 }
                 averageStars = (double)sumStars / riderFeedbacks.Count;
-                this.riderRating.NumStars = (int)Math.Round(averageStars);
+                this.riderRating.Rating = (int)Math.Round(averageStars);
             }
         }
 
         /// <summary>
-        /// Method invoked when the driver either accepts or declines a match
+        /// Method invoked when the driver either accepts or declines a match. Upon acceptance,
+        /// the method will send a confirmation to the server. Then, regardless of whether the
+        /// match was accepted or not, this method will update the view to the next match,
+        /// or finish the activity if no more matches are found.
         /// </summary>
         private void Proceed(bool accept)
         {
@@ -179,6 +210,10 @@ namespace mRides_app
             }
         }
 
+        /// <summary>
+        /// Method called by google map once the map is finished loading
+        /// </summary>
+        /// <param name="googleMap"></param>
         public void OnMapReady(GoogleMap googleMap)
         {
             // Set the instance of google map
@@ -206,5 +241,58 @@ namespace mRides_app
             CameraUpdate cameraUpdate = CameraUpdateFactory.NewCameraPosition(cameraPosition);
             this.riderLocationMap.AnimateCamera(cameraUpdate);
         }
+
+        /// <summary>
+        /// Method invoked when the chat button is clicked. Will start the chat activity with the rider.
+        /// </summary>
+        private void Chat()
+        {
+            int riderId = this.matchedRequests[currentRiderRequestIndex].riderRequests.First().riderID;
+            
+            Intent chatIntent = new Intent(this, typeof(ChatActivity));
+            chatIntent.PutExtra("ChatName", CreateChatName(riderId));
+            chatIntent.PutExtra("id", riderId);
+            StartActivity(chatIntent);
+        }
+
+        /// <summary>
+        /// Creates the chat name based on the user id to which we want to communicate with
+        /// </summary>
+        /// <param name="riderId"></param>
+        /// <returns>string chat name</returns>
+        private string CreateChatName(int riderId)
+        {
+            int intUserId = Convert.ToInt32(riderId);
+            int currentUser = User.currentUser.id;
+            if (currentUser < intUserId)
+            {
+                return currentUser + " & " + riderId;
+            }
+            return riderId + " & " + currentUser;
+        }
+
+        /// <summary>
+        /// Reverse geocode using Google API. Given the latitude and longitude,
+        /// this method will return a string representing the approximate address
+        /// of the location.
+        /// </summary>
+        /// <param name="lat"></param>
+        /// <param name="lng"></param>
+        /// <returns>string approximate address</returns>
+        public string ReverseGeoCode(string latitude, string longitude)
+        {
+            string reverseGeoCodingBaseUrl = "https://maps.googleapis.com/maps/api/geocode/";
+            string reverseGeoEndApi = "json?latlng=" + latitude + "," + longitude;
+            
+            var client = new RestClient(reverseGeoCodingBaseUrl);
+            var request = new RestRequest(reverseGeoEndApi, Method.GET);
+            
+            var response = client.Execute(request);
+            dynamic requestResults = JObject.Parse(response.Content);
+            string formattedAddress = (string) requestResults["results"][0]["formatted_address"] ;
+            return formattedAddress;
+        }
+
+
     }
 }
