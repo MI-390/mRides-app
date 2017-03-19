@@ -50,6 +50,23 @@ namespace mRides_app
             StartActivity(i);
         }
 
+        [Java.Interop.Export("StartActivityFive")]
+        public void StartActivityFive()
+        {
+            Intent i = new Intent(this, typeof(ChatActivity));
+            i.PutExtra("ChatName", "UITEST");
+            i.PutExtra("id", "172");
+            StartActivity(i);
+        }
+
+        [Java.Interop.Export("StartActivitySix")]
+        public void StartActivitySix()
+        {
+            Intent intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse("http://maps.google.com/maps?" + "saddr=" + "45.222,-72.70&daddr=45.4581,-73.6403"));
+            intent.SetClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+            StartActivity(intent);
+        }
+
         void LoginToFacebook(bool allowCancel)
         {
             var auth = new OAuth2Authenticator(

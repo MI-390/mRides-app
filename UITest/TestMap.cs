@@ -11,10 +11,10 @@ using System.Text;
 using mRides_app.Mappers;
 using mRides_app.Models;
 
-namespace UITest
+namespace UITests
 {
     [TestFixture]
-    public class TestFeedback
+    public class TestMap
     {
         AndroidApp app;
 
@@ -35,34 +35,17 @@ namespace UITest
         }
 
         [Test]
-        public void IsRatingBarVisible()
+        public void EnterDriveMode()
         {
-            app.Invoke("StartActivityThree");
-            app.Tap(c => c.Marked("testFragment2"));
-            app.WaitForElement(c => c.Marked("reviewRatingBar1"));
-            app.Flash(c => c.Marked("reviewRatingBar1"));
+            app.WaitForElement(c => c.Marked("loginButton"));
+            app.Invoke("StartActivitySix");
         }
 
         [Test]
-        public void IsReviewLineVisible()
+        public void OpenMap()
         {
-            app.Invoke("StartActivityThree");
-            app.Tap(c => c.Marked("testFragment2"));
-            app.WaitForElement(c => c.Marked("reviewEdit1"));
-        }
-
-        [Test]
-        public void GiveFeedbackToUser()
-        {
-            app.Invoke("StartActivityThree");
-            app.Tap(c => c.Marked("testFragment2"));
-            app.Tap(c => c.Marked("reviewRatingBar1"));
-            string uiTest = "Best driver! (UI Test)";
-            app.EnterText(c => c.Marked("reviewEdit1"), uiTest);
-            var results = app.Query(c => c.Marked("reviewEdit1"));
-            app.Tap("submitFeedback1");
-            Assert.AreEqual(uiTest, results[0].Text);
-            Assert.AreNotEqual("Not working", results[0].Text);
+            app.WaitForElement(c => c.Marked("loginButton"));
+            app.Invoke("StartActivityTwo");
         }
 
     }

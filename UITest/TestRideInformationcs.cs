@@ -26,7 +26,7 @@ namespace UITest
             // and select the app projects that should be tested.
             app = ConfigureApp
             .Android
-            .ApkFile("D:/Projects/mRides-app/mRides-app/bin/Release//mRides_app.mRides_app-Signed.apk") //CHANGE THIS APK PATH
+            .ApkFile("D:/Projects/mRides2/mRides-app/bin/Release//mRides_app.mRides_app-Signed.apk") //CHANGE THIS APK PATH
             .EnableLocalScreenshots().StartApp();
             UserMapper userMapper = UserMapper.getInstance();
             User user = userMapper.GetUserByFacebookId(113083069215300);
@@ -43,34 +43,79 @@ namespace UITest
             app.Tap(c => c.Marked("radioButtonNoHandicap"));
             app.Tap(c => c.Marked("radioButtonNoPet"));
             app.Tap(c => c.Marked("text1"));
-            app.TapCoordinates(721, 1200);
-            app.Tap(c => c.Marked("buttonBack"));
-            app.WaitForElement(c => c.Marked("loginButton"));
+            app.Tap("Female");
+            Thread.Sleep(4000);
+            var results = app.Query(c => c.Marked("text1"));
+            // These should be false
+            bool valueOfSmokerRadio = app.Query(c => c.Id("radioButtonSmoker").Invoke("isChecked").Value<bool>()).First();
+            bool valueOfLuggageRadio = app.Query(c => c.Id("radioButtonLuggage").Invoke("isChecked").Value<bool>()).First();
+            bool valueOfHandicapRadio = app.Query(c => c.Id("radioButtonHandicap").Invoke("isChecked").Value<bool>()).First();
+            bool valueOfPetRadio = app.Query(c => c.Id("radioButtonPet").Invoke("isChecked").Value<bool>()).First();
+
+            // These should be true, as they are checked
+            bool valueOfNonSmokerRadio = app.Query(c => c.Id("radioButtonNonSmoker").Invoke("isChecked").Value<bool>()).First();
+            bool valueOfNoLuggageRadio = app.Query(c => c.Id("radioButtonNoLuggage").Invoke("isChecked").Value<bool>()).First();
+            bool valueOfNoHandicapRadio = app.Query(c => c.Id("radioButtonNoHandicap").Invoke("isChecked").Value<bool>()).First();
+            bool valueOfNoPetRadio = app.Query(c => c.Id("radioButtonNoPet").Invoke("isChecked").Value<bool>()).First();
+
+            bool isTrue = true;
+            bool isFalse = false;
+
+            Assert.AreEqual(valueOfSmokerRadio, isFalse);
+            Assert.AreEqual(valueOfLuggageRadio, isFalse);
+            Assert.AreEqual(valueOfHandicapRadio, isFalse);
+            Assert.AreEqual(valueOfPetRadio, isFalse);
+
+            Assert.AreEqual(valueOfNonSmokerRadio, isTrue);
+            Assert.AreEqual(valueOfNoLuggageRadio, isTrue);
+            Assert.AreEqual(valueOfNoHandicapRadio, isTrue);
+            Assert.AreEqual(valueOfNoPetRadio, isTrue);
+
+            Assert.AreNotEqual(valueOfSmokerRadio, isTrue); // Just to see that the opposite also works
+
+            Assert.AreEqual("Female", results[0].Text);
+            app.Tap(c => c.Marked("buttonDone"));
         }
 
         [Test]
-        public void SelectNumOfPeopleOrSeats()
+        public void SelectNumOfPeople()
         {
             app.Invoke("StartActivityThree");
             app.Tap(c => c.Marked("testFragment1"));
             app.Tap(c => c.Marked("numOfPeople"));
-            app.TapCoordinates(926, 1050);
-            app.Tap(c => c.Marked("riderOrDriverSwitch"));
-            app.Tap(c => c.Marked("numOfPeople"));
-            app.TapCoordinates(926, 1550);
+            app.Tap("4");
+            Thread.Sleep(4000); // It takes time for 4 to be tapped
+            var results = app.Query(c => c.Marked("text1"));
+            Assert.AreEqual("4", results[0].Text);
+            Assert.AreNotEqual("5", results[0].Text);
             app.Tap("Next");
         }
 
         [Test]
         public void SelectDriverOrRider()
         {
+            bool isTrue = true;
+            bool isFalse = false;
+
+            bool isDriver = false;
+
             app.Invoke("StartActivityThree");
             Thread.Sleep(3000);
             app.Tap(c => c.Marked("testFragment1"));
             app.Tap(c => c.Marked("riderOrDriverSwitch"));
-            app.Flash(c => c.Marked("driver1"));
+
+            isDriver = app.Query(c => c.Id("riderOrDriverSwitch").Invoke("isChecked").Value<bool>()).First();
+
+            Thread.Sleep(3000);
+
+            Assert.AreEqual(isDriver, isTrue);
+
             app.Tap(c => c.Marked("riderOrDriverSwitch"));
-            app.Tap(c => c.Marked("rider1"));
+            Thread.Sleep(3000);
+            isDriver = app.Query(c => c.Id("riderOrDriverSwitch").Invoke("isChecked").Value<bool>()).First();
+
+            Assert.AreEqual(isDriver, isFalse);
+
             app.Tap("Next");
         }
 

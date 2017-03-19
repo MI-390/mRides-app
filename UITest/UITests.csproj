@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TestFeedback.cs" />
+    <Compile Include="TestMap.cs" />
     <Compile Include="TestRideInformationcs.cs" />
     <Compile Include="TestUserProfile.cs" />
     <Compile Include="TestFacebookAuthentication.cs" />
