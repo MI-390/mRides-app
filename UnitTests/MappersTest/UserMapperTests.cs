@@ -158,7 +158,7 @@ namespace UnitTests
             bool successDriverToRiderFeedback = false;
             foreach (Feedback f in riderReviews)
             {
-                if (f.givenBy.id == driver.id && f.stars == 4 && f.feedback.Equals("Review from driver " + driver.id))
+                if (f.givenBy.id == driver.id && f.stars == 4 && f.feedbackText.Equals("Review from driver " + driver.id))
                 {
                     successDriverToRiderFeedback = true;
                     break;
@@ -173,7 +173,7 @@ namespace UnitTests
             bool successRiderToDriverFeedback = false;
             foreach (Feedback f in driverReviews)
             {
-                if (f.givenBy.id == rider.id && f.stars == 5 && f.feedback.Equals("Review from rider " + rider.id))
+                if (f.givenBy.id == rider.id && f.stars == 5 && f.feedbackText.Equals("Review from rider " + rider.id))
                 {
                     successRiderToDriverFeedback = true;
                     break;

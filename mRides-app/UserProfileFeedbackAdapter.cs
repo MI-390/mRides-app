@@ -67,7 +67,7 @@ namespace mRides_app
             userNameGivingFeedback.Text = feedbackList.ElementAt(position).givenBy.firstName;
             dateOfFeedback.Text = feedbackList.ElementAt(position).time;
             ratingBarOfFeedback.NumStars = feedbackList.ElementAt(position).stars;
-            reviewOfFeedback.Text = feedbackList.ElementAt(position).feedback;
+            reviewOfFeedback.Text = feedbackList.ElementAt(position).feedbackText;
 
             // Get the picture of the reviewer from the mapper
             UserMapper userMapper = UserMapper.getInstance();
