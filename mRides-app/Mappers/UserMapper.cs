@@ -69,7 +69,7 @@ namespace mRides_app.Mappers
             {
                 fcmToken = fcmToken
             };
-            SendPost<object>(ApiEndPointUrl.registerFcmToken, fcmTokenObject, true);
+            SendPost<object>(ApiEndPointUrl.updateFcmToken, fcmTokenObject, true);
         }
 
         /**
