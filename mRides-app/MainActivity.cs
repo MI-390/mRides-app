@@ -89,7 +89,8 @@ namespace mRides_app
                     if (user != null)
                     {
                         User.currentUser = user;
-                        UserMapper.getInstance().updateFcmToken(FirebaseInstanceId.Instance.Token);
+                        string token = FirebaseInstanceId.Instance.Token;
+                        UserMapper.getInstance().updateFcmToken(token);
                         var mapActivity = new Intent(this, typeof(MapActivity));
                         StartActivity(mapActivity);
                     }
