@@ -81,15 +81,16 @@ namespace mRides_app
             {
                 Log.Debug("Driver", "I am a driver woohoo");
                 // Open a session as a Driver?
-                string availableSeats = GetString(Resource.String.seatsAvailable);
-                tv1.SetText(availableSeats, TextView.BufferType.Normal);
+                tv1.Visibility = ViewStates.Gone;
+                spinner.Visibility = ViewStates.Gone;
             }
             else
             {
                 Log.Debug("Rider", "I am a rider woohoo");
                 // Open a session as a Rider
                 string numRiders = GetString(Resource.String.numberOfRiders);
-                tv1.SetText(numRiders, TextView.BufferType.Normal);
+                tv1.Visibility = ViewStates.Visible;
+                spinner.Visibility = ViewStates.Visible;
             }
 
             driver = !driver;

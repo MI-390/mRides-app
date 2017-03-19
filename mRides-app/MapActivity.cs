@@ -458,18 +458,17 @@ namespace mRides_app
             string usrType = GetString(Resource.String.user_type);
             string userDriver = GetString(Resource.String.user_driver);
             string userRider = GetString(Resource.String.user_rider);
-
+            string numOfPeople = GetString(Resource.String.number_of_people);
             if (type == "driver")
             {
                 typeDisplayed = userDriver;
+                Toast.MakeText(ApplicationContext, usrType + " : " + typeDisplayed, ToastLength.Long).Show();
             }
             else if (type == "rider")
             {
                 typeDisplayed = userRider;
+                Toast.MakeText(ApplicationContext, usrType + " : " + typeDisplayed + " " + numOfPeople + " : " + numberOfPeople, ToastLength.Long).Show();
             }
-
-            string numOfPeople = GetString(Resource.String.number_of_people);
-            Toast.MakeText(ApplicationContext, usrType + " : " + typeDisplayed + " " + numOfPeople + " : " + numberOfPeople, ToastLength.Long).Show();
         }
 
         

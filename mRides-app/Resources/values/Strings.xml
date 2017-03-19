@@ -37,7 +37,6 @@
   <string name="riderOrDriver">  Are you a Rider \nor Driver? </string>
   <string name="r">R</string>
   <string name="d">D</string>
-  <string name="seatsAvailable">How many available seats?</string>
   <string name="numberOfRiders">How many are you?</string>
    <string-array name="numbers_array">
     <item>"1"</item>
