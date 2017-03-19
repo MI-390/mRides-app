@@ -15,6 +15,8 @@ using mRides_app.Constants;
 using mRides_app.Mappers;
 using Android.Graphics;
 using Newtonsoft.Json;
+using Android.Gms.Maps;
+using Android.Gms.Maps.Model;
 
 namespace mRides_app
 {
@@ -23,7 +25,7 @@ namespace mRides_app
     /// which makes up a route.
     /// </summary>
     [Activity(Label ="DriverAcceptDeclineMatchActivity")]
-    public class DriverAcceptDeclineMatchActivity : Activity
+    public class DriverAcceptDeclineMatchActivity : Activity, IOnMapReadyCallback
     {
 
         private TextView show_time;
@@ -35,7 +37,8 @@ namespace mRides_app
         private Button declineButton;
         private Button doneButton;
         private RatingBar riderRating;
-
+        private GoogleMap riderLocationMap;
+        private MapFragment mapFragment;
 
         private List<Request> matchedRequests;
         private Request driverRequest;
@@ -107,8 +110,15 @@ namespace mRides_app
             // Capture the done button
             this.doneButton = FindViewById<Button>(Resource.Id.driverMatchButtonDone);
             this.doneButton.Click += delegate { this.Finish(); };
-            
 
+            // Put the map fragment programatically
+            this.mapFragment = MapFragment.NewInstance();
+            var ft = FragmentManager.BeginTransaction();
+            ft.Add(Resource.Id.driverMatchingMapPlaceHolder, mapFragment).Commit();
+
+            // Display the rider's location
+            this.mapFragment.GetMapAsync(this);
+            
             // Set the profile picture
             this.riderPicture = FindViewById<ImageView>(Resource.Id.driverAcceptDeclineMatchRiderPicture);
             Bitmap userPicture = userMapper.GetUserFacebookProfilePicture(riderRequest.rider.facebookID);
@@ -131,7 +141,8 @@ namespace mRides_app
             // Update the rating bar to the average rating the rider received
             this.riderRating = FindViewById<RatingBar>(Resource.Id.ratingBarRiderDestinationMatch);
             List<Models.Feedback> riderFeedbacks = UserMapper.getInstance().GetReviews(riderRequest.rider.id);
-            if(riderFeedbacks.Count > 0)
+
+            if (riderFeedbacks.Count > 0)
             {
                 int sumStars = 0;
                 double averageStars = 0;
@@ -166,6 +177,34 @@ namespace mRides_app
                 Toast.MakeText(ApplicationContext, Resources.GetString(Resource.String.driverMatchNoMoreMatch), ToastLength.Long).Show();
                 this.Finish();
             }
+        }
+
+        public void OnMapReady(GoogleMap googleMap)
+        {
+            // Set the instance of google map
+            this.riderLocationMap = googleMap;
+
+            // Obtain the current rider request being processed
+            RiderRequest currentRiderRequest = this.matchedRequests[this.currentRiderRequestIndex].riderRequests.First();
+
+            // Create a custom marker for the rider's location
+            MarkerOptions userMarker = new MarkerOptions();
+            string[] splitCoordinates = currentRiderRequest.location.Split(',');
+            LatLng riderCoordinates = new LatLng(Double.Parse(splitCoordinates[0]), Double.Parse(splitCoordinates[1]));
+            userMarker.SetPosition(riderCoordinates)
+                                  .SetTitle(currentRiderRequest.rider.firstName.ToString() + " " + currentRiderRequest.rider.lastName.ToString())
+                                  .SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.userIcon2)).Anchor(0.5f, 0.5f);
+            this.riderLocationMap.AddMarker(userMarker);
+
+            // Move camera to the marker
+            CameraPosition.Builder builder = CameraPosition.InvokeBuilder();
+            builder.Target(riderCoordinates);
+            builder.Zoom(17);
+            builder.Bearing(45);
+            builder.Tilt(90);
+            CameraPosition cameraPosition = builder.Build();
+            CameraUpdate cameraUpdate = CameraUpdateFactory.NewCameraPosition(cameraPosition);
+            this.riderLocationMap.AnimateCamera(cameraUpdate);
         }
     }
 }
