@@ -33,4 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="27.0dp" />
     </LinearLayout>
-</LinearLayout>
+    <include
+        android:id="@+id/toolbar_bottom"
+        layout="@layout/toolbar_bottom" />
+</RelativeLayout>

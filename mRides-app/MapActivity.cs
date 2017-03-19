@@ -52,6 +52,7 @@ namespace mRides_app
         private Android.Gms.Maps.Model.Polyline polyline;
         private const string googleApiKey = "AIzaSyAz9p6O99w8ZWkFUbaREJXmnj01Mpm19dA";
         int numberOfPeople;
+     
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -70,6 +71,16 @@ namespace mRides_app
             }
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Destination);
+            var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
+            SetActionBar(toolbar);
+            ActionBar.Title = "mRides";
+
+            //var toolbar_bot = FindViewById<BottomNavigationView>(Resource.Id.toolbar_bot);
+            //toolbar_bot.InflateMenu(Resource.Menu.bottombar);
+            
+
+
+
 
             string text = mRides_app.Models.User.currentUser.firstName;
 
@@ -275,13 +286,14 @@ namespace mRides_app
             {
                 destinationCoordinates.Add(directionList[i].Latitude.ToString() + "," + directionList[i].Longitude.ToString());
             }
-            
-            Request newRequest = new Request {
+
+            Request newRequest = new Request
+            {
                 destinationCoordinates = destinationCoordinates,
-                destination= destinationCoordinates[destinationCoordinates.Count-1],
-                location= destinationCoordinates[0],
-                type="driver"
-        };
+                destination = destinationCoordinates[destinationCoordinates.Count - 1],
+                location = destinationCoordinates[0],
+                type = "driver"
+            };
             newRequest.destinationCoordinates = destinationCoordinates;
             User.currentUser.requestsAsDriver = ConsoleMapper.getInstance().FindRiders(newRequest);
         }
@@ -381,7 +393,6 @@ namespace mRides_app
             }
         }
 
-
         //Used to start Google Maps Navigation to have real-time navigation system to pick up the selected user
         public void enterDriverMode(double latitude, double longitude)
         {
@@ -398,7 +409,7 @@ namespace mRides_app
                 Toast.MakeText(ApplicationContext, "Google Maps is not installed", ToastLength.Long).Show();
             }
         }
-
+          
         //Interface methods below
 
         protected override void OnResume()
@@ -406,6 +417,14 @@ namespace mRides_app
             base.OnResume();
             if (googleApiClient.IsConnected)
                 getCurrentLocation();
+
+            //MenuBar
+            var chatMenuButton = FindViewById<ImageButton>(Resource.Id.menu_chat);
+            chatMenuButton.Click += delegate
+            {
+                Intent i = new Intent(this, typeof(ChatListActivity));
+                StartActivity(i);
+            };
         }
 
         //When Google API Client is connected
@@ -516,9 +535,26 @@ namespace mRides_app
         {
             User.currentUser.currentType = type;
             numberOfPeople = number;
+            string typeDisplayed = "";
+
+            // For multilingual
             string usrType = GetString(Resource.String.user_type);
+            string userDriver = GetString(Resource.String.user_driver);
+            string userRider = GetString(Resource.String.user_rider);
+
+            if (type == "driver")
+            {
+                typeDisplayed = userDriver;
+            }
+            else if (type == "rider")
+            {
+                typeDisplayed = userRider;
+            }
+
             string numOfPeople = GetString(Resource.String.number_of_people);
-            Toast.MakeText(ApplicationContext, usrType + " : " + User.currentUser.currentType + " " + numOfPeople + " : " + numberOfPeople, ToastLength.Long).Show();
+            Toast.MakeText(ApplicationContext, usrType + " : " + typeDisplayed + " " + numOfPeople + " : " + numberOfPeople, ToastLength.Long).Show();
         }
+
+        
     }
 }

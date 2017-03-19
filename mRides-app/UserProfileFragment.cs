@@ -9,6 +9,8 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using mRides_app.Mappers;
+using mRides_app.Models;
 
 namespace mRides_app
 {
@@ -22,6 +24,7 @@ namespace mRides_app
 
         Button viewProfile;
         Button reviewButton;
+        Button chatButton;
         Button pickUpButton;
         TextView username;
         IStartDrivingModeListener listener;
@@ -41,9 +44,11 @@ namespace mRides_app
             viewProfile = view.FindViewById<Button>(Resource.Id.viewProfileFragmentButton);
             reviewButton = view.FindViewById<Button>(Resource.Id.reviewFragmentButton);
             pickUpButton = view.FindViewById<Button>(Resource.Id.pickUpButton);
+            chatButton = view.FindViewById<Button>(Resource.Id.chatActivityButton);
             viewProfile.Click += ViewProfileButtonClicked;
             reviewButton.Click += ReviewButtonClicked;
             pickUpButton.Click += PickUpButtonClicked;
+            chatButton.Click += ChatButtonClicked;
             return view;
         }
 
@@ -72,6 +77,25 @@ namespace mRides_app
             FragmentTransaction transaction = FragmentManager.BeginTransaction();
             dialog.Show(transaction, "Leave review fragment");
             Dismiss();
+        }
+        void ChatButtonClicked(object sender, EventArgs e)
+        {
+            Intent i = new Intent(Context, typeof(ChatActivity));
+            i.PutExtra("ChatName", createChatName());
+            i.PutExtra("id", userID);
+            Context.StartActivity(i);
+            Dismiss();
+        }
+
+        string createChatName()
+        {
+            int intUserId = Convert.ToInt32(userID);
+            int currentUser = User.currentUser.id;
+            if (currentUser < intUserId)
+            {
+                return currentUser + " & " + userID;
+            }
+            return userID + " & " + currentUser;
         }
 
         void PickUpButtonClicked(object sender, EventArgs e)
