@@ -87,18 +87,18 @@ namespace mRides_app
             int selectedGenderPref = (int)spinnerGender.SelectedItemId;
             if (selectedGenderPref == 0)
             {
-                genderPreference = "any";
+                genderPreference = User.PREFERENCE_GENDER_ANY;
             }
             else if (selectedGenderPref == 1)
             {
-                genderPreference = "male";
+                genderPreference = User.PREFERENCE_GENDER_MALE;
             }
             else
             {
-                genderPreference = "female";
+                genderPreference = User.PREFERENCE_GENDER_FEMALE;
             }
             doneButton.Click += delegate { this.SaveAndContinue(rbSmoker.Checked, rbLuggage.Checked, rbHandicap.Checked, rbPet.Checked, genderPreference); };
-            
+
         }
 
         private void SaveAndContinue(Boolean smoker, Boolean luggage, Boolean handicap, Boolean pet, string gender)
@@ -106,7 +106,8 @@ namespace mRides_app
             // If the current user is null and the previous activity is the main, 
             // create a new user using the preferences
             string previousActivity = Intent.GetStringExtra(Constants.IntentExtraNames.PreviousActivity);
-            if (User.currentUser == null && previousActivity.Equals(Constants.ActivityNames.MainActivity)) {
+            if (User.currentUser == null && previousActivity.Equals(Constants.ActivityNames.MainActivity))
+            {
                 long facebookID = Convert.ToInt64(Intent.GetStringExtra(Constants.IntentExtraNames.UserFacebookId));
                 string facebookFirstName = Intent.GetStringExtra(Constants.IntentExtraNames.UserFacebookFirstName);
                 string facebookLastName = Intent.GetStringExtra(Constants.IntentExtraNames.UserFacebookLastName);
@@ -155,7 +156,7 @@ namespace mRides_app
 
             /**
              * Add a new preference to the set
-             */ 
+             */
             public void AddPreference(RadioButton newPreference)
             {
                 // Add it to the set of preferences 
@@ -171,18 +172,18 @@ namespace mRides_app
             /**
              * Updates which button is currently clicked, and unclicked the previous clicked
              * button
-             */ 
-            public void Click (RadioButton clickedRadioButton)
+             */
+            public void Click(RadioButton clickedRadioButton)
             {
-                if(this.preferenceList.Contains(clickedRadioButton))
+                if (this.preferenceList.Contains(clickedRadioButton))
                 {
-                    if(this.selectedPreference != null && !this.selectedPreference.Equals(clickedRadioButton))
+                    if (this.selectedPreference != null && !this.selectedPreference.Equals(clickedRadioButton))
                     {
                         this.selectedPreference.Checked = false;
                     }
                     this.selectedPreference = clickedRadioButton;
                 }
             }
-        } 
+        }
     }
 }
