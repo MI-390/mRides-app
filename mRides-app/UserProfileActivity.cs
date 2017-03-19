@@ -44,20 +44,15 @@ namespace mRides_app
                 ImageView facebookPicture = FindViewById<ImageView>(Resource.Id.userPhoto);
                 facebookPicture.SetImageBitmap(facebookPictureBitMap);
             }
-            
-
-            //For testing
-            //FeedbackForNow fb = new FeedbackForNow();
-            //fb.dateOfFeedback = DateTime.Now;
-            //fb.rating = 3;
-            //fb.review = "Awesome";
-            //fb.userIdForNow = 2;
-            //fb.username = "Nassim";
 
             TextView gsdText;
             gsdText = FindViewById<TextView>(Resource.Id.userProfileGSD);
             long userGSD = UserMapper.getInstance().GetGSD(id);
             gsdText.Text = "$ " + userGSD.ToString() + " GSD";
+
+            //For testing purposes
+            //long newgsd = UserMapper.getInstance().setGSD(id, 7777);
+            //gsdText.Text = "$ " + newgsd + " GSD";
 
             var userProfileFeedbackAdapter = new UserProfileFeedbackAdapter(this, userFeedback);
             var feedbackListView = FindViewById<ListView>(Resource.Id.userProfileListView);
