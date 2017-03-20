@@ -28,7 +28,7 @@
         android:text="Mcgill University"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/driverMatchingRiderGoingTo"
+        android:id="@+id/userMatchedDestination"
         android:textColor="#FFFFFF"
         android:fontFamily="Helvetica" />
     <LinearLayout
@@ -47,7 +47,7 @@
             android:layout_marginTop="0.0dp"
             android:layout_marginRight="10.0dp"
             android:layout_marginLeft="10.0dp"
-            android:id="@+id/driverMatchingMapPlaceHolder" />
+            android:id="@+id/userMatchingMapPlaceHolder" />
         <Space
             android:layout_width="match_parent"
             android:layout_height="20dp"
@@ -56,7 +56,7 @@
             android:text="From"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/driverMatchingRiderFromIndicator"
+            android:id="@+id/userMatchedOriginIndicator"
             android:gravity="center"
             android:textColor="#FFFFFF"
             android:fontFamily="Helvetica" />
@@ -64,7 +64,7 @@
             android:text="Loyola Campus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/driverMatchingRiderFrom"
+            android:id="@+id/userMatchedOrigin"
             android:gravity="center"
             android:textColor="#FFFFFF"
             android:fontFamily="Helvetica" />
@@ -96,7 +96,7 @@
             android:text="Rider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView9"
+            android:id="@+id/matchedUserRole"
             android:gravity="center"
             android:textColor="#FFFFFF"
             android:fontFamily="Helvetica" />
@@ -106,20 +106,20 @@
             android:minHeight="25px"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/llDriverAcceptDeclineMatchPicture"
+            android:id="@+id/llMatchedUserPicture"
             android:gravity="center">
             <ImageView
                 android:src="@android:drawable/ic_menu_gallery"
                 android:layout_width="52.5dp"
                 android:layout_height="52.5dp"
-                android:id="@+id/driverAcceptDeclineMatchRiderPicture"
+                android:id="@+id/matchedUserPicture"
                 android:layout_marginTop="5.5dp" />
         </LinearLayout>
         <TextView
             android:text="Thomas Grey"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/driverMatchingRiderName"
+            android:id="@+id/matchedUserName"
             android:gravity="center"
             android:textColor="#FFFFFF" />
     </LinearLayout>
@@ -156,7 +156,7 @@
     </LinearLayout>
     <Button
         android:layout_height="38.0dp"
-        android:id="@+id/driverMatchingChatButton"
+        android:id="@+id/userMatchingChatButton"
         android:background="@drawable/smsicon"
         android:scaleX="0.6"
         android:scaleY="0.9"
@@ -175,10 +175,10 @@
         android:id="@+id/linearLayout2"
         android:layout_marginTop="30.0dp">
         <Button
-            android:text="@string/driverMatchAccept"
+            android:text="@string/userMatchAccept"
             android:layout_width="87.5dp"
             android:layout_height="25.0dp"
-            android:id="@+id/driverMatchButtonAccept"
+            android:id="@+id/userMatchButtonAccept"
             android:background="#92d36e"
             android:layout_marginBottom="5.5dp"
             android:layout_marginRight="0dp"
@@ -188,10 +188,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" />
         <Button
-            android:text="@string/driverMatchDecline"
+            android:text="@string/userMatchDecline"
             android:layout_width="87.5dp"
             android:layout_height="25.0dp"
-            android:id="@+id/driverMatchButtonDecline"
+            android:id="@+id/userMatchButtonDecline"
             android:background="#92d36e"
             android:layout_marginBottom="5.5dp"
             android:stateListAnimator="@null" />
@@ -200,10 +200,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" />
         <Button
-            android:text="@string/driverMatchDone"
+            android:text="@string/userMatchDone"
             android:layout_width="87.5dp"
             android:layout_height="25.0dp"
-            android:id="@+id/driverMatchButtonDone"
+            android:id="@+id/userMatchButtonDone"
             android:background="#92d36e"
             android:layout_marginBottom="5.5dp"
             android:stateListAnimator="@null" />

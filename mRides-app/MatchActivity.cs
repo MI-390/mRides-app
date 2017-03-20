@@ -27,30 +27,34 @@ namespace mRides_app
     /// This activity takes in the intent a list of strings representing mulitple coordinates
     /// which makes up a route.
     /// </summary>
-    [Activity(Label ="DriverAcceptDeclineMatchActivity")]
-    public class DriverAcceptDeclineMatchActivity : Activity, IOnMapReadyCallback
+    [Activity(Label ="MatchActivity")]
+    public class MatchActivity : Activity, IOnMapReadyCallback
     {
 
         private TextView show_time;
-        private TextView riderName;
-        private TextView riderFrom;
-        private TextView riderGoingTo;
+        private TextView matchedUserName;
+        private TextView matchedUserFrom;
+        private TextView matchedUserGoingTo;
+        private TextView matchedUserRole;
+
         private int hour;
         private int minute;
-        private ImageView riderPicture;
+        private ImageView matchedUserPicture;
         private Button acceptButton;
         private Button declineButton;
         private Button doneButton;
         private Button chatButton;
-        private RatingBar riderRating;
-        private GoogleMap riderLocationMap;
+        private RatingBar matchedUserRatingBar;
+        private GoogleMap matchedUserLocationMap;
         private MapFragment mapFragment;
 
+        private string userType;
+
         private List<Request> matchedRequests;
-        private Request driverRequest;
+        private Request userRequest;
 
         // Keeps track of the index of the rider request currently displayed
-        private int currentRiderRequestIndex;
+        private int currentMatchedUserIndex;
 
         private UserMapper userMapper;
         private ConsoleMapper consoleMapper; 
@@ -63,25 +67,31 @@ namespace mRides_app
             this.userMapper = UserMapper.getInstance();
             this.consoleMapper = ConsoleMapper.getInstance();
 
-            // Deserialize the list of coordinates
+            // Obtain the type of the user for this request and deserialize the list of coordinates
+            this.userType = Intent.GetStringExtra(Constants.IntentExtraNames.RequestType);
             string json = Intent.GetStringExtra(IntentExtraNames.RouteCoordinatesJson);
             List <string> coordinates = JsonConvert.DeserializeObject<List<string>>(Intent.GetStringExtra(IntentExtraNames.RouteCoordinatesJson));
 
             // Send the request to the server
-            this.driverRequest = new Request
+            this.userRequest = new Request
             {
                 destinationCoordinates = coordinates,
                 destination = coordinates[coordinates.Count - 1],
                 location = coordinates[0],
-                type = Request.TYPE_DRIVER
+                type = this.userType
             };
-            this.matchedRequests = consoleMapper.FindRiders(this.driverRequest);
+            if(this.userType == Request.TYPE_DRIVER)
+            {
+                this.matchedRequests = consoleMapper.FindRiders(this.userRequest);
+            }
+            else
+            {
+                this.matchedRequests = consoleMapper.FindDrivers(this.userRequest);
+            }
+            
 
-            // Start giving the driver choices of riders
-            this.currentRiderRequestIndex = 0;
-            this.UpdateDisplay();
-
-            // Update the display
+            // Start giving the user choices of matched users
+            this.currentMatchedUserIndex = 0;
             if(this.matchedRequests.Count > 0)
             {
                 this.UpdateDisplay();
@@ -89,7 +99,8 @@ namespace mRides_app
             else
             {
                 // Display some message to the user
-                Toast.MakeText(ApplicationContext, Resources.GetString(Resource.String.driverMatchNoMatchFound), ToastLength.Long).Show();
+                Toast.MakeText(ApplicationContext, Resources.GetString(Resource.String.matchNoMatchFound), ToastLength.Long).Show();
+                Finish();
             }
         }
 
@@ -100,75 +111,98 @@ namespace mRides_app
         /// </summary>
         private void UpdateDisplay()
         {
-            // Get the rider to display
-            Request request = this.matchedRequests[this.currentRiderRequestIndex];
-            RiderRequest riderRequest = request.riderRequests.First();
+            // Get the matched user to display
+            Request currentRequest = this.matchedRequests[this.currentMatchedUserIndex];
+            RiderRequest matchedRiderRequest = null;
+            User matchedUser;
+            if (this.userType == Request.TYPE_DRIVER)
+            {
+                matchedRiderRequest = currentRequest.riderRequests.First();
+                matchedUser = matchedRiderRequest.rider;
+            }
+            else
+            {
+                matchedUser = currentRequest.driver;
+            }
 
             // Display
-            SetContentView(Resource.Layout.DriverAcceptDeclineMatch);
+            SetContentView(Resource.Layout.Match);
 
             // Capture the accept button
-            this.acceptButton = FindViewById<Button>(Resource.Id.driverMatchButtonAccept);
+            this.acceptButton = FindViewById<Button>(Resource.Id.userMatchButtonAccept);
             this.acceptButton.Click += delegate { this.Proceed(true); };
 
             // Capture the decline button
-            this.declineButton = FindViewById<Button>(Resource.Id.driverMatchButtonDecline);
+            this.declineButton = FindViewById<Button>(Resource.Id.userMatchButtonDecline);
             this.declineButton.Click += delegate { this.Proceed(false); };
 
             // Capture the done button
-            this.doneButton = FindViewById<Button>(Resource.Id.driverMatchButtonDone);
+            this.doneButton = FindViewById<Button>(Resource.Id.userMatchButtonDone);
             this.doneButton.Click += delegate { this.Finish(); };
 
             // Capture the chat button
-            this.chatButton = FindViewById<Button>(Resource.Id.driverMatchingChatButton);
+            this.chatButton = FindViewById<Button>(Resource.Id.userMatchingChatButton);
             this.chatButton.Click += delegate { this.Chat(); };
 
             // Put the map fragment programatically
             this.mapFragment = MapFragment.NewInstance();
             var ft = FragmentManager.BeginTransaction();
-            ft.Add(Resource.Id.driverMatchingMapPlaceHolder, mapFragment).Commit();
+            ft.Add(Resource.Id.userMatchingMapPlaceHolder, mapFragment).Commit();
 
             // Display the rider's location
             this.mapFragment.GetMapAsync(this);
             
             // Set the profile picture
-            this.riderPicture = FindViewById<ImageView>(Resource.Id.driverAcceptDeclineMatchRiderPicture);
-            Bitmap userPicture = userMapper.GetUserFacebookProfilePicture(riderRequest.rider.facebookID);
+            this.matchedUserPicture = FindViewById<ImageView>(Resource.Id.matchedUserPicture);
+            Bitmap userPicture = userMapper.GetUserFacebookProfilePicture(matchedUser.facebookID);
             if (userPicture != null)
             {
-                this.riderPicture.SetImageBitmap(userPicture);
+                this.matchedUserPicture.SetImageBitmap(userPicture);
             }
 
-            // Set the time of the rider's request
+            // Set the time of the matched user's request
             this.show_time = FindViewById<TextView>(Resource.Id.displayTime);
-            hour = request.dateTime.Hour;
-            minute = request.dateTime.Minute;
+            this.hour = currentRequest.dateTime.Hour;
+            this.minute = currentRequest.dateTime.Minute;
+            
             string time = string.Format("{0}:{1}", hour, minute.ToString().PadLeft(2, '0'));
             this.show_time.Text = time;
 
-            // Display the rider's name
-            this.riderName = FindViewById<TextView>(Resource.Id.driverMatchingRiderName);
-            riderName.Text = riderRequest.rider.firstName + " " + riderRequest.rider.lastName;
+            // Display the matched user's name
+            this.matchedUserName = FindViewById<TextView>(Resource.Id.matchedUserName);
+            this.matchedUserName.Text = matchedUser.firstName + " " + matchedUser.lastName;
 
-            // Obtain the rider's from/going
-            string[] riderFromCoordinates = riderRequest.location.Split(',');
-            if(riderFromCoordinates.Length > 1)
+            // Display the role of the matched user (opposite of the current user type)
+            this.matchedUserRole = FindViewById<TextView>(Resource.Id.matchedUserRole);
+            this.matchedUserRole.Text = this.userType == Request.TYPE_DRIVER ? Resources.GetString(Resource.String.user_rider) : Resources.GetString(Resource.String.user_driver);
+
+            // Obtain the matched user's origin and destination coordinates and set the addresses
+            string[] matchedUserOriginCoordinates;
+            string[] matchedUserDestinationCoordinates;
+            if (this.userType == Request.TYPE_DRIVER)
             {
-                this.riderFrom = FindViewById<TextView>(Resource.Id.driverMatchingRiderFrom);
-                this.riderFrom.Text = ReverseGeoCode(riderFromCoordinates[0], riderFromCoordinates[1]);
+                matchedUserOriginCoordinates = matchedRiderRequest.location.Split(',');
+                matchedUserDestinationCoordinates = matchedRiderRequest.destination.Split(',');
+            }
+            else
+            {
+                matchedUserOriginCoordinates = currentRequest.location.Split(',');
+                matchedUserDestinationCoordinates = currentRequest.destination.Split(',');
+            }
+            if(matchedUserOriginCoordinates.Length > 1)
+            {
+                this.matchedUserFrom = FindViewById<TextView>(Resource.Id.userMatchedOrigin);
+                this.matchedUserFrom.Text = ReverseGeoCode(matchedUserOriginCoordinates[0], matchedUserOriginCoordinates[1]);
+            }
+            if(matchedUserDestinationCoordinates.Length > 1)
+            {
+                this.matchedUserGoingTo = FindViewById<TextView>(Resource.Id.userMatchedDestination);
+                this.matchedUserGoingTo.Text = ReverseGeoCode(matchedUserDestinationCoordinates[0], matchedUserDestinationCoordinates[1]);
             }
             
-            string[] riderGoingToCoordinates = riderRequest.destination.Split(',');
-            if(riderGoingToCoordinates.Length > 1)
-            {
-                this.riderGoingTo = FindViewById<TextView>(Resource.Id.driverMatchingRiderGoingTo);
-                this.riderGoingTo.Text = ReverseGeoCode(riderGoingToCoordinates[0], riderGoingToCoordinates[1]);
-            }
-            
-
             // Update the rating bar to the average rating the rider received
-            this.riderRating = FindViewById<RatingBar>(Resource.Id.ratingBarRiderDestinationMatch);
-            List<Models.Feedback> riderFeedbacks = UserMapper.getInstance().GetReviews(riderRequest.rider.id);
+            this.matchedUserRatingBar = FindViewById<RatingBar>(Resource.Id.ratingBarRiderDestinationMatch);
+            List<Models.Feedback> riderFeedbacks = UserMapper.getInstance().GetReviews(matchedUser.id);
 
             if (riderFeedbacks.Count > 0)
             {
@@ -179,7 +213,7 @@ namespace mRides_app
                     sumStars = feedback.stars;
                 }
                 averageStars = (double)sumStars / riderFeedbacks.Count;
-                this.riderRating.Rating = (int)Math.Round(averageStars);
+                this.matchedUserRatingBar.Rating = (int)Math.Round(averageStars);
             }
         }
 
@@ -194,18 +228,26 @@ namespace mRides_app
             // Send confirmation message to the server if driver accepted
             if(accept)
             {
-                consoleMapper.Confirm(this.matchedRequests[currentRiderRequestIndex].riderRequests.First().requestID, this.driverRequest.ID);
-                Toast.MakeText(ApplicationContext, Resources.GetString(Resource.String.driverMatchRequestSent), ToastLength.Long).Show();
+                if(this.userType == Request.TYPE_DRIVER)
+                {
+                    consoleMapper.Confirm(this.matchedRequests[currentMatchedUserIndex].riderRequests.First().requestID, this.userRequest.ID);
+                }
+                else
+                {
+                    consoleMapper.Confirm(this.matchedRequests[currentMatchedUserIndex].ID, this.userRequest.ID);
+                }
+                
+                Toast.MakeText(ApplicationContext, Resources.GetString(Resource.String.matchRequestSent), ToastLength.Long).Show();
             }
 
             // Update to the view if there is a next one, otherwise finish this activity
-            if (++this.currentRiderRequestIndex < this.matchedRequests.Count)
+            if (++this.currentMatchedUserIndex < this.matchedRequests.Count)
             {
                 this.UpdateDisplay();
             }
             else
             {
-                Toast.MakeText(ApplicationContext, Resources.GetString(Resource.String.driverMatchNoMoreMatch), ToastLength.Long).Show();
+                Toast.MakeText(ApplicationContext, Resources.GetString(Resource.String.matchNoMoreMatch), ToastLength.Long).Show();
                 this.Finish();
             }
         }
@@ -217,19 +259,32 @@ namespace mRides_app
         public void OnMapReady(GoogleMap googleMap)
         {
             // Set the instance of google map
-            this.riderLocationMap = googleMap;
+            this.matchedUserLocationMap = googleMap;
 
-            // Obtain the current rider request being processed
-            RiderRequest currentRiderRequest = this.matchedRequests[this.currentRiderRequestIndex].riderRequests.First();
+            // Obtain the current matched user's request being processed
+            User currentMatchedUser = null;
+            string location;
+            if(this.userType == Request.TYPE_DRIVER)
+            {
+                RiderRequest currentRiderRequest = this.matchedRequests[this.currentMatchedUserIndex].riderRequests.First();
+                location = currentRiderRequest.location;
+                currentMatchedUser = currentRiderRequest.rider;
+            }
+            else
+            {
+                location = this.matchedRequests[this.currentMatchedUserIndex].location;
+                currentMatchedUser = this.matchedRequests[this.currentMatchedUserIndex].driver;
+            }
+            
 
             // Create a custom marker for the rider's location
             MarkerOptions userMarker = new MarkerOptions();
-            string[] splitCoordinates = currentRiderRequest.location.Split(',');
+            string[] splitCoordinates = location.Split(',');
             LatLng riderCoordinates = new LatLng(Double.Parse(splitCoordinates[0]), Double.Parse(splitCoordinates[1]));
             userMarker.SetPosition(riderCoordinates)
-                                  .SetTitle(currentRiderRequest.rider.firstName?.ToString() + " " + currentRiderRequest.rider.lastName?.ToString())
+                                  .SetTitle(currentMatchedUser.firstName?.ToString() + " " + currentMatchedUser.lastName?.ToString())
                                   .SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.userIcon2)).Anchor(0.5f, 0.5f);
-            this.riderLocationMap.AddMarker(userMarker);
+            this.matchedUserLocationMap.AddMarker(userMarker);
 
             // Move camera to the marker
             CameraPosition.Builder builder = CameraPosition.InvokeBuilder();
@@ -239,7 +294,7 @@ namespace mRides_app
             builder.Tilt(90);
             CameraPosition cameraPosition = builder.Build();
             CameraUpdate cameraUpdate = CameraUpdateFactory.NewCameraPosition(cameraPosition);
-            this.riderLocationMap.AnimateCamera(cameraUpdate);
+            this.matchedUserLocationMap.AnimateCamera(cameraUpdate);
         }
 
         /// <summary>
@@ -247,7 +302,7 @@ namespace mRides_app
         /// </summary>
         private void Chat()
         {
-            int riderId = this.matchedRequests[currentRiderRequestIndex].riderRequests.First().riderID;
+            int riderId = this.matchedRequests[currentMatchedUserIndex].riderRequests.First().riderID;
             
             Intent chatIntent = new Intent(this, typeof(ChatActivity));
             chatIntent.PutExtra("ChatName", CreateChatName(riderId));

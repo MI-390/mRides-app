@@ -546,37 +546,35 @@ namespace mRides_app
             numberOfPeople = number;
             string typeDisplayed = "";
 
+            // Get the list of coordinates
+            List<string> destinationCoordinates = this.getFormattedDirectionList();
+
             // For multilingual
             string usrType = GetString(Resource.String.user_type);
             string userDriver = GetString(Resource.String.user_driver);
             string userRider = GetString(Resource.String.user_rider);
             string numOfPeople = GetString(Resource.String.number_of_people);
-            if (type == "driver")
-            {
-                typeDisplayed = userDriver;
-                Toast.MakeText(ApplicationContext, usrType + " : " + typeDisplayed, ToastLength.Long).Show();
-            }
-            else if (type == "rider")
-            {
-                typeDisplayed = userRider;
-                Toast.MakeText(ApplicationContext, usrType + " : " + typeDisplayed + " " + numOfPeople + " : " + numberOfPeople, ToastLength.Long).Show();
-            }
 
-            
-            
-
-            // Start the driver matching session
-            if (type == mRides_app.Models.Request.TYPE_DRIVER)
+            if(type == mRides_app.Models.Request.TYPE_DRIVER || type == mRides_app.Models.Request.TYPE_RIDER)
             {
-                List<string> destinationCoordinates = this.getFormattedDirectionList();
+                if (type == mRides_app.Models.Request.TYPE_DRIVER)
+                {
+                    typeDisplayed = userDriver;
+                    Toast.MakeText(ApplicationContext, usrType + " : " + typeDisplayed, ToastLength.Long).Show();
+                }
+                else
+                {
+                    typeDisplayed = userRider;
+                    Toast.MakeText(ApplicationContext, usrType + " : " + typeDisplayed + " " + numOfPeople + " : " + numberOfPeople, ToastLength.Long).Show();
+                }
 
-                Intent driverAcceptDeclineMatch = new Intent(this, typeof(DriverAcceptDeclineMatchActivity));
-                driverAcceptDeclineMatch.PutExtra(Constants.IntentExtraNames.RouteCoordinatesJson, JsonConvert.SerializeObject(destinationCoordinates));
-                StartActivity(driverAcceptDeclineMatch);
+                // Prepare the next activity
+                Intent matchActivity = new Intent(this, typeof(MatchActivity));
+                matchActivity.PutExtra(Constants.IntentExtraNames.RouteCoordinatesJson, JsonConvert.SerializeObject(destinationCoordinates));
+                matchActivity.PutExtra(Constants.IntentExtraNames.RequestType, type);
+                StartActivity(matchActivity);
             }
             
         }
-
-        
     }
 }

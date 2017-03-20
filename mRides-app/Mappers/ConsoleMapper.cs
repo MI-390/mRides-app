@@ -43,16 +43,33 @@ namespace mRides_app.Mappers
          */
         public List<Request> FindDrivers(Request newRequest)
         {
-            dynamic response = SendPost<dynamic>(ApiEndPointUrl.findDrivers, newRequest, true);
+            // Create a new rest client
+            var client = new RestClient()
+            {
+                BaseUrl = new System.Uri(BaseUrl),
+                Authenticator = new HttpBasicAuthenticator(_accountSid, _secretKey)
+            };
 
-            // The response consists of a list:
-            // - The first element is a list of Ride
-            // - The second element is the id of the newly create request
-            List<Request> requests = response.rides.ToObject<List<Request>>();
-            int requestId = Convert.ToInt32(response.requestId);
-            newRequest.ID = requestId;
+            // Serialize the object of interest into a JSON
+            var json = JsonConvert.SerializeObject(newRequest);
 
-            return requests;
+            // Make a new request object
+            var request = new RestRequest(ApiEndPointUrl.findDrivers, Method.POST);
+            request.AddHeader(HeaderNameUserId, User.currentUser.id.ToString());
+            request.AddParameter("text/json", json, ParameterType.RequestBody);
+
+            // Execute the request and return the response
+            var response = client.Execute<FindDriversJson>(request);
+            var responseData = response == null ? null : response.Data;
+            if (responseData == null)
+            {
+                return new List<Request>();
+            }
+            else
+            {
+                newRequest.ID = responseData.riderRequestID;
+                return responseData.requests;
+            }
         }
 
         /**
