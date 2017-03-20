@@ -26,11 +26,10 @@ namespace mRides_app
             string idToGet = Intent.GetStringExtra("id") ?? GetString(Resource.String.ExtraData_DataNotAvailable);
             int id = Int32.Parse(idToGet);
             User user = UserMapper.getInstance().GetUser(id);
-            
+
             //Displaying username based on name sent after authentication
             //In the future, can be changed to get username from DB
             TextView usernameText;
-
             //String username = Intent.GetStringExtra("Profile Info") ?? "Data not available";
             SetContentView(Resource.Layout.UserProfile);
             usernameText = FindViewById<TextView>(Resource.Id.userName);
@@ -45,30 +44,17 @@ namespace mRides_app
                 ImageView facebookPicture = FindViewById<ImageView>(Resource.Id.userPhoto);
                 facebookPicture.SetImageBitmap(facebookPictureBitMap);
             }
-            
 
-            //For testing
-            //FeedbackForNow fb = new FeedbackForNow();
-            //fb.dateOfFeedback = DateTime.Now;
-            //fb.rating = 3;
-            //fb.review = "Awesome";
-            //fb.userIdForNow = 2;
-            //fb.username = "Nassim";
+            TextView gsdText;
+            gsdText = FindViewById<TextView>(Resource.Id.userProfileGSD);
+            long userGSD = UserMapper.getInstance().GetGSD(id);
+            gsdText.Text = "$ " + userGSD.ToString() + " GSD";
 
-            //FeedbackForNow fb2 = new FeedbackForNow();
-            //fb2.dateOfFeedback = DateTime.Now;
-            //fb2.rating = 5;
-            //fb2.review = "Cool";
-            //fb2.userIdForNow = 3;
-            //fb2.username = "Hannah";
+            //For testing purposes
+            //long newgsd = UserMapper.getInstance().setGSD(id, 7777);
+            //gsdText.Text = "$ " + newgsd + " GSD";
 
-            //List<FeedbackForNow> feedbackfornowlist = new List<FeedbackForNow>();
-            //feedbackfornowlist.Add(fb);
-            //feedbackfornowlist.Add(fb2);
-
-            //put for loop later in the future
             var userProfileFeedbackAdapter = new UserProfileFeedbackAdapter(this, userFeedback);
-            //var feedbackAdapter = new UserProfileFeedbackAdapter(this);
             var feedbackListView = FindViewById<ListView>(Resource.Id.userProfileListView);
             feedbackListView.Adapter = userProfileFeedbackAdapter;
 

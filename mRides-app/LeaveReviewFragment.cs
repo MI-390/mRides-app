@@ -57,6 +57,21 @@ namespace mRides_app
             rating = getCurrentRating();
 
             UserMapper.getInstance().LeaveReview(1, userID, rating, review);
+
+            long gsdAmount = UserMapper.getInstance().GetGSD(userID);
+            if (rating == 5)
+                gsdAmount += 100;
+            else if (rating == 4)
+                gsdAmount += 75;
+            else if (rating == 3)
+                gsdAmount += 50;
+            else if (rating == 2)
+                gsdAmount += 25;
+            else if (rating < 2)
+                gsdAmount += 0; // Change this if necessary, for now GSD doesn't increase if rating is below 2/5
+
+            UserMapper.getInstance().setGSD(userID, gsdAmount);
+
             Dismiss();
 
             // To debug

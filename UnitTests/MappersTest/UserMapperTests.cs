@@ -4,6 +4,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using UnitTests.Mappers;
+using System.Threading;
 
 namespace UnitTests
 {
@@ -181,5 +182,65 @@ namespace UnitTests
             }
             Assert.True(successRiderToDriverFeedback);
         }
+
+        /**
+        * Test whether we are able to successfully get the GSD of a user
+        */
+        [Test]
+        public void GetGSD()
+        {
+            UserMapper userMapper = UserMapper.getInstance();
+            // Create a test user
+            User aline = new User
+            {
+                id = 88888,
+                firstName = "Test",
+                lastName = "User",
+                genderPreference = "male",
+                gsd = 15,
+                hasLuggage = false,
+                isHandicap = false,
+                isSmoker = false,
+                hasPet = false,
+                prefferedLanguage = "en-ca"
+            };
+      
+            userMapper.CreateUser(aline);
+            //Thread.Sleep(5000);
+            long testGSD = userMapper.GetGSD(88888);
+            Assert.AreEqual(testGSD, 15);
+        }
+
+        /**
+        * Test whether we are able to successfully set the GSD of a user
+        */
+        [Test]
+        public void SetGSD()
+        {
+            UserMapper userMapper = UserMapper.getInstance();
+            // Create a test user
+            User aline = new User
+            {
+                id = 9999,
+                firstName = "Test",
+                lastName = "User",
+                genderPreference = "male",
+                gsd = 15,
+                hasLuggage = false,
+                isHandicap = false,
+                isSmoker = false,
+                hasPet = false,
+                prefferedLanguage = "en-ca"
+            };
+
+            userMapper.CreateUser(aline);
+            //Thread.Sleep(5000);
+            userMapper.setGSD(9999, 150);
+            long testGSD = userMapper.GetGSD(9999);
+            Assert.AreEqual(testGSD, 150);
+        }
+
+
+
     }
 }

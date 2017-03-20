@@ -16,6 +16,7 @@ using RestSharp.Authenticators;
 using Newtonsoft.Json;
 using Android.Graphics;
 using System.Net;
+using System.Threading;
 
 namespace mRides_app.Mappers
 {
@@ -175,5 +176,31 @@ namespace mRides_app.Mappers
 
             return imageBitmap;
         }
+
+        /**
+        * Obtain a user's GSD amount
+        */
+        public long GetGSD(int userId)
+        {
+            return SendGetWithUrlSegment<long>(ApiEndPointUrl.getGSD, "id", userId.ToString());
+        }
+
+        /**
+        * Change a user's GSD amount
+        */
+        public void setGSD(int id, long gsdAmount)
+        {
+            UserMapper um = UserMapper.getInstance();
+            //User u = um.GetUser(id);
+            object objectSent = new
+            {
+                amountGSD = gsdAmount
+            };
+            SendPost<object>(ApiEndPointUrl.setGSD, objectSent, true);
+            //return u.gsd;
+            //return um.GetGSD(id);
+        }
+
+
     }
 }
