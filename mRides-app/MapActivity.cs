@@ -27,6 +27,7 @@ using Newtonsoft.Json;
 using mRides_app.Models;
 using mRides_app.Mappers;
 using Android.Content.PM;
+using static mRides_app.Models.Request;
 
 namespace mRides_app
 {
@@ -281,12 +282,12 @@ namespace mRides_app
         //Send coordinates to the server and get a list of users
         public void findNearbyUsers(List<LatLng> directionList)
         {
-            List<string> destinationCoordinates = getFormattedDirectionList();
+            List<DestinationCoordinate> destinationCoordinates = getFormattedDirectionList();
             
             Request newRequest = new Request {
                 destinationCoordinates = destinationCoordinates,
-                destination = destinationCoordinates[destinationCoordinates.Count - 1],
-                location = destinationCoordinates[0],
+                destination = destinationCoordinates.Last().coordinate,
+                location = destinationCoordinates.First().coordinate,
                 type = "driver"
             };
             newRequest.destinationCoordinates = destinationCoordinates;
@@ -297,12 +298,17 @@ namespace mRides_app
         /// Obtain the formatted list of coordinates.
         /// </summary>
         /// <returns>List of string representing the coordinates of the directions</returns>
-        public List<string> getFormattedDirectionList()
+        public List<DestinationCoordinate> getFormattedDirectionList()
         {
-            List<string> destinationCoordinates = new List<string>();
+            List<DestinationCoordinate> destinationCoordinates = new List<DestinationCoordinate>();
+            
             for (int i = 0; i < directionList.Count; i += 10)
             {
-                destinationCoordinates.Add(directionList[i].Latitude.ToString() + "," + directionList[i].Longitude.ToString());
+                DestinationCoordinate destinationCoordinate = new DestinationCoordinate
+                {
+                    coordinate = directionList[i].Latitude.ToString() + "," + directionList[i].Longitude.ToString()
+                };
+                destinationCoordinates.Add(destinationCoordinate);
             }
             return destinationCoordinates;
         }
@@ -547,7 +553,7 @@ namespace mRides_app
             string typeDisplayed = "";
 
             // Get the list of coordinates
-            List<string> destinationCoordinates = this.getFormattedDirectionList();
+            List<DestinationCoordinate> destinationCoordinates = this.getFormattedDirectionList();
 
             // For multilingual
             string usrType = GetString(Resource.String.user_type);

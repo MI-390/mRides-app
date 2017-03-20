@@ -20,6 +20,7 @@ using Android.Gms.Maps.Model;
 using System.Net;
 using RestSharp;
 using Newtonsoft.Json.Linq;
+using static mRides_app.Models.Request;
 
 namespace mRides_app
 {
@@ -70,14 +71,14 @@ namespace mRides_app
             // Obtain the type of the user for this request and deserialize the list of coordinates
             this.userType = Intent.GetStringExtra(Constants.IntentExtraNames.RequestType);
             string json = Intent.GetStringExtra(IntentExtraNames.RouteCoordinatesJson);
-            List <string> coordinates = JsonConvert.DeserializeObject<List<string>>(Intent.GetStringExtra(IntentExtraNames.RouteCoordinatesJson));
+            List <DestinationCoordinate> coordinates = JsonConvert.DeserializeObject<List<DestinationCoordinate>>(Intent.GetStringExtra(IntentExtraNames.RouteCoordinatesJson));
 
             // Send the request to the server
             this.userRequest = new Request
             {
                 destinationCoordinates = coordinates,
-                destination = coordinates[coordinates.Count - 1],
-                location = coordinates[0],
+                destination = coordinates.Last().coordinate,
+                location = coordinates.First().coordinate,
                 type = this.userType
             };
             if(this.userType == Request.TYPE_DRIVER)
