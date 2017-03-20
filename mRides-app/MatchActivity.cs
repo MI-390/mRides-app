@@ -154,6 +154,7 @@ namespace mRides_app
             
             // Set the profile picture
             this.matchedUserPicture = FindViewById<ImageView>(Resource.Id.matchedUserPicture);
+            this.matchedUserPicture.Click += delegate { this.OpenUserProfile(); };
             Bitmap userPicture = userMapper.GetUserFacebookProfilePicture(matchedUser.facebookID);
             if (userPicture != null)
             {
@@ -298,15 +299,45 @@ namespace mRides_app
         }
 
         /// <summary>
+        /// Opens the user profile of the matched user
+        /// </summary>
+        private void OpenUserProfile()
+        {
+            int matchedUserId = 0;
+
+            if (this.userType == Request.TYPE_DRIVER)
+            {
+                matchedUserId = this.matchedRequests[currentMatchedUserIndex].riderRequests.First().riderID;
+            }
+            else
+            {
+                matchedUserId = this.matchedRequests[currentMatchedUserIndex].driver.id;
+            }
+
+            Intent profileIntent = new Intent(this, typeof(UserProfileActivity));
+            profileIntent.PutExtra("id", matchedUserId.ToString());
+            StartActivity(profileIntent);
+        }
+
+        /// <summary>
         /// Method invoked when the chat button is clicked. Will start the chat activity with the rider.
         /// </summary>
         private void Chat()
         {
-            int riderId = this.matchedRequests[currentMatchedUserIndex].riderRequests.First().riderID;
+            int matchedUserId = 0;
+
+            if(this.userType == Request.TYPE_DRIVER)
+            {
+                matchedUserId = this.matchedRequests[currentMatchedUserIndex].riderRequests.First().riderID;
+            }
+            else
+            {
+                matchedUserId = this.matchedRequests[currentMatchedUserIndex].driver.id;
+            }
             
             Intent chatIntent = new Intent(this, typeof(ChatActivity));
-            chatIntent.PutExtra("ChatName", CreateChatName(riderId));
-            chatIntent.PutExtra("id", riderId);
+            chatIntent.PutExtra("ChatName", CreateChatName(matchedUserId));
+            chatIntent.PutExtra("id", matchedUserId);
             StartActivity(chatIntent);
         }
 
