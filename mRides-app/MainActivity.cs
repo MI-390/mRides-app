@@ -9,6 +9,7 @@ using Android.Content;
 using mRides_app.Mappers;
 using mRides_app.Models;
 using System.Collections.Generic;
+using Firebase.Iid;
 //cvnewggbsc_1487629189@tfbnw.net
 //mi-390
 namespace mRides_app
@@ -20,18 +21,20 @@ namespace mRides_app
         string userName;
         // For UI testing
         [Java.Interop.Export("StartActivityOne")]
+        // Test PreferencesActivity
         public void StartActivityOne()
         {
             Intent i = new Intent(this, typeof(PreferencesActivity));
             StartActivity(i);
         }
+        //Test MapActivity
         [Java.Interop.Export("StartActivityTwo")]
         public void StartActivityTwo()
         {
             Intent i = new Intent(this, typeof(MapActivity));
             StartActivity(i);
         }
-
+        //For testing fragments, an activity is used that contains buttons to open those fragments
         [Java.Interop.Export("StartActivityThree")]
         public void StartActivityThree()
         {
@@ -42,15 +45,26 @@ namespace mRides_app
         [Java.Interop.Export("StartActivityFour")]
         public void StartActivityFour()
         {
-            Intent i = new Intent(this, typeof(Feedback.FeedbackTest));
+            Intent i = new Intent(this, typeof(UserProfileActivity));
+            i.PutExtra("id", "8");
             StartActivity(i);
         }
 
         [Java.Interop.Export("StartActivityFive")]
         public void StartActivityFive()
         {
-            Intent i = new Intent(this, typeof(UserProfileActivity));
+            Intent i = new Intent(this, typeof(ChatActivity));
+            i.PutExtra("ChatName", "UITEST");
+            i.PutExtra("id", "172");
             StartActivity(i);
+        }
+
+        [Java.Interop.Export("StartActivitySix")]
+        public void StartActivitySix()
+        {
+            Intent intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse("http://maps.google.com/maps?" + "saddr=" + "45.222,-72.70&daddr=45.4581,-73.6403"));
+            intent.SetClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+            StartActivity(intent);
         }
 
         void LoginToFacebook(bool allowCancel)
@@ -79,20 +93,21 @@ namespace mRides_app
                 {
                     // Obtain the content from the response]
                     var obj = JObject.Parse(response.GetResponseText());
-                    long facebookId = Convert.ToInt64(obj["id"]);
+                    long facebookId = Convert.ToInt64(obj["id"].ToString());
                     string facebookFirstName = obj["first_name"].ToString();
                     string facebookLastName = obj["last_name"].ToString();
-                    // string facebookPicture = obj["picture"].ToString();
 
                     // Try to obtain the user
                     UserMapper userMapper = UserMapper.getInstance();
-                    User user = userMapper.GetUserByFacebookId(facebookId);                    
-                    
+                    User user = userMapper.GetUserByFacebookId(facebookId);
+
                     // If the user already exists, set the current user to it
                     // and go to map activity
                     if (user != null)
                     {
                         User.currentUser = user;
+                        string token = FirebaseInstanceId.Instance.Token;
+                        UserMapper.getInstance().updateFcmToken(token);
                         var mapActivity = new Intent(this, typeof(MapActivity));
                         StartActivity(mapActivity);
                     }
@@ -113,20 +128,25 @@ namespace mRides_app
                     //var userProfileActivity = new Intent(this, typeof(UserProfileActivity));
                     //userProfileActivity.PutExtra("Profile Info", userName);
                     //StartActivity(userProfileActivity);
-                    
+
                 }
             }
         }
 
         // private static readonly TaskScheduler UIScheduler = TaskScheduler.FromCurrentSynchronizationContext();
-
+        protected override void OnResume()
+        {
+            base.OnResume();
+          
+        }
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
 
             var facebook = FindViewById<Button>(Resource.Id.loginButton);
-            facebook.Click += delegate {
+            facebook.Click += delegate
+            {
                 LoginToFacebook(true);
             };
 

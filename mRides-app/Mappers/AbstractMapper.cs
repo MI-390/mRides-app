@@ -188,7 +188,7 @@ namespace mRides_app.Mappers
     // AVAILABLE URLS
     // ---------------------------------------------------------------------------
 
-    class ApiEndPointUrl
+    public class ApiEndPointUrl
     {
         // Console related url
         public const string findDrivers = "Console/findDrivers";
@@ -206,6 +206,13 @@ namespace mRides_app.Mappers
         public const string getUserByFacebookId = "User/getUserByFacebookId";
         public const string getReviews = "User/getReviews/{id}";
         public const string leaveReview = "User/leaveReview";
+        public const string updateFcmToken = "User/updateFcmToken";
+        public const string getGSD = "User/getGSD/{id}";
+        public const string setGSD = "User/setGSD";
 
+        // Ride related url
+        public const string createRide = "Ride/createRide";
+        public const string addRiderToRide = "Ride/addRiderToRide";
+        public const string getRide = "Ride/getRide/{id}";
     }
 }

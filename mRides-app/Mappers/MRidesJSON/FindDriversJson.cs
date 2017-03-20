@@ -17,6 +17,6 @@ namespace MRidesJSON
     public class FindDriversJson
     {
         public List<Request> requests { get; set; }
-        public int driverRequestID { get; set; }
+        public int riderRequestID { get; set; }
     }
 }

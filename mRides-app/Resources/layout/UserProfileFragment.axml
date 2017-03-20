@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/linearLayout2">
         <TextView
-            android:text="Person"
+            android:text="@string/p_erson"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="384.0dp"
             android:layout_height="47.0dp"
@@ -22,7 +22,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
         <Button
-            android:text="View profile"
+            android:text="@string/viewUserProfile"
             android:id="@+id/viewProfileFragmentButton"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -33,10 +33,26 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
         <Button
-            android:text="Review"
+            android:text="@string/reviewUser"
             android:id="@+id/reviewFragmentButton"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+<!--To translate-->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:text="@string/message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/chatActivityButton" />
+          <Button android:text="Pick Up"
+            android:id="@+id/pickUpButton"
+            android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
             android:layout_weight="1" />
     </LinearLayout>
 </LinearLayout>

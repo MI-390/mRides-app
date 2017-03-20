@@ -3,6 +3,8 @@ using mRides_app.Models;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using UnitTests.Mappers;
+using System.Threading;
 
 namespace UnitTests
 {
@@ -97,14 +99,148 @@ namespace UnitTests
         [Test]
         public void LeaveReview()
         {
+            // Get user mapper
             UserMapper userMapper = UserMapper.getInstance();
 
-            // Set a current user
-            User.currentUser = userMapper.GetUser(6);
+            // Create a driver
+            User driver = new User
+            {
+                firstName = "Driver",
+                lastName = "Driver",
+                genderPreference = "male",
+                gsd = 0,
+                hasLuggage = false,
+                isHandicap = false,
+                isSmoker = false,
+                hasPet = false,
+                prefferedLanguage = "en-ca"
+            };
+            driver = userMapper.CreateUser(driver);
 
-            // TODO: come up with tests that ensure that such rides exist
-            userMapper.LeaveReview(1, 1, 4, "Some test reviews");
-            Assert.True(true);
+            // Create a rider
+            User rider = new User
+            {
+                firstName = "Rider",
+                lastName = "Rider",
+                genderPreference = "male",
+                gsd = 0,
+                hasLuggage = false,
+                isHandicap = false,
+                isSmoker = false,
+                hasPet = false,
+                prefferedLanguage = "en-ca"
+            };
+            rider = userMapper.CreateUser(rider);
+
+            // Create a ride
+            User.currentUser = driver;
+            RideMapper rideMapper = RideMapper.getInstance();
+            Ride ride = new Ride
+            {
+                destination = "",
+                location = "",
+                dateTime = DateTime.Now,
+                isWeekly = false,
+                Driver = driver,
+                DriverID = driver.id,
+                type = "driver"
+            };
+            ride = rideMapper.CreateRide(ride);
+
+            // Add the rider to the ride
+            User.currentUser = rider;
+            ride = rideMapper.AddRiderToRide(ride.ID);
+
+
+            // Test the leave review by the driver
+            User.currentUser = driver;
+            userMapper.LeaveReview(ride.ID, rider.id, 4, "Review from driver " + driver.id);
+            List<Feedback> riderReviews = userMapper.GetReviews(rider.id);
+            bool successDriverToRiderFeedback = false;
+            foreach (Feedback f in riderReviews)
+            {
+                if (f.givenBy.id == driver.id && f.stars == 4 && f.feedbackText.Equals("Review from driver " + driver.id))
+                {
+                    successDriverToRiderFeedback = true;
+                    break;
+                }
+            }
+            Assert.True(successDriverToRiderFeedback);
+
+            // Test the leave review by the rider
+            User.currentUser = rider;
+            userMapper.LeaveReview(ride.ID, driver.id, 5, "Review from rider " + rider.id);
+            List<Feedback> driverReviews = userMapper.GetReviews(driver.id);
+            bool successRiderToDriverFeedback = false;
+            foreach (Feedback f in driverReviews)
+            {
+                if (f.givenBy.id == rider.id && f.stars == 5 && f.feedbackText.Equals("Review from rider " + rider.id))
+                {
+                    successRiderToDriverFeedback = true;
+                    break;
+                }
+            }
+            Assert.True(successRiderToDriverFeedback);
         }
+
+        /**
+        * Test whether we are able to successfully get the GSD of a user
+        */
+        [Test]
+        public void GetGSD()
+        {
+            UserMapper userMapper = UserMapper.getInstance();
+            // Create a test user
+            User aline = new User
+            {
+                id = 88888,
+                firstName = "Test",
+                lastName = "User",
+                genderPreference = "male",
+                gsd = 15,
+                hasLuggage = false,
+                isHandicap = false,
+                isSmoker = false,
+                hasPet = false,
+                prefferedLanguage = "en-ca"
+            };
+      
+            userMapper.CreateUser(aline);
+            //Thread.Sleep(5000);
+            long testGSD = userMapper.GetGSD(88888);
+            Assert.AreEqual(testGSD, 15);
+        }
+
+        /**
+        * Test whether we are able to successfully set the GSD of a user
+        */
+        [Test]
+        public void SetGSD()
+        {
+            UserMapper userMapper = UserMapper.getInstance();
+            // Create a test user
+            User aline = new User
+            {
+                id = 9999,
+                firstName = "Test",
+                lastName = "User",
+                genderPreference = "male",
+                gsd = 15,
+                hasLuggage = false,
+                isHandicap = false,
+                isSmoker = false,
+                hasPet = false,
+                prefferedLanguage = "en-ca"
+            };
+
+            userMapper.CreateUser(aline);
+            //Thread.Sleep(5000);
+            userMapper.setGSD(9999, 150);
+            long testGSD = userMapper.GetGSD(9999);
+            Assert.AreEqual(testGSD, 150);
+        }
+
+
+
     }
 }

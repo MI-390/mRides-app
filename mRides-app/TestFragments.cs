@@ -25,7 +25,6 @@ namespace mRides_app
 
             Button f1 = FindViewById<Button>(Resource.Id.testFragment1);
             Button f2 = FindViewById<Button>(Resource.Id.testFragment2);
-            Button f3 = FindViewById<Button>(Resource.Id.testFragment3);
 
             f1.Click += (sender, args) =>
             {
@@ -36,15 +35,12 @@ namespace mRides_app
 
             f2.Click += (sender, args) =>
             {
+                Bundle bundleArgs = new Bundle();
+                bundleArgs.PutString("id", "8");
+                LeaveReviewFragment dialog = new LeaveReviewFragment();
+                dialog.Arguments = bundleArgs;
                 FragmentTransaction transaction = FragmentManager.BeginTransaction();
-                DriverReview dialog = new DriverReview();
-                dialog.Show(transaction, "Driver Review Fragment");
-            };
-
-            f3.Click += (sender, args) =>
-            {;
-                var userProfileActivity = new Intent(this, typeof(UserProfileActivity));
-                StartActivity(userProfileActivity);
+                dialog.Show(transaction, "Leave review fragment");
             };
         }
 

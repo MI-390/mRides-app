@@ -17,6 +17,10 @@ namespace mRides_app
     {
         void updateUserSelection(string type, int num);
     }
+
+    /// <summary>
+    /// Fragment class for the options of selecting whether user is a driver/rider and number of people
+    /// </summary>
     public class UserTypeFragment : DialogFragment
     {
         Button previous;
@@ -77,15 +81,16 @@ namespace mRides_app
             {
                 Log.Debug("Driver", "I am a driver woohoo");
                 // Open a session as a Driver?
-                string str = GetString(Resource.String.seatsAvailable);
-                tv1.SetText(str, TextView.BufferType.Normal);
+                tv1.Visibility = ViewStates.Gone;
+                spinner.Visibility = ViewStates.Gone;
             }
             else
             {
                 Log.Debug("Rider", "I am a rider woohoo");
                 // Open a session as a Rider
-                string str1 = GetString(Resource.String.numberOfRiders);
-                tv1.SetText(str1, TextView.BufferType.Normal);
+                string numRiders = GetString(Resource.String.numberOfRiders);
+                tv1.Visibility = ViewStates.Visible;
+                spinner.Visibility = ViewStates.Visible;
             }
 
             driver = !driver;
@@ -99,8 +104,8 @@ namespace mRides_app
         void NextButtonClicked(object sender, EventArgs e)
         {
             string userType = "";
-            string usr_driver = GetString(Resource.String.user_driver);
-            string usr_rider = GetString(Resource.String.user_rider);
+            string usr_driver = mRides_app.Models.Request.TYPE_DRIVER;
+            string usr_rider = mRides_app.Models.Request.TYPE_RIDER;
 
             if (driver)
             {

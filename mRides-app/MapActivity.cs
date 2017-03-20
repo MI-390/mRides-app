@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -27,29 +26,34 @@ using System.Json;
 using Newtonsoft.Json;
 using mRides_app.Models;
 using mRides_app.Mappers;
+using Android.Content.PM;
+using static mRides_app.Models.Request;
 
 namespace mRides_app
 {
     [Activity(Label = "MapActivity")]
     public class MapActivity : Activity, IOnMapReadyCallback, Android.Gms.Location.ILocationListener,
-        GoogleApiClient.IConnectionCallbacks, GoogleApiClient.IOnConnectionFailedListener, IPlaceSelectionListener, IEditUserSelectionListener
+        GoogleApiClient.IConnectionCallbacks, GoogleApiClient.IOnConnectionFailedListener, IPlaceSelectionListener,
+        IEditUserSelectionListener, IStartDrivingModeListener
     {
-        private const double MATCH_DISTANCE = 1.0;
         private Android.Gms.Maps.GoogleMap map;
         private GoogleApiClient googleApiClient;
         private LocationRequest locationRequest;
         private Location lastUserLocation;
         private bool locationPermissionGranted;
-        private string destination;
-
+        private Marker originMarker;
         private Marker destinationMarker;
+        private Button mapButton;
+        private bool mapButtonClicked;
         private Dictionary<User, Marker> usersOnMap;
         private List<LatLng> directionList;
         private List<Request> requestList;
         private DestinationJSON destinationData;
-        const string googleApiKey = "AIzaSyAz9p6O99w8ZWkFUbaREJXmnj01Mpm19dA";
-        string userType;
+        private PlaceAutocompleteFragment autocompleteFragment;
+        private Android.Gms.Maps.Model.Polyline polyline;
+        private const string googleApiKey = "AIzaSyAz9p6O99w8ZWkFUbaREJXmnj01Mpm19dA";
         int numberOfPeople;
+     
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -68,29 +72,55 @@ namespace mRides_app
             }
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Destination);
+            var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
+            SetActionBar(toolbar);
+            ActionBar.Title = "mRides";
+
+            //var toolbar_bot = FindViewById<BottomNavigationView>(Resource.Id.toolbar_bot);
+            //toolbar_bot.InflateMenu(Resource.Menu.bottombar);
+            
+
+
+
 
             string text = mRides_app.Models.User.currentUser.firstName;
-            string str1 = GetString(Resource.String.hello_map);
-            Toast.MakeText(ApplicationContext, str1 + " " + text, ToastLength.Long).Show();
 
-            // Retrieve the PlaceAutocompleteFragment.
-            PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)FragmentManager.FindFragmentById(Resource.Id.place_autocomplete_fragment);
-            AutocompleteFilter typeFilter = new AutocompleteFilter.Builder().SetTypeFilter(AutocompleteFilter.TypeFilterEstablishment).Build();
+            string helloMap = GetString(Resource.String.hello_map);
+            Toast.MakeText(ApplicationContext, helloMap + " " + text, ToastLength.Long).Show();
+            mapButton = (Button)FindViewById(Resource.Id.mapButton);
+            mapButtonClicked = false;
+            mapButton.Click += OnMapButtonClick;
+            //Retrieve the PlaceAutocompleteFragment.
+            autocompleteFragment = (PlaceAutocompleteFragment)FragmentManager.FindFragmentById(Resource.Id.place_autocomplete_fragment);
             autocompleteFragment.SetHint("Destination?");
-            autocompleteFragment.SetFilter(typeFilter);
 
+            //AutocompleteFilter typeFilterDestination = new AutocompleteFilter.Builder().SetTypeFilter(AutocompleteFilter.TypeFilterEstablishment).Build();
+            //autocompleteFragment.SetFilter(typeFilterDestination);
             // Register a listener to receive callbacks when a place has been selected or an error has occurred.
             autocompleteFragment.SetOnPlaceSelectedListener(this);
+        }
 
-            string userType;
-            int numberOfPeople;
+        void OnMapButtonClick(object sender, EventArgs e)
+        {
+            if (!mapButtonClicked)
+            {
+                mapButtonClicked = true;
+                mapButton.Text = "Click to choose destination";
+                autocompleteFragment.SetHint("Origin?");
+            }
+            else
+            {
+                mapButtonClicked = false;
+                mapButton.Text = "Click to choose origin";
+                autocompleteFragment.SetHint("Destination?");
+            }
         }
 
         public void OnMapReady(Android.Gms.Maps.GoogleMap googleMap)
         {
             map = googleMap;
             map.MarkerClick += OnMarkerClick;
-           //map.PolylineClick += OnPolylineClick;
+            map.PolylineClick += OnPolylineClick;
             if (locationPermissionGranted)
             {
                 map.MyLocationEnabled = true;
@@ -109,7 +139,12 @@ namespace mRides_app
                 FragmentTransaction transaction = FragmentManager.BeginTransaction();
                 UserTypeFragment dialog = new UserTypeFragment();
                 dialog.Show(transaction, "User type fragment");
-                findUsers();
+                showNearbyUsers();
+            }
+            else
+            if (e.Marker.Equals(originMarker))
+            {
+                //
             }
             else
             {
@@ -120,37 +155,57 @@ namespace mRides_app
                         Bundle args = new Bundle();
                         args.PutString("name", e.Marker.Title);
                         args.PutString("id", option.Key.id.ToString());
+                        args.PutString("location", option.Value.Position.Latitude.ToString() + "," + option.Value.Position.Longitude.ToString());
                         FragmentTransaction transaction = FragmentManager.BeginTransaction();
                         UserProfileFragment dialog = new UserProfileFragment();
                         dialog.Arguments = args;
                         dialog.Show(transaction, "User profile fragment");
-                        //e.Marker.ShowInfoWindow();
                     }
                 }
             }
         }
 
         //When the user clicks on a polyline
-        //private void OnPolylineClick(object sender, Android.Gms.Maps.GoogleMap.PolylineClickEventArgs e)
-        //{
-        //    findUsers();
-        //    if (usersOnMap != null)
-        //    {
-        //        foreach (KeyValuePair<User, MarkerOptions> option in usersOnMap)
-        //            map.AddMarker(option.Value);
-                
-        //    }
-        //}
+        private void OnPolylineClick(object sender, Android.Gms.Maps.GoogleMap.PolylineClickEventArgs e)
+        {
+            if (usersOnMap != null)
+            {
+                if (usersOnMap.Count > 0)
+                {
+                    string pathURL;
+                    string waypointString = "&waypoints=optimize:true";
+                    foreach (KeyValuePair<User, Marker> option in usersOnMap)
+                    {
+                        waypointString += "|" + option.Value.Position.Latitude + "," + option.Value.Position.Longitude;
+                    }
+
+                    if (originMarker != null)
+                    {
+                        pathURL = ("https://maps.googleapis.com/maps/api/directions/json?" +
+                       "origin=" + originMarker.Position.Latitude + "," + originMarker.Position.Longitude +
+                       "&destination=" + destinationData.routes[0].legs[destinationData.routes[0].legs.Count - 1].end_location.lat + "," +
+                       destinationData.routes[0].legs[destinationData.routes[0].legs.Count - 1].end_location.lng + waypointString +
+                       "&key=" + googleApiKey);
+                    }
+                    else
+                    {
+                        pathURL = ("https://maps.googleapis.com/maps/api/directions/json?" +
+                            "origin=" + User.currentUser.latitude + "," + User.currentUser.longitude +
+                            "&destination=" + destinationData.routes[0].legs[destinationData.routes[0].legs.Count - 1].end_location.lat + "," +
+                            destinationData.routes[0].legs[destinationData.routes[0].legs.Count - 1].end_location.lng + waypointString +
+                            "&key=" + googleApiKey);
+                    }
+
+                    setDestinationData(pathURL);
+                }
+            }
+        }
 
         private void OnMyLocationButtonClick(object sender, Android.Gms.Maps.GoogleMap.MyLocationButtonClickEventArgs e)
         {
-            LatLng position = new LatLng(lastUserLocation.Latitude, lastUserLocation.Longitude);
-            PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)FragmentManager.FindFragmentById(Resource.Id.place_autocomplete_fragment);
+            LatLng position = new LatLng(User.currentUser.latitude, User.currentUser.longitude);
+            getCurrentLocation();
             UpdateCameraPosition(position);
-            if (usersOnMap != null)
-            {
-                findUsers();
-            }
         }
 
         //Update the camera position to a latitude/longitude coordinate position
@@ -190,7 +245,7 @@ namespace mRides_app
             }
         }
 
-        async Task setDestinationData(string url)
+        public async Task setDestinationData(string url)
         {
             // Create an HTTP web request using the URL:
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri(url));
@@ -211,9 +266,10 @@ namespace mRides_app
                             destinationData = serializer.Deserialize<DestinationJSON>(jsonReader);
                             if (destinationData != null)
                             {
+                                directionList = getDirectionList(destinationData.routes[0].overview_polyline);
                                 //Show the polyline directions on the map
-                                showDirections();
-                                sendCoordinatesToServer();
+                                displayPathOnMap(directionList);
+                                findNearbyUsers(directionList);
                                 //Update the camera position to the destination
                                 UpdateCameraPosition(new LatLng(destinationData.routes[0].legs[0].end_location.lat, destinationData.routes[0].legs[0].end_location.lng));
                             }
@@ -224,30 +280,42 @@ namespace mRides_app
         }
 
         //Send coordinates to the server and get a list of users
-        public void sendCoordinatesToServer()
+        public void findNearbyUsers(List<LatLng> directionList)
         {
-            List<string> destinationCoordinates = new List<string>();
-            for (int i = 0; i < directionList.Count; i += 10)
-            {
-                destinationCoordinates.Add(directionList[i].Latitude.ToString() + "," + directionList[i].Longitude.ToString());
-            }
+            List<DestinationCoordinate> destinationCoordinates = getFormattedDirectionList();
             
             Request newRequest = new Request {
                 destinationCoordinates = destinationCoordinates,
-                destination= destinationCoordinates[destinationCoordinates.Count-1],
-                location= destinationCoordinates[0],
-                type="driver"
-        };
+                destination = destinationCoordinates.Last().coordinate,
+                location = destinationCoordinates.First().coordinate,
+                type = "driver"
+            };
             newRequest.destinationCoordinates = destinationCoordinates;
-            requestList = ConsoleMapper.getInstance().FindRiders(newRequest);
+            User.currentUser.requestsAsDriver = ConsoleMapper.getInstance().FindRiders(newRequest);
+        }
+
+        /// <summary>
+        /// Obtain the formatted list of coordinates.
+        /// </summary>
+        /// <returns>List of string representing the coordinates of the directions</returns>
+        public List<DestinationCoordinate> getFormattedDirectionList()
+        {
+            List<DestinationCoordinate> destinationCoordinates = new List<DestinationCoordinate>();
+            
+            for (int i = 0; i < directionList.Count; i += 10)
+            {
+                DestinationCoordinate destinationCoordinate = new DestinationCoordinate
+                {
+                    coordinate = directionList[i].Latitude.ToString() + "," + directionList[i].Longitude.ToString()
+                };
+                destinationCoordinates.Add(destinationCoordinate);
+            }
+            return destinationCoordinates;
         }
 
         //Method to display the polyline path from the current user location to the destination
-        public void showDirections()
+        public void displayPathOnMap(List<LatLng> directionList)
         {
-            OverviewPolyline overviewPolyline = destinationData.routes[0].overview_polyline;
-            String encodedPolyline = overviewPolyline.points;
-            directionList = decodePolyline(encodedPolyline);
             PolylineOptions polylineOptions = new PolylineOptions().Geodesic(true).InvokeColor(Color.Blue).InvokeWidth(5).Clickable(true);
             for (int i = 0; i < directionList.Count - 1; i++)
             {
@@ -256,7 +324,19 @@ namespace mRides_app
                 polylineOptions.Add(start, destination);
             }
 
-            Android.Gms.Maps.Model.Polyline polyline = map.AddPolyline(polylineOptions);
+            if (polyline != null)
+                polyline.Remove();
+            if (map != null)
+                polyline = map.AddPolyline(polylineOptions);
+        }
+
+        public List<LatLng> getDirectionList(OverviewPolyline overview)
+        {
+            OverviewPolyline overviewPolyline = overview;
+           // destinationData.routes[0].overview_polyline;
+            String encodedPolyline = overviewPolyline.points;
+            directionList = decodePolyline(encodedPolyline);
+            return directionList;
         }
 
         // Decodes an encoded polyline path string into a list of LatLngs. This code is from the com.google.maps.android:android-maps-utils library
@@ -301,53 +381,65 @@ namespace mRides_app
             return path;
         }
 
-        //Find users along a path
-        public void findUsers()
+        //Show users along a path
+        public void showNearbyUsers()
         {
             //Instantiate a new dictionary for the new destination
             usersOnMap = new Dictionary<User, Marker>();
 
-            if (requestList != null)
+            if (User.currentUser.requestsAsDriver != null)
             {               
-                foreach (Request request in requestList)
+                foreach (Request request in User.currentUser.requestsAsDriver)
                 {
-                    Android.Gms.Maps.Model.MarkerOptions userMarker = new Android.Gms.Maps.Model.MarkerOptions();
-                    string[] splitCoordinates = request.riderRequests.First().location.Split(',');
-                    userMarker.SetPosition(new LatLng(Double.Parse(splitCoordinates[0]), Double.Parse(splitCoordinates[1]))).SetTitle(request.riderRequests.First().rider.firstName.ToString() + " " + request.riderRequests.First().rider.lastName.ToString())
-                              .SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.userIcon2)).Anchor(0.5f, 0.5f);
-                    Marker marker = map.AddMarker(userMarker);
-                    usersOnMap.Add(request.riderRequests.First().rider, marker);                    
+                    if (request.riderRequests.First().rider.firstName != null && request.riderRequests.First().rider.lastName != null)
+                    {
+                        Android.Gms.Maps.Model.MarkerOptions userMarker = new Android.Gms.Maps.Model.MarkerOptions();
+                        string[] splitCoordinates = request.riderRequests.First().location.Split(',');
+                        userMarker.SetPosition(new LatLng(Double.Parse(splitCoordinates[0]), Double.Parse(splitCoordinates[1])))
+                                  .SetTitle(request.riderRequests.First().rider.firstName.ToString() + " " + request.riderRequests.First().rider.lastName.ToString())
+                                  .SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.userIcon2)).Anchor(0.5f, 0.5f);
+                        if (map != null)
+                        {
+                            Marker marker = map.AddMarker(userMarker);
+                            usersOnMap.Add(request.riderRequests.First().rider, marker);
+                        }
+                    }             
                 }
             }
         }
 
-        //Calculates distance between two degree coordinates using the Haversine formula
-        //public double distanceBetweenTwoCoordinates(LatLng latlng1, LatLng latlng2)
-        //{
-        //    //Mean radius of the earth in km
-        //    int earthRadius = 6371;
-        //    double dLat = degreeToRadians(latlng2.Latitude - latlng1.Latitude);
-        //    double dLng = degreeToRadians(latlng2.Longitude - latlng1.Longitude);
-        //    double a = Math.Pow(Math.Sin(dLat / 2), 2) +
-        //               Math.Cos(degreeToRadians(latlng1.Latitude)) * Math.Cos(degreeToRadians(latlng2.Latitude)) *
-        //               Math.Pow(Math.Sin(dLng / 2), 2);
-        //    double angle = 2 * Math.Asin(Math.Sqrt(a));
-        //    return angle * earthRadius;
-        //}
-
-        ////Transforms degrees to radians unit
-        //public double degreeToRadians(double degree)
-        //{
-        //    return degree * (Math.PI / 180);
-        //}
-        
-
+        //Used to start Google Maps Navigation to have real-time navigation system to pick up the selected user
+        public void enterDriverMode(double latitude, double longitude)
+        {
+            try
+            {
+                ApplicationInfo info = PackageManager.GetApplicationInfo("com.google.android.apps.maps", 0);
+                Intent intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse("http://maps.google.com/maps?" + "saddr=" + User.currentUser.latitude + "," +
+                User.currentUser.longitude + "&daddr=" + latitude + "," + longitude));
+                intent.SetClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+                StartActivity(intent);           
+            }
+            catch (PackageManager.NameNotFoundException e)
+            {
+                Toast.MakeText(ApplicationContext, "Google Maps is not installed", ToastLength.Long).Show();
+            }
+        }
+          
         //Interface methods below
+
         protected override void OnResume()
         {
             base.OnResume();
             if (googleApiClient.IsConnected)
                 getCurrentLocation();
+
+            //MenuBar
+            var chatMenuButton = FindViewById<ImageButton>(Resource.Id.menu_chat);
+            chatMenuButton.Click += delegate
+            {
+                Intent i = new Intent(this, typeof(ChatListActivity));
+                StartActivity(i);
+            };
         }
 
         //When Google API Client is connected
@@ -373,8 +465,11 @@ namespace mRides_app
             if (lastUserLocation == null)
                 UpdateCameraPosition(new LatLng(location.Latitude, location.Longitude));
             lastUserLocation = location;
-            PlaceAutocompleteFragment autocompleteFragment = FragmentManager.FindFragmentById<PlaceAutocompleteFragment>(Resource.Id.place_autocomplete_fragment);
-            autocompleteFragment.SetBoundsBias(new LatLngBounds(new LatLng(lastUserLocation.Latitude - 0.2, lastUserLocation.Longitude - 0.2), new LatLng(lastUserLocation.Latitude + 0.2, lastUserLocation.Longitude + 0.2)));
+            User.currentUser.latitude = location.Latitude;
+            User.currentUser.longitude = location.Longitude;
+
+            autocompleteFragment.SetBoundsBias(new LatLngBounds(new LatLng(User.currentUser.latitude - 0.2, User.currentUser.longitude - 0.2),
+                                                                new LatLng(User.currentUser.latitude + 0.2, User.currentUser.longitude + 0.2)));
         }
 
         public void OnConnectionSuspended(int i)
@@ -388,42 +483,104 @@ namespace mRides_app
 
         public void OnPlaceSelected(IPlace place)
         {
-            destination = place.NameFormatted.ToString();
-            string str1 = GetString(Resource.String.dest);
-            Toast.MakeText(ApplicationContext, str1 + " : " + destination, ToastLength.Long).Show();
+            if (!mapButtonClicked)
+            {
+                string destination = place.NameFormatted.ToString();
+                string usr_destination = GetString(Resource.String.dest);
+                string pathURL;
 
-           
-        
-            if (destinationMarker != null)
-                map.Clear();
-            destinationMarker = map.AddMarker(new MarkerOptions().SetPosition(place.LatLng).SetTitle(destination));
+                Toast.MakeText(ApplicationContext, usr_destination + " : " + destination, ToastLength.Long).Show();
 
-            string pathURL = ("https://maps.googleapis.com/maps/api/directions/json?" +
-                              "origin=" + lastUserLocation.Latitude + "," + lastUserLocation.Longitude +
-                              "&destination=" + place.LatLng.Latitude + "," + place.LatLng.Longitude +
+                if (destinationMarker != null)
+                {
+                    destinationMarker.Position = place.LatLng;
+                    destinationMarker.Title = destination;
+                }                  
+                else
+                    destinationMarker = map.AddMarker(new MarkerOptions().SetPosition(place.LatLng).SetTitle(destination));
+                if (originMarker != null)
+                   pathURL = ("https://maps.googleapis.com/maps/api/directions/json?" +
+                                "origin=" + originMarker.Position.Latitude + "," + originMarker.Position.Longitude +
+                                "&destination=" + place.LatLng.Latitude + "," + place.LatLng.Longitude +
+                                "&key=" + googleApiKey);
+                else
+                    pathURL = ("https://maps.googleapis.com/maps/api/directions/json?" +
+                                  "origin=" + User.currentUser.latitude + "," + User.currentUser.longitude +
+                                  "&destination=" + place.LatLng.Latitude + "," + place.LatLng.Longitude +
+                                  "&key=" + googleApiKey);
+
+                setDestinationData(pathURL);
+            }
+
+            if (mapButtonClicked)
+            {
+                string origin = place.NameFormatted.ToString();
+                string pathURL;
+                Toast.MakeText(ApplicationContext, "Origin" + " : " + origin, ToastLength.Long).Show();
+
+                if (originMarker != null)
+                {
+                    originMarker.Position = place.LatLng;
+                    originMarker.Title = origin;
+                }
+                else
+                    originMarker = map.AddMarker(new MarkerOptions().SetPosition(place.LatLng).SetTitle(origin));
+
+                UpdateCameraPosition(originMarker.Position);
+
+                if (destinationMarker != null)
+                {
+                    pathURL = ("https://maps.googleapis.com/maps/api/directions/json?" +
+                              "origin=" + originMarker.Position.Latitude + "," + originMarker.Position.Longitude +
+                              "&destination=" + destinationMarker.Position.Latitude + "," + destinationMarker.Position.Longitude +
                               "&key=" + googleApiKey);
+                    setDestinationData(pathURL);                   
+                }
+            }
+        }
 
-            setDestinationData(pathURL);
+        public void OnOriginSelected(IPlace place)
+        {
 
-            //To add waypoints to the path
-            /**&waypoints=optimize:true|via:-37.81223%2C144.96254%7Cvia:-34.92788%2C138.60008 */
-
-            //To find the country code of the selection
-            /**Geocoder geocoder = new Geocoder(this);
-            //IList<Address> addresses = null;
-            //addresses = geocoder.GetFromLocation(place.LatLng.Latitude, place.LatLng.Longitude, 1);
-            //string countryCode = addresses[0].CountryCode;*/
         }
 
 
         //Overriden method from interface of UserTypeFragment.cs
         public void updateUserSelection(string type, int number)
         {
-            userType = type;
+            User.currentUser.currentType = type;
             numberOfPeople = number;
-            string str2 = GetString(Resource.String.user_type);
-            string str3 = GetString(Resource.String.number_of_people);
-            Toast.MakeText(ApplicationContext, str2 + " : " + userType + " " + str3 + " : " + numberOfPeople, ToastLength.Long).Show();
+            string typeDisplayed = "";
+
+            // Get the list of coordinates
+            List<DestinationCoordinate> destinationCoordinates = this.getFormattedDirectionList();
+
+            // For multilingual
+            string usrType = GetString(Resource.String.user_type);
+            string userDriver = GetString(Resource.String.user_driver);
+            string userRider = GetString(Resource.String.user_rider);
+            string numOfPeople = GetString(Resource.String.number_of_people);
+
+            if(type == mRides_app.Models.Request.TYPE_DRIVER || type == mRides_app.Models.Request.TYPE_RIDER)
+            {
+                if (type == mRides_app.Models.Request.TYPE_DRIVER)
+                {
+                    typeDisplayed = userDriver;
+                    Toast.MakeText(ApplicationContext, usrType + " : " + typeDisplayed, ToastLength.Long).Show();
+                }
+                else
+                {
+                    typeDisplayed = userRider;
+                    Toast.MakeText(ApplicationContext, usrType + " : " + typeDisplayed + " " + numOfPeople + " : " + numberOfPeople, ToastLength.Long).Show();
+                }
+
+                // Prepare the next activity
+                Intent matchActivity = new Intent(this, typeof(MatchActivity));
+                matchActivity.PutExtra(Constants.IntentExtraNames.RouteCoordinatesJson, JsonConvert.SerializeObject(destinationCoordinates));
+                matchActivity.PutExtra(Constants.IntentExtraNames.RequestType, type);
+                StartActivity(matchActivity);
+            }
+            
         }
     }
 }

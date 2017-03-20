@@ -9,6 +9,8 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using mRides_app.Mappers;
+
 namespace mRides_app
 {
 
@@ -65,7 +67,16 @@ namespace mRides_app
             userNameGivingFeedback.Text = feedbackList.ElementAt(position).givenBy.firstName;
             dateOfFeedback.Text = feedbackList.ElementAt(position).time;
             ratingBarOfFeedback.NumStars = feedbackList.ElementAt(position).stars;
-            reviewOfFeedback.Text = feedbackList.ElementAt(position).feedback;
+            reviewOfFeedback.Text = feedbackList.ElementAt(position).feedbackText;
+
+            // Get the picture of the reviewer from the mapper
+            UserMapper userMapper = UserMapper.getInstance();
+            var facebookPictureBitMap = userMapper.GetUserFacebookProfilePicture(feedbackList.ElementAt(position).givenBy.facebookID);
+            if(facebookPictureBitMap != null)
+            {
+                var reviewerProfilePicture = view.FindViewById<ImageView>(Resource.Id.feedbackFragmentUserProfilePicture);
+                reviewerProfilePicture.SetImageBitmap(facebookPictureBitMap);
+            }
 
             return view;
         }
