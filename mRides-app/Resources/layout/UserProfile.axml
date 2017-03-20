@@ -39,14 +39,14 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/linearLayout1"
+                android:id="@+id/userProfileinearLayout3"
                 android:minWidth="25px"
                 android:minHeight="25px">
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/linearLayout2">
+                    android:id="@+id/userProfileLinearLayout4">
                     <ImageView
                         android:src="@android:drawable/ic_menu_gallery"
                         android:id="@+id/genderImage"
