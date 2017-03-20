@@ -187,7 +187,7 @@ namespace UnitTests
         * Test whether we are able to successfully get the GSD of a user
         */
         [Test]
-        public void GetGSDTest()
+        public void GetGSD()
         {
             UserMapper userMapper = UserMapper.getInstance();
             // Create a test user
@@ -215,7 +215,7 @@ namespace UnitTests
         * Test whether we are able to successfully set the GSD of a user
         */
         [Test]
-        public void SetGSDTest()
+        public void SetGSD()
         {
             UserMapper userMapper = UserMapper.getInstance();
             // Create a test user
