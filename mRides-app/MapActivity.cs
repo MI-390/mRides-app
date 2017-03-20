@@ -27,6 +27,7 @@ using Newtonsoft.Json;
 using mRides_app.Models;
 using mRides_app.Mappers;
 using Android.Content.PM;
+using static mRides_app.Models.Request;
 
 namespace mRides_app
 {
@@ -281,21 +282,35 @@ namespace mRides_app
         //Send coordinates to the server and get a list of users
         public void findNearbyUsers(List<LatLng> directionList)
         {
-            List<string> destinationCoordinates = new List<string>();
-            for (int i = 0; i < directionList.Count; i += 10)
-            {
-                destinationCoordinates.Add(directionList[i].Latitude.ToString() + "," + directionList[i].Longitude.ToString());
-            }
-
-            Request newRequest = new Request
-            {
+            List<DestinationCoordinate> destinationCoordinates = getFormattedDirectionList();
+            
+            Request newRequest = new Request {
                 destinationCoordinates = destinationCoordinates,
-                destination = destinationCoordinates[destinationCoordinates.Count - 1],
-                location = destinationCoordinates[0],
+                destination = destinationCoordinates.Last().coordinate,
+                location = destinationCoordinates.First().coordinate,
                 type = "driver"
             };
             newRequest.destinationCoordinates = destinationCoordinates;
             User.currentUser.requestsAsDriver = ConsoleMapper.getInstance().FindRiders(newRequest);
+        }
+
+        /// <summary>
+        /// Obtain the formatted list of coordinates.
+        /// </summary>
+        /// <returns>List of string representing the coordinates of the directions</returns>
+        public List<DestinationCoordinate> getFormattedDirectionList()
+        {
+            List<DestinationCoordinate> destinationCoordinates = new List<DestinationCoordinate>();
+            
+            for (int i = 0; i < directionList.Count; i += 10)
+            {
+                DestinationCoordinate destinationCoordinate = new DestinationCoordinate
+                {
+                    coordinate = directionList[i].Latitude.ToString() + "," + directionList[i].Longitude.ToString()
+                };
+                destinationCoordinates.Add(destinationCoordinate);
+            }
+            return destinationCoordinates;
         }
 
         //Method to display the polyline path from the current user location to the destination
@@ -537,23 +552,35 @@ namespace mRides_app
             numberOfPeople = number;
             string typeDisplayed = "";
 
+            // Get the list of coordinates
+            List<DestinationCoordinate> destinationCoordinates = this.getFormattedDirectionList();
+
             // For multilingual
             string usrType = GetString(Resource.String.user_type);
             string userDriver = GetString(Resource.String.user_driver);
             string userRider = GetString(Resource.String.user_rider);
             string numOfPeople = GetString(Resource.String.number_of_people);
-            if (type == "driver")
-            {
-                typeDisplayed = userDriver;
-                Toast.MakeText(ApplicationContext, usrType + " : " + typeDisplayed, ToastLength.Long).Show();
-            }
-            else if (type == "rider")
-            {
-                typeDisplayed = userRider;
-                Toast.MakeText(ApplicationContext, usrType + " : " + typeDisplayed + " " + numOfPeople + " : " + numberOfPeople, ToastLength.Long).Show();
-            }
-        }
 
-        
+            if(type == mRides_app.Models.Request.TYPE_DRIVER || type == mRides_app.Models.Request.TYPE_RIDER)
+            {
+                if (type == mRides_app.Models.Request.TYPE_DRIVER)
+                {
+                    typeDisplayed = userDriver;
+                    Toast.MakeText(ApplicationContext, usrType + " : " + typeDisplayed, ToastLength.Long).Show();
+                }
+                else
+                {
+                    typeDisplayed = userRider;
+                    Toast.MakeText(ApplicationContext, usrType + " : " + typeDisplayed + " " + numOfPeople + " : " + numberOfPeople, ToastLength.Long).Show();
+                }
+
+                // Prepare the next activity
+                Intent matchActivity = new Intent(this, typeof(MatchActivity));
+                matchActivity.PutExtra(Constants.IntentExtraNames.RouteCoordinatesJson, JsonConvert.SerializeObject(destinationCoordinates));
+                matchActivity.PutExtra(Constants.IntentExtraNames.RequestType, type);
+                StartActivity(matchActivity);
+            }
+            
+        }
     }
 }

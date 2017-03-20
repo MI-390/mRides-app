@@ -96,9 +96,14 @@
 
   <!-- STRINGS FOR DRIVER ACCEPT/DECLINE MATCH -->
 
-  <string name="driverMatchAccept">Accept</string>
-  <string name="driverMatchDecline">Decline</string>
-  <string name="going_to_destination">GOINT TO</string>
+  <string name="userMatchAccept">Accept</string>
+  <string name="userMatchDecline">Decline</string>
+  <string name="userMatchDone">Done</string>
+  <string name="going_to_destination">GOING TO</string>
+  <string name="matchRequestSent">A request has been sent to this rider</string>
+  <string name="matchNoMoreMatch">No more match</string>
+  <string name="matchNoMatchFound">No more match found</string>
+  
   
  
    

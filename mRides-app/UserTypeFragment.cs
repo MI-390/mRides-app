@@ -104,14 +104,23 @@ namespace mRides_app
         void NextButtonClicked(object sender, EventArgs e)
         {
             string userType = "";
+            string usr_driver = mRides_app.Models.Request.TYPE_DRIVER;
+            string usr_rider = mRides_app.Models.Request.TYPE_RIDER;
 
             if (driver)
             {
-                userType = "driver";
+                
+                userType = usr_driver;
+                //Intent myIntent1 = new Intent(view.Context, typeof(DriverMode));
+                //myIntent1.PutExtra("numOfSeats", num);
+                //view.Context.StartActivity(myIntent1);
             }
             else
             {
-                userType = "rider";
+                userType = usr_rider;
+                //Intent myIntent2 = new Intent(view.Context, typeof(RiderMode));
+                //myIntent2.PutExtra("numOfPeople", num);
+                //view.Context.StartActivity(myIntent2);
             }
 
             listener.updateUserSelection(userType, num);
