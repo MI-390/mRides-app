@@ -4,6 +4,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using UnitTests.Mappers;
+using static mRides_app.Models.Request;
 
 namespace UnitTests
 {
@@ -56,7 +57,12 @@ namespace UnitTests
             // Now switch to be a driver looking for riders, having the same destination
             User.currentUser = UserMapper.getInstance().CreateUser(new User());
             Request driverRequest = new Request(0, "45.4928064,-73.5781321", "45.4975281,-73.5789193", DateTime.Now, false, Request.TYPE_DRIVER);
-            driverRequest.destinationCoordinates = new List<string> { "45.4928065,-73.5781322", "45.4928063,-73.5781320", "45.4928065,-73.5781322" };
+            driverRequest.destinationCoordinates = new List<DestinationCoordinate>
+            {
+                new DestinationCoordinate{coordinate = "45.4928065,-73.5781322" },
+                new DestinationCoordinate{coordinate = "45.4928063,-73.5781320" },
+                new DestinationCoordinate{coordinate = "45.4928065,-73.5781322" }
+            };
             List<Request> response = ConsoleMapper.getInstance().FindRiders(driverRequest);
 
             // Ensure that the FindRiders() updated the ID of the newly created request
