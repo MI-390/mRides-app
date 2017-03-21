@@ -47,12 +47,12 @@ namespace mRides_app
 
             TextView gsdText;
             gsdText = FindViewById<TextView>(Resource.Id.userProfileGSD);
-            long userGSD = UserMapper.getInstance().GetGSD(id);
-            gsdText.Text = "$ " + userGSD.ToString() + " GSD";
+            //long userGSD = UserMapper.getInstance().GetGSD(id);
+            //gsdText.Text = "$ " + userGSD.ToString() + " GSD";
 
             //For testing purposes
-            //long newgsd = UserMapper.getInstance().setGSD(id, 7777);
-            //gsdText.Text = "$ " + newgsd + " GSD";
+            long newgsd = UserMapper.getInstance().setGSD(id, 5656);
+            gsdText.Text = "$ " + newgsd + " GSD";
 
             var userProfileFeedbackAdapter = new UserProfileFeedbackAdapter(this, userFeedback);
             var feedbackListView = FindViewById<ListView>(Resource.Id.userProfileListView);
