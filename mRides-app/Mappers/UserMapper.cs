@@ -191,15 +191,12 @@ namespace mRides_app.Mappers
         public long setGSD(int id, long gsdAmount)
         {
             UserMapper um = UserMapper.getInstance();
-            //User u = um.GetUser(id);
             object objectSent = new
             {
                 userId = id,
                 amountGSD = gsdAmount
             };
             return SendPost<long>(ApiEndPointUrl.setGSD, objectSent, false);
-            //return u.gsd;
-            //return um.GetGSD(id);
         }
 
 
