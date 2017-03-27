@@ -10,6 +10,8 @@ using mRides_app.Mappers;
 using mRides_app.Models;
 using System.Collections.Generic;
 using Firebase.Iid;
+using System.Linq;
+
 //cvnewggbsc_1487629189@tfbnw.net
 //mi-390
 namespace mRides_app
@@ -83,53 +85,57 @@ namespace mRides_app
             StartActivity(intent);
         }
 
-        async void OnAuthenticationCompleted(object sender, AuthenticatorCompletedEventArgs e)
+        async void handleRequest(Account account)
+        {
+            var request = new OAuth2Request("GET", new Uri("https://graph.facebook.com/me?fields=email,first_name,last_name,gender,picture"), null, account);
+            var response = await request.GetResponseAsync();
+            if (response != null)
+            {
+                // Obtain the content from the response
+                var obj = JObject.Parse(response.GetResponseText());
+                long facebookId = Convert.ToInt64(obj["id"].ToString());
+                string facebookFirstName = obj["first_name"].ToString();
+                string facebookLastName = obj["last_name"].ToString();
+
+                // Try to obtain the user
+                UserMapper userMapper = UserMapper.getInstance();
+                User user = userMapper.GetUserByFacebookId(facebookId);
+
+                // If the user already exists, set the current user to it
+                // and go to map activity
+                if (user != null)
+                {
+                    User.currentUser = user;
+                    string token = FirebaseInstanceId.Instance.Token;
+                    UserMapper.getInstance().updateFcmToken(token);
+                    var mapActivity = new Intent(this, typeof(MapActivity));
+                    StartActivity(mapActivity);
+                }
+                // Otherwise, go to the preference activity
+                else
+                {
+                    var preferencesActivity = new Intent(this, typeof(PreferencesActivity));
+                    preferencesActivity.PutExtra(Constants.IntentExtraNames.UserFacebookId, obj["id"].ToString());
+                    preferencesActivity.PutExtra(Constants.IntentExtraNames.UserFacebookFirstName, facebookFirstName);
+                    preferencesActivity.PutExtra(Constants.IntentExtraNames.UserFacebookLastName, facebookLastName);
+                    preferencesActivity.PutExtra(Constants.IntentExtraNames.PreviousActivity, Constants.ActivityNames.MainActivity);
+                    StartActivity(preferencesActivity);
+                }
+                /** UNCOMMENT THE FOLLOWING TO VIEW USER PROFILE ACTIVITY UPON LOGIN **/
+                //userName = "" + obj["name"].ToString();
+                //var userProfileActivity = new Intent(this, typeof(UserProfileActivity));
+                //userProfileActivity.PutExtra("Profile Info", userName);
+                //StartActivity(userProfileActivity);
+
+            }
+        }
+
+        void OnAuthenticationCompleted(object sender, AuthenticatorCompletedEventArgs e)
         {
             if (e.IsAuthenticated)
             {
-                var request = new OAuth2Request("GET", new Uri("https://graph.facebook.com/me?fields=email,first_name,last_name,gender,picture"), null, e.Account);
-                var response = await request.GetResponseAsync();
-                if (response != null)
-                {
-                    // Obtain the content from the response]
-                    var obj = JObject.Parse(response.GetResponseText());
-                    long facebookId = Convert.ToInt64(obj["id"].ToString());
-                    string facebookFirstName = obj["first_name"].ToString();
-                    string facebookLastName = obj["last_name"].ToString();
-
-                    // Try to obtain the user
-                    UserMapper userMapper = UserMapper.getInstance();
-                    User user = userMapper.GetUserByFacebookId(facebookId);
-
-                    // If the user already exists, set the current user to it
-                    // and go to map activity
-                    if (user != null)
-                    {
-                        User.currentUser = user;
-                        string token = FirebaseInstanceId.Instance.Token;
-                        UserMapper.getInstance().updateFcmToken(token);
-                        var mapActivity = new Intent(this, typeof(MapActivity));
-                        StartActivity(mapActivity);
-                    }
-                    // Otherwise, go to the preference activity
-                    else
-                    {
-                        var preferencesActivity = new Intent(this, typeof(PreferencesActivity));
-                        preferencesActivity.PutExtra(Constants.IntentExtraNames.UserFacebookId, obj["id"].ToString());
-                        preferencesActivity.PutExtra(Constants.IntentExtraNames.UserFacebookFirstName, facebookFirstName);
-                        preferencesActivity.PutExtra(Constants.IntentExtraNames.UserFacebookLastName, facebookLastName);
-                        preferencesActivity.PutExtra(Constants.IntentExtraNames.PreviousActivity, Constants.ActivityNames.MainActivity);
-                        StartActivity(preferencesActivity);
-                    }
-
-
-                    /** UNCOMMENT THE FOLLOWING TO VIEW USER PROFILE ACTIVITY UPON LOGIN **/
-                    //userName = "" + obj["name"].ToString();
-                    //var userProfileActivity = new Intent(this, typeof(UserProfileActivity));
-                    //userProfileActivity.PutExtra("Profile Info", userName);
-                    //StartActivity(userProfileActivity);
-
-                }
+                AccountStore.Create(this).Save(e.Account, "Facebook");
+                handleRequest(e.Account);              
             }
         }
 
@@ -142,13 +148,24 @@ namespace mRides_app
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            SetContentView(Resource.Layout.Main);
+            var account = AccountStore.Create(this).FindAccountsForService("Facebook").FirstOrDefault();
+            //IEnumerable<Account> accounts = AccountStore.Create(this).FindAccountsForService("Facebook");
 
-            var facebook = FindViewById<Button>(Resource.Id.loginButton);
-            facebook.Click += delegate
+            if (account != null)
             {
-                LoginToFacebook(true);
-            };
+                handleRequest(account);
+            }
+            else
+            {
+                SetContentView(Resource.Layout.Main);
+
+                var facebook = FindViewById<Button>(Resource.Id.loginButton);
+                facebook.Click += delegate
+                {
+                    LoginToFacebook(true);
+                };
+            }
+                
 
 
             //var facebookNoCancel = FindViewById<Button>(Resource.Id.FacebookButtonNoCancel);
