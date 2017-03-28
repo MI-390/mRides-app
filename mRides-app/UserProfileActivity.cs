@@ -14,6 +14,7 @@ using mRides_app.Mappers;
 using Android.Graphics;
 using System.Net;
 using Xamarin.Auth;
+using Android.Graphics.Drawables;
 
 namespace mRides_app
 {
@@ -30,16 +31,15 @@ namespace mRides_app
             //Displaying username based on name sent after authentication
             //In the future, can be changed to get username from DB
             TextView usernameText;
-            //String username = Intent.GetStringExtra("Profile Info") ?? "Data not available";
             SetContentView(Resource.Layout.UserProfile);
             usernameText = FindViewById<TextView>(Resource.Id.userName);
             usernameText.Text = user.firstName.ToString() + " " + user.lastName.ToString();
             List<Models.Feedback> userFeedback = UserMapper.getInstance().GetReviews(id);
-            
+
             // Obtain the user's profile picture from facebook
             UserMapper userMapper = UserMapper.getInstance();
             var facebookPictureBitMap = userMapper.GetUserFacebookProfilePicture(user.facebookID);
-            if(facebookPictureBitMap != null)
+            if (facebookPictureBitMap != null)
             {
                 ImageView facebookPicture = FindViewById<ImageView>(Resource.Id.userPhoto);
                 facebookPicture.SetImageBitmap(facebookPictureBitMap);
@@ -50,9 +50,18 @@ namespace mRides_app
             long userGSD = UserMapper.getInstance().GetGSD(id);
             gsdText.Text = "$ " + userGSD.ToString() + " GSD";
 
-            //For testing purposes
-            //long newgsd = UserMapper.getInstance().setGSD(id, 7777);
-            //gsdText.Text = "$ " + newgsd + " GSD";
+            ImageView genderIcon = FindViewById<ImageView>(Resource.Id.genderImage);
+            string facebookGender = Intent.GetStringExtra(Constants.IntentExtraNames.UserFacebookGender);
+            if (facebookGender.Equals("female")) {
+                Drawable femaleIcon = Resources.GetDrawable(Resource.Drawable.girl);
+                genderIcon.SetImageDrawable(femaleIcon);
+            }
+            else
+            {
+                Drawable maleIcon = Resources.GetDrawable(Resource.Drawable.boy);
+                genderIcon.SetImageDrawable(maleIcon);
+
+            }
 
             var userProfileFeedbackAdapter = new UserProfileFeedbackAdapter(this, userFeedback);
             var feedbackListView = FindViewById<ListView>(Resource.Id.userProfileListView);
