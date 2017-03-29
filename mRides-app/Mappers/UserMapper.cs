@@ -218,17 +218,16 @@ namespace mRides_app.Mappers
             // Serialize the object of interest into a JSON
             var json = JsonConvert.SerializeObject(userId);
 
-            // Make a new request object
             string url = ApiEndPointUrl.getGender;
             url = url.Replace("{id}", userId.ToString());
+
+            // Make a new request object
             var request = new RestRequest(url, Method.GET);
 
-            // Execute the request and return the response
+            //Response variable
             var response = client.Execute(request);
-            dynamic oGender = Newtonsoft.Json.JsonConvert.DeserializeObject(response.Content);
 
-            string genderObtained = JsonConvert.DeserializeObject<Models.User>(oGender.ToString());
-
+            string genderObtained = response.Content;
             return genderObtained;
 
         }
