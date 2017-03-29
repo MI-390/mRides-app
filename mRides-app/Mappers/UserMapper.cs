@@ -191,7 +191,6 @@ namespace mRides_app.Mappers
         public void setGSD(int id, long gsdAmount)
         {
             UserMapper um = UserMapper.getInstance();
-            //User u = um.GetUser(id);
             object objectSent = new
             {
                 amountGSD = gsdAmount
@@ -206,7 +205,6 @@ namespace mRides_app.Mappers
         /// <returns>Gender of the user</returns>
         public string getGender(int userId)
         {
-            //SendGetWithUrlSegment<string>(ApiEndPointUrl.getGender, "id", userId.ToString());
 
             // Create a new rest client
             var client = new RestClient()
@@ -229,7 +227,20 @@ namespace mRides_app.Mappers
 
             string genderObtained = response.Content;
             return genderObtained;
+        }
 
+        /**
+        * Change a user's gender
+        */
+        public void setGender(int id, string newGender)
+        {
+            UserMapper um = UserMapper.getInstance();
+            object objectSent = new
+            {
+                userId = id,
+                userGender = newGender
+            };
+            SendPost<object>(ApiEndPointUrl.setGender, objectSent, false);
         }
     }
 }
