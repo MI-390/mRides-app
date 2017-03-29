@@ -209,6 +209,8 @@ namespace mRides_app.Mappers
         public const string updateFcmToken = "User/updateFcmToken";
         public const string getGSD = "User/getGSD/{id}";
         public const string setGSD = "User/setGSD";
+        public const string getGender = "User/getGender/{id}";
+        public const string setGender = "User/setGender";
 
         // Ride related url
         public const string createRide = "Ride/createRide";

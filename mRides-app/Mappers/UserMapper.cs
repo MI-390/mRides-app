@@ -197,10 +197,40 @@ namespace mRides_app.Mappers
                 amountGSD = gsdAmount
             };
             SendPost<object>(ApiEndPointUrl.setGSD, objectSent, true);
-            //return u.gsd;
-            //return um.GetGSD(id);
         }
 
+        /// <summary>
+        /// This method returns the gender of a user.
+        /// </summary>
+        /// <param name="userId">Id of the user whose gender we are obtaining</param>
+        /// <returns>Gender of the user</returns>
+        public string getGender(int userId)
+        {
+            //SendGetWithUrlSegment<string>(ApiEndPointUrl.getGender, "id", userId.ToString());
 
+            // Create a new rest client
+            var client = new RestClient()
+            {
+                BaseUrl = new System.Uri(BaseUrl),
+                Authenticator = new HttpBasicAuthenticator(_accountSid, _secretKey)
+            };
+
+            // Serialize the object of interest into a JSON
+            var json = JsonConvert.SerializeObject(userId);
+
+            // Make a new request object
+            string url = ApiEndPointUrl.getGender;
+            url = url.Replace("{id}", userId.ToString());
+            var request = new RestRequest(url, Method.GET);
+
+            // Execute the request and return the response
+            var response = client.Execute(request);
+            dynamic oGender = Newtonsoft.Json.JsonConvert.DeserializeObject(response.Content);
+
+            string genderObtained = JsonConvert.DeserializeObject<Models.User>(oGender.ToString());
+
+            return genderObtained;
+
+        }
     }
 }

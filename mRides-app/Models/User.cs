@@ -32,9 +32,8 @@ namespace mRides_app.Models
         public bool hasLuggage { get; set; }
         public bool hasPet { get; set; }
         public string genderPreference { get; set; }
+        public string gender { get; set; }
         public int gsd { get; set; }
-
-
 
         public double latitude { get; set; }
         public double longitude { get; set; }

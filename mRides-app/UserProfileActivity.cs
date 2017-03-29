@@ -51,7 +51,7 @@ namespace mRides_app
             gsdText.Text = "$ " + userGSD.ToString() + " GSD";
 
             ImageView genderIcon = FindViewById<ImageView>(Resource.Id.genderImage);
-            string facebookGender = Intent.GetStringExtra(Constants.IntentExtraNames.UserFacebookGender);
+            string facebookGender = userMapper.getGender();
             if (facebookGender.Equals("female")) {
                 Drawable femaleIcon = Resources.GetDrawable(Resource.Drawable.girl);
                 genderIcon.SetImageDrawable(femaleIcon);
