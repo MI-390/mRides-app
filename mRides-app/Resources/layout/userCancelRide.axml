@@ -45,14 +45,15 @@
     </LinearLayout>
     <TableLayout
         android:layout_width="fill_parent"
-        android:layout_height="266.0dp"
+        android:layout_height="wrap_content"
         android:stretchColumns="1"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="0dp"
         android:backgroundTint="#00000000"
         android:backgroundTintMode="screen"
         android:background="#6E6767"
-        android:alpha="0.58">
+        android:alpha="0.58"
+        android:id="@+id/tableAbove1">
         <TableRow>
         <!--First column of first row : Riders-->
             <FrameLayout
@@ -122,185 +123,23 @@
                     android:textStyle="bold" />
             </FrameLayout>
         </TableRow>
-        <TableRow
-            android:layout_height="49.5dp">
-            <FrameLayout
-                android:layout_height="wrap_content"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_marginTop="15dp">
-                <TextView
-                    android:text="Rider1"
-                    android:textColor="#ffffff"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textAllCaps="false"
-                    android:id="@+id/nameRider1"
-                    android:paddingBottom="0dp"
-                    android:layout_marginTop="0dp"
-                    android:backgroundTint="#00000000"
-                    android:shadowColor="#00000000"
-                    android:layout_marginBottom="15.0dp" />
-            </FrameLayout>
-            <FrameLayout
-                android:layout_height="wrap_content"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_marginTop="15dp">
-                <TextView
-                    android:text="Pick-up location"
-                    android:textColor="#ffffff"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textAllCaps="false"
-                    android:id="@+id/locationRider1"
-                    android:paddingBottom="0dp"
-                    android:layout_marginTop="0dp"
-                    android:backgroundTint="#00000000"
-                    android:shadowColor="#00000000"
-                    android:layout_marginBottom="15.0dp" />
-            </FrameLayout>
-            <FrameLayout
-                android:layout_height="wrap_content"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_marginTop="15dp">
-                <CheckBox
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/checkBoxCancel1"
-                    android:textColor="#ffffff"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:layout_marginBottom="15.0dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="29.5dp" />
-            </FrameLayout>
-        </TableRow>
-        <TableRow
-            android:layout_height="49.5dp">
-            <FrameLayout
-                android:layout_height="wrap_content"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_marginTop="15dp">
-                <TextView
-                    android:text="Rider2"
-                    android:textColor="#ffffff"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textAllCaps="false"
-                    android:id="@+id/nameRider2"
-                    android:paddingBottom="0dp"
-                    android:layout_marginTop="0dp"
-                    android:backgroundTint="#00000000"
-                    android:shadowColor="#00000000"
-                    android:layout_marginBottom="15.0dp" />
-            </FrameLayout>
-            <FrameLayout
-                android:layout_height="wrap_content"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_marginTop="15dp">
-                <TextView
-                    android:text="Pick-up location"
-                    android:textColor="#ffffff"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textAllCaps="false"
-                    android:id="@+id/locationRider2"
-                    android:paddingBottom="0dp"
-                    android:layout_marginTop="0dp"
-                    android:backgroundTint="#00000000"
-                    android:shadowColor="#00000000"
-                    android:layout_marginBottom="15.0dp" />
-            </FrameLayout>
-            <FrameLayout
-                android:layout_height="wrap_content"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_marginTop="15dp">
-                <CheckBox
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/checkBoxCancel2"
-                    android:textColor="#ffffff"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:layout_marginBottom="15.0dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="29.5dp" />
-            </FrameLayout>
-        </TableRow>
-        <TableRow
-            android:layout_height="55.0dp">
-            <FrameLayout
-                android:layout_height="wrap_content"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_marginTop="15dp">
-                <TextView
-                    android:text="Rider3"
-                    android:textColor="#ffffff"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textAllCaps="false"
-                    android:id="@+id/nameRider3"
-                    android:paddingBottom="0dp"
-                    android:layout_marginTop="0dp"
-                    android:backgroundTint="#00000000"
-                    android:shadowColor="#00000000"
-                    android:layout_marginBottom="15.0dp" />
-            </FrameLayout>
-            <FrameLayout
-                android:layout_height="wrap_content"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_marginTop="15dp">
-                <TextView
-                    android:text="Pick-up location"
-                    android:textColor="#ffffff"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textAllCaps="false"
-                    android:id="@+id/locationRider3"
-                    android:paddingBottom="0dp"
-                    android:layout_marginTop="0dp"
-                    android:backgroundTint="#00000000"
-                    android:shadowColor="#00000000"
-                    android:layout_marginBottom="15.0dp" />
-            </FrameLayout>
-            <FrameLayout
-                android:layout_height="wrap_content"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_marginTop="15dp">
-                <CheckBox
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/checkBoxCancel3"
-                    android:textColor="#ffffff"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:layout_marginBottom="15.0dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="29.5dp" />
-            </FrameLayout>
-        </TableRow>
     </TableLayout>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="188.0dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tableAbove1"
+        android:layout_above="@+id/linearLayoutBottom"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="16dp"
+        android:id="@+id/list_of_rides"
+        android:layout_marginBottom="16dp" />
     <LinearLayout
         android:orientation="vertical"
+        android:id="@+id/linearLayoutBottom"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:gravity="bottom"
         android:layout_weight="1"
         android:layout_marginTop="0.0dp">
