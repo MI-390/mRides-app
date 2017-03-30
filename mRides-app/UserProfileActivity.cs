@@ -51,16 +51,23 @@ namespace mRides_app
             gsdText.Text = "$ " + userGSD.ToString() + " GSD";
 
             ImageView genderIcon = FindViewById<ImageView>(Resource.Id.genderImage);
+            //userMapper.setGender(id, "male");
             string facebookGender = userMapper.getGender(id);
+
+
             if (facebookGender.Equals("female")) {
                 Drawable femaleIcon = Resources.GetDrawable(Resource.Drawable.girl);
                 genderIcon.SetImageDrawable(femaleIcon);
             }
-            else
+            else if (facebookGender.Equals("male"))
             {
                 Drawable maleIcon = Resources.GetDrawable(Resource.Drawable.boy);
                 genderIcon.SetImageDrawable(maleIcon);
 
+            }
+            else
+            {
+                //user's gender is invalid
             }
 
             var userProfileFeedbackAdapter = new UserProfileFeedbackAdapter(this, userFeedback);

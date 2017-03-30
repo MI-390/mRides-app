@@ -2570,8 +2570,8 @@ namespace mRides_app
 			// aapt resource value: 0x7f090047
 			public const int @fixed = 2131296327;
 			
-			// aapt resource value: 0x7f0900f9
-			public const int genderImage = 2131296505;
+			// aapt resource value: 0x7f0900f5
+			public const int genderImage = 2131296501;
 			
 			// aapt resource value: 0x7f090005
 			public const int home = 2131296261;
@@ -3107,8 +3107,8 @@ namespace mRides_app
 			// aapt resource value: 0x7f0900f6
 			public const int userName = 2131296502;
 			
-			// aapt resource value: 0x7f0900f4
-			public const int userPhoto = 2131296500;
+			// aapt resource value: 0x7f0900f7
+			public const int userPhoto = 2131296503;
 			
 			// aapt resource value: 0x7f090105
 			public const int userProfileFragmentName = 2131296517;
@@ -3116,17 +3116,17 @@ namespace mRides_app
 			// aapt resource value: 0x7f0900fa
 			public const int userProfileGSD = 2131296506;
 			
-			// aapt resource value: 0x7f0900f5
-			public const int userProfileLinearLayout2 = 2131296501;
+			// aapt resource value: 0x7f0900f4
+			public const int userProfileLinearLayout2 = 2131296500;
 			
-			// aapt resource value: 0x7f0900f8
-			public const int userProfileLinearLayout4 = 2131296504;
+			// aapt resource value: 0x7f0900f9
+			public const int userProfileLinearLayout4 = 2131296505;
 			
 			// aapt resource value: 0x7f0900fd
 			public const int userProfileListView = 2131296509;
 			
-			// aapt resource value: 0x7f0900f7
-			public const int userProfileinearLayout3 = 2131296503;
+			// aapt resource value: 0x7f0900f8
+			public const int userProfileinearLayout3 = 2131296504;
 			
 			// aapt resource value: 0x7f090106
 			public const int viewProfileFragmentButton = 2131296518;
