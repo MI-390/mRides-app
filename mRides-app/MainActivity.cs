@@ -145,7 +145,6 @@ namespace mRides_app
                 LoginToFacebook(true);
             };
 
-
             //var facebookNoCancel = FindViewById<Button>(Resource.Id.FacebookButtonNoCancel);
             // facebookNoCancel.Click += delegate { LoginToFacebook(false); };
         }
