@@ -2255,52 +2255,58 @@ namespace mRides_app
 			public const int loyolaTest = 2130837620;
 			
 			// aapt resource value: 0x7f020075
-			public const int map = 2130837621;
+			public const int m_Rides_Logo = 2130837621;
 			
 			// aapt resource value: 0x7f020076
-			public const int mcgill_test = 2130837622;
+			public const int map = 2130837622;
 			
 			// aapt resource value: 0x7f020077
-			public const int mrides_logo = 2130837623;
+			public const int mcgill_test = 2130837623;
 			
 			// aapt resource value: 0x7f020078
-			public const int navigation_empty_icon = 2130837624;
-			
-			// aapt resource value: 0x7f020084
-			public const int notification_template_icon_bg = 2130837636;
+			public const int mrides_logo = 2130837624;
 			
 			// aapt resource value: 0x7f020079
-			public const int places_ic_clear = 2130837625;
+			public const int navigation_empty_icon = 2130837625;
+			
+			// aapt resource value: 0x7f020086
+			public const int notification_template_icon_bg = 2130837638;
 			
 			// aapt resource value: 0x7f02007a
-			public const int places_ic_search = 2130837626;
+			public const int places_ic_clear = 2130837626;
 			
 			// aapt resource value: 0x7f02007b
-			public const int powered_by_google_dark = 2130837627;
+			public const int places_ic_search = 2130837627;
 			
 			// aapt resource value: 0x7f02007c
-			public const int powered_by_google_light = 2130837628;
+			public const int powered_by_google_dark = 2130837628;
 			
 			// aapt resource value: 0x7f02007d
-			public const int settings = 2130837629;
+			public const int powered_by_google_light = 2130837629;
 			
 			// aapt resource value: 0x7f02007e
-			public const int smsicon = 2130837630;
+			public const int settings = 2130837630;
 			
 			// aapt resource value: 0x7f02007f
-			public const int smsicongray = 2130837631;
+			public const int smsicon = 2130837631;
 			
 			// aapt resource value: 0x7f020080
-			public const int top_border = 2130837632;
+			public const int smsicongray = 2130837632;
 			
 			// aapt resource value: 0x7f020081
-			public const int trashcanCancel = 2130837633;
+			public const int splash = 2130837633;
 			
 			// aapt resource value: 0x7f020082
-			public const int user = 2130837634;
+			public const int top_border = 2130837634;
 			
 			// aapt resource value: 0x7f020083
-			public const int userIcon2 = 2130837635;
+			public const int trashcanCancel = 2130837635;
+			
+			// aapt resource value: 0x7f020084
+			public const int user = 2130837636;
+			
+			// aapt resource value: 0x7f020085
+			public const int userIcon2 = 2130837637;
 			
 			static Drawable()
 			{
@@ -4305,6 +4311,15 @@ namespace mRides_app
 			
 			// aapt resource value: 0x7f0a014f
 			public const int Base_Widget_Design_TabLayout = 2131362127;
+			
+			// aapt resource value: 0x7f0a0167
+			public const int MyTheme = 2131362151;
+			
+			// aapt resource value: 0x7f0a0166
+			public const int MyTheme_Base = 2131362150;
+			
+			// aapt resource value: 0x7f0a0168
+			public const int MyTheme_Splash = 2131362152;
 			
 			// aapt resource value: 0x7f0a0019
 			public const int Platform_AppCompat = 2131361817;

@@ -17,7 +17,7 @@ using System.Linq;
 namespace mRides_app
 {
     //ggrrg
-    [Activity(Label = "mRides_app", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "mRides_app", Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
         string userName;
@@ -85,91 +85,30 @@ namespace mRides_app
             StartActivity(intent);
         }
 
-        async void handleRequest(Account account)
-        {
-            var request = new OAuth2Request("GET", new Uri("https://graph.facebook.com/me?fields=email,first_name,last_name,gender,picture"), null, account);
-            var response = await request.GetResponseAsync();
-            if (response != null)
-            {
-                // Obtain the content from the response
-                var obj = JObject.Parse(response.GetResponseText());
-                long facebookId = Convert.ToInt64(obj["id"].ToString());
-                string facebookFirstName = obj["first_name"].ToString();
-                string facebookLastName = obj["last_name"].ToString();
-
-                // Try to obtain the user
-                UserMapper userMapper = UserMapper.getInstance();
-                User user = userMapper.GetUserByFacebookId(facebookId);
-
-                // If the user already exists, set the current user to it
-                // and go to map activity
-                if (user != null)
-                {
-                    User.currentUser = user;
-                    string token = FirebaseInstanceId.Instance.Token;
-                    UserMapper.getInstance().updateFcmToken(token);
-                    var mapActivity = new Intent(this, typeof(MapActivity));
-                    StartActivity(mapActivity);
-                }
-                // Otherwise, go to the preference activity
-                else
-                {
-                    var preferencesActivity = new Intent(this, typeof(PreferencesActivity));
-                    preferencesActivity.PutExtra(Constants.IntentExtraNames.UserFacebookId, obj["id"].ToString());
-                    preferencesActivity.PutExtra(Constants.IntentExtraNames.UserFacebookFirstName, facebookFirstName);
-                    preferencesActivity.PutExtra(Constants.IntentExtraNames.UserFacebookLastName, facebookLastName);
-                    preferencesActivity.PutExtra(Constants.IntentExtraNames.PreviousActivity, Constants.ActivityNames.MainActivity);
-                    StartActivity(preferencesActivity);
-                }
-                /** UNCOMMENT THE FOLLOWING TO VIEW USER PROFILE ACTIVITY UPON LOGIN **/
-                //userName = "" + obj["name"].ToString();
-                //var userProfileActivity = new Intent(this, typeof(UserProfileActivity));
-                //userProfileActivity.PutExtra("Profile Info", userName);
-                //StartActivity(userProfileActivity);
-
-            }
-        }
-
         void OnAuthenticationCompleted(object sender, AuthenticatorCompletedEventArgs e)
         {
             if (e.IsAuthenticated)
             {
                 AccountStore.Create(this).Save(e.Account, "Facebook");
-                handleRequest(e.Account);              
+                LoginRequest.handleRequest(e.Account, this);              
             }
         }
 
-        // private static readonly TaskScheduler UIScheduler = TaskScheduler.FromCurrentSynchronizationContext();
         protected override void OnResume()
         {
             base.OnResume();
           
         }
+
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            var account = AccountStore.Create(this).FindAccountsForService("Facebook").FirstOrDefault();
-            //IEnumerable<Account> accounts = AccountStore.Create(this).FindAccountsForService("Facebook");
-
-            if (account != null)
+            SetContentView(Resource.Layout.Main);
+            var facebook = FindViewById<Button>(Resource.Id.loginButton);
+            facebook.Click += delegate
             {
-                handleRequest(account);
-            }
-            else
-            {
-                SetContentView(Resource.Layout.Main);
-
-                var facebook = FindViewById<Button>(Resource.Id.loginButton);
-                facebook.Click += delegate
-                {
-                    LoginToFacebook(true);
-                };
-            }
-                
-
-
-            //var facebookNoCancel = FindViewById<Button>(Resource.Id.FacebookButtonNoCancel);
-            // facebookNoCancel.Click += delegate { LoginToFacebook(false); };
+              LoginToFacebook(true);
+            };
         }
     }
 }
