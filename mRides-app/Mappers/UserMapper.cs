@@ -186,19 +186,17 @@ namespace mRides_app.Mappers
         }
 
         /**
-        * Change a user's GSD amount
-        */
-        public void setGSD(int id, long gsdAmount)
+         * Change a user's GSD amount
+         */
+        public long setGSD(int id, long gsdAmount)
         {
             UserMapper um = UserMapper.getInstance();
-            //User u = um.GetUser(id);
             object objectSent = new
             {
+                userId = id,
                 amountGSD = gsdAmount
             };
-            SendPost<object>(ApiEndPointUrl.setGSD, objectSent, true);
-            //return u.gsd;
-            //return um.GetGSD(id);
+            return SendPost<long>(ApiEndPointUrl.setGSD, objectSent, false);
         }
 
 
