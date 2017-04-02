@@ -39,6 +39,7 @@
   <string name="user_review">Commentaire</string>
   <string name="leaveReviewForUser">Laisser un commentaire pour cet utilisateur :</string>
   <string name="reviewSubmit">Envoyer</string>
+  <string name="closeFeedback">Fermer</string>
   <string name="viewUserProfile">Afficher le profil</string>
   <string name="reviewUser">Commentaire</string>
   <string name="feedbackPopup">Cliquez pour popup Feedback !</string>

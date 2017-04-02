@@ -13,10 +13,14 @@ using mRides_app.Mappers;
 
 namespace mRides_app
 {
+    /// <summary>
+    /// Fragment for leaving a review
+    /// </summary>
     class LeaveReviewFragment : DialogFragment
     {
         RatingBar ratingBar;
         Button submitButton;
+        Button closeReview;
         EditText reviewEditText;
 
         int userID;
@@ -37,7 +41,7 @@ namespace mRides_app
             submitButton = view.FindViewById<Button>(Resource.Id.submitFeedback1);
             ratingBar = view.FindViewById<RatingBar>(Resource.Id.reviewRatingBar1);
             reviewEditText = view.FindViewById<EditText>(Resource.Id.reviewEdit1);
-
+            closeReview = view.FindViewById<Button>(Resource.Id.closeFeedback1);
             // For clicking on the submit button
             submitButton.Click += submitFeedback;
 
@@ -53,8 +57,8 @@ namespace mRides_app
         void submitFeedback(object sender, EventArgs e)
         {
             // Get the review and rating
-            review = getCurrentReviewText();
-            rating = getCurrentRating();
+            review = reviewEditText.Text;
+            rating = (Int32)ratingBar.Rating;
 
             UserMapper.getInstance().LeaveReview(1, userID, rating, review);
 
@@ -76,31 +80,6 @@ namespace mRides_app
 
             // To debug
             Toast.MakeText(Activity, "Rating: " + rating + "\nReview: " + review, ToastLength.Short).Show();
-        }
-
-        // Method to get the current text entered by the user in the EditText
-        // These was separated for testing purpose
-        String getCurrentReviewText()
-        {
-            return reviewEditText.Text;
-        }
-
-        // Method to get the current star rating entered by the user
-        int getCurrentRating()
-        {
-            return (Int32)ratingBar.Rating;
-        }
-
-        // Method to set the review to an arbitrary text (for testing purpose)
-        void setCurrentReviewText(String str)
-        {
-            review = str;
-        }
-
-        // Method to set the review to an arbitrary rating (for testing purpose)
-        void setCurrentRating(int ratingNum)
-        {
-            this.rating = ratingNum;
         }
     }
 }

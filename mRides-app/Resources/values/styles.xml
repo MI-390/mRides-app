@@ -14,4 +14,16 @@
   	  <!-- You can also set colorControlNormal, colorControlActivated
            colorControlHighlight and colorSwitchThumbNormal. -->
     </style>
+  <style name="mRidesThemeRider" parent="@android:style/Theme.Material.Light.DarkActionBar">
+    <item name="android:windowNoTitle">true</item>
+    <!--Replace action bar with toolbar-->
+    <item name="android:windowActionBar">false</item>
+    <!-- colorPrimary is used for the default action bar background -->
+    <item name="android:colorPrimary">#32CD32</item>
+    <!-- colorPrimaryDark is used for the status bar -->
+    <item name="android:colorPrimaryDark">#008000</item>
+    <!-- colorAccent is used as the default value for colorControlActivated
+           which is used to tint widgets -->
+    <item name="android:colorAccent">#ffffff</item>
+  </style>
 </resources>

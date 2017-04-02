@@ -80,7 +80,7 @@
   <!-- STRINGS FOR DRIVER REVIEW -->
    <string name="leaveReviewForUser">Leave a review for this user:</string>
   <string name="reviewSubmit">Submit</string>
-  
+  <string name="closeFeedback">Close</string>
 
 
   <!-- STRINGS FOR USER PROFILE FRAGMENT  --> 

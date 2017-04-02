@@ -19,7 +19,7 @@ namespace mRides_app
     /// <summary>
     /// Activity for canceling a ride
     /// </summary>
-    [Activity(Label = "UserCancelRideActivity", MainLauncher = true, Theme = "@style/Theme.AppCompat.Light.NoActionBar")]
+    [Activity(Label = "UserCancelRideActivity", Theme = "@style/Theme.AppCompat.Light.NoActionBar")]
     public class UserCancelRideActivity : AppCompatActivity
     {
         ListView listView;

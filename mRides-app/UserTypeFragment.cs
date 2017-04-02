@@ -42,8 +42,6 @@ namespace mRides_app
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            // Use this to return your custom view for this Fragment
-            // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
             base.OnCreateView(inflater, container, savedInstanceState);
             View view = inflater.Inflate(Resource.Layout.UserTypeFragment, container, false);
             previous = view.FindViewById<Button>(Resource.Id.CloseButton);
