@@ -13,6 +13,9 @@ using Android.Widget;
 
 namespace mRides_app
 {
+    /// <summary>
+    /// Interface that will be used by MapActivity
+    /// </summary>
     public interface IEditUserSelectionListener
     {
         void updateUserSelection(string type, int num);
@@ -40,6 +43,7 @@ namespace mRides_app
             return fragment;
         }
 
+        // Method that is called when view is created
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             base.OnCreateView(inflater, container, savedInstanceState);
@@ -77,15 +81,13 @@ namespace mRides_app
         {
             if (!driver)
             {
-                Log.Debug("Driver", "I am a driver woohoo");
-                // Open a session as a Driver?
+                Log.Debug("Driver", "Driver mode");
                 tv1.Visibility = ViewStates.Gone;
                 spinner.Visibility = ViewStates.Gone;
             }
             else
             {
-                Log.Debug("Rider", "I am a rider woohoo");
-                // Open a session as a Rider
+                Log.Debug("Rider", "Rider mode");
                 string numRiders = GetString(Resource.String.numberOfRiders);
                 tv1.Visibility = ViewStates.Visible;
                 spinner.Visibility = ViewStates.Visible;
@@ -109,16 +111,10 @@ namespace mRides_app
             {
                 
                 userType = usr_driver;
-                //Intent myIntent1 = new Intent(view.Context, typeof(DriverMode));
-                //myIntent1.PutExtra("numOfSeats", num);
-                //view.Context.StartActivity(myIntent1);
             }
             else
             {
                 userType = usr_rider;
-                //Intent myIntent2 = new Intent(view.Context, typeof(RiderMode));
-                //myIntent2.PutExtra("numOfPeople", num);
-                //view.Context.StartActivity(myIntent2);
             }
 
             listener.updateUserSelection(userType, num);
