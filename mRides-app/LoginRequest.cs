@@ -19,6 +19,7 @@ namespace mRides_app
 {
     class LoginRequest
     {
+
         public static async void handleRequest(Account account, Context context)
         {
             var request = new OAuth2Request("GET", new Uri("https://graph.facebook.com/me?fields=email,first_name,last_name,gender,picture"), null, account);
@@ -30,6 +31,7 @@ namespace mRides_app
                 long facebookId = Convert.ToInt64(obj["id"].ToString());
                 string facebookFirstName = obj["first_name"].ToString();
                 string facebookLastName = obj["last_name"].ToString();
+                string facebookGender = obj["gender"].ToString();
 
                 // Try to obtain the user
                 UserMapper userMapper = UserMapper.getInstance();
@@ -52,14 +54,10 @@ namespace mRides_app
                     preferencesActivity.PutExtra(Constants.IntentExtraNames.UserFacebookId, obj["id"].ToString());
                     preferencesActivity.PutExtra(Constants.IntentExtraNames.UserFacebookFirstName, facebookFirstName);
                     preferencesActivity.PutExtra(Constants.IntentExtraNames.UserFacebookLastName, facebookLastName);
+                    preferencesActivity.PutExtra(Constants.IntentExtraNames.UserFacebookGender, facebookGender);
                     preferencesActivity.PutExtra(Constants.IntentExtraNames.PreviousActivity, Constants.ActivityNames.MainActivity);
                     context.StartActivity(preferencesActivity);
                 }
-                /** UNCOMMENT THE FOLLOWING TO VIEW USER PROFILE ACTIVITY UPON LOGIN **/
-                //userName = "" + obj["name"].ToString();
-                //var userProfileActivity = new Intent(this, typeof(UserProfileActivity));
-                //userProfileActivity.PutExtra("Profile Info", userName);
-                //StartActivity(userProfileActivity);
             }
         }
     }

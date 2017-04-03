@@ -25,6 +25,10 @@ namespace mRides_app.Mappers
         private UserMapper() { }
 
         private static UserMapper _instance;
+
+        /// <summary>
+        /// Method that returns the user mapper singleton instance.
+        /// </summary>
         public static UserMapper getInstance()
         {
             if (_instance == null)
@@ -38,32 +42,33 @@ namespace mRides_app.Mappers
         // CALLS TO USER WEB API
         // ---------------------------------------------------------------------------
 
-        /**
-         * Obtain a user object given its ID
-         */
+        /// <summary>
+        /// This method returns a user object given its user ID.
+        /// </summary>
         public User GetUser(int userId)
         {
             return SendGetWithUrlSegment<User>(ApiEndPointUrl.getUser, "id", userId.ToString());
         }
 
-        /**
-         * Obtain a user object given its Facebook ID
-         */
+        /// <summary>
+        /// Obtain a user object given its Facebook ID.
+        /// </summary>
         public User GetUserByFacebookId(long userId)
         {
             return SendPost<User>(ApiEndPointUrl.getUserByFacebookId, userId.ToString(), false);
         }
 
-        /**
-         * Create a new user given the new user object
-         */
+        /// <summary>
+        /// This method creates a new user, given a new user object.
+        /// </summary>
         public User CreateUser(User newUser)
         {
             return SendPost<User>(ApiEndPointUrl.createUser, newUser, false);
         }
-        /**
-         * Update fcm token for a user
-         */
+
+        /// <summary>
+        /// Updates a fcm token of a user.
+        /// </summary>
         public void updateFcmToken(string fcmToken)
         {
             object fcmTokenObject = new
@@ -73,9 +78,9 @@ namespace mRides_app.Mappers
             SendPost<object>(ApiEndPointUrl.updateFcmToken, fcmTokenObject, true);
         }
 
-        /**
-         * Create a new review 
-         */
+        /// <summary>
+        /// Creates a new review.
+        /// </summary>
         public void LeaveReview(int rideId, int revieweeId, int rating, string review)
         {
             object newReview = new
@@ -88,9 +93,9 @@ namespace mRides_app.Mappers
             SendPost<object>(ApiEndPointUrl.leaveReview, newReview, true);
         }
 
-        /**
-         * Obtain reviews given to a user
-         */
+        /// <summary>
+        /// Obtains reviews given to a user.
+        /// </summary>
         public List<Models.Feedback> GetReviews(int userId)
         {
             // Create a new rest client
@@ -177,17 +182,17 @@ namespace mRides_app.Mappers
             return imageBitmap;
         }
 
-        /**
-        * Obtain a user's GSD amount
-        */
+        /// <summary>
+        /// Obtains the GSD amount of a user.
+        /// </summary>
         public long GetGSD(int userId)
         {
             return SendGetWithUrlSegment<long>(ApiEndPointUrl.getGSD, "id", userId.ToString());
         }
 
-        /**
-         * Change a user's GSD amount
-         */
+        /// <summary>
+        /// This method sets the GSD amount of a user.
+        /// </summary>
         public long setGSD(int id, long gsdAmount)
         {
             UserMapper um = UserMapper.getInstance();
@@ -199,6 +204,48 @@ namespace mRides_app.Mappers
             return SendPost<long>(ApiEndPointUrl.setGSD, objectSent, false);
         }
 
+        /// <summary>
+        /// This method returns the gender of a user.
+        /// </summary>
+        /// <param name="userId">Id of the user whose gender we are obtaining</param>
+        /// <returns>Gender of the user</returns>
+        public string getGender(int userId)
+        {
+            // Create a new rest client
+            var client = new RestClient()
+            {
+                BaseUrl = new System.Uri(BaseUrl),
+                Authenticator = new HttpBasicAuthenticator(_accountSid, _secretKey)
+            };
 
+            // Serialize the object of interest into a JSON
+            var json = JsonConvert.SerializeObject(userId);
+
+            string url = ApiEndPointUrl.getGender;
+            url = url.Replace("{id}", userId.ToString());
+
+            // Make a new request object
+            var request = new RestRequest(url, Method.GET);
+
+            //Response variable
+            var response = client.Execute(request);
+
+            string genderObtained = response.Content;
+            return genderObtained;
+        }
+
+        /// <summary>
+        /// This method sets the gender of a user.
+        /// </summary>
+        public void setGender(int id, string newGender)
+        {
+            UserMapper um = UserMapper.getInstance();
+            object objectSent = new
+            {
+                userId = id,
+                userGender = newGender
+            };
+            SendPost<object>(ApiEndPointUrl.setGender, objectSent, false);
+        }
     }
 }
