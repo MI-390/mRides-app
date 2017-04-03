@@ -213,6 +213,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cache\UserCache.cs" />
     <Compile Include="ChatListActivity.cs" />
     <Compile Include="ChatActivity.cs" />
     <Compile Include="ChatAdapter.cs" />

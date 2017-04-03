@@ -3,7 +3,7 @@ using mRides_app.Models;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using UnitTests.Mappers;
+using UnitTests.Gateways;
 using System.Threading;
 
 namespace UnitTests
@@ -134,7 +134,7 @@ namespace UnitTests
 
             // Create a ride
             User.currentUser = driver;
-            RideMapper rideMapper = RideMapper.getInstance();
+            RideGateway rideMapper = RideGateway.getInstance();
             Ride ride = new Ride
             {
                 destination = "",
