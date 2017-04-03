@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using mRides_app.Models;
 
 namespace mRides_app
 {
@@ -31,7 +32,8 @@ namespace mRides_app
         Switch switcher;
         Spinner spinner;
         TextView tv1;
-        Boolean driver = false; // Keep track if user selected 'Driver' or ' Rider'
+        View view;
+        Boolean driver; // Keep track if user selected 'Driver' or ' Rider'
         int num = 1; // Keep track of the number selected by the user in the drop-down list
         IEditUserSelectionListener listener;
 
@@ -47,12 +49,26 @@ namespace mRides_app
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             base.OnCreateView(inflater, container, savedInstanceState);
-            View view = inflater.Inflate(Resource.Layout.UserTypeFragment, container, false);
+            view = inflater.Inflate(Resource.Layout.UserTypeFragment, container, false);
             previous = view.FindViewById<Button>(Resource.Id.CloseButton);
             next = view.FindViewById<Button>(Resource.Id.Next);
             switcher = view.FindViewById<Switch>(Resource.Id.riderOrDriverSwitch);
             spinner = view.FindViewById<Spinner>(Resource.Id.numOfPeople);
             tv1 = view.FindViewById<TextView>(Resource.Id.textView3);
+
+            // Set the toggle to be at the position where the user has last placed
+            if (User.currentUser.currentType == "rider")
+            {
+                switcher.Checked = false;
+                driver = false;
+            }
+            else
+            {
+                switcher.Checked = true;
+                driver = true;
+                tv1.Visibility = ViewStates.Gone;
+                spinner.Visibility = ViewStates.Gone;
+            }
 
             switcher.CheckedChange += SwitchDriverOrRider;
 
@@ -109,7 +125,6 @@ namespace mRides_app
 
             if (driver)
             {
-                
                 userType = usr_driver;
             }
             else

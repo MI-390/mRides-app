@@ -22,6 +22,7 @@ namespace mRides_app
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            UserMapper.getInstance().setTheme(this);
             base.OnCreate(savedInstanceState);
             string idToGet = Intent.GetStringExtra("id") ?? GetString(Resource.String.ExtraData_DataNotAvailable);
             int id = Int32.Parse(idToGet);

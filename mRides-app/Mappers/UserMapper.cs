@@ -201,6 +201,20 @@ namespace mRides_app.Mappers
             //return um.GetGSD(id);
         }
 
+        /**
+        * Set the theme of an activity depending on whether the user is a driver or a rider
+        */
+        public void setTheme(Activity context)
+        {
+            if (User.currentUser.currentType == "driver")
+            {
+                context.SetTheme(Resource.Style.mRidesTheme);
+            }
+            else if (User.currentUser.currentType == "rider")
+            {
+                context.SetTheme(Resource.Style.mRidesThemeRider);
+            }
+        }
 
     }
 }

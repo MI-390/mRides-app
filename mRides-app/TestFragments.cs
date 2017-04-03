@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace mRides_app
 {
-    [Activity(Label = "TestFragments",MainLauncher = true)]
+    [Activity(Label = "TestFragments")]
     public class TestFragments : Activity, IEditUserSelectionListener
     {
         string userType;

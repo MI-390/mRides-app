@@ -75,7 +75,7 @@ namespace mRides_app
             var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
             SetActionBar(toolbar);
             ActionBar.Title = "mRides";
-
+            
             //var toolbar_bot = FindViewById<BottomNavigationView>(Resource.Id.toolbar_bot);
             //toolbar_bot.InflateMenu(Resource.Menu.bottombar);
             
@@ -567,11 +567,18 @@ namespace mRides_app
                 {
                     typeDisplayed = userDriver;
                     Toast.MakeText(ApplicationContext, usrType + " : " + typeDisplayed, ToastLength.Long).Show();
+                    // Manually setting the theme color since you can only set the theme when creating a new activity
+                    Window.SetNavigationBarColor(Android.Graphics.Color.DarkRed);
+                    Window.SetStatusBarColor(Android.Graphics.Color.DarkRed);
+                    ActionBar.SetBackgroundDrawable(new Android.Graphics.Drawables.ColorDrawable(Color.ParseColor("#EF5350")));
                 }
                 else
                 {
                     typeDisplayed = userRider;
                     Toast.MakeText(ApplicationContext, usrType + " : " + typeDisplayed + " " + numOfPeople + " : " + numberOfPeople, ToastLength.Long).Show();
+                    Window.SetNavigationBarColor(Android.Graphics.Color.DarkGreen);
+                    Window.SetStatusBarColor(Android.Graphics.Color.DarkGreen);
+                    ActionBar.SetBackgroundDrawable(new Android.Graphics.Drawables.ColorDrawable(Color.ParseColor("#26A65B")));
                 }
 
                 // Prepare the next activity

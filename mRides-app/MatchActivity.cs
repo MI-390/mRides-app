@@ -62,6 +62,7 @@ namespace mRides_app
 
         protected override void OnCreate(Bundle bundle)
         {
+            UserMapper.getInstance().setTheme(this);
             base.OnCreate(bundle);
 
             // Obtain the mapper instances
