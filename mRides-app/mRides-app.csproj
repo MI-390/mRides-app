@@ -219,6 +219,9 @@
     <Compile Include="Constants\ActivityNames.cs" />
     <Compile Include="Constants\IntentExtraNames.cs" />
     <Compile Include="DestinationJSON.cs" />
+    <Compile Include="Gateways\AbstractGateway.cs" />
+    <Compile Include="Gateways\ConsoleGateway.cs" />
+    <Compile Include="Gateways\UserGateway.cs" />
     <Compile Include="LoginRequest.cs" />
     <Compile Include="MessagingService\ListViewAdapter.cs" />
     <Compile Include="MessagingService\MessageContent.cs" />
