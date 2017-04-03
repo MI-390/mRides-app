@@ -443,7 +443,7 @@ namespace mRides_app
             userProfileButton.Click += delegate
             {
                 Intent i = new Intent(this, typeof(UserProfileActivity));
-                i.PutExtra("id", User.currentUser.id.ToString()); //not sure if we store this userID
+                i.PutExtra("id", User.currentUser.id.ToString()); 
                 StartActivity(i);
             };
 
