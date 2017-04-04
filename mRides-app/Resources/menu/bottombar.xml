@@ -20,14 +20,13 @@
 
  
     <ImageButton
-        android:id="@+id/menu_map"
-        android:src="@drawable/map"
+        android:id="@+id/menu_home"
+        android:src="@drawable/home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?android:selectableItemBackground"
         android:layout_weight="1" />
 
- 
     <ImageButton
         android:id="@+id/menu_chat"
         android:src="@drawable/chat"
