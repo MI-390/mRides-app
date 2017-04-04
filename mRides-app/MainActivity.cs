@@ -15,7 +15,7 @@ using Firebase.Iid;
 namespace mRides_app
 {
     //ggrrg
-    [Activity(Label = "mRides_app", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "mRides_app", MainLauncher = false, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
         string userName;

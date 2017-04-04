@@ -3,16 +3,27 @@
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:minWidth="25px"
-    android:minHeight="25px"
-    android:alpha="0.5">
+    android:id="@+id/feedbackFragmentSize"
+    android:background="#80ffffff"
+    android:padding="50px"
+              >
+    <TextView
+        android:text="@string/feedbackTitle"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/feedbackTitle1"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:textColor="#ffffff"/>
     <TextView
         android:text="@string/leaveReviewForUser"
         android:textSize="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/reviewText1"
-        android:padding="10dp" />
+        android:padding="10dp"
+        android:textColor="#ffffff"/>
     <RatingBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,15 +31,15 @@
         android:numStars="5"
         android:stepSize="1"
         android:clickable="true"
-        android:progressTint="#00ff00"
+        android:progressTint="#FFEB3B"
         android:layout_gravity="center" />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:id="@+id/reviewEdit1"
-        android:text="Enter your review!"
-        android:textColor="#000000" />
+        android:hint="@string/enterCommentForUser"
+        android:textColor="#ffffff" />
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -40,11 +51,13 @@
             android:text="@string/reviewSubmit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:id="@+id/submitFeedback1" />
         <Button
             android:text="@string/closeFeedback"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:id="@+id/closeFeedback1" />
     </LinearLayout>
 </LinearLayout>

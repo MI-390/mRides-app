@@ -11,6 +11,8 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using mRides_app.Models;
+using Android.Graphics.Drawables;
+using Android.Graphics;
 
 namespace mRides_app
 {
@@ -50,24 +52,32 @@ namespace mRides_app
         {
             base.OnCreateView(inflater, container, savedInstanceState);
             view = inflater.Inflate(Resource.Layout.UserTypeFragment, container, false);
+
+            //Dialog.Window.SetLayout(LinearLayout.LayoutParams.WrapContent, LinearLayout.LayoutParams.WrapContent);
+            //Dialog.Window.SetBackgroundDrawable(new ColorDrawable(Color.Yellow));
+
             previous = view.FindViewById<Button>(Resource.Id.CloseButton);
             next = view.FindViewById<Button>(Resource.Id.Next);
             switcher = view.FindViewById<Switch>(Resource.Id.riderOrDriverSwitch);
             spinner = view.FindViewById<Spinner>(Resource.Id.numOfPeople);
             tv1 = view.FindViewById<TextView>(Resource.Id.textView3);
-
             // Set the toggle to be at the position where the user has last placed
-            if (User.currentUser.currentType == "rider")
+            if (User.currentUser != null)
             {
-                switcher.Checked = false;
-                driver = false;
-            }
-            else
-            {
-                switcher.Checked = true;
-                driver = true;
-                tv1.Visibility = ViewStates.Gone;
-                spinner.Visibility = ViewStates.Gone;
+                if (User.currentUser.currentType == "rider")
+                {
+                    switcher.Checked = false;
+                    driver = false;
+                    next.SetBackgroundResource(Resource.Drawable.red_button);
+                }
+                else
+                {
+                    next.SetBackgroundResource(Resource.Drawable.green_button);
+                    switcher.Checked = true;
+                    driver = true;
+                    tv1.Visibility = ViewStates.Gone;
+                    spinner.Visibility = ViewStates.Gone;
+                }
             }
 
             switcher.CheckedChange += SwitchDriverOrRider;
@@ -97,12 +107,14 @@ namespace mRides_app
         {
             if (!driver)
             {
+                next.SetBackgroundResource(Resource.Drawable.red_button);
                 Log.Debug("Driver", "Driver mode");
                 tv1.Visibility = ViewStates.Gone;
                 spinner.Visibility = ViewStates.Gone;
             }
             else
             {
+                next.SetBackgroundResource(Resource.Drawable.green_button);
                 Log.Debug("Rider", "Rider mode");
                 string numRiders = GetString(Resource.String.numberOfRiders);
                 tv1.Visibility = ViewStates.Visible;

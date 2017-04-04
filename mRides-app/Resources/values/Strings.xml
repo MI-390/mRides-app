@@ -34,7 +34,7 @@
   <string name="fb">Login with Facebook</string>
   
     <!--RIDER OR DRIVER-RELATED STRINGS-->
-  <string name="riderOrDriver">  Are you a Rider \nor Driver? </string>
+  <string name="riderOrDriver">  Are you a Rider \nor a Driver? </string>
   <string name="r">R</string>
   <string name="d">D</string>
   <string name="numberOfRiders">How many are you?</string>
@@ -78,7 +78,9 @@
  <string name="user_review">Review</string>
 
   <!-- STRINGS FOR DRIVER REVIEW -->
-   <string name="leaveReviewForUser">Leave a review for this user:</string>
+  <string name="feedbackTitle">Give your feedback!</string>
+  <string name="leaveReviewForUser">How would you rate this user?</string>
+  <string name="enterCommentForUser">Enter your comment here</string>
   <string name="reviewSubmit">Submit</string>
   <string name="closeFeedback">Close</string>
 

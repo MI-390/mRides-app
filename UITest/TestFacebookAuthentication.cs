@@ -35,7 +35,7 @@ namespace UITest
             // and select the app projects that should be tested.
             app = ConfigureApp
             .Android
-            .ApkFile("D:/Projects/mRides/mRides-app/bin/Release//mRides_app.mRides_app-Signed.apk") //CHANGE THIS APK PATH
+            .ApkFile("D:/Projects/mRides-app/mRides-app/bin/Release//mRides_app.mRides_app-Signed.apk") //CHANGE THIS APK PATH
             .EnableLocalScreenshots().StartApp();
             // Set up the user to David
             UserMapper userMapper = UserMapper.getInstance();

@@ -11,6 +11,9 @@ using Android.Views;
 using Android.Widget;
 using mRides_app.Mappers;
 
+using Android.Graphics.Drawables;
+using Android.Graphics;
+
 namespace mRides_app
 {
     /// <summary>
@@ -33,6 +36,8 @@ namespace mRides_app
             Bundle args = Arguments;
             base.OnCreateView(inflater, container, savedInstanceState);
             View view = inflater.Inflate(Resource.Layout.LeaveReview, container, false);
+            // Added transparent background to the fragment
+            //Dialog.Window.SetBackgroundDrawable(new ColorDrawable(Color.Transparent));
 
             // Get the user id
             userID = Int32.Parse(args.GetString("id"));
@@ -43,8 +48,8 @@ namespace mRides_app
             reviewEditText = view.FindViewById<EditText>(Resource.Id.reviewEdit1);
             closeReview = view.FindViewById<Button>(Resource.Id.closeFeedback1);
             // For clicking on the submit button
-            submitButton.Click += submitFeedback;
-
+            submitButton.Click += SubmitFeedback;
+            closeReview.Click += CloseFeedback;
             return view;
         }
 
@@ -54,7 +59,7 @@ namespace mRides_app
         }
 
         // Method that is called when the user clicks on 'Submit' button
-        void submitFeedback(object sender, EventArgs e)
+        void SubmitFeedback(object sender, EventArgs e)
         {
             // Get the review and rating
             review = reviewEditText.Text;
@@ -80,6 +85,12 @@ namespace mRides_app
 
             // To debug
             Toast.MakeText(Activity, "Rating: " + rating + "\nReview: " + review, ToastLength.Short).Show();
+        }
+
+        // Method that will close the feedback fragment after clicking the 'Close' button
+        void CloseFeedback(object sender, EventArgs e)
+        {
+            Dismiss();
         }
     }
 }
