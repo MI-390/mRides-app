@@ -212,6 +212,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\SplashActivity.cs" />
     <Compile Include="Cache\UserCache.cs" />
     <Compile Include="Activities\ChatListActivity.cs" />
     <Compile Include="Activities\ChatActivity.cs" />
@@ -249,10 +250,8 @@
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="RidesAdapter.cs" />
     <Compile Include="UserCancelRideActivity.cs" />
-    <Compile Include="SplashActivity.cs" />
     <Compile Include="UserProfileFeedbackAdapter.cs" />
     <Compile Include="Fragments\UserProfileFragment.cs" />
-    <Compile Include="UserRides.cs" />
     <Compile Include="Fragments\UserTypeFragment.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Activities\UserProfileActivity.cs" />
