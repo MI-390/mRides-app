@@ -11,36 +11,36 @@ using Android.Views;
 using Android.Widget;
 
 using mRides_app.Models;
-using mRides_app.Mappers;
+using mRides_app.Gateways;
 
-namespace UnitTests.Mappers
+namespace UnitTests.Gateways
 {
     /// <summary>
     /// The ride mapper class provides an interface for its users to perform operations on the
     /// server related to Rides. This SHOULD NOT be used by the application activities.
     /// </summary>
-    public class RideMapper : AbstractMapper
+    public class RideGateway : AbstractGateway
     {
         
         /// <summary>
         /// Singleton class instance
         /// </summary>
-        private static RideMapper _instance;
+        private static RideGateway _instance;
 
         /// <summary>
         /// Private default constructor since this class is a singleton
         /// </summary>
-        private RideMapper() { }
+        private RideGateway() { }
 
         /// <summary>
         /// Used to obtain the instance of this class, since it is a singleton.
         /// </summary>
         /// <returns>Instance of the ride mapper</returns>
-        public static RideMapper getInstance()
+        public static RideGateway getInstance()
         {
             if (_instance == null)
             {
-                _instance = new RideMapper();
+                _instance = new RideGateway();
             }
             return _instance;
         }

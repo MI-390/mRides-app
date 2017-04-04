@@ -36,4 +36,17 @@
       <item name="android:shadowDy" >1</item>
       <item name="android:shadowRadius" >2</item>
     </style>
+  <!--Splash screen style-->
+  <style name="MyTheme.Base" parent="Theme.AppCompat.Light">
+  </style>
+  <style name="MyTheme" parent="MyTheme.Base">
+  </style>
+  <style name="MyTheme.Splash" parent ="Theme.AppCompat.Light.NoActionBar">
+    <item name="android:windowBackground">@android:color/white</item>
+    <item name="android:background">@drawable/splash</item>
+
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowFullscreen">true</item>
+  </style>
 </resources>
+

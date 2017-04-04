@@ -26,6 +26,7 @@ using System.Json;
 using Newtonsoft.Json;
 using mRides_app.Models;
 using mRides_app.Mappers;
+using mRides_app.Constants;
 using Android.Content.PM;
 using static mRides_app.Models.Request;
 
@@ -78,10 +79,6 @@ namespace mRides_app
             
             //var toolbar_bot = FindViewById<BottomNavigationView>(Resource.Id.toolbar_bot);
             //toolbar_bot.InflateMenu(Resource.Menu.bottombar);
-            
-
-
-
 
             string text = mRides_app.Models.User.currentUser.firstName;
 
@@ -440,6 +437,16 @@ namespace mRides_app
                 Intent i = new Intent(this, typeof(ChatListActivity));
                 StartActivity(i);
             };
+
+            //MenuBar
+            var userProfileButton = FindViewById<ImageButton>(Resource.Id.menu_user);
+            userProfileButton.Click += delegate
+            {
+                Intent i = new Intent(this, typeof(UserProfileActivity));
+                i.PutExtra("id", User.currentUser.id.ToString()); 
+                StartActivity(i);
+            };
+
         }
 
         //When Google API Client is connected
