@@ -17,12 +17,14 @@
             android:layout_width="160.0dp"
             android:layout_height="49.5dp"
             android:id="@+id/textView2"
-            android:layout_marginRight="0.0dp" />
-        <TextView
+            android:layout_marginRight="0.0dp"
+            android:textColor="#000000" />
+        <Button
             android:text="@string/r"
-            android:layout_width="14.0dp"
-            android:layout_height="19.0dp"
+            android:layout_width="35.0dp"
+            android:layout_height="35.0dp"
             android:id="@+id/rider1"
+            android:background="@drawable/passenger_icon"
             android:layout_marginLeft="0.0dp"
             android:layout_marginRight="0.0dp" />
         <Switch
@@ -33,34 +35,36 @@
             android:layout_marginLeft="5.0dp"
             android:layout_marginRight="0dp"
             android:layout_marginBottom="0.0dp" />
-        <TextView
+        <Button
             android:text="@string/d"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:layout_width="14.0dp"
-            android:layout_height="19.0dp"
+            android:layout_width="35.0dp"
+            android:layout_height="35.0dp"
             android:id="@+id/driver1"
             android:layout_marginLeft="0.5dp"
-            android:layout_marginRight="0dp" />
+            android:layout_marginRight="0dp"
+            android:background="@drawable/driver_icon"
+            android:textColor="#000000" />
     </LinearLayout>
-  <LinearLayout
-      android:orientation="horizontal"
-      android:layout_width="wrap_content"
-      android:layout_height="42.0dp"
-      android:layout_margin="10dp">
-    <TextView
-        android:text="@string/numberOfRiders"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:layout_width="160dp"
-        android:layout_height="41.5dp"
-        android:id="@+id/textView3"
-        android:paddingRight="10dp"
-        android:layout_marginRight="20.0dp" />
-    <Spinner
-        android:layout_width="54.0dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/numOfPeople"
-        android:clickable="true"/>
-  </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="42.0dp"
+        android:layout_margin="10dp">
+        <TextView
+            android:text="@string/numberOfRiders"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="160dp"
+            android:layout_height="41.5dp"
+            android:id="@+id/textView3"
+            android:paddingRight="10dp"
+            android:layout_marginRight="20.0dp"
+            android:textColor="#000000" />
+        <Spinner
+            android:layout_width="54.0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/numOfPeople"
+            android:clickable="true" />
+    </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="wrap_content"
@@ -69,20 +73,20 @@
         android:layout_gravity="right"
         android:layout_marginLeft="0dp">
         <Button
-          android:background="@drawable/grey_button"
-          android:text="@string/previous"
-          android:layout_width="80dp"
-          android:layout_height="25dp"
-          android:id="@+id/CloseButton"
-          style="@style/button_text"
-          android:textSize="12dp"/>
-      <Button
-        android:background="@drawable/red_button"
-        android:text="@string/next"
-        android:layout_width="60dp"
-        android:layout_height="25dp"
-        android:id="@+id/Next"
-        style="@style/button_text"
-        android:textSize="12dp"/>
+            android:background="@drawable/grey_button"
+            android:text="@string/previous"
+            android:layout_width="80dp"
+            android:layout_height="25dp"
+            android:id="@+id/CloseButton"
+            style="@style/button_text"
+            android:textSize="12dp" />
+        <Button
+            android:background="@drawable/red_button"
+            android:text="@string/next"
+            android:layout_width="60dp"
+            android:layout_height="25dp"
+            android:id="@+id/Next"
+            style="@style/button_text"
+            android:textSize="12dp" />
     </LinearLayout>
 </LinearLayout>

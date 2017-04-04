@@ -78,7 +78,7 @@
  <string name="user_review">Review</string>
 
   <!-- STRINGS FOR DRIVER REVIEW -->
-  <string name="feedbackTitle">Give your feedback!</string>
+  <string name="feedbackTitle">Leave a feedback!</string>
   <string name="leaveReviewForUser">How would you rate this user?</string>
   <string name="enterCommentForUser">Enter your comment here</string>
   <string name="reviewSubmit">Submit</string>

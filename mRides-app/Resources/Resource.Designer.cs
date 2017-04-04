@@ -2243,73 +2243,79 @@ namespace mRides_app
 			public const int divider = 2130837616;
 			
 			// aapt resource value: 0x7f020071
-			public const int girl = 2130837617;
+			public const int driver_icon = 2130837617;
 			
 			// aapt resource value: 0x7f020072
-			public const int green_button = 2130837618;
+			public const int girl = 2130837618;
 			
 			// aapt resource value: 0x7f020073
-			public const int grey_button = 2130837619;
+			public const int green_button = 2130837619;
 			
 			// aapt resource value: 0x7f020074
-			public const int ic_stat_ic_notification = 2130837620;
+			public const int grey_button = 2130837620;
 			
 			// aapt resource value: 0x7f020075
-			public const int Icon = 2130837621;
+			public const int ic_stat_ic_notification = 2130837621;
 			
 			// aapt resource value: 0x7f020076
-			public const int loyolaTest = 2130837622;
+			public const int Icon = 2130837622;
 			
 			// aapt resource value: 0x7f020077
-			public const int map = 2130837623;
+			public const int loyolaTest = 2130837623;
 			
 			// aapt resource value: 0x7f020078
-			public const int mcgill_test = 2130837624;
+			public const int map = 2130837624;
 			
 			// aapt resource value: 0x7f020079
-			public const int mrides_logo = 2130837625;
+			public const int mcgill_test = 2130837625;
 			
 			// aapt resource value: 0x7f02007a
-			public const int navigation_empty_icon = 2130837626;
-			
-			// aapt resource value: 0x7f020087
-			public const int notification_template_icon_bg = 2130837639;
+			public const int mrides_logo = 2130837626;
 			
 			// aapt resource value: 0x7f02007b
-			public const int places_ic_clear = 2130837627;
+			public const int navigation_empty_icon = 2130837627;
+			
+			// aapt resource value: 0x7f020089
+			public const int notification_template_icon_bg = 2130837641;
 			
 			// aapt resource value: 0x7f02007c
-			public const int places_ic_search = 2130837628;
+			public const int passenger_icon = 2130837628;
 			
 			// aapt resource value: 0x7f02007d
-			public const int powered_by_google_dark = 2130837629;
+			public const int places_ic_clear = 2130837629;
 			
 			// aapt resource value: 0x7f02007e
-			public const int powered_by_google_light = 2130837630;
+			public const int places_ic_search = 2130837630;
 			
 			// aapt resource value: 0x7f02007f
-			public const int red_button = 2130837631;
+			public const int powered_by_google_dark = 2130837631;
 			
 			// aapt resource value: 0x7f020080
-			public const int settings = 2130837632;
+			public const int powered_by_google_light = 2130837632;
 			
 			// aapt resource value: 0x7f020081
-			public const int smsicon = 2130837633;
+			public const int red_button = 2130837633;
 			
 			// aapt resource value: 0x7f020082
-			public const int smsicongray = 2130837634;
+			public const int settings = 2130837634;
 			
 			// aapt resource value: 0x7f020083
-			public const int top_border = 2130837635;
+			public const int smsicon = 2130837635;
 			
 			// aapt resource value: 0x7f020084
-			public const int trashcanCancel = 2130837636;
+			public const int smsicongray = 2130837636;
 			
 			// aapt resource value: 0x7f020085
-			public const int user = 2130837637;
+			public const int top_border = 2130837637;
 			
 			// aapt resource value: 0x7f020086
-			public const int userIcon2 = 2130837638;
+			public const int trashcanCancel = 2130837638;
+			
+			// aapt resource value: 0x7f020087
+			public const int user = 2130837639;
+			
+			// aapt resource value: 0x7f020088
+			public const int userIcon2 = 2130837640;
 			
 			static Drawable()
 			{
