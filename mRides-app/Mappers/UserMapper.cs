@@ -17,116 +17,88 @@ using Newtonsoft.Json;
 using Android.Graphics;
 using System.Net;
 using System.Threading;
+using mRides_app.Gateways;
+using mRides_app.Cache;
 
 namespace mRides_app.Mappers
 {
     public class UserMapper : AbstractMapper
     {
-        private UserMapper() { }
+        private UserGateway userGateway;
+        private UserCache userCache;
 
-        private static UserMapper _instance;
+        private UserMapper()
+        {
+            this.userGateway = UserGateway.GetInstance();
+            this.userCache = UserCache.GetInstance();
+        }
+
+        private static UserMapper instance;
+
+        /// <summary>
+        /// Method that returns the user mapper singleton instance.
+        /// </summary>
         public static UserMapper getInstance()
         {
-            if (_instance == null)
+            if (instance == null)
             {
-                _instance = new UserMapper();
+                instance = new UserMapper();
             }
-            return _instance;
+            return instance;
         }
 
-        // ---------------------------------------------------------------------------
-        // CALLS TO USER WEB API
-        // ---------------------------------------------------------------------------
-
-        /**
-         * Obtain a user object given its ID
-         */
+        /// <summary>
+        /// This method returns a user object given its user ID.
+        /// </summary>
         public User GetUser(int userId)
         {
-            return SendGetWithUrlSegment<User>(ApiEndPointUrl.getUser, "id", userId.ToString());
+            return userGateway.GetUser(userId);
         }
 
-        /**
-         * Obtain a user object given its Facebook ID
-         */
-        public User GetUserByFacebookId(long userId)
+        /// <summary>
+        /// Obtain a user object given its Facebook ID.
+        /// </summary>
+        public User GetUserByFacebookId(long facebookId)
         {
-            return SendPost<User>(ApiEndPointUrl.getUserByFacebookId, userId.ToString(), false);
+            return userGateway.GetUserByFacebookId(facebookId);
         }
 
-        /**
-         * Create a new user given the new user object
-         */
+        /// <summary>
+        /// This method creates a new user, given a new user object. It 
+        /// also saves the user's preference in the local persistent storage.
+        /// </summary>
+        /// <param name="newUser">New user to be created</param>
+        /// <returns>The updated newly created user with the ID</returns>
         public User CreateUser(User newUser)
         {
-            return SendPost<User>(ApiEndPointUrl.createUser, newUser, false);
+            newUser = userGateway.CreateUser(newUser);
+            this.userCache.SaveUserPreferences(newUser.id, newUser.isSmoker, newUser.isHandicap, newUser.hasLuggage, newUser.hasPet, newUser.genderPreference);
+            return newUser;
         }
-        /**
-         * Update fcm token for a user
-         */
+
+        /// <summary>
+        /// Updates a fcm token of a user.
+        /// </summary>
         public void updateFcmToken(string fcmToken)
         {
-            object fcmTokenObject = new
-            {
-                fcmToken = fcmToken
-            };
-            SendPost<object>(ApiEndPointUrl.updateFcmToken, fcmTokenObject, true);
+            userGateway.UpdateFcmToken(fcmToken);
         }
 
-        /**
-         * Create a new review 
-         */
+        /// <summary>
+        /// Creates a new review.
+        /// </summary>
         public void LeaveReview(int rideId, int revieweeId, int rating, string review)
         {
-            object newReview = new
-            {
-                rideId = rideId,
-                revieweeId = revieweeId,
-                star = rating,
-                review = review
-            };
-            SendPost<object>(ApiEndPointUrl.leaveReview, newReview, true);
+            userGateway.LeaveReview(rideId, revieweeId, rating, review);
         }
 
-        /**
-         * Obtain reviews given to a user
-         */
+        /// <summary>
+        /// Obtains reviews given to a user.
+        /// </summary>
         public List<Models.Feedback> GetReviews(int userId)
         {
-            // Create a new rest client
-            var client = new RestClient()
-            {
-                BaseUrl = new System.Uri(BaseUrl),
-                Authenticator = new HttpBasicAuthenticator(_accountSid, _secretKey)
-            };
-
-            // Serialize the object of interest into a JSON
-            var json = JsonConvert.SerializeObject(userId);
-
-            // Make a new request object
-            string url = ApiEndPointUrl.getReviews;
-            url = url.Replace("{id}", userId.ToString());
-            var request = new RestRequest(url, Method.GET);
-
-            // Execute the request and return the response
-            var response = client.Execute(request);
-            dynamic oFeedbacks = Newtonsoft.Json.JsonConvert.DeserializeObject(response.Content);
-
-            // Build the list of feedbacks to be returns
-            List<Models.Feedback> feedbacks = new List<Models.Feedback>();
-            foreach(dynamic oFeedback in oFeedbacks)
-            {
-                Models.Feedback feedback = JsonConvert.DeserializeObject<Models.Feedback>(oFeedback.ToString());
-                feedbacks.Add(feedback);
-            }
-
-            return feedbacks;
+            return userGateway.GetReviews(userId);
         }
-
-
-        // ---------------------------------------------------------------------------
-        // CALLS TO FACEBOOK
-        // ---------------------------------------------------------------------------
 
         /// <summary>
         /// Given the facebook ID of a user, this method will retrieve the profile picture of 
@@ -138,67 +110,41 @@ namespace mRides_app.Mappers
         /// <returns>Bitmap object representing the picture</returns>
         public Bitmap GetUserFacebookProfilePicture(long facebookId)
         {
-            Bitmap facebookPicture;
-            try
-            {
-                facebookPicture = GetImageBitmapFromUrl("http://graph.facebook.com/" + facebookId + "/picture?type=large");
-            }
-            catch(Exception e)
-            {
-                facebookPicture = null;
-            }
-            return facebookPicture;
+            return userGateway.GetUserFacebookProfilePicture(facebookId);
         }
-
-
-        // ---------------------------------------------------------------------------
-        // HELPER METHODS
-        // ---------------------------------------------------------------------------
 
         /// <summary>
-        /// This method takes in the URL that goes to an image, and converts
-        /// the image into a bitmap to be returned.
+        /// Obtains the GSD amount of a user.
         /// </summary>
-        /// <param name="url">URL representing the image</param>
-        /// <returns>Bitmap of the image</returns>
-        private Bitmap GetImageBitmapFromUrl(string url)
-        {
-            Bitmap imageBitmap = null;
-
-            using (var webClient = new WebClient())
-            {
-                var imageBytes = webClient.DownloadData(url);
-                if (imageBytes != null && imageBytes.Length > 0)
-                {
-                    imageBitmap = BitmapFactory.DecodeByteArray(imageBytes, 0, imageBytes.Length);
-                }
-            }
-
-            return imageBitmap;
-        }
-
-        /**
-        * Obtain a user's GSD amount
-        */
         public long GetGSD(int userId)
         {
-            return SendGetWithUrlSegment<long>(ApiEndPointUrl.getGSD, "id", userId.ToString());
+            return userGateway.GetGSD(userId);
         }
 
-        /**
-         * Change a user's GSD amount
-         */
+        /// <summary>
+        /// This method sets the GSD amount of a user.
+        /// </summary>
         public long setGSD(int id, long gsdAmount)
         {
-            UserMapper um = UserMapper.getInstance();
-            object objectSent = new
-            {
-                userId = id,
-                amountGSD = gsdAmount
-            };
-            return SendPost<long>(ApiEndPointUrl.setGSD, objectSent, false);
+            return userGateway.setGSD(id, gsdAmount);
         }
 
+        /// <summary>
+        /// This method returns the gender of a user.
+        /// </summary>
+        /// <param name="userId">Id of the user whose gender we are obtaining</param>
+        /// <returns>Gender of the user</returns>
+        public string getGender(int userId)
+        {
+            return userGateway.getGender(userId);
+        }
 
+        /// <summary>
+        /// This method sets the gender of a user.
+        /// </summary>
+        public void setGender(int id, string newGender)
+        {
+            userGateway.setGender(id, newGender);
+        }
     }
 }
