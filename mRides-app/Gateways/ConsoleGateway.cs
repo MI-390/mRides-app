@@ -36,11 +36,13 @@ namespace mRides_app.Gateways
         // ---------------------------------------------------------------------------
         // CALLS TO CONSOLE WEB API
         // ---------------------------------------------------------------------------
-
-        /**
-         * This method is used to find a list of rides that match the criteria
-         * of a request made by a rider.
-         */
+        
+        /// <summary>
+        ///  This method is used to find a list of rides that match the criteria
+        ///  of a request made by a rider.
+        /// </summary>
+        /// <param name="newRequest">Request made by a rider</param>
+        /// <returns>List of Request that matches the request of the rider</returns>
         public List<Request> FindDrivers(Request newRequest)
         {
             // Create a new rest client
@@ -71,11 +73,13 @@ namespace mRides_app.Gateways
                 return responseData.requests;
             }
         }
-
-        /**
-          * This method is used to find a list of rides that match the criteria
-          * of a request made by a driver.
-          */
+        
+        /// <summary>
+        /// This method is used to find a list of rides that match the criteria
+        /// of a request made by a driver.
+        /// </summary>
+        /// <param name="newRequest">Request made by a driver</param>
+        /// <returns>List of Request that matches the request made by the driver</returns>
         public List<Request> FindRiders(Request newRequest)
         {
             // Create a new rest client
@@ -106,14 +110,15 @@ namespace mRides_app.Gateways
                 return responseData.requests;
             }
         }
-
-        /**
-         * Sends the FIRST confirmation, in other words, ask the other user
-         * if he/she accepts to be matched. This does not imply that there is 
-         * match, unless the other users accepts the confirmation.
-         * 
-         * Returns a boolean indicating whether the message was sent successfully.
-         */
+        
+        /// <summary>
+        /// Send the first confirmation, in other words, asks the other user
+        /// if he/she accepts to be matched. This does not imply that there is
+        /// a match, unless the other user accepts the confirmation.
+        /// </summary>
+        /// <param name="riderRequestId">ID of the request of the rider</param>
+        /// <param name="driverRequestId">ID of the request of the driver</param>
+        /// <returns>bool indicating whether the message was sent successfully</returns>
         public bool Confirm(int riderRequestId, int driverRequestId)
         {
             object confirmation = new
@@ -124,13 +129,14 @@ namespace mRides_app.Gateways
             return SendPost<bool>(ApiEndPointUrl.confirm, confirmation, true);
         }
 
-        /**
-         * The other user already accepts the match, upon notifying this user,
-         * if the user also accepts to be match with the other, this method should
-         * be invoked.
-         * 
-         * Returns a boolean indicating whether the messagw was sent successfully.
-         */
+        /// <summary>
+        /// The other user already accepts the match, upon notifying this user,
+        /// if the user also accepts to be match with the first user, this method
+        /// should be invoked.
+        /// </summary>
+        /// <param name="riderRequestId">ID of the request of the rider</param>
+        /// <param name="driverRequestId">ID of the request of the driver</param>
+        /// <returns>bool indicating whether the message was sent successfully</returns>
         public bool AcceptConfirmation(int riderRequestId, int driverRequestId)
         {
             object confirmationAcceptance = new
