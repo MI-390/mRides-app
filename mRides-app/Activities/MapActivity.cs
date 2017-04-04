@@ -29,6 +29,8 @@ using mRides_app.Mappers;
 using mRides_app.Constants;
 using Android.Content.PM;
 using static mRides_app.Models.Request;
+using Android.Graphics.Drawables;
+using Android.Graphics;
 
 namespace mRides_app
 {
@@ -76,7 +78,7 @@ namespace mRides_app
             var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
             SetActionBar(toolbar);
             ActionBar.Title = "mRides";
-
+            
             //var toolbar_bot = FindViewById<BottomNavigationView>(Resource.Id.toolbar_bot);
             //toolbar_bot.InflateMenu(Resource.Menu.bottombar);
 
@@ -568,17 +570,24 @@ namespace mRides_app
             string userRider = GetString(Resource.String.user_rider);
             string numOfPeople = GetString(Resource.String.number_of_people);
 
-            if(type == mRides_app.Models.Request.TYPE_DRIVER || type == mRides_app.Models.Request.TYPE_RIDER)
+            if (type == mRides_app.Models.Request.TYPE_DRIVER || type == mRides_app.Models.Request.TYPE_RIDER)
             {
                 if (type == mRides_app.Models.Request.TYPE_DRIVER)
                 {
                     typeDisplayed = userDriver;
                     Toast.MakeText(ApplicationContext, usrType + " : " + typeDisplayed, ToastLength.Long).Show();
+                    // Manually setting the theme color since you can only set the theme when creating a new activity
+                    Window.SetNavigationBarColor(new Android.Graphics.Color(Color.ParseColor("#EF5350")));
+                    Window.SetStatusBarColor(new Android.Graphics.Color(Color.ParseColor("#ba3c39")));
+                    ActionBar.SetBackgroundDrawable(new Android.Graphics.Drawables.ColorDrawable(Color.ParseColor("#ba3c39")));
                 }
                 else
                 {
                     typeDisplayed = userRider;
                     Toast.MakeText(ApplicationContext, usrType + " : " + typeDisplayed + " " + numOfPeople + " : " + numberOfPeople, ToastLength.Long).Show();
+                    Window.SetNavigationBarColor(Android.Graphics.Color.DarkGreen);
+                    Window.SetStatusBarColor(Android.Graphics.Color.DarkGreen);
+                    ActionBar.SetBackgroundDrawable(new Android.Graphics.Drawables.ColorDrawable(Color.ParseColor("#26A65B")));
                 }
 
                 // Prepare the next activity
