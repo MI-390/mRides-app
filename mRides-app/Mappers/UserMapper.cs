@@ -147,9 +147,10 @@ namespace mRides_app.Mappers
             userGateway.setGender(id, newGender);
         }
 
-        /**
-        * Set the theme of an activity depending on whether the user is a driver or a rider
-        */
+        /// <summary>
+        /// Set the theme of an activity depending on whether the user is a driver or a rider
+        /// </summary>
+        /// <param name="context">Current activity</param>
         public void setTheme(Activity context)
         {
             if (User.currentUser.currentType == "driver")
