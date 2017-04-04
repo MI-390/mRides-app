@@ -29,6 +29,5 @@ namespace mRides_app.Models
         public int driverStars { get; set; }
         public int riderStars { get; set; }
 
-
     }
 }

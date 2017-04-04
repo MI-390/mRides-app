@@ -7,86 +7,95 @@
 <!-- Child linear layout with horizontal orientation -->
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="182.3dp"
+        android:layout_height="257.5dp"
         android:orientation="horizontal"
-        android:background="#fcfcfc"
-        android:layout_marginTop="21dip">
-        <ImageView
-            android:src="@android:drawable/ic_menu_gallery"
-            android:id="@+id/userPhoto"
-            android:layout_width="139.0dp"
-            android:layout_height="139.0dp"
-            android:layout_marginRight="0.0dp"
-            android:layout_marginLeft="10.0dp" />
+        android:background="#f0524f"
+        android:layout_marginTop="0dp">
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="185.0dp"
+            android:layout_height="248.5dp"
             android:orientation="vertical"
-            android:background="#fcfcfc"
+            android:background="#F0524F"
             android:layout_marginTop="8dip"
             android:id="@+id/userProfileLinearLayout2"
             android:weightSum="100"
-            android:layout_marginBottom="19.0dp">
-            <TextView
-                android:text="@string/personUser"
-                android:padding="5dip"
-                android:id="@+id/userName"
-                android:layout_width="196.0dp"
-                android:layout_height="89.7dp"
-                android:textColor="#161616"
-                android:textSize="23dp" />
+            android:layout_marginBottom="0dp">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/userProfileLinearLayout5"
+                android:gravity="center"
+                android:background="#F0524F"
+                android:layout_marginTop="5dp">
+                <ImageView
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:id="@+id/genderImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:text="@string/personUser"
+                    android:padding="5dip"
+                    android:id="@+id/userName"
+                    android:textColor="#FFFFFF"
+                    android:textSize="23dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <ImageView
+                android:src="@android:drawable/ic_menu_gallery"
+                android:id="@+id/userPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="112.5dp"
+                android:layout_marginTop="3dp" />
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/userProfileinearLayout3"
                 android:minWidth="25px"
-                android:minHeight="25px">
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/userProfileLinearLayout4">
-                    <ImageView
-                        android:src="@android:drawable/ic_menu_gallery"
-                        android:id="@+id/genderImage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent" />
-                    <TextView
-                        android:text="GSD"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:id="@+id/userProfileGSD"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="0.0dp"
-                        android:textColor="#161616"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="4dp" />
-                </LinearLayout>
+                android:minHeight="25px"
+                android:gravity="center"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp">
+                <TextView
+                    android:text="GSD"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/userProfileGSD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="0.0dp"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginLeft="0.0dp"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center" />
             </LinearLayout>
-            <RatingBar
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:orientation="vertical"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/ratingBar"
-                style="?android:attr/ratingBarStyleIndicator"
-                android:progressTint="#FFEB3B"
-                android:scaleX="1"
-                android:rating="3.5"
-                android:scaleY="1"
-                android:stepSize="0.1"
-                android:transformPivotX="0dp"
-                android:transformPivotY="0dp"
-                android:max="5"
-                android:layout_marginRight="0.0dp"
-                android:layout_marginBottom="8.7dp" />
+                android:id="@+id/userProfileLinearLayout4"
+                android:gravity="center">
+                <RatingBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ratingBar"
+                    style="?android:attr/ratingBarStyleIndicator"
+                    android:progressTint="#FFEB3B"
+                    android:scaleX="1"
+                    android:rating="3.5"
+                    android:scaleY="1"
+                    android:stepSize="0.1"
+                    android:transformPivotX="0dp"
+                    android:transformPivotY="0dp"
+                    android:max="5"
+                    android:layout_marginRight="0.0dp"
+                    android:layout_marginBottom="8.7dp" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-    <ImageView
-        android:src="@drawable/divider"
-        android:layout_width="match_parent"
-        android:layout_height="39.0dp"
-        android:id="@+id/divider"
-        android:layout_marginBottom="0.0dp" />
     <TextView
         android:text="@string/ratingsAndReviews"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -95,11 +104,13 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textColor="#161616"
-        android:layout_marginBottom="13dp" />
+        android:layout_marginBottom="13dp"
+        android:layout_marginTop="10dp" />
     <ListView
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/userProfileListView" />
+        android:id="@+id/userProfileListView"
+        android:layout_marginTop="0.0dp" />
 </LinearLayout>

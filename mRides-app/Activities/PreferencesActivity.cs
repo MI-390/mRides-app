@@ -111,6 +111,7 @@ namespace mRides_app
                 long facebookID = Convert.ToInt64(Intent.GetStringExtra(Constants.IntentExtraNames.UserFacebookId));
                 string facebookFirstName = Intent.GetStringExtra(Constants.IntentExtraNames.UserFacebookFirstName);
                 string facebookLastName = Intent.GetStringExtra(Constants.IntentExtraNames.UserFacebookLastName);
+                string facebookGender = Intent.GetStringExtra(Constants.IntentExtraNames.UserFacebookGender);
                 User newUser = new User
                 {
                     facebookID = facebookID,
@@ -120,7 +121,8 @@ namespace mRides_app
                     hasLuggage = luggage,
                     isHandicap = handicap,
                     hasPet = pet,
-                    genderPreference = gender
+                    genderPreference = gender,
+                    gender = facebookGender
                 };
                 User.currentUser = UserMapper.getInstance().CreateUser(newUser);
 

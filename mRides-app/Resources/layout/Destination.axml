@@ -33,7 +33,7 @@
             android:id="@+id/place_autocomplete_fragment"
             android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
             android:layout_width="match_parent"
-            android:layout_height="23.5dp" />
+            android:layout_height="30.0dp" />
     </LinearLayout>
     <include
         android:id="@+id/toolbar_bottom"

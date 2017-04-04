@@ -50,6 +50,7 @@ namespace mRides_app
 
         protected override void OnCreate(Bundle bundle)
         {
+            UserMapper.getInstance().setTheme(this);
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Chat);
             chatName = Intent.GetStringExtra("ChatName");
