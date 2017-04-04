@@ -37,7 +37,23 @@ namespace UnitTests
 
             string isSmoker;
             preferences.TryGetValue(UserCache.USER_PREFERENCE_ISSMOKER, out isSmoker);
-            Assert.True(isSmoker.Equals("true"));
+            Assert.True(isSmoker.Equals("True"));
+
+            string isHandicap;
+            preferences.TryGetValue(UserCache.USER_PREFERENCE_ISHANDICAP, out isHandicap);
+            Assert.True(isHandicap.Equals("False"));
+
+            string hasLuggage;
+            preferences.TryGetValue(UserCache.USER_PREFERENCE_HASLUGGAGE, out hasLuggage);
+            Assert.True(hasLuggage.Equals("True"));
+
+            string hasPet;
+            preferences.TryGetValue(UserCache.USER_PREFERENCE_HASPET, out hasPet);
+            Assert.True(hasPet.Equals("False"));
+
+            string genderPref;
+            preferences.TryGetValue(UserCache.USER_PREFERENCE_GENDERPREFERENCE, out genderPref);
+            Assert.True(genderPref.Equals(User.PREFERENCE_GENDER_ANY));
         }
 
     }
