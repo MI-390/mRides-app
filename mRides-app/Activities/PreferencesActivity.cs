@@ -127,9 +127,9 @@ namespace mRides_app
                 User.currentUser = UserMapper.getInstance().CreateUser(newUser);
 
                 // Go to the next activity
-                var mapActivity = new Intent(this, typeof(MapActivity));
-                mapActivity.PutExtras(Intent);
-                StartActivity(mapActivity);
+                var mainMenuActivity = new Intent(this, typeof(MainMenuActivity));
+                mainMenuActivity.PutExtras(Intent);
+                StartActivity(mainMenuActivity);
             }
 
             // Otherwise, the user already exists, update it, and save those changes on

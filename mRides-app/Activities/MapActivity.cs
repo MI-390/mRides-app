@@ -462,7 +462,7 @@ namespace mRides_app
         {
             base.OnResume();
 
-            //MenuBar
+            //Menu bottom bar
             var chatMenuButton = FindViewById<ImageButton>(Resource.Id.menu_chat);
             chatMenuButton.Click += delegate
             {
@@ -470,12 +470,18 @@ namespace mRides_app
                 StartActivity(i);
             };
 
-            //MenuBar
             var userProfileButton = FindViewById<ImageButton>(Resource.Id.menu_user);
             userProfileButton.Click += delegate
             {
                 Intent i = new Intent(this, typeof(UserProfileActivity));
                 i.PutExtra("id", User.currentUser.id.ToString()); 
+                StartActivity(i);
+            };
+
+            var mainMenuButton = FindViewById<ImageButton>(Resource.Id.menu_home);
+            mainMenuButton.Click += delegate
+            {
+                Intent i = new Intent(this, typeof(MainMenuActivity));
                 StartActivity(i);
             };
 

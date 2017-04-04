@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:id="@+id/mainMenuLinearLayout"
+    android:background="#FFFFFF">
+    <LinearLayout
+        android:orientation="vertical"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:id="@+id/linearLayout1">
+        <TextView
+            android:text="Welcome, user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/mainMenuWelcomeText"
+            android:textColor="#000000"
+            android:gravity="center"
+            android:textSize="25dp"
+            android:layout_marginBottom="8dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:id="@+id/mainMenuLinearLayout2"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="150.0dp"
+            android:background="@drawable/menu_createride"
+            android:paddingBottom="5dp"
+            android:paddingTop="8dp"
+            android:id="@+id/createRideButton"
+            android:layout_marginBottom="10dp"
+            android:textColor="#000000" />
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/menu_preferences"
+            android:paddingBottom="5dp"
+            android:paddingTop="8dp"
+            android:id="@+id/preferencesButton"
+            android:textColor="#000000" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:id="@+id/mainMenuLinearLayout2"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/menu_myrides"
+            android:paddingBottom="5dp"
+            android:paddingTop="8dp"
+            android:id="@+id/myRidesButton"
+            android:layout_marginBottom="10dp"
+            android:textColor="#000000" />
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/menu_chat"
+            android:paddingBottom="5dp"
+            android:paddingTop="8dp"
+            android:id="@+id/chatButton"
+            android:textColor="#000000" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:id="@+id/mainMenuLinearLayout3"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/menu_myprofile"
+            android:paddingBottom="5dp"
+            android:paddingTop="8dp"
+            android:id="@+id/myProfileButton"
+            android:layout_marginBottom="10dp"
+            android:textColor="#000000" />
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/menu_logout"
+            android:paddingBottom="5dp"
+            android:paddingTop="8dp"
+            android:id="@+id/logOutButton"
+            android:textColor="#000000" />
+    </LinearLayout>
+</LinearLayout>
