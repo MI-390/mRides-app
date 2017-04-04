@@ -11,23 +11,23 @@ using Android.Views;
 using Android.Widget;
 
 using mRides_app.Models;
-using mRides_app.Mappers;
+using mRides_app.Gateways;
 
-namespace UnitTests.Mappers
+namespace UnitTests.Gateways
 {
     /**
      * This mapper class is only used for testing purposes in order to populate requests.
      * It should never be used by the activities in the app.
      */
-    public class RequestMapper : AbstractMapper
+    public class RequestGateway : AbstractGateway
     {
-        private RequestMapper() { }
-        private static RequestMapper _instance;
-        public static RequestMapper getInstance()
+        private RequestGateway() { }
+        private static RequestGateway _instance;
+        public static RequestGateway getInstance()
         {
             if (_instance == null)
             {
-                _instance = new RequestMapper();
+                _instance = new RequestGateway();
             }
             return _instance;
         }
