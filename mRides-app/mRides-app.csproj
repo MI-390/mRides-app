@@ -213,8 +213,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cache\UserCache.cs" />
-    <Compile Include="ChatListActivity.cs" />
-    <Compile Include="ChatActivity.cs" />
+    <Compile Include="Activities\ChatListActivity.cs" />
+    <Compile Include="Activities\ChatActivity.cs" />
     <Compile Include="ChatAdapter.cs" />
     <Compile Include="Constants\ActivityNames.cs" />
     <Compile Include="Constants\IntentExtraNames.cs" />
@@ -226,12 +226,12 @@
     <Compile Include="MessagingService\ListViewAdapter.cs" />
     <Compile Include="MessagingService\MessageContent.cs" />
     <Compile Include="MessagingService\FirebaseIIDService.cs" />
-    <Compile Include="MatchActivity.cs" />
-    <Compile Include="LeaveReviewFragment.cs" />
-    <Compile Include="MapActivity.cs" />
+    <Compile Include="Activities\MatchActivity.cs" />
+    <Compile Include="Fragments\LeaveReviewFragment.cs" />
+    <Compile Include="Activities\MapActivity.cs" />
     <Compile Include="Authentication\Facebook.cs" />
-    <Compile Include="MainActivity.cs" />
-    <Compile Include="MessagingActivity.cs" />
+    <Compile Include="Activities\MainActivity.cs" />
+    <Compile Include="Activities\MessagingActivity.cs" />
     <Compile Include="MessagingService\FirebaseMessagingService.cs" />
     <Compile Include="Models\ChatList.cs" />
     <Compile Include="Models\Feedback.cs" />
@@ -244,19 +244,20 @@
     <Compile Include="Mappers\AbstractMapper.cs" />
     <Compile Include="Mappers\ConsoleMapper.cs" />
     <Compile Include="Mappers\UserMapper.cs" />
-    <Compile Include="PreferencesActivity.cs" />
+    <Compile Include="Activities\PreferencesActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="RidesAdapter.cs" />
     <Compile Include="UserCancelRideActivity.cs" />
     <Compile Include="SplashActivity.cs" />
     <Compile Include="UserProfileFeedbackAdapter.cs" />
-    <Compile Include="UserProfileFragment.cs" />
-    <Compile Include="UserTypeFragment.cs" />
+    <Compile Include="Fragments\UserProfileFragment.cs" />
+    <Compile Include="UserRides.cs" />
+    <Compile Include="Fragments\UserTypeFragment.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="UserProfileActivity.cs" />
+    <Compile Include="Activities\UserProfileActivity.cs" />
     <Compile Include="Feedback\FeedbackTest.cs" />
-    <Compile Include="TestFragments.cs" />
+    <Compile Include="Fragments\TestFragments.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
