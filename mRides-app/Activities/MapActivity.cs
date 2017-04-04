@@ -29,6 +29,8 @@ using mRides_app.Mappers;
 using mRides_app.Constants;
 using Android.Content.PM;
 using static mRides_app.Models.Request;
+using Android.Graphics.Drawables;
+using Android.Graphics;
 
 namespace mRides_app
 {
@@ -55,7 +57,7 @@ namespace mRides_app
         private const string googleApiKey = "AIzaSyAz9p6O99w8ZWkFUbaREJXmnj01Mpm19dA";
         private bool selectingDestination;
         int numberOfPeople;
-     
+
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -278,8 +280,9 @@ namespace mRides_app
         public void findNearbyUsers(List<LatLng> directionList)
         {
             List<DestinationCoordinate> destinationCoordinates = getFormattedDirectionList();
-            
-            Request newRequest = new Request {
+
+            Request newRequest = new Request
+            {
                 destinationCoordinates = destinationCoordinates,
                 destination = destinationCoordinates.Last().coordinate,
                 location = destinationCoordinates.First().coordinate,
@@ -296,7 +299,7 @@ namespace mRides_app
         public List<DestinationCoordinate> getFormattedDirectionList()
         {
             List<DestinationCoordinate> destinationCoordinates = new List<DestinationCoordinate>();
-            
+
             for (int i = 0; i < directionList.Count; i += 10)
             {
                 DestinationCoordinate destinationCoordinate = new DestinationCoordinate
@@ -328,7 +331,7 @@ namespace mRides_app
         public List<LatLng> getDirectionList(OverviewPolyline overview)
         {
             OverviewPolyline overviewPolyline = overview;
-           // destinationData.routes[0].overview_polyline;
+            // destinationData.routes[0].overview_polyline;
             String encodedPolyline = overviewPolyline.points;
             directionList = decodePolyline(encodedPolyline);
             return directionList;
@@ -380,14 +383,16 @@ namespace mRides_app
         {
             string customMessage = "";
             AlertDialog.Builder originAlert = new AlertDialog.Builder(this, Resource.Style.Theme_AppCompat_Light_Dialog_Alert);
-            originAlert.SetPositiveButton("Custom Location", new EventHandler<DialogClickEventArgs>((senderAlert, args) => {
+            originAlert.SetPositiveButton("Custom Location", new EventHandler<DialogClickEventArgs>((senderAlert, args) =>
+            {
             }));
-            originAlert.SetNeutralButton("Default Location", new EventHandler<DialogClickEventArgs>((senderAlert, args) => {
+            originAlert.SetNeutralButton("Default Location", new EventHandler<DialogClickEventArgs>((senderAlert, args) =>
+            {
             }));
 
             if (User.currentUser.currentType == "rider")
                 customMessage = "choose pick up location";
-            
+
             if (User.currentUser.currentType == "driver")
                 customMessage = "choose start location";
 
@@ -404,7 +409,8 @@ namespace mRides_app
             AlertDialog.Builder destinationAlert = new AlertDialog.Builder(this, Resource.Style.Theme_AppCompat_Light_Dialog_Alert);
             destinationAlert.SetTitle("Create a new ride");
             destinationAlert.SetMessage(GetString(Resource.String.hello_map) + " " + mRides_app.Models.User.currentUser.firstName + ".\nTo get started, choose your destination.");
-            destinationAlert.SetPositiveButton("Proceed", new EventHandler<DialogClickEventArgs>((senderAlert, args) => {
+            destinationAlert.SetPositiveButton("Proceed", new EventHandler<DialogClickEventArgs>((senderAlert, args) =>
+            {
                 // Do something
                 selectingDestination = true;
             }));
@@ -419,7 +425,7 @@ namespace mRides_app
             usersOnMap = new Dictionary<User, Marker>();
 
             if (User.currentUser.requestsAsDriver != null)
-            {               
+            {
                 foreach (Request request in User.currentUser.requestsAsDriver)
                 {
                     if (request.riderRequests.First().rider.firstName != null && request.riderRequests.First().rider.lastName != null)
@@ -434,7 +440,7 @@ namespace mRides_app
                             Marker marker = map.AddMarker(userMarker);
                             usersOnMap.Add(request.riderRequests.First().rider, marker);
                         }
-                    }             
+                    }
                 }
             }
         }
@@ -448,14 +454,14 @@ namespace mRides_app
                 Intent intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse("http://maps.google.com/maps?" + "saddr=" + User.currentUser.latitude + "," +
                 User.currentUser.longitude + "&daddr=" + latitude + "," + longitude));
                 intent.SetClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
-                StartActivity(intent);           
+                StartActivity(intent);
             }
             catch (PackageManager.NameNotFoundException e)
             {
                 Toast.MakeText(ApplicationContext, "Google Maps is not installed", ToastLength.Long).Show();
             }
         }
-          
+
         //Interface methods below
 
         protected override void OnResume()
@@ -474,7 +480,7 @@ namespace mRides_app
             userProfileButton.Click += delegate
             {
                 Intent i = new Intent(this, typeof(UserProfileActivity));
-                i.PutExtra("id", User.currentUser.id.ToString()); 
+                i.PutExtra("id", User.currentUser.id.ToString());
                 StartActivity(i);
             };
 
@@ -493,7 +499,7 @@ namespace mRides_app
             lastUserLocation = getCurrentLocation();
             //GetMapAsync(this) invokes the OnMapReady operation
             if (map == null)
-                 FragmentManager.FindFragmentById<MapFragment>(Resource.Id.map).GetMapAsync(this);
+                FragmentManager.FindFragmentById<MapFragment>(Resource.Id.map).GetMapAsync(this);
         }
 
         //When Google API Client is disconnected
@@ -536,24 +542,26 @@ namespace mRides_app
                 AlertDialog.Builder destinationChoiceAlert = new AlertDialog.Builder(this, Resource.Style.Theme_AppCompat_Light_Dialog_Alert);
                 destinationChoiceAlert.SetTitle("Destination");
                 destinationChoiceAlert.SetMessage("Do you want to set your destination to " + destination + "?");
-                destinationChoiceAlert.SetPositiveButton("Yes", new EventHandler<DialogClickEventArgs>((senderAlert, args) => {
+                destinationChoiceAlert.SetPositiveButton("Yes", new EventHandler<DialogClickEventArgs>((senderAlert, args) =>
+                {
                     userSelection = true;
                     FragmentTransaction transaction = FragmentManager.BeginTransaction();
                     UserTypeFragment dialog = new UserTypeFragment();
                     dialog.Show(transaction, "User type fragment");
                 }));
-                destinationChoiceAlert.SetNegativeButton("No", new EventHandler<DialogClickEventArgs>((senderAlert, args) => {
+                destinationChoiceAlert.SetNegativeButton("No", new EventHandler<DialogClickEventArgs>((senderAlert, args) =>
+                {
                     userSelection = false;
                 }));
                 Dialog destinationDialog = destinationChoiceAlert.Create();
                 destinationDialog.Show();
-     
+
 
                 if (destinationMarker != null)
                 {
                     destinationMarker.Position = place.LatLng;
                     destinationMarker.Title = destination;
-                }                  
+                }
                 else
                     destinationMarker = map.AddMarker(new MarkerOptions().SetPosition(place.LatLng).SetTitle(destination));
 
@@ -621,20 +629,28 @@ namespace mRides_app
             //    {
             //        typeDisplayed = userDriver;
             //        Toast.MakeText(ApplicationContext, usrType + " : " + typeDisplayed, ToastLength.Long).Show();
+            //          
+            //         //Manually setting the theme color since you can only set the theme when creating a new activity
+            //         Window.SetNavigationBarColor(new Android.Graphics.Color(Color.ParseColor("#EF5350")));
+            //         Window.SetStatusBarColor(new Android.Graphics.Color(Color.ParseColor("#ba3c39")));
+            //         ActionBar.SetBackgroundDrawable(new Android.Graphics.Drawables.ColorDrawable(Color.ParseColor("#ba3c39")));
             //    }
             //    else
             //    {
             //        typeDisplayed = userRider;
             //        Toast.MakeText(ApplicationContext, usrType + " : " + typeDisplayed + " " + numOfPeople + " : " + numberOfPeople, ToastLength.Long).Show();
+            //        Window.SetNavigationBarColor(Android.Graphics.Color.DarkGreen);
+            //        Window.SetStatusBarColor(Android.Graphics.Color.DarkGreen);
+            //        ActionBar.SetBackgroundDrawable(new Android.Graphics.Drawables.ColorDrawable(Color.ParseColor("#26A65B")));
             //    }
 
-            //    // Prepare the next activity
-            //    Intent matchActivity = new Intent(this, typeof(MatchActivity));
-            //    matchActivity.PutExtra(Constants.IntentExtraNames.RouteCoordinatesJson, JsonConvert.SerializeObject(destinationCoordinates));
-            //    matchActivity.PutExtra(Constants.IntentExtraNames.RequestType, type);
-            //    StartActivity(matchActivity);
-            //}
+                //    // Prepare the next activity
+                //    Intent matchActivity = new Intent(this, typeof(MatchActivity));
+                //    matchActivity.PutExtra(Constants.IntentExtraNames.RouteCoordinatesJson, JsonConvert.SerializeObject(destinationCoordinates));
+                //    matchActivity.PutExtra(Constants.IntentExtraNames.RequestType, type);
+                //    StartActivity(matchActivity);
+                //}
 
+            }
         }
     }
-}

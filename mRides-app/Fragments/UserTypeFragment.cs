@@ -10,9 +10,15 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using mRides_app.Models;
+using Android.Graphics.Drawables;
+using Android.Graphics;
 
 namespace mRides_app
 {
+    /// <summary>
+    /// Interface that will be used by MapActivity
+    /// </summary>
     public interface IEditUserSelectionListener
     {
         void updateUserSelection(string type, int num);
@@ -28,29 +34,47 @@ namespace mRides_app
         Switch switcher;
         Spinner spinner;
         TextView tv1;
-        Boolean driver = false; // Keep track if user selected 'Driver' or ' Rider'
+        View view;
+        Boolean driver; // Keep track if user selected 'Driver' or ' Rider'
         int num = 1; // Keep track of the number selected by the user in the drop-down list
         IEditUserSelectionListener listener;
 
-        // Static method to create a new instance of this fragment
-        public static UserTypeFragment NewInstance(Bundle bundle)
-        {
-            UserTypeFragment fragment = new UserTypeFragment();
-            fragment.Arguments = bundle;
-            return fragment;
-        }
-
+        /// <summary>
+        /// Method for the creation of the fragment's view
+        /// </summary>
+        /// <param name="inflater"></param>
+        /// <param name="container"></param>
+        /// <param name="savedInstanceState"></param>
+        /// <returns></returns>
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            // Use this to return your custom view for this Fragment
-            // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
             base.OnCreateView(inflater, container, savedInstanceState);
-            View view = inflater.Inflate(Resource.Layout.UserTypeFragment, container, false);
+            view = inflater.Inflate(Resource.Layout.UserTypeFragment, container, false);
+
             previous = view.FindViewById<Button>(Resource.Id.CloseButton);
             next = view.FindViewById<Button>(Resource.Id.Next);
             switcher = view.FindViewById<Switch>(Resource.Id.riderOrDriverSwitch);
             spinner = view.FindViewById<Spinner>(Resource.Id.numOfPeople);
             tv1 = view.FindViewById<TextView>(Resource.Id.textView3);
+
+            // Set the toggle to be at the position where the user has last placed
+            if (User.currentUser != null)
+            {
+                if (User.currentUser.currentType == "rider")
+                {
+                    switcher.Checked = false;
+                    driver = false;
+                    next.SetBackgroundResource(Resource.Drawable.green_button);
+                }
+                else
+                {
+                    next.SetBackgroundResource(Resource.Drawable.red_button);
+                    switcher.Checked = true;
+                    driver = true;
+                    tv1.Visibility = ViewStates.Gone;
+                    spinner.Visibility = ViewStates.Gone;
+                }
+            }
 
             switcher.CheckedChange += SwitchDriverOrRider;
 
@@ -67,6 +91,10 @@ namespace mRides_app
             return view;
         }
 
+        /// <summary>
+        /// Method that is called when an activity is attached to the fragment.
+        /// </summary>
+        /// <param name="activity">The activity where the fragment was opened</param>
         public override void OnAttach(Activity activity)
         {
             base.OnAttach(activity);
@@ -74,20 +102,24 @@ namespace mRides_app
         }
 
 
-        // Toggle between rider and driver
+        /// <summary>
+        /// Method to toggle between rider and driver when the user clicks on the switch
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void SwitchDriverOrRider(object sender, EventArgs e)
         {
             if (!driver)
             {
-                Log.Debug("Driver", "I am a driver woohoo");
-                // Open a session as a Driver?
+                next.SetBackgroundResource(Resource.Drawable.red_button);
+                Log.Debug("Driver", "Driver mode");
                 tv1.Visibility = ViewStates.Gone;
                 spinner.Visibility = ViewStates.Gone;
             }
             else
             {
-                Log.Debug("Rider", "I am a rider woohoo");
-                // Open a session as a Rider
+                next.SetBackgroundResource(Resource.Drawable.green_button);
+                Log.Debug("Rider", "Rider mode");
                 string numRiders = GetString(Resource.String.numberOfRiders);
                 tv1.Visibility = ViewStates.Visible;
                 spinner.Visibility = ViewStates.Visible;
@@ -95,12 +127,22 @@ namespace mRides_app
 
             driver = !driver;
         }
-        // Store the number selected from the drop-down list
+
+        /// <summary>
+        /// Method that will store the user's selected number from the spinner
+        /// </summary>
+        /// <param name="sender">The sender object</param>
+        /// <param name="e">An event argument</param>
         void SpinnerItemSelected(object sender, EventArgs e)
         {
             num = Int32.Parse(spinner.SelectedItem.ToString());
         }
-        // Load a new activity and transfer the data to the new one
+
+        /// <summary>
+        /// Method that will set the user type of the user after clicking the next button
+        /// </summary>
+        /// <param name="sender">The sender object</param>
+        /// <param name="e">An event argument</param>
         void NextButtonClicked(object sender, EventArgs e)
         {
             string userType = "";
@@ -109,25 +151,22 @@ namespace mRides_app
 
             if (driver)
             {
-                
                 userType = usr_driver;
-                //Intent myIntent1 = new Intent(view.Context, typeof(DriverMode));
-                //myIntent1.PutExtra("numOfSeats", num);
-                //view.Context.StartActivity(myIntent1);
             }
             else
             {
                 userType = usr_rider;
-                //Intent myIntent2 = new Intent(view.Context, typeof(RiderMode));
-                //myIntent2.PutExtra("numOfPeople", num);
-                //view.Context.StartActivity(myIntent2);
             }
 
             listener.updateUserSelection(userType, num);
             Dismiss();
         }
 
-        // Close dialog fragment when clicking 'Previous' button
+        /// <summary>
+        /// Method that will close the fragment when the previous button is clicked
+        /// </summary>
+        /// <param name="sender">The sender object</param>
+        /// <param name="e">An event argument</param>
         void PreviousButtonClicked(object sender, EventArgs e)
         {
             Dismiss();
