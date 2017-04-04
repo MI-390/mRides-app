@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:id="@+id/mainMenuLinearLayout"
+    android:background="#FFFFFF">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:id="@+id/mainMenuLinearLayout2"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="159.0dp"
+            android:background="@drawable/menu_createride"
+            android:paddingBottom="5dp"
+            android:paddingTop="8dp"
+            android:id="@+id/myRidesButton"
+            android:layout_marginBottom="10dp"
+            android:textColor="#000000" />
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="159.0dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/menu_preferences"
+            android:paddingBottom="5dp"
+            android:paddingTop="8dp"
+            android:id="@+id/chatButton"
+            android:textColor="#000000" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:id="@+id/mainMenuLinearLayout2"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="159.0dp"
+            android:background="@drawable/menu_myrides"
+            android:paddingBottom="5dp"
+            android:paddingTop="8dp"
+            android:id="@+id/myRidesButton"
+            android:layout_marginBottom="10dp"
+            android:textColor="#000000" />
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="159.0dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/menu_chat"
+            android:paddingBottom="5dp"
+            android:paddingTop="8dp"
+            android:id="@+id/chatButton"
+            android:textColor="#000000" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:id="@+id/mainMenuLinearLayout3"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="159.0dp"
+            android:background="@drawable/menu_myprofile"
+            android:paddingBottom="5dp"
+            android:paddingTop="8dp"
+            android:id="@+id/myProfileButton"
+            android:layout_marginBottom="10dp"
+            android:textColor="#000000" />
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="159.0dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/menu_logout"
+            android:paddingBottom="5dp"
+            android:paddingTop="8dp"
+            android:id="@+id/logOutButton"
+            android:textColor="#000000" />
+    </LinearLayout>
+</LinearLayout>
