@@ -39,28 +39,24 @@ namespace mRides_app
         int num = 1; // Keep track of the number selected by the user in the drop-down list
         IEditUserSelectionListener listener;
 
-        // Static method to create a new instance of this fragment
-        public static UserTypeFragment NewInstance(Bundle bundle)
-        {
-            UserTypeFragment fragment = new UserTypeFragment();
-            fragment.Arguments = bundle;
-            return fragment;
-        }
-
-        // Method that is called when view is created
+        /// <summary>
+        /// Method for the creation of the fragment's view
+        /// </summary>
+        /// <param name="inflater"></param>
+        /// <param name="container"></param>
+        /// <param name="savedInstanceState"></param>
+        /// <returns></returns>
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             base.OnCreateView(inflater, container, savedInstanceState);
             view = inflater.Inflate(Resource.Layout.UserTypeFragment, container, false);
-
-            //Dialog.Window.SetLayout(LinearLayout.LayoutParams.WrapContent, LinearLayout.LayoutParams.WrapContent);
-            //Dialog.Window.SetBackgroundDrawable(new ColorDrawable(Color.Yellow));
 
             previous = view.FindViewById<Button>(Resource.Id.CloseButton);
             next = view.FindViewById<Button>(Resource.Id.Next);
             switcher = view.FindViewById<Switch>(Resource.Id.riderOrDriverSwitch);
             spinner = view.FindViewById<Spinner>(Resource.Id.numOfPeople);
             tv1 = view.FindViewById<TextView>(Resource.Id.textView3);
+
             // Set the toggle to be at the position where the user has last placed
             if (User.currentUser != null)
             {
@@ -95,6 +91,10 @@ namespace mRides_app
             return view;
         }
 
+        /// <summary>
+        /// Method that is called when an activity is attached to the fragment.
+        /// </summary>
+        /// <param name="activity">The activity where the fragment was opened</param>
         public override void OnAttach(Activity activity)
         {
             base.OnAttach(activity);
@@ -102,7 +102,11 @@ namespace mRides_app
         }
 
 
-        // Toggle between rider and driver
+        /// <summary>
+        /// Method to toggle between rider and driver when the user clicks on the switch
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void SwitchDriverOrRider(object sender, EventArgs e)
         {
             if (!driver)
@@ -123,12 +127,22 @@ namespace mRides_app
 
             driver = !driver;
         }
-        // Store the number selected from the drop-down list
+
+        /// <summary>
+        /// Method that will store the user's selected number from the spinner
+        /// </summary>
+        /// <param name="sender">The sender object</param>
+        /// <param name="e">An event argument</param>
         void SpinnerItemSelected(object sender, EventArgs e)
         {
             num = Int32.Parse(spinner.SelectedItem.ToString());
         }
-        // Load a new activity and transfer the data to the new one
+
+        /// <summary>
+        /// Method that will set the user type of the user after clicking the next button
+        /// </summary>
+        /// <param name="sender">The sender object</param>
+        /// <param name="e">An event argument</param>
         void NextButtonClicked(object sender, EventArgs e)
         {
             string userType = "";
@@ -148,7 +162,11 @@ namespace mRides_app
             Dismiss();
         }
 
-        // Close dialog fragment when clicking 'Previous' button
+        /// <summary>
+        /// Method that will close the fragment when the previous button is clicked
+        /// </summary>
+        /// <param name="sender">The sender object</param>
+        /// <param name="e">An event argument</param>
         void PreviousButtonClicked(object sender, EventArgs e)
         {
             Dismiss();
