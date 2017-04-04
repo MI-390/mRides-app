@@ -64,11 +64,11 @@ namespace mRides_app
                 {
                     switcher.Checked = false;
                     driver = false;
-                    next.SetBackgroundResource(Resource.Drawable.red_button);
+                    next.SetBackgroundResource(Resource.Drawable.green_button);
                 }
                 else
                 {
-                    next.SetBackgroundResource(Resource.Drawable.green_button);
+                    next.SetBackgroundResource(Resource.Drawable.red_button);
                     switcher.Checked = true;
                     driver = true;
                     tv1.Visibility = ViewStates.Gone;
