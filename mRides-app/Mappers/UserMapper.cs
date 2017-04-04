@@ -18,15 +18,19 @@ using Android.Graphics;
 using System.Net;
 using System.Threading;
 using mRides_app.Gateways;
+using mRides_app.Cache;
 
 namespace mRides_app.Mappers
 {
     public class UserMapper : AbstractMapper
     {
         private UserGateway userGateway;
+        private UserCache userCache;
+
         private UserMapper()
         {
             this.userGateway = UserGateway.GetInstance();
+            this.userCache = UserCache.GetInstance();
         }
 
         private static UserMapper instance;
@@ -60,11 +64,16 @@ namespace mRides_app.Mappers
         }
 
         /// <summary>
-        /// This method creates a new user, given a new user object.
+        /// This method creates a new user, given a new user object. It 
+        /// also saves the user's preference in the local persistent storage.
         /// </summary>
+        /// <param name="newUser">New user to be created</param>
+        /// <returns>The updated newly created user with the ID</returns>
         public User CreateUser(User newUser)
         {
-            return userGateway.CreateUser(newUser);
+            newUser = userGateway.CreateUser(newUser);
+            this.userCache.SaveUserPreferences(newUser.id, newUser.isSmoker, newUser.isHandicap, newUser.hasLuggage, newUser.hasPet, newUser.genderPreference);
+            return newUser;
         }
 
         /// <summary>
