@@ -3844,6 +3844,9 @@ namespace mRides_app
 			// aapt resource value: 0x7f0a008b
 			public const int AlertDialog_AppCompat_Light = 2131361931;
 			
+			// aapt resource value: 0x7f0a0169
+			public const int AlertDialogCustom = 2131362153;
+			
 			// aapt resource value: 0x7f0a008c
 			public const int Animation_AppCompat_Dialog = 2131361932;
 			

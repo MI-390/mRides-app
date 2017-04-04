@@ -40,7 +40,7 @@ namespace mRides_app
         private Android.Gms.Maps.GoogleMap map;
         private GoogleApiClient googleApiClient;
         private LocationRequest locationRequest;
-        private Location lastUserLocation;
+        private LatLng lastUserLocation;
         private bool locationPermissionGranted;
         private Marker originMarker;
         private Marker destinationMarker;
@@ -53,12 +53,14 @@ namespace mRides_app
         private PlaceAutocompleteFragment autocompleteFragment;
         private Android.Gms.Maps.Model.Polyline polyline;
         private const string googleApiKey = "AIzaSyAz9p6O99w8ZWkFUbaREJXmnj01Mpm19dA";
+        private bool selectingDestination;
         int numberOfPeople;
      
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
+
             // Create an instance of GoogleAPIClient.
             if (googleApiClient == null)
             {
@@ -67,34 +69,28 @@ namespace mRides_app
                      .AddApi(PlacesClass.GEO_DATA_API)
                      .AddApi(PlacesClass.PLACE_DETECTION_API)
                      .Build();
-
                 // generate a location request that we will pass into a call for location updates
                 googleApiClient.Connect();
             }
+
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Destination);
             var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
             SetActionBar(toolbar);
             ActionBar.Title = "mRides";
 
-            //var toolbar_bot = FindViewById<BottomNavigationView>(Resource.Id.toolbar_bot);
-            //toolbar_bot.InflateMenu(Resource.Menu.bottombar);
+            // Retrieve the PlaceAutocompleteFragment.
+            autocompleteFragment = (PlaceAutocompleteFragment)FragmentManager.FindFragmentById(Resource.Id.place_autocomplete_fragment);
+            // Register a listener to receive callbacks when a place has been selected or an error has occurred.
+            autocompleteFragment.SetOnPlaceSelectedListener(this);
+            autocompleteFragment.SetHint("Destination?");
 
-            string text = mRides_app.Models.User.currentUser.firstName;
+            // Alert Dialog
+            openDestinationAlertDialog();
 
-            string helloMap = GetString(Resource.String.hello_map);
-            Toast.MakeText(ApplicationContext, helloMap + " " + text, ToastLength.Long).Show();
             mapButton = (Button)FindViewById(Resource.Id.mapButton);
             mapButtonClicked = false;
             mapButton.Click += OnMapButtonClick;
-            //Retrieve the PlaceAutocompleteFragment.
-            autocompleteFragment = (PlaceAutocompleteFragment)FragmentManager.FindFragmentById(Resource.Id.place_autocomplete_fragment);
-            autocompleteFragment.SetHint("Destination?");
-
-            //AutocompleteFilter typeFilterDestination = new AutocompleteFilter.Builder().SetTypeFilter(AutocompleteFilter.TypeFilterEstablishment).Build();
-            //autocompleteFragment.SetFilter(typeFilterDestination);
-            // Register a listener to receive callbacks when a place has been selected or an error has occurred.
-            autocompleteFragment.SetOnPlaceSelectedListener(this);
         }
 
         void OnMapButtonClick(object sender, EventArgs e)
@@ -126,6 +122,7 @@ namespace mRides_app
                 map.MyLocationButtonClick += OnMyLocationButtonClick;
                 //map.SetOnMyLocationButtonClickListener(this);              
             }
+            UpdateCameraPosition(lastUserLocation);
         }
 
         //When the user clicks on a marker
@@ -201,12 +198,11 @@ namespace mRides_app
         private void OnMyLocationButtonClick(object sender, Android.Gms.Maps.GoogleMap.MyLocationButtonClickEventArgs e)
         {
             LatLng position = new LatLng(User.currentUser.latitude, User.currentUser.longitude);
-            getCurrentLocation();
             UpdateCameraPosition(position);
         }
 
         //Update the camera position to a latitude/longitude coordinate position
-        public void UpdateCameraPosition(LatLng position)
+        private void UpdateCameraPosition(LatLng position)
         {
             if (map != null)
             {
@@ -223,13 +219,12 @@ namespace mRides_app
 
 
         //Get users current location
-        public void getCurrentLocation()
+        private LatLng getCurrentLocation()
         {
             if (CheckSelfPermission(Android.Manifest.Permission.AccessFineLocation) == Android.Content.PM.Permission.Granted)
                 locationPermissionGranted = true;
             else
                 RequestPermissions(new string[] { Android.Manifest.Permission.AccessFineLocation }, 1); // 1 is the request code for AccessFineLocation
-
 
             if (locationPermissionGranted)
             {
@@ -237,9 +232,12 @@ namespace mRides_app
                 locationRequest.SetPriority(100);
                 locationRequest.SetFastestInterval(500);
                 locationRequest.SetInterval(1000);
-                lastUserLocation = LocationServices.FusedLocationApi.GetLastLocation(googleApiClient);
+                Location lastUserLocation = LocationServices.FusedLocationApi.GetLastLocation(googleApiClient);
                 LocationServices.FusedLocationApi.RequestLocationUpdates(googleApiClient, locationRequest, this);
+                return new LatLng(lastUserLocation.Latitude, lastUserLocation.Longitude);
             }
+            else
+                return null;
         }
 
         public async Task setDestinationData(string url)
@@ -378,6 +376,42 @@ namespace mRides_app
             return path;
         }
 
+        private void openOriginAlertDialog()
+        {
+            string customMessage = "";
+            AlertDialog.Builder originAlert = new AlertDialog.Builder(this, Resource.Style.Theme_AppCompat_Light_Dialog_Alert);
+            originAlert.SetPositiveButton("Custom Location", new EventHandler<DialogClickEventArgs>((senderAlert, args) => {
+            }));
+            originAlert.SetNeutralButton("Default Location", new EventHandler<DialogClickEventArgs>((senderAlert, args) => {
+            }));
+
+            if (User.currentUser.currentType == "rider")
+                customMessage = "choose pick up location";
+            
+            if (User.currentUser.currentType == "driver")
+                customMessage = "choose start location";
+
+            originAlert.SetTitle("Origin");
+            originAlert.SetMessage("Do you want to use your default location or " + customMessage);
+
+
+            Dialog originDialog = originAlert.Create();
+            originDialog.Show();
+        }
+
+        private void openDestinationAlertDialog()
+        {
+            AlertDialog.Builder destinationAlert = new AlertDialog.Builder(this, Resource.Style.Theme_AppCompat_Light_Dialog_Alert);
+            destinationAlert.SetTitle("Create a new ride");
+            destinationAlert.SetMessage(GetString(Resource.String.hello_map) + " " + mRides_app.Models.User.currentUser.firstName + ".\nTo get started, choose your destination.");
+            destinationAlert.SetPositiveButton("Proceed", new EventHandler<DialogClickEventArgs>((senderAlert, args) => {
+                // Do something
+                selectingDestination = true;
+            }));
+            Dialog destinationDialog = destinationAlert.Create();
+            destinationDialog.Show();
+        }
+
         //Show users along a path
         public void showNearbyUsers()
         {
@@ -427,8 +461,6 @@ namespace mRides_app
         protected override void OnResume()
         {
             base.OnResume();
-            if (googleApiClient.IsConnected)
-                getCurrentLocation();
 
             //MenuBar
             var chatMenuButton = FindViewById<ImageButton>(Resource.Id.menu_chat);
@@ -452,10 +484,10 @@ namespace mRides_app
         //When Google API Client is connected
         public void OnConnected(Bundle bundle)
         {
+            lastUserLocation = getCurrentLocation();
             //GetMapAsync(this) invokes the OnMapReady operation
             if (map == null)
-                FragmentManager.FindFragmentById<MapFragment>(Resource.Id.map).GetMapAsync(this);
-            getCurrentLocation();
+                 FragmentManager.FindFragmentById<MapFragment>(Resource.Id.map).GetMapAsync(this);
         }
 
         //When Google API Client is disconnected
@@ -469,11 +501,9 @@ namespace mRides_app
 
         public void OnLocationChanged(Location location)
         {
-            if (lastUserLocation == null)
-                UpdateCameraPosition(new LatLng(location.Latitude, location.Longitude));
-            lastUserLocation = location;
-            User.currentUser.latitude = location.Latitude;
-            User.currentUser.longitude = location.Longitude;
+            LatLng newLocation = new LatLng(location.Latitude, location.Longitude);
+            User.currentUser.latitude = newLocation.Latitude;
+            User.currentUser.longitude = newLocation.Longitude;
 
             autocompleteFragment.SetBoundsBias(new LatLngBounds(new LatLng(User.currentUser.latitude - 0.2, User.currentUser.longitude - 0.2),
                                                                 new LatLng(User.currentUser.latitude + 0.2, User.currentUser.longitude + 0.2)));
@@ -490,13 +520,28 @@ namespace mRides_app
 
         public void OnPlaceSelected(IPlace place)
         {
-            if (!mapButtonClicked)
+            if (selectingDestination)
             {
                 string destination = place.NameFormatted.ToString();
                 string usr_destination = GetString(Resource.String.dest);
                 string pathURL;
-
-                Toast.MakeText(ApplicationContext, usr_destination + " : " + destination, ToastLength.Long).Show();
+                bool userSelection = false;
+                // Alert Dialog
+                AlertDialog.Builder destinationChoiceAlert = new AlertDialog.Builder(this, Resource.Style.Theme_AppCompat_Light_Dialog_Alert);
+                destinationChoiceAlert.SetTitle("Destination");
+                destinationChoiceAlert.SetMessage("Do you want to set your destination to " + destination + "?");
+                destinationChoiceAlert.SetPositiveButton("Yes", new EventHandler<DialogClickEventArgs>((senderAlert, args) => {
+                    userSelection = true;
+                    FragmentTransaction transaction = FragmentManager.BeginTransaction();
+                    UserTypeFragment dialog = new UserTypeFragment();
+                    dialog.Show(transaction, "User type fragment");
+                }));
+                destinationChoiceAlert.SetNegativeButton("No", new EventHandler<DialogClickEventArgs>((senderAlert, args) => {
+                    userSelection = false;
+                }));
+                Dialog destinationDialog = destinationChoiceAlert.Create();
+                destinationDialog.Show();
+     
 
                 if (destinationMarker != null)
                 {
@@ -505,52 +550,47 @@ namespace mRides_app
                 }                  
                 else
                     destinationMarker = map.AddMarker(new MarkerOptions().SetPosition(place.LatLng).SetTitle(destination));
-                if (originMarker != null)
-                   pathURL = ("https://maps.googleapis.com/maps/api/directions/json?" +
-                                "origin=" + originMarker.Position.Latitude + "," + originMarker.Position.Longitude +
-                                "&destination=" + place.LatLng.Latitude + "," + place.LatLng.Longitude +
-                                "&key=" + googleApiKey);
-                else
-                    pathURL = ("https://maps.googleapis.com/maps/api/directions/json?" +
-                                  "origin=" + User.currentUser.latitude + "," + User.currentUser.longitude +
-                                  "&destination=" + place.LatLng.Latitude + "," + place.LatLng.Longitude +
-                                  "&key=" + googleApiKey);
 
-                setDestinationData(pathURL);
+                //if (originMarker != null)
+                //   pathURL = ("https://maps.googleapis.com/maps/api/directions/json?" +
+                //                "origin=" + originMarker.Position.Latitude + "," + originMarker.Position.Longitude +
+                //                "&destination=" + place.LatLng.Latitude + "," + place.LatLng.Longitude +
+                //                "&key=" + googleApiKey);
+                //else
+                //    pathURL = ("https://maps.googleapis.com/maps/api/directions/json?" +
+                //                  "origin=" + User.currentUser.latitude + "," + User.currentUser.longitude +
+                //                  "&destination=" + place.LatLng.Latitude + "," + place.LatLng.Longitude +
+                //                  "&key=" + googleApiKey);
+
+                //setDestinationData(pathURL);
             }
 
-            if (mapButtonClicked)
+            if (!selectingDestination)
             {
-                string origin = place.NameFormatted.ToString();
-                string pathURL;
-                Toast.MakeText(ApplicationContext, "Origin" + " : " + origin, ToastLength.Long).Show();
+                //string origin = place.NameFormatted.ToString();
+                //string pathURL;
+                //Toast.MakeText(ApplicationContext, "Origin" + " : " + origin, ToastLength.Long).Show();
 
-                if (originMarker != null)
-                {
-                    originMarker.Position = place.LatLng;
-                    originMarker.Title = origin;
-                }
-                else
-                    originMarker = map.AddMarker(new MarkerOptions().SetPosition(place.LatLng).SetTitle(origin));
+                //if (originMarker != null)
+                //{
+                //    originMarker.Position = place.LatLng;
+                //    originMarker.Title = origin;
+                //}
+                //else
+                //    originMarker = map.AddMarker(new MarkerOptions().SetPosition(place.LatLng).SetTitle(origin));
 
-                UpdateCameraPosition(originMarker.Position);
+                //UpdateCameraPosition(originMarker.Position);
 
-                if (destinationMarker != null)
-                {
-                    pathURL = ("https://maps.googleapis.com/maps/api/directions/json?" +
-                              "origin=" + originMarker.Position.Latitude + "," + originMarker.Position.Longitude +
-                              "&destination=" + destinationMarker.Position.Latitude + "," + destinationMarker.Position.Longitude +
-                              "&key=" + googleApiKey);
-                    setDestinationData(pathURL);                   
-                }
+                //if (destinationMarker != null)
+                //{
+                //    pathURL = ("https://maps.googleapis.com/maps/api/directions/json?" +
+                //              "origin=" + originMarker.Position.Latitude + "," + originMarker.Position.Longitude +
+                //              "&destination=" + destinationMarker.Position.Latitude + "," + destinationMarker.Position.Longitude +
+                //              "&key=" + googleApiKey);
+                //    setDestinationData(pathURL);                   
+                //}
             }
         }
-
-        public void OnOriginSelected(IPlace place)
-        {
-
-        }
-
 
         //Overriden method from interface of UserTypeFragment.cs
         public void updateUserSelection(string type, int number)
@@ -558,36 +598,37 @@ namespace mRides_app
             User.currentUser.currentType = type;
             numberOfPeople = number;
             string typeDisplayed = "";
+            openOriginAlertDialog();
 
-            // Get the list of coordinates
-            List<DestinationCoordinate> destinationCoordinates = this.getFormattedDirectionList();
+            //// Get the list of coordinates
+            //List<DestinationCoordinate> destinationCoordinates = this.getFormattedDirectionList();
 
-            // For multilingual
-            string usrType = GetString(Resource.String.user_type);
-            string userDriver = GetString(Resource.String.user_driver);
-            string userRider = GetString(Resource.String.user_rider);
-            string numOfPeople = GetString(Resource.String.number_of_people);
+            //// For multilingual
+            //string usrType = GetString(Resource.String.user_type);
+            //string userDriver = GetString(Resource.String.user_driver);
+            //string userRider = GetString(Resource.String.user_rider);
+            //string numOfPeople = GetString(Resource.String.number_of_people);
 
-            if(type == mRides_app.Models.Request.TYPE_DRIVER || type == mRides_app.Models.Request.TYPE_RIDER)
-            {
-                if (type == mRides_app.Models.Request.TYPE_DRIVER)
-                {
-                    typeDisplayed = userDriver;
-                    Toast.MakeText(ApplicationContext, usrType + " : " + typeDisplayed, ToastLength.Long).Show();
-                }
-                else
-                {
-                    typeDisplayed = userRider;
-                    Toast.MakeText(ApplicationContext, usrType + " : " + typeDisplayed + " " + numOfPeople + " : " + numberOfPeople, ToastLength.Long).Show();
-                }
+            //if(type == mRides_app.Models.Request.TYPE_DRIVER || type == mRides_app.Models.Request.TYPE_RIDER)
+            //{
+            //    if (type == mRides_app.Models.Request.TYPE_DRIVER)
+            //    {
+            //        typeDisplayed = userDriver;
+            //        Toast.MakeText(ApplicationContext, usrType + " : " + typeDisplayed, ToastLength.Long).Show();
+            //    }
+            //    else
+            //    {
+            //        typeDisplayed = userRider;
+            //        Toast.MakeText(ApplicationContext, usrType + " : " + typeDisplayed + " " + numOfPeople + " : " + numberOfPeople, ToastLength.Long).Show();
+            //    }
 
-                // Prepare the next activity
-                Intent matchActivity = new Intent(this, typeof(MatchActivity));
-                matchActivity.PutExtra(Constants.IntentExtraNames.RouteCoordinatesJson, JsonConvert.SerializeObject(destinationCoordinates));
-                matchActivity.PutExtra(Constants.IntentExtraNames.RequestType, type);
-                StartActivity(matchActivity);
-            }
-            
+            //    // Prepare the next activity
+            //    Intent matchActivity = new Intent(this, typeof(MatchActivity));
+            //    matchActivity.PutExtra(Constants.IntentExtraNames.RouteCoordinatesJson, JsonConvert.SerializeObject(destinationCoordinates));
+            //    matchActivity.PutExtra(Constants.IntentExtraNames.RequestType, type);
+            //    StartActivity(matchActivity);
+            //}
+
         }
     }
 }

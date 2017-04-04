@@ -26,5 +26,9 @@
     <item name="android:windowNoTitle">true</item>
     <item name="android:windowFullscreen">true</item>
   </style>
+  <style name="AlertDialogCustom" parent="Theme.AppCompat.Light.Dialog.Alert">
+    <item name="android:textColor">@android:color/black</item>
+    <item name="android:textSize">5sp</item>
+  </style>
 </resources>
 
