@@ -21,6 +21,7 @@ using Firebase.Iid;
 using Android.Util;
 using Firebase.Xamarin.Database.Query;
 using mRides_app.Models;
+using mRides_app.Mappers;
 using System.Threading.Tasks;
 
 namespace mRides_app
@@ -37,6 +38,7 @@ namespace mRides_app
         List<ChatList> chatList = new List<ChatList>();
         protected override async void OnCreate(Bundle bundle)
         {
+            UserMapper.getInstance().setTheme(this);
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Chats);
             var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
