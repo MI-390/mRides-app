@@ -147,6 +147,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="15dp"
         android:gravity="bottom"
         android:layout_weight="1">
         <Button
@@ -154,9 +155,8 @@
             android:layout_width="87.5dp"
             android:layout_height="37.0dp"
             android:id="@+id/buttonBack"
-            android:background="#ff5d55"
-            android:layout_marginLeft="37.5dp"
-            android:layout_marginBottom="5.5dp" />
+            android:background="@drawable/grey_button"
+            style="@style/button_text"/>
         <Space
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -164,10 +164,9 @@
         <Button
             android:text="@string/Pref_Done"
             android:layout_width="87.5dp"
-            android:layout_height="wrap_content"
+            android:layout_height="37.0dp"
             android:id="@+id/buttonDone"
-            android:backgroundTint="#ffff5d55"
-            android:layout_marginRight="38.0dp"
-            android:layout_marginBottom="4.0dp" />
+            android:background="@drawable/red_button"
+            style="@style/button_text"/>
     </LinearLayout>
 </LinearLayout>

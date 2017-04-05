@@ -9,14 +9,15 @@
         android:layout_width="fill_parent"
         android:layout_height="257.5dp"
         android:orientation="horizontal"
+        android:id="@+id/userProfileLinearLayout1"
         android:background="#f0524f"
         android:layout_marginTop="0dp">
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="248.5dp"
             android:orientation="vertical"
-            android:background="#F0524F"
             android:layout_marginTop="8dip"
+            android:background="#f0524f"
             android:id="@+id/userProfileLinearLayout2"
             android:weightSum="100"
             android:layout_marginBottom="0dp">

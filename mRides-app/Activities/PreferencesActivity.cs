@@ -83,6 +83,20 @@ namespace mRides_app
 
             // Set the done button to save and continue to the next activity
             Button doneButton = FindViewById<Button>(Resource.Id.buttonDone);
+
+            // Set 'Done' button color to the right color
+            if (User.currentUser != null)
+            {
+                if (User.currentUser.currentType == "rider")
+                {
+                    doneButton.SetBackgroundResource(Resource.Drawable.green_button);
+                }
+                else
+                {
+                    doneButton.SetBackgroundResource(Resource.Drawable.red_button);
+                }
+            }
+
             string genderPreference = "";
             int selectedGenderPref = (int)spinnerGender.SelectedItemId;
             if (selectedGenderPref == 0)
