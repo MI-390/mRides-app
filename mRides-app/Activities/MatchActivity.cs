@@ -61,14 +61,26 @@ namespace mRides_app
         private UserMapper userMapper;
         private ConsoleMapper consoleMapper;
 
+        /// <summary>
+        /// Method called upon creation of the activity. The page will be loaded, and elements
+        /// of importance contained in the page will be captured. A request to the server
+        /// is then sent to obtain the list of matched users.
+        /// </summary>
+        /// <param name="bundle"></param>
         protected override void OnCreate(Bundle bundle)
         {
-            UserMapper.getInstance().setTheme(this);
-            base.OnCreate(bundle);
+            // Obtain the mapper instances
+            this.userMapper = UserMapper.getInstance();
+            this.consoleMapper = ConsoleMapper.getInstance();
 
+            // Set the theme
+            this.userMapper.setTheme(this);
+
+            // Display view
+            base.OnCreate(bundle);
             SetContentView(Resource.Layout.Match);
 
-            // While loading, set the texts to loading, and disable click
+            // While loading, set the texts to loading
             this.matchedUserName = FindViewById<TextView>(Resource.Id.matchedUserName);
             this.matchedUserName.Text = Resources.GetString(Resource.String.matchLoading);
 
@@ -103,6 +115,7 @@ namespace mRides_app
             this.chatButton.Click += delegate { this.Chat(); };
             this.chatButton.Visibility = ViewStates.Invisible;
             LinearLayout layout = FindViewById<LinearLayout>(Resource.Id.matchingLinearLayout3);
+            
             // Set button colors sto the right color
             if (User.currentUser != null)
             {
@@ -124,17 +137,11 @@ namespace mRides_app
                 }
             }
 
-
             // Put the map fragment programatically
             this.mapFragment = MapFragment.NewInstance();
             var ft = FragmentManager.BeginTransaction();
             ft.Add(Resource.Id.userMatchingMapPlaceHolder, mapFragment).Commit();
-
-
-            // Obtain the mapper instances
-            this.userMapper = UserMapper.getInstance();
-            this.consoleMapper = ConsoleMapper.getInstance();
-
+            
             // Obtain the type of the user for this request and deserialize the list of coordinates
             this.userType = Intent.GetStringExtra(Constants.IntentExtraNames.RequestType);
             string json = Intent.GetStringExtra(IntentExtraNames.RouteCoordinatesJson);
@@ -158,18 +165,15 @@ namespace mRides_app
         /// <param name="requests">List of matched requests</param>
         public void OnFindMatchComplete(List<Request> requests)
         {
-            // Enable back the clicks on the elements
-            this.matchedUserPicture.Visibility = ViewStates.Visible;
-            this.chatButton.Visibility = ViewStates.Visible;
-            this.acceptButton.Visibility = ViewStates.Visible;
-            this.declineButton.Visibility = ViewStates.Visible;
-
             // Start giving the user choices of matched users
             this.matchedRequests = requests;
             this.currentMatchedUserIndex = 0;
             if (this.matchedRequests.Count > 0)
             {
-                RunOnUiThread(() => this.UpdateDisplay());
+                RunOnUiThread(() => {
+                    this.SetClickableElementsVisible();
+                    this.UpdateDisplay();
+                });
             }
             else
             {
@@ -177,6 +181,19 @@ namespace mRides_app
                 Toast.MakeText(ApplicationContext, Resources.GetString(Resource.String.matchNoMatchFound), ToastLength.Long).Show();
                 Finish();
             }
+        }
+
+        /// <summary>
+        /// Sets the clickable elements that relies on the response of the asynchronous call to be
+        /// visible. 
+        /// </summary>
+        public void SetClickableElementsVisible()
+        {
+            // Enable back the clicks on the elements
+            this.matchedUserPicture.Visibility = ViewStates.Visible;
+            this.chatButton.Visibility = ViewStates.Visible;
+            this.acceptButton.Visibility = ViewStates.Visible;
+            this.declineButton.Visibility = ViewStates.Visible;
         }
 
         /// <summary>
@@ -199,12 +216,7 @@ namespace mRides_app
             {
                 matchedUser = currentRequest.driver;
             }
-
-            // Put the map fragment programatically
-            this.mapFragment = MapFragment.NewInstance();
-            var ft = FragmentManager.BeginTransaction();
-            ft.Add(Resource.Id.userMatchingMapPlaceHolder, mapFragment).Commit();
-
+            
             // Display the rider's location
             this.mapFragment.GetMapAsync(this);
             
@@ -426,7 +438,5 @@ namespace mRides_app
             string formattedAddress = (string) requestResults["results"][0]["formatted_address"] ;
             return formattedAddress;
         }
-
-        
     }
 }
