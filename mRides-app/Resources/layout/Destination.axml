@@ -23,17 +23,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|top"
+                android:background="@drawable/red_button"
                 android:id="@+id/mapButton"
-                android:text="Click to change origin"
+                android:text="Change origin"
                 android:padding="10dp"
                 android:layout_marginTop="20dp"
-                android:paddingRight="10dp" />
+                android:paddingRight="10dp" 
+                style="@style/button_text"/>
         </fragment>
         <fragment
             android:id="@+id/place_autocomplete_fragment"
             android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
             android:layout_width="match_parent"
-            android:layout_height="23.5dp" />
+            android:layout_height="30.0dp" />
     </LinearLayout>
     <include
         android:id="@+id/toolbar_bottom"

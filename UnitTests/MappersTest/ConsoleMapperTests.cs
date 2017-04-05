@@ -3,7 +3,8 @@ using mRides_app.Models;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using UnitTests.Mappers;
+using UnitTests.Gateways;
+using static mRides_app.Models.Request;
 
 namespace UnitTests
 {
@@ -28,7 +29,7 @@ namespace UnitTests
             User driver = new User();
             User.currentUser = UserMapper.getInstance().CreateUser(driver);
             Request driverRequest = new Request(0, "45.4928064,-73.5781321", "45.4975281,-73.5789193", DateTime.Now, false, Request.TYPE_DRIVER);
-            RequestMapper.getInstance().CreateRequest(driverRequest);
+            RequestGateway.getInstance().CreateRequest(driverRequest);
 
             // Create a rider and set it to be the current user
             // Make a request for this current user and try to find drivers matching this request
@@ -51,12 +52,17 @@ namespace UnitTests
             // Create a rider and create a request that the rider made in the past
             User.currentUser = UserMapper.getInstance().CreateUser(new User());
             Request riderRequest = new Request(0, "45.4928064,-73.5781321", "45.4975281,-73.5789193", DateTime.Now, false, Request.TYPE_RIDER);
-            RequestMapper.getInstance().CreateRequest(riderRequest);
+            RequestGateway.getInstance().CreateRequest(riderRequest);
 
             // Now switch to be a driver looking for riders, having the same destination
             User.currentUser = UserMapper.getInstance().CreateUser(new User());
             Request driverRequest = new Request(0, "45.4928064,-73.5781321", "45.4975281,-73.5789193", DateTime.Now, false, Request.TYPE_DRIVER);
-            driverRequest.destinationCoordinates = new List<string> { "45.4928065,-73.5781322", "45.4928063,-73.5781320", "45.4928065,-73.5781322" };
+            driverRequest.destinationCoordinates = new List<DestinationCoordinate>
+            {
+                new DestinationCoordinate{coordinate = "45.4928065,-73.5781322" },
+                new DestinationCoordinate{coordinate = "45.4928063,-73.5781320" },
+                new DestinationCoordinate{coordinate = "45.4928065,-73.5781322" }
+            };
             List<Request> response = ConsoleMapper.getInstance().FindRiders(driverRequest);
 
             // Ensure that the FindRiders() updated the ID of the newly created request

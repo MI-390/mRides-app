@@ -26,7 +26,11 @@ using System.Json;
 using Newtonsoft.Json;
 using mRides_app.Models;
 using mRides_app.Mappers;
+using mRides_app.Constants;
 using Android.Content.PM;
+using static mRides_app.Models.Request;
+using Android.Graphics.Drawables;
+using Android.Graphics;
 
 namespace mRides_app
 {
@@ -74,13 +78,9 @@ namespace mRides_app
             var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
             SetActionBar(toolbar);
             ActionBar.Title = "mRides";
-
+            
             //var toolbar_bot = FindViewById<BottomNavigationView>(Resource.Id.toolbar_bot);
             //toolbar_bot.InflateMenu(Resource.Menu.bottombar);
-            
-
-
-
 
             string text = mRides_app.Models.User.currentUser.firstName;
 
@@ -93,6 +93,19 @@ namespace mRides_app
             autocompleteFragment = (PlaceAutocompleteFragment)FragmentManager.FindFragmentById(Resource.Id.place_autocomplete_fragment);
             autocompleteFragment.SetHint("Destination?");
 
+            // Set appropriate color to the button
+            if (User.currentUser != null)
+            {
+                if (User.currentUser.currentType == "rider")
+                {
+                    mapButton.SetBackgroundResource(Resource.Drawable.green_button);
+                }
+                else
+                {
+                    mapButton.SetBackgroundResource(Resource.Drawable.red_button);
+                }
+            }
+
             //AutocompleteFilter typeFilterDestination = new AutocompleteFilter.Builder().SetTypeFilter(AutocompleteFilter.TypeFilterEstablishment).Build();
             //autocompleteFragment.SetFilter(typeFilterDestination);
             // Register a listener to receive callbacks when a place has been selected or an error has occurred.
@@ -104,13 +117,13 @@ namespace mRides_app
             if (!mapButtonClicked)
             {
                 mapButtonClicked = true;
-                mapButton.Text = "Click to choose destination";
+                mapButton.Text = "Choose destination";
                 autocompleteFragment.SetHint("Origin?");
             }
             else
             {
                 mapButtonClicked = false;
-                mapButton.Text = "Click to choose origin";
+                mapButton.Text = "Choose origin";
                 autocompleteFragment.SetHint("Destination?");
             }
         }
@@ -281,21 +294,35 @@ namespace mRides_app
         //Send coordinates to the server and get a list of users
         public void findNearbyUsers(List<LatLng> directionList)
         {
-            List<string> destinationCoordinates = new List<string>();
-            for (int i = 0; i < directionList.Count; i += 10)
-            {
-                destinationCoordinates.Add(directionList[i].Latitude.ToString() + "," + directionList[i].Longitude.ToString());
-            }
-
-            Request newRequest = new Request
-            {
+            List<DestinationCoordinate> destinationCoordinates = getFormattedDirectionList();
+            
+            Request newRequest = new Request {
                 destinationCoordinates = destinationCoordinates,
-                destination = destinationCoordinates[destinationCoordinates.Count - 1],
-                location = destinationCoordinates[0],
+                destination = destinationCoordinates.Last().coordinate,
+                location = destinationCoordinates.First().coordinate,
                 type = "driver"
             };
             newRequest.destinationCoordinates = destinationCoordinates;
             User.currentUser.requestsAsDriver = ConsoleMapper.getInstance().FindRiders(newRequest);
+        }
+
+        /// <summary>
+        /// Obtain the formatted list of coordinates.
+        /// </summary>
+        /// <returns>List of string representing the coordinates of the directions</returns>
+        public List<DestinationCoordinate> getFormattedDirectionList()
+        {
+            List<DestinationCoordinate> destinationCoordinates = new List<DestinationCoordinate>();
+            
+            for (int i = 0; i < directionList.Count; i += 10)
+            {
+                DestinationCoordinate destinationCoordinate = new DestinationCoordinate
+                {
+                    coordinate = directionList[i].Latitude.ToString() + "," + directionList[i].Longitude.ToString()
+                };
+                destinationCoordinates.Add(destinationCoordinate);
+            }
+            return destinationCoordinates;
         }
 
         //Method to display the polyline path from the current user location to the destination
@@ -425,6 +452,16 @@ namespace mRides_app
                 Intent i = new Intent(this, typeof(ChatListActivity));
                 StartActivity(i);
             };
+
+            //MenuBar
+            var userProfileButton = FindViewById<ImageButton>(Resource.Id.menu_user);
+            userProfileButton.Click += delegate
+            {
+                Intent i = new Intent(this, typeof(UserProfileActivity));
+                i.PutExtra("id", User.currentUser.id.ToString()); 
+                StartActivity(i);
+            };
+
         }
 
         //When Google API Client is connected
@@ -537,23 +574,44 @@ namespace mRides_app
             numberOfPeople = number;
             string typeDisplayed = "";
 
+            // Get the list of coordinates
+            List<DestinationCoordinate> destinationCoordinates = this.getFormattedDirectionList();
+
             // For multilingual
             string usrType = GetString(Resource.String.user_type);
             string userDriver = GetString(Resource.String.user_driver);
             string userRider = GetString(Resource.String.user_rider);
             string numOfPeople = GetString(Resource.String.number_of_people);
-            if (type == "driver")
-            {
-                typeDisplayed = userDriver;
-                Toast.MakeText(ApplicationContext, usrType + " : " + typeDisplayed, ToastLength.Long).Show();
-            }
-            else if (type == "rider")
-            {
-                typeDisplayed = userRider;
-                Toast.MakeText(ApplicationContext, usrType + " : " + typeDisplayed + " " + numOfPeople + " : " + numberOfPeople, ToastLength.Long).Show();
-            }
-        }
 
-        
+            if (type == mRides_app.Models.Request.TYPE_DRIVER || type == mRides_app.Models.Request.TYPE_RIDER)
+            {
+                if (type == mRides_app.Models.Request.TYPE_DRIVER)
+                {
+                    typeDisplayed = userDriver;
+                    Toast.MakeText(ApplicationContext, usrType + " : " + typeDisplayed, ToastLength.Long).Show();
+                    // Manually setting the theme color since you can only set the theme when creating a new activity
+                    Window.SetNavigationBarColor(new Android.Graphics.Color(Color.ParseColor("#ba3c39")));
+                    Window.SetStatusBarColor(new Android.Graphics.Color(Color.ParseColor("#ba3c39")));
+                    ActionBar.SetBackgroundDrawable(new Android.Graphics.Drawables.ColorDrawable(Color.ParseColor("#ba3c39")));
+                    mapButton.SetBackgroundResource(Resource.Drawable.red_button);
+                }
+                else
+                {
+                    typeDisplayed = userRider;
+                    Toast.MakeText(ApplicationContext, usrType + " : " + typeDisplayed + " " + numOfPeople + " : " + numberOfPeople, ToastLength.Long).Show();
+                    Window.SetNavigationBarColor(new Android.Graphics.Color(Color.ParseColor("#008000")));
+                    Window.SetStatusBarColor(new Android.Graphics.Color(Color.ParseColor("#008000")));
+                    ActionBar.SetBackgroundDrawable(new Android.Graphics.Drawables.ColorDrawable(Color.ParseColor("#26A65B")));
+                    mapButton.SetBackgroundResource(Resource.Drawable.green_button);
+                }
+
+                // Prepare the next activity
+                Intent matchActivity = new Intent(this, typeof(MatchActivity));
+                matchActivity.PutExtra(Constants.IntentExtraNames.RouteCoordinatesJson, JsonConvert.SerializeObject(destinationCoordinates));
+                matchActivity.PutExtra(Constants.IntentExtraNames.RequestType, type);
+                StartActivity(matchActivity);
+            }
+            
+        }
     }
 }

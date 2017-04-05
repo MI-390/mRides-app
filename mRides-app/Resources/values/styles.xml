@@ -8,10 +8,45 @@
       <item name="android:colorPrimary">#EF5350</item>
       <!-- colorPrimaryDark is used for the status bar -->
       <item name="android:colorPrimaryDark">#ba3c39</item>
+    <item name="android:navigationBarColor">#ba3c39</item>
       <!-- colorAccent is used as the default value for colorControlActivated
            which is used to tint widgets -->
-      <item name="android:colorAccent">#ffffff</item>
-  	  <!-- You can also set colorControlNormal, colorControlActivated
-           colorControlHighlight and colorSwitchThumbNormal. -->
+      <!--<item name="android:colorAccent">#ffffff</item> -->
     </style>
+  <style name="mRidesThemeRider" parent="@android:style/Theme.Material.Light.DarkActionBar">
+    <item name="android:windowNoTitle">true</item>
+    <!--Replace action bar with toolbar-->
+    <item name="android:windowActionBar">false</item>
+    <!-- colorPrimary is used for the default action bar background -->
+    <item name="android:colorPrimary">#26A65B</item>
+    <!-- colorPrimaryDark is used for the status bar -->
+    <item name="android:colorPrimaryDark">#008000</item>
+    <item name="android:navigationBarColor">#008000</item>
+  </style>
+    <style name="button_text" >
+      <item name="android:layout_width" >fill_parent</item>
+      <item name="android:layout_height" >wrap_content</item>
+      <item name="android:textColor" >#ffffff</item>
+      <item name="android:gravity" >center</item>
+      <item name="android:layout_margin" >3dp</item>
+      <item name="android:textSize" >14dp</item>
+      <item name="android:textStyle" >bold</item>
+      <item name="android:shadowColor" >#000000</item>
+      <item name="android:shadowDx" >1</item>
+      <item name="android:shadowDy" >1</item>
+      <item name="android:shadowRadius" >2</item>
+    </style>
+  <!--Splash screen style-->
+  <style name="MyTheme.Base" parent="Theme.AppCompat.Light">
+  </style>
+  <style name="MyTheme" parent="MyTheme.Base">
+  </style>
+  <style name="MyTheme.Splash" parent ="Theme.AppCompat.Light.NoActionBar">
+    <item name="android:windowBackground">@android:color/white</item>
+    <item name="android:background">@drawable/splash</item>
+
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowFullscreen">true</item>
+  </style>
 </resources>
+

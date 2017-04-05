@@ -26,11 +26,12 @@ namespace UITest
             // and select the app projects that should be tested.
             app = ConfigureApp
             .Android
-            .ApkFile("D:/Projects/mRides2/mRides-app/bin/Release//mRides_app.mRides_app-Signed.apk") //CHANGE THIS APK PATH
+            .ApkFile("D:/Projects/mRides-app/mRides-app/bin/Release//mRides_app.mRides_app-Signed.apk") //CHANGE THIS APK PATH
             .EnableLocalScreenshots().StartApp();
             UserMapper userMapper = UserMapper.getInstance();
             User user = userMapper.GetUserByFacebookId(113083069215300);
             User.currentUser = user;
+            User.currentUser.currentType = "rider";
 
         }
 
@@ -74,7 +75,6 @@ namespace UITest
             Assert.AreNotEqual(valueOfSmokerRadio, isTrue); // Just to see that the opposite also works
 
             Assert.AreEqual("Female", results[0].Text);
-            app.Tap(c => c.Marked("buttonDone"));
         }
 
         [Test]

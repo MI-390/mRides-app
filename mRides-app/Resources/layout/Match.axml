@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="#FFFFFF"
+    android:padding="20px">
+    <LinearLayout
+        android:orientation="vertical"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:id="@+id/matchingLinearLayout1">
+        <TextView
+            android:text="@string/matchedWith"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/matchedWithTextView1"
+            android:layout_gravity="center"
+            android:textColor="#000000"
+            android:fontFamily="Helvetica" />
+    <!--Rider description -->
+        <TextView
+            android:text="Rider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/matchedUserRole"
+            android:layout_gravity="center"
+            android:textColor="#000000"
+            android:fontFamily="Helvetica" />
+        <ImageView
+            android:src="@android:drawable/ic_menu_gallery"
+            android:layout_width="52.5dp"
+            android:layout_height="52.5dp"
+            android:layout_gravity="center"
+            android:id="@+id/matchedUserPicture" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/matchingLinearLayout2">
+            <TextView
+                android:text="Thomas Grey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/matchedUserName"
+                android:layout_gravity="center"
+                android:textColor="#000000" />
+            <Button
+                android:layout_height="30dp"
+                android:id="@+id/userMatchingChatButton"
+                android:background="@drawable/smsiconred"
+                android:shadowColor="#00000000"
+                android:layout_width="33dp"
+                android:stateListAnimator="@null" />
+        </LinearLayout>
+        <RatingBar
+            android:id="@+id/ratingBarRiderDestinationMatch"
+            style="?android:attr/ratingBarStyleIndicator"
+            android:layout_gravity="center"
+            android:numStars="5"
+            android:stepSize="0.1"
+            android:isIndicator="true"
+            android:max="5"
+            android:progress="5"
+            android:progressTint="#ffe4b331"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="0.7"
+            android:scaleY="0.7" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/redRoundedBg"
+        android:id="@+id/matchingLinearLayout3">
+    <!--Destination of Rider-->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/matchingLinearLayout4"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="10dp"
+            android:layout_gravity="center">
+            <TextView
+                android:text="@string/going_to_destination"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/goingToTextView1"
+                android:textColor="#ffffff"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:fontFamily="Helvetica"
+                android:layout_gravity="center" />
+            <TextView
+                android:text="McGill University"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/userMatchedDestination"
+                android:textColor="#ffffff"
+                android:fontFamily="Helvetica"
+                android:layout_gravity="center" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="158.0dp"
+            android:layout_marginTop="0.0dp"
+            android:layout_marginRight="10.0dp"
+            android:layout_marginLeft="10.0dp"
+            android:id="@+id/userMatchingMapPlaceHolder" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/matchingLinearLayout5"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="5dp"
+            android:layout_gravity="center">
+            <TextView
+                android:text="@string/userMatchFrom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/userMatchedOriginIndicator"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_gravity="center"
+                android:textColor="#ffffff"
+                android:fontFamily="Helvetica" />
+            <TextView
+                android:text="Loyola Campus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/userMatchedOrigin"
+                android:layout_gravity="center"
+                android:textColor="#ffffff"
+                android:fontFamily="Helvetica" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:id="@+id/matchingLinearLayout6">
+        <Button
+            android:text="@string/userMatchAccept"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:id="@+id/userMatchButtonAccept"
+            android:background="@drawable/red_button"
+            android:layout_marginRight="0dp"
+            style="@style/button_text" />
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+        <Button
+            android:text="@string/userMatchDecline"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:id="@+id/userMatchButtonDecline"
+            android:background="@drawable/red_button"
+            style="@style/button_text" />
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+        <Button
+            android:text="@string/userMatchDone"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:id="@+id/userMatchButtonDone"
+            android:background="@drawable/red_button"
+            style="@style/button_text" />
+    </LinearLayout>
+</LinearLayout>

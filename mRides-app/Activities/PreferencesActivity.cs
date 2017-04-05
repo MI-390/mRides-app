@@ -83,6 +83,20 @@ namespace mRides_app
 
             // Set the done button to save and continue to the next activity
             Button doneButton = FindViewById<Button>(Resource.Id.buttonDone);
+
+            // Set 'Done' button color to the right color
+            if (User.currentUser != null)
+            {
+                if (User.currentUser.currentType == "rider")
+                {
+                    doneButton.SetBackgroundResource(Resource.Drawable.green_button);
+                }
+                else
+                {
+                    doneButton.SetBackgroundResource(Resource.Drawable.red_button);
+                }
+            }
+
             string genderPreference = "";
             int selectedGenderPref = (int)spinnerGender.SelectedItemId;
             if (selectedGenderPref == 0)
@@ -111,6 +125,7 @@ namespace mRides_app
                 long facebookID = Convert.ToInt64(Intent.GetStringExtra(Constants.IntentExtraNames.UserFacebookId));
                 string facebookFirstName = Intent.GetStringExtra(Constants.IntentExtraNames.UserFacebookFirstName);
                 string facebookLastName = Intent.GetStringExtra(Constants.IntentExtraNames.UserFacebookLastName);
+                string facebookGender = Intent.GetStringExtra(Constants.IntentExtraNames.UserFacebookGender);
                 User newUser = new User
                 {
                     facebookID = facebookID,
@@ -120,7 +135,8 @@ namespace mRides_app
                     hasLuggage = luggage,
                     isHandicap = handicap,
                     hasPet = pet,
-                    genderPreference = gender
+                    genderPreference = gender,
+                    gender = facebookGender
                 };
                 User.currentUser = UserMapper.getInstance().CreateUser(newUser);
 

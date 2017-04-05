@@ -3,7 +3,8 @@ using mRides_app.Models;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using UnitTests.Mappers;
+using UnitTests.Gateways;
+using System.Threading;
 
 namespace UnitTests
 {
@@ -133,7 +134,7 @@ namespace UnitTests
 
             // Create a ride
             User.currentUser = driver;
-            RideMapper rideMapper = RideMapper.getInstance();
+            RideGateway rideMapper = RideGateway.getInstance();
             Ride ride = new Ride
             {
                 destination = "",
@@ -181,5 +182,123 @@ namespace UnitTests
             }
             Assert.True(successRiderToDriverFeedback);
         }
+
+        /**
+        * Test whether we are able to successfully get the gender of a user
+        */
+        [Test]
+        public void GetGender()
+        {
+            UserMapper userMapper = UserMapper.getInstance();
+            // Create a test user
+            User aline = new User
+            {
+                id = 7777,
+                firstName = "Test",
+                lastName = "User",
+                genderPreference = "male",
+                gsd = 15,
+                hasLuggage = false,
+                isHandicap = false,
+                isSmoker = false,
+                hasPet = false,
+                prefferedLanguage = "en-ca",
+                gender = "female"
+            };
+
+            userMapper.CreateUser(aline);
+            string testGender = userMapper.getGender(7777);
+            Assert.AreEqual(testGender, "female");
+        }
+
+        /**
+        * Test whether we are able to successfully set the gender of a user
+        */
+        [Test]
+        public void SetGender()
+        {
+            UserMapper userMapper = UserMapper.getInstance();
+            // Create a test user
+            User aline = new User
+            {
+                id = 6666,
+                firstName = "Test",
+                lastName = "User",
+                genderPreference = "male",
+                gsd = 15,
+                hasLuggage = false,
+                isHandicap = false,
+                isSmoker = false,
+                hasPet = false,
+                prefferedLanguage = "en-ca",
+                gender = "female"
+            };
+
+            userMapper.CreateUser(aline);
+            userMapper.setGender(6666, "male");
+            string testGender = userMapper.getGender(6666);
+            Assert.AreEqual(testGender, "male");
+        }
+
+        /**
+        * Test whether we are able to successfully get the GSD of a user
+        */
+        [Test]
+        public void GetGSD()
+        {
+            UserMapper userMapper = UserMapper.getInstance();
+            // Create a test user
+            User aline = new User
+            {
+                id = 88888,
+                firstName = "Test",
+                lastName = "User",
+                genderPreference = "male",
+                gsd = 15,
+                hasLuggage = false,
+                isHandicap = false,
+                isSmoker = false,
+                hasPet = false,
+                prefferedLanguage = "en-ca",
+                gender = "female"
+            };
+
+            userMapper.CreateUser(aline);
+            //Thread.Sleep(5000);
+            long testGSD = userMapper.GetGSD(88888);
+            Assert.AreEqual(testGSD, 15);
+        }
+
+        /**
+        * Test whether we are able to successfully set the GSD of a user
+        */
+        [Test]
+        public void SetGSD()
+        {
+            UserMapper userMapper = UserMapper.getInstance();
+            // Create a test user
+            User aline = new User
+            {
+                id = 9999,
+                firstName = "Test",
+                lastName = "User",
+                genderPreference = "male",
+                gsd = 15,
+                hasLuggage = false,
+                isHandicap = false,
+                isSmoker = false,
+                hasPet = false,
+                prefferedLanguage = "en-ca",
+                gender = "female"
+            };
+
+            userMapper.CreateUser(aline);
+            //Thread.Sleep(5000);
+            userMapper.setGSD(9999, 150);
+            long testGSD = userMapper.GetGSD(9999);
+            Assert.AreEqual(testGSD, 150);
+        }
+
+
     }
 }

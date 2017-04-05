@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Java.IO;
 
 namespace mRides_app.Models
 {
@@ -26,7 +27,7 @@ namespace mRides_app.Models
         public int? driverID { get; set; }
         public User driver { get; set; }
         public List<RiderRequest> riderRequests { get; set; }
-        public List<string> destinationCoordinates { get; set; }
+        public List<DestinationCoordinate> destinationCoordinates { get; set; }
 
         // Default constructor
         public Request() { }
@@ -40,6 +41,14 @@ namespace mRides_app.Models
             this.dateTime = dateTime;
             this.isWeekly = isWeekly;
             this.type = type;
+        }
+
+        public class DestinationCoordinate
+        {
+            public int ID { get; set; }
+            public string coordinate { get; set; }
+            public int RequestID { get; set; }
+            public Request Request { get; set; }
         }
     }
 }

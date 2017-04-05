@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+  <item
+    android:left ="80.0dp"
+     android:top ="250.0dp"
+     android:bottom ="250.0dp"
+    android:right="80.0dp">
+    <bitmap
+        android:src="@drawable/m_Rides_Logo"
+        android:gravity="fill_horizontal|fill_vertical"/>
+  </item>
+</layer-list>

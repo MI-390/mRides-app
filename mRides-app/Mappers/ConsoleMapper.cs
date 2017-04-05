@@ -15,21 +15,30 @@ using MRidesJSON;
 using RestSharp;
 using RestSharp.Authenticators;
 using Newtonsoft.Json;
+using mRides_app.Gateways;
 
 namespace mRides_app.Mappers
 {
     public class ConsoleMapper : AbstractMapper
     {
-        private ConsoleMapper () { }
+        private ConsoleGateway consoleGateway;
 
-        private static ConsoleMapper _instance;
+        /// <summary>
+        /// Private constructor of the console mapper.
+        /// </summary>
+        private ConsoleMapper ()
+        {
+            this.consoleGateway = ConsoleGateway.GetInstance();
+        }
+
+        private static ConsoleMapper instance;
         public static ConsoleMapper getInstance ()
         {
-            if (_instance == null)
+            if (instance == null)
             {
-                _instance = new ConsoleMapper();
+                instance = new ConsoleMapper();
             }
-            return _instance;
+            return instance;
         }
 
 
@@ -43,16 +52,7 @@ namespace mRides_app.Mappers
          */
         public List<Request> FindDrivers(Request newRequest)
         {
-            dynamic response = SendPost<dynamic>(ApiEndPointUrl.findDrivers, newRequest, true);
-
-            // The response consists of a list:
-            // - The first element is a list of Ride
-            // - The second element is the id of the newly create request
-            List<Request> requests = response.rides.ToObject<List<Request>>();
-            int requestId = Convert.ToInt32(response.requestId);
-            newRequest.ID = requestId;
-
-            return requests;
+            return consoleGateway.FindDrivers(newRequest);
         }
 
         /**
@@ -61,25 +61,7 @@ namespace mRides_app.Mappers
           */
         public List<Request> FindRiders(Request newRequest)
         {
-            // Create a new rest client
-            var client = new RestClient()
-            {
-                BaseUrl = new System.Uri(BaseUrl),
-                Authenticator = new HttpBasicAuthenticator(_accountSid, _secretKey)
-            };
-
-            // Serialize the object of interest into a JSON
-            var json = JsonConvert.SerializeObject(newRequest);
-
-            // Make a new request object
-            var request = new RestRequest(ApiEndPointUrl.findRiders, Method.POST);
-            request.AddHeader(HeaderNameUserId, User.currentUser.id.ToString());
-            request.AddParameter("text/json", json, ParameterType.RequestBody);
-
-            // Execute the request and return the response
-            var response = client.Execute<FindRidersJson>(request).Data;
-            newRequest.ID = response.driverRequestID;
-            return response.requests;
+            return consoleGateway.FindRiders(newRequest);
         }
 
         /**
@@ -91,12 +73,7 @@ namespace mRides_app.Mappers
          */
         public bool Confirm(int riderRequestId, int driverRequestId)
         {
-            object confirmation = new
-            {
-                riderRequestId = riderRequestId,
-                driverRequestId = driverRequestId
-            };
-            return SendPost<bool>(ApiEndPointUrl.confirm, confirmation, true);
+            return consoleGateway.Confirm(riderRequestId, driverRequestId);
         }
 
         /**
@@ -108,12 +85,7 @@ namespace mRides_app.Mappers
          */
         public bool AcceptConfirmation(int riderRequestId, int driverRequestId)
         {
-            object confirmationAcceptance = new
-            {
-                riderRequestId = riderRequestId,
-                driverRequestId = driverRequestId
-            };
-            return SendPost<bool>(ApiEndPointUrl.acceptConfirm, confirmationAcceptance, true);
+            return consoleGateway.AcceptConfirmation(riderRequestId, driverRequestId);
         }
     }
 }

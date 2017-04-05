@@ -18,10 +18,8 @@
   <string name="slogan">Voyager ensemble</string>
   <string name="fblogin">Pour commencer, connectez-vous à l’aide d’un simple clic :</string>
   <string name="fb">Connexion avec Facebook</string>
-  <string name="riderOrDriver">  Vous êtes un Passager \nou Conducteur ? </string>
-  <string name="r">P</string>
-  <string name="d">C</string>
-  <string name="numberOfRiders">Combien êtes-vous ?</string>
+  <string name="riderOrDriver">Êtes vous un Passager \nou un Conducteur ? </string>
+  <string name="numberOfRiders">Combien êtes-vous?</string>
   <string name="previous">Précédent</string>
   <string name="next">Suivant</string>
   <string name="hello_map">Bonjour</string>
@@ -37,14 +35,25 @@
   <string name="gender">Sexe</string>
   <string name="person_profile">Personne</string>
   <string name="user_review">Commentaire</string>
-  <string name="leaveReviewForUser">Laisser un commentaire pour cet utilisateur :</string>
+  <string name="feedbackTitle">Donnez votre évaluation!</string>
+  <string name="leaveReviewForUser">Comment évaluez-vous cet utilisateur?</string>
+  <string name="enterCommentForUser">Entrez votre commentaire ici</string>
   <string name="reviewSubmit">Envoyer</string>
+  <string name="closeFeedback">Fermer</string>
   <string name="viewUserProfile">Afficher le profil</string>
   <string name="reviewUser">Commentaire</string>
-  <string name="feedbackPopup">Cliquez pour popup Feedback !</string>
+  <string name="feedbackPopup">Cliquez pour popup Feedback!</string>
   <string name="driverMatchAccept">Accepter</string>
   <string name="driverMatchDecline">Refuser</string>
-  <string name="going_to_destination">DESTINATION</string>
+  <string name="going_to_destination">Destination</string>
+  <string name="userMatchAccept">Accepter</string>
+  <string name="userMatchDecline">Refuser</string>
+  <string name="userMatchDone">Fermer</string>
+  <string name="matchedWith">Tu es matché avec:</string>
+  <string name="userMatchFrom">Origine:</string>
+  <string name="matchRequestSent">Une requête a été envoyé à cet utilisateur</string>
+  <string name="matchNoMoreMatch">Il n’y a plus de match</string>
+  <string name="matchNoMatchFound">Il n’y a pas de match</string>
   <string-array name="Pref_Gender">
     <item>N\'importe lequel</item>
     <item>Male</item>
