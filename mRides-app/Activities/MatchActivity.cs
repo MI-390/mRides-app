@@ -100,7 +100,14 @@ namespace mRides_app
             List <DestinationCoordinate> coordinates = JsonConvert.DeserializeObject<List<DestinationCoordinate>>(Intent.GetStringExtra(IntentExtraNames.RouteCoordinatesJson));
 
             // Send an async request to find matches
-            FindMatchAsyncTask findMatchTask = new FindMatchAsyncTask(this.userType, coordinates, this);
+            this.userRequest = new Request
+            {
+                destinationCoordinates = coordinates,
+                destination = coordinates.Last().coordinate,
+                location = coordinates.First().coordinate,
+                type = this.userType
+            };
+            FindMatchAsyncTask findMatchTask = new FindMatchAsyncTask(this.userRequest, this);
             findMatchTask.Execute();
         }
 

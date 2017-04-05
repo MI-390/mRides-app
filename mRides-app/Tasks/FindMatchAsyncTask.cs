@@ -20,8 +20,7 @@ namespace mRides_app.Tasks
     public class FindMatchAsyncTask : AsyncTask<Java.Lang.Void, Java.Lang.Void, Java.Lang.Void>
     {
         // Data necessary to build the request for the match
-        string userType;
-        List<DestinationCoordinate> coordinates;
+        private Request userRequest;
 
         // Object to call once the task is complete
         private IOnFindMatchCompleteCallback callBackObject;
@@ -38,10 +37,9 @@ namespace mRides_app.Tasks
         /// <param name="userType"></param>
         /// <param name="coordinates"></param>
         /// <param name="callBackObject"></param>
-        public FindMatchAsyncTask(string userType, List<DestinationCoordinate> coordinates, IOnFindMatchCompleteCallback callBackObject)
+        public FindMatchAsyncTask(Request userRequest, IOnFindMatchCompleteCallback callBackObject)
         {
-            this.userType = userType;
-            this.coordinates = coordinates;
+            this.userRequest = userRequest;
             this.callBackObject = callBackObject;
             this.listOfMatchedRequests = null;
             this.consoleMapper = ConsoleMapper.getInstance();
@@ -55,21 +53,13 @@ namespace mRides_app.Tasks
         protected override Java.Lang.Void RunInBackground(params Java.Lang.Void[] @params)
         {
             // Send the request to the server
-            Request userRequest = new Request
+            if (this.userRequest.type == Request.TYPE_DRIVER)
             {
-                destinationCoordinates = coordinates,
-                destination = coordinates.Last().coordinate,
-                location = coordinates.First().coordinate,
-                type = this.userType
-            };
-
-            if (this.userType == Request.TYPE_DRIVER)
-            {
-                this.listOfMatchedRequests = consoleMapper.FindRiders(userRequest);
+                this.listOfMatchedRequests = consoleMapper.FindRiders(this.userRequest);
             }
             else
             {
-                this.listOfMatchedRequests = consoleMapper.FindDrivers(userRequest);
+                this.listOfMatchedRequests = consoleMapper.FindDrivers(this.userRequest);
             }
 
             return null;
