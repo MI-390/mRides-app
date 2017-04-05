@@ -46,7 +46,8 @@ namespace mRides_app
         private bool locationPermissionGranted;
         private Marker originMarker;
         private Marker destinationMarker;
-        private Button mapButton;
+        private Button modifyDestinationButton;
+        private Button confirmRideButton;
         private bool mapButtonClicked;
         private Dictionary<User, Marker> usersOnMap;
         private List<LatLng> directionList;
@@ -56,6 +57,8 @@ namespace mRides_app
         private Android.Gms.Maps.Model.Polyline polyline;
         private const string googleApiKey = "AIzaSyAz9p6O99w8ZWkFUbaREJXmnj01Mpm19dA";
         private bool selectingDestination;
+        private bool selectingOrigin;
+        private bool confirmingRide;
         int numberOfPeople;
 
 
@@ -90,41 +93,67 @@ namespace mRides_app
             // Alert Dialog
             openDestinationAlertDialog();
 
-            mapButton = (Button)FindViewById(Resource.Id.mapButton);
-            mapButtonClicked = false;
-            mapButton.Click += OnMapButtonClick;
+            //mapButton = (Button)FindViewById(Resource.Id.mapButton);
+            //mapButtonClicked = false;
+            //mapButton.Click += OnMapButtonClick;
         
 
             // Set appropriate color to the button
-            if (User.currentUser != null)
-            {
-                if (User.currentUser.currentType == "rider")
-                {
-                    mapButton.SetBackgroundResource(Resource.Drawable.green_button);
-                }
-                else
-                {
-                    mapButton.SetBackgroundResource(Resource.Drawable.red_button);
-                }
-            }
+            //if (User.currentUser != null)
+            //{
+            //    if (User.currentUser.currentType == "rider")
+            //    {
+            //        mapButton.SetBackgroundResource(Resource.Drawable.green_button);
+            //    }
+            //    else
+            //    {
+            //        mapButton.SetBackgroundResource(Resource.Drawable.red_button);
+            //    }
+            //}
+            modifyDestinationButton = (Button)FindViewById(Resource.Id.modifyDestinationButton);
+            modifyDestinationButton.Visibility = ViewStates.Invisible;
 
+            confirmRideButton = (Button)FindViewById(Resource.Id.confirmRideButton);
+            confirmRideButton.Visibility = ViewStates.Invisible;
 
+            modifyDestinationButton.Click += OnModifyDestinationButtonClick;
+            confirmRideButton.Click += OnConfirmRideButtonClick;
         }
 
-        void OnMapButtonClick(object sender, EventArgs e)
+        void OnModifyDestinationButtonClick(object sender, EventArgs e)
         {
-            if (!mapButtonClicked)
+            if (selectingOrigin)
             {
-                mapButtonClicked = true;
-                mapButton.Text = "Choose destination";
-                autocompleteFragment.SetHint("Origin?");
-            }
-            else
-            {
-                mapButtonClicked = false;
-                mapButton.Text = "Choose origin";
+                selectingOrigin = false;
+                confirmingRide = false;
+                confirmRideButton.Visibility = ViewStates.Invisible;
+                modifyDestinationButton.Visibility = ViewStates.Invisible;
                 autocompleteFragment.SetHint("Destination?");
+                autocompleteFragment.SetText("");
+                destinationMarker.Visible = false;
+                openDestinationAlertDialog();
             }
+        }
+
+        async void OnConfirmRideButtonClick(object sender, EventArgs e)
+        {
+            confirmRideButton.Visibility = ViewStates.Invisible;
+            modifyDestinationButton.Visibility = ViewStates.Invisible;
+            selectingOrigin = false;
+            confirmingRide = false;
+            string pathURL = ("https://maps.googleapis.com/maps/api/directions/json?" +
+                              "origin=" + originMarker.Position.Latitude + "," + originMarker.Position.Longitude +
+                              "&destination=" + destinationMarker.Position.Latitude + "," + destinationMarker.Position.Longitude +
+                              "&key=" + googleApiKey);
+
+            await setDestinationData(pathURL);
+
+            // Prepare the match activity
+            List<DestinationCoordinate> destinationCoordinates = this.getFormattedDirectionList();
+            Intent matchActivity = new Intent(this, typeof(MatchActivity));
+            matchActivity.PutExtra(Constants.IntentExtraNames.RouteCoordinatesJson, JsonConvert.SerializeObject(destinationCoordinates));
+            matchActivity.PutExtra(Constants.IntentExtraNames.RequestType, User.currentUser.currentType);
+            StartActivity(matchActivity);
         }
 
         public void OnMapReady(Android.Gms.Maps.GoogleMap googleMap)
@@ -136,9 +165,9 @@ namespace mRides_app
             {
                 map.MyLocationEnabled = true;
                 map.UiSettings.MyLocationButtonEnabled = true;
-                map.UiSettings.ZoomControlsEnabled = true;
+                map.UiSettings.SetAllGesturesEnabled(true);
+                map.SetPadding(0, 250, 0, 0);
                 map.MyLocationButtonClick += OnMyLocationButtonClick;
-                //map.SetOnMyLocationButtonClickListener(this);              
             }
             UpdateCameraPosition(lastUserLocation);
         }
@@ -146,19 +175,7 @@ namespace mRides_app
         //When the user clicks on a marker
         private void OnMarkerClick(object sender, Android.Gms.Maps.GoogleMap.MarkerClickEventArgs e)
         {
-            if (e.Marker.Equals(destinationMarker))
-            {
-                FragmentTransaction transaction = FragmentManager.BeginTransaction();
-                UserTypeFragment dialog = new UserTypeFragment();
-                dialog.Show(transaction, "User type fragment");
-                showNearbyUsers();
-            }
-            else
-            if (e.Marker.Equals(originMarker))
-            {
-                //
-            }
-            else
+            if (!e.Marker.Equals(destinationMarker) && !e.Marker.Equals(originMarker))
             {
                 foreach (KeyValuePair<User, Marker> option in usersOnMap)
                 {
@@ -226,13 +243,25 @@ namespace mRides_app
             {
                 CameraPosition.Builder builder = CameraPosition.InvokeBuilder();
                 builder.Target(position);
-                builder.Zoom(17);
-                builder.Bearing(45);
-                builder.Tilt(90);
+                builder.Zoom(15);
                 CameraPosition cameraPosition = builder.Build();
                 CameraUpdate cameraUpdate = CameraUpdateFactory.NewCameraPosition(cameraPosition);
                 map.AnimateCamera(cameraUpdate);
             }
+        }
+
+        private void UpdateCameraPositionToMarkers()
+        {
+            int padding = 100; // offset from edges of the map in pixels
+            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+            builder.Include(destinationMarker.Position);
+            if (originMarker != null)
+                builder.Include(originMarker.Position);
+            else
+                builder.Include(new LatLng(User.currentUser.latitude, User.currentUser.longitude));
+            LatLngBounds bounds = builder.Build();
+            CameraUpdate cameraUpdate = CameraUpdateFactory.NewLatLngBounds(bounds, padding);
+            map.AnimateCamera(cameraUpdate);
         }
 
 
@@ -247,9 +276,7 @@ namespace mRides_app
             if (locationPermissionGranted)
             {
                 locationRequest = new LocationRequest();
-                locationRequest.SetPriority(100);
-                locationRequest.SetFastestInterval(500);
-                locationRequest.SetInterval(1000);
+                locationRequest.SetPriority(100); //HIGH ACCURACY
                 Location lastUserLocation = LocationServices.FusedLocationApi.GetLastLocation(googleApiClient);
                 LocationServices.FusedLocationApi.RequestLocationUpdates(googleApiClient, locationRequest, this);
                 return new LatLng(lastUserLocation.Latitude, lastUserLocation.Longitude);
@@ -283,8 +310,6 @@ namespace mRides_app
                                 //Show the polyline directions on the map
                                 displayPathOnMap(directionList);
                                 findNearbyUsers(directionList);
-                                //Update the camera position to the destination
-                                UpdateCameraPosition(new LatLng(destinationData.routes[0].legs[0].end_location.lat, destinationData.routes[0].legs[0].end_location.lng));
                             }
                         }
                     }
@@ -306,6 +331,7 @@ namespace mRides_app
             };
             newRequest.destinationCoordinates = destinationCoordinates;
             User.currentUser.requestsAsDriver = ConsoleMapper.getInstance().FindRiders(newRequest);
+            showNearbyUsers();
         }
 
         /// <summary>
@@ -347,7 +373,6 @@ namespace mRides_app
         public List<LatLng> getDirectionList(OverviewPolyline overview)
         {
             OverviewPolyline overviewPolyline = overview;
-            // destinationData.routes[0].overview_polyline;
             String encodedPolyline = overviewPolyline.points;
             directionList = decodePolyline(encodedPolyline);
             return directionList;
@@ -359,8 +384,7 @@ namespace mRides_app
         {
             int len = encodedPolyline.Length;
 
-            // For speed we preallocate to an upper bound on the final length, then
-            // truncate the array before returning.
+            // For speed we preallocate to an upper bound on the final length, then truncate the array before returning.
             List<LatLng> path = new List<LatLng>();
             int index = 0;
             int lat = 0;
@@ -393,45 +417,6 @@ namespace mRides_app
             }
 
             return path;
-        }
-
-        private void openOriginAlertDialog()
-        {
-            string customMessage = "";
-            AlertDialog.Builder originAlert = new AlertDialog.Builder(this, Resource.Style.Theme_AppCompat_Light_Dialog_Alert);
-            originAlert.SetPositiveButton("Custom Location", new EventHandler<DialogClickEventArgs>((senderAlert, args) =>
-            {
-            }));
-            originAlert.SetNeutralButton("Default Location", new EventHandler<DialogClickEventArgs>((senderAlert, args) =>
-            {
-            }));
-
-            if (User.currentUser.currentType == "rider")
-                customMessage = "choose pick up location";
-
-            if (User.currentUser.currentType == "driver")
-                customMessage = "choose start location";
-
-            originAlert.SetTitle("Origin");
-            originAlert.SetMessage("Do you want to use your default location or " + customMessage);
-
-
-            Dialog originDialog = originAlert.Create();
-            originDialog.Show();
-        }
-
-        private void openDestinationAlertDialog()
-        {
-            AlertDialog.Builder destinationAlert = new AlertDialog.Builder(this, Resource.Style.Theme_AppCompat_Light_Dialog_Alert);
-            destinationAlert.SetTitle("Create a new ride");
-            destinationAlert.SetMessage(GetString(Resource.String.hello_map) + " " + mRides_app.Models.User.currentUser.firstName + ".\nTo get started, choose your destination.");
-            destinationAlert.SetPositiveButton("Proceed", new EventHandler<DialogClickEventArgs>((senderAlert, args) =>
-            {
-                // Do something
-                selectingDestination = true;
-            }));
-            Dialog destinationDialog = destinationAlert.Create();
-            destinationDialog.Show();
         }
 
         //Show users along a path
@@ -478,6 +463,145 @@ namespace mRides_app
             }
         }
 
+        //Dialog methods below
+
+        private void openOriginAlertDialog()
+        {
+            string customMessage = "";
+            AlertDialog.Builder originAlert = new AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
+
+            //When user clicks on "Custom Location"
+            originAlert.SetPositiveButton("Custom Location", new EventHandler<DialogClickEventArgs>((senderAlert, args) =>
+            {
+                UpdateCameraPositionToMarkers();
+
+                if (originMarker != null)
+                {
+                    confirmRideButton.Visibility = ViewStates.Visible;
+                    modifyDestinationButton.Visibility = ViewStates.Visible;
+                }
+            }));
+
+            //When user clicks on "Default Location"
+            originAlert.SetNeutralButton("Default Location", new EventHandler<DialogClickEventArgs>((senderAlert, args) =>
+            {
+                modifyDestinationButton.Visibility = ViewStates.Visible;
+                confirmRideButton.Visibility = ViewStates.Visible;
+
+                if (originMarker != null)
+                {
+                    originMarker.Position = new LatLng(User.currentUser.latitude, User.currentUser.longitude);
+                    originMarker.Title = "Location during ride request";
+                }
+                else
+                    originMarker = map.AddMarker(new MarkerOptions().SetPosition(new LatLng(User.currentUser.latitude, User.currentUser.longitude)).SetTitle("Location during ride request"));
+
+                UpdateCameraPositionToMarkers();
+            }));
+
+            if (User.currentUser.currentType == mRides_app.Models.Request.TYPE_RIDER)
+                customMessage = "choose pick up location";
+
+            if (User.currentUser.currentType == mRides_app.Models.Request.TYPE_DRIVER)
+                customMessage = "choose a start location";
+
+            originAlert.SetTitle("Origin");
+            originAlert.SetMessage("Do you want to use your default location or " + customMessage);
+          
+            Dialog originDialog = originAlert.Create();
+            originDialog.SetCancelable(false);
+            originDialog.SetCanceledOnTouchOutside(false);
+            originDialog.Show();
+        }
+
+        private void openDestinationAlertDialog()
+        {
+            AlertDialog.Builder destinationAlert = new AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
+            destinationAlert.SetTitle("Create a new ride");
+            destinationAlert.SetMessage(GetString(Resource.String.hello_map) + " " + mRides_app.Models.User.currentUser.firstName + ".\nTo get started, choose your destination.");
+
+            //When user clicks on "Proceed"
+            destinationAlert.SetPositiveButton("Proceed", new EventHandler<DialogClickEventArgs>((senderAlert, args) =>
+            {
+                selectingDestination = true;
+            }));
+
+            Dialog destinationDialog = destinationAlert.Create();
+            destinationDialog.SetCancelable(false);
+            destinationDialog.SetCanceledOnTouchOutside(false);
+            destinationDialog.Show();
+        }
+
+        private void openDestinationSelectionAlertDialog(string destination, LatLng coordinates)
+        {
+            AlertDialog.Builder destinationChoiceAlert = new AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
+            destinationChoiceAlert.SetTitle("Destination");
+            destinationChoiceAlert.SetMessage("Do you want to set your destination to " + destination + "?");
+
+            //When user clicks on "Yes"
+            destinationChoiceAlert.SetPositiveButton("Yes", new EventHandler<DialogClickEventArgs>((senderAlert, args) =>
+            {
+                FragmentTransaction transaction = FragmentManager.BeginTransaction();
+                UserTypeFragment dialog = new UserTypeFragment();
+                dialog.Show(transaction, "User type fragment");
+
+                if (destinationMarker != null)
+                {
+                    destinationMarker.Visible = true;
+                    destinationMarker.Position = coordinates;
+                    destinationMarker.Title = destination;
+                }
+                else
+                    destinationMarker = map.AddMarker(new MarkerOptions().SetPosition(coordinates).SetTitle("destination"));
+
+                modifyDestinationButton.Visibility = ViewStates.Visible;
+            }));
+
+            //When user clicks on "No"
+            destinationChoiceAlert.SetNegativeButton("No", new EventHandler<DialogClickEventArgs>((senderAlert, args) =>
+            {
+                return;
+            }));
+
+            Dialog destinationDialog = destinationChoiceAlert.Create();
+            destinationDialog.SetCanceledOnTouchOutside(false);
+            destinationDialog.SetCancelable(false);
+            destinationDialog.Show();
+        }
+
+        private void openOriginSelectionAlertDialog(string origin, LatLng coordinates)
+        {
+            AlertDialog.Builder originChoiceAlert = new AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
+            originChoiceAlert.SetTitle("Destination");
+            originChoiceAlert.SetMessage("Do you want to set your origin to " + origin + "?");
+
+            //When user clicks on "Yes"
+            originChoiceAlert.SetPositiveButton("Yes", new EventHandler<DialogClickEventArgs>((senderAlert, args) =>
+            {
+                if (originMarker != null)
+                {
+                    originMarker.Position = coordinates;
+                    originMarker.Title = origin;
+                }
+                else
+                    originMarker = map.AddMarker(new MarkerOptions().SetPosition(coordinates).SetTitle("Location during ride request"));
+                confirmRideButton.Visibility = ViewStates.Visible;
+                UpdateCameraPositionToMarkers();
+            }));
+
+            //When user clicks on "No"
+            originChoiceAlert.SetNegativeButton("No", new EventHandler<DialogClickEventArgs>((senderAlert, args) =>
+            {
+                return;
+            }));
+
+            Dialog originDialog = originChoiceAlert.Create();
+            originDialog.SetCanceledOnTouchOutside(false);
+            originDialog.SetCancelable(false);
+            originDialog.Show();
+        }
+
+
         //Interface methods below
 
         protected override void OnResume()
@@ -513,7 +637,7 @@ namespace mRides_app
         public void OnConnected(Bundle bundle)
         {
             lastUserLocation = getCurrentLocation();
-            //GetMapAsync(this) invokes the OnMapReady operation
+            //GetMapAsync(this) invokes the OnMapReady operation when ready
             if (map == null)
                 FragmentManager.FindFragmentById<MapFragment>(Resource.Id.map).GetMapAsync(this);
         }
@@ -530,8 +654,8 @@ namespace mRides_app
         public void OnLocationChanged(Location location)
         {
             LatLng newLocation = new LatLng(location.Latitude, location.Longitude);
-            User.currentUser.latitude = newLocation.Latitude;
-            User.currentUser.longitude = newLocation.Longitude;
+            User.currentUser.latitude = location.Latitude;
+            User.currentUser.longitude = location.Longitude;
 
             autocompleteFragment.SetBoundsBias(new LatLngBounds(new LatLng(User.currentUser.latitude - 0.2, User.currentUser.longitude - 0.2),
                                                                 new LatLng(User.currentUser.latitude + 0.2, User.currentUser.longitude + 0.2)));
@@ -553,123 +677,57 @@ namespace mRides_app
                 string destination = place.NameFormatted.ToString();
                 string usr_destination = GetString(Resource.String.dest);
                 string pathURL;
-                bool userSelection = false;
                 // Alert Dialog
-                AlertDialog.Builder destinationChoiceAlert = new AlertDialog.Builder(this, Resource.Style.Theme_AppCompat_Light_Dialog_Alert);
-                destinationChoiceAlert.SetTitle("Destination");
-                destinationChoiceAlert.SetMessage("Do you want to set your destination to " + destination + "?");
-                destinationChoiceAlert.SetPositiveButton("Yes", new EventHandler<DialogClickEventArgs>((senderAlert, args) =>
-                {
-                    userSelection = true;
-                    FragmentTransaction transaction = FragmentManager.BeginTransaction();
-                    UserTypeFragment dialog = new UserTypeFragment();
-                    dialog.Show(transaction, "User type fragment");
-                }));
-                destinationChoiceAlert.SetNegativeButton("No", new EventHandler<DialogClickEventArgs>((senderAlert, args) =>
-                {
-                    userSelection = false;
-                }));
-                Dialog destinationDialog = destinationChoiceAlert.Create();
-                destinationDialog.Show();
-
-
-                if (destinationMarker != null)
-                {
-                    destinationMarker.Position = place.LatLng;
-                    destinationMarker.Title = destination;
-                }
-                else
-                    destinationMarker = map.AddMarker(new MarkerOptions().SetPosition(place.LatLng).SetTitle(destination));
-
-                //if (originMarker != null)
-                //   pathURL = ("https://maps.googleapis.com/maps/api/directions/json?" +
-                //                "origin=" + originMarker.Position.Latitude + "," + originMarker.Position.Longitude +
-                //                "&destination=" + place.LatLng.Latitude + "," + place.LatLng.Longitude +
-                //                "&key=" + googleApiKey);
-                //else
-                //    pathURL = ("https://maps.googleapis.com/maps/api/directions/json?" +
-                //                  "origin=" + User.currentUser.latitude + "," + User.currentUser.longitude +
-                //                  "&destination=" + place.LatLng.Latitude + "," + place.LatLng.Longitude +
-                //                  "&key=" + googleApiKey);
-
-                //setDestinationData(pathURL);
+                openDestinationSelectionAlertDialog(destination, place.LatLng);
             }
-
-            if (!selectingDestination)
+            else
+            if (selectingOrigin)
             {
-                //string origin = place.NameFormatted.ToString();
-                //string pathURL;
-                //Toast.MakeText(ApplicationContext, "Origin" + " : " + origin, ToastLength.Long).Show();
-
-                //if (originMarker != null)
-                //{
-                //    originMarker.Position = place.LatLng;
-                //    originMarker.Title = origin;
-                //}
-                //else
-                //    originMarker = map.AddMarker(new MarkerOptions().SetPosition(place.LatLng).SetTitle(origin));
-
-                //UpdateCameraPosition(originMarker.Position);
-
-                //if (destinationMarker != null)
-                //{
-                //    pathURL = ("https://maps.googleapis.com/maps/api/directions/json?" +
-                //              "origin=" + originMarker.Position.Latitude + "," + originMarker.Position.Longitude +
-                //              "&destination=" + destinationMarker.Position.Latitude + "," + destinationMarker.Position.Longitude +
-                //              "&key=" + googleApiKey);
-                //    setDestinationData(pathURL);                   
-                //}
+                string origin = place.NameFormatted.ToString();
+                string pathURL;
+                //Alert Dialog
+                openOriginSelectionAlertDialog(origin, place.LatLng);
             }
         }
 
         //Overriden method from interface of UserTypeFragment.cs
         public void updateUserSelection(string type, int number)
         {
+            //Set user to selected type
             User.currentUser.currentType = type;
             numberOfPeople = number;
-            string typeDisplayed = "";
             openOriginAlertDialog();
-
+            selectingOrigin = true;
+            selectingDestination = false;
+            autocompleteFragment.SetText("");
+            autocompleteFragment.SetHint("Origin?");
             //// Get the list of coordinates
-            //List<DestinationCoordinate> destinationCoordinates = this.getFormattedDirectionList();
 
-            //// For multilingual
-            //string usrType = GetString(Resource.String.user_type);
-            //string userDriver = GetString(Resource.String.user_driver);
-            //string userRider = GetString(Resource.String.user_rider);
-            //string numOfPeople = GetString(Resource.String.number_of_people);
+            // For multilingual purposes
+            string typeDisplayed = "";
+            string usrType = GetString(Resource.String.user_type);
+            string userDriver = GetString(Resource.String.user_driver);
+            string userRider = GetString(Resource.String.user_rider);
+            string numOfPeople = GetString(Resource.String.number_of_people);
 
-            //if(type == mRides_app.Models.Request.TYPE_DRIVER || type == mRides_app.Models.Request.TYPE_RIDER)
-            //{
-            //    if (type == mRides_app.Models.Request.TYPE_DRIVER)
-            //    {
-            //        typeDisplayed = userDriver;
-            //        Toast.MakeText(ApplicationContext, usrType + " : " + typeDisplayed, ToastLength.Long).Show();
-            //          
-            //         //Manually setting the theme color since you can only set the theme when creating a new activity
-            //         Window.SetNavigationBarColor(new Android.Graphics.Color(Color.ParseColor("#EF5350")));
-            //         Window.SetStatusBarColor(new Android.Graphics.Color(Color.ParseColor("#ba3c39")));
-            //         ActionBar.SetBackgroundDrawable(new Android.Graphics.Drawables.ColorDrawable(Color.ParseColor("#ba3c39")));
-            //         mapButton.SetBackgroundResource(Resource.Drawable.red_button);
-            //    }
-            //    else
-            //    {
-            //          typeDisplayed = userRider;
-            //          Toast.MakeText(ApplicationContext, usrType + " : " + typeDisplayed + " " + numOfPeople + " : " + numberOfPeople, ToastLength.Long).Show();
-            //          Window.SetNavigationBarColor(new Android.Graphics.Color(Color.ParseColor("#008000")));
-            //          Window.SetStatusBarColor(new Android.Graphics.Color(Color.ParseColor("#008000")));
-            //          ActionBar.SetBackgroundDrawable(new Android.Graphics.Drawables.ColorDrawable(Color.ParseColor("#26A65B")));
-            //          mapButton.SetBackgroundResource(Resource.Drawable.green_button);
-
-            //    }
-
-            //    // Prepare the next activity
-            //    Intent matchActivity = new Intent(this, typeof(MatchActivity));
-            //    matchActivity.PutExtra(Constants.IntentExtraNames.RouteCoordinatesJson, JsonConvert.SerializeObject(destinationCoordinates));
-            //    matchActivity.PutExtra(Constants.IntentExtraNames.RequestType, type);
-            //    StartActivity(matchActivity);
-            //}
-
+            if (type == mRides_app.Models.Request.TYPE_DRIVER || type == mRides_app.Models.Request.TYPE_RIDER)
+            {
+                if (type == mRides_app.Models.Request.TYPE_DRIVER)
+                {
+                    typeDisplayed = userDriver;
+                    //Manually setting the theme color since you can only set the theme when creating a new activity
+                    Window.SetNavigationBarColor(new Android.Graphics.Color(Color.ParseColor("#EF5350")));
+                    Window.SetStatusBarColor(new Android.Graphics.Color(Color.ParseColor("#ba3c39")));
+                    ActionBar.SetBackgroundDrawable(new Android.Graphics.Drawables.ColorDrawable(Color.ParseColor("#ba3c39")));
+                }
+                else
+                {
+                    typeDisplayed = userRider;
+                    Window.SetNavigationBarColor(Android.Graphics.Color.DarkGreen);
+                    Window.SetStatusBarColor(Android.Graphics.Color.DarkGreen);
+                    ActionBar.SetBackgroundDrawable(new Android.Graphics.Drawables.ColorDrawable(Color.ParseColor("#26A65B")));
+                }
+            }
         }
     }
-    }
+}

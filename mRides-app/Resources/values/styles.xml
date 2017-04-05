@@ -50,7 +50,11 @@
   </style>
   <style name="AlertDialogCustom" parent="Theme.AppCompat.Light.Dialog.Alert">
     <item name="android:textColor">@android:color/black</item>
-    <item name="android:textSize">5sp</item>
+    <item name="android:textSize">12dp</item>
+    <item name="android:buttonBarButtonStyle">@style/button_text</item>
+    <item name="buttonBarPositiveButtonStyle">@style/button_text</item>
+    <item name="buttonBarNegativeButtonStyle">@style/button_text</item>
+    <item name="buttonBarNeutralButtonStyle">@style/button_text</item>
   </style>
 </resources>
 
