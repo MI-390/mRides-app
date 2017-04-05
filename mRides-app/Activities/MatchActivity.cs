@@ -73,10 +73,12 @@ namespace mRides_app
             this.matchedUserName.Text = Resources.GetString(Resource.String.matchLoading);
 
             this.matchedUserPicture = FindViewById<ImageView>(Resource.Id.matchedUserPicture);
+            this.matchedUserPicture.Visibility = ViewStates.Invisible;
 
             this.matchedUserRatingBar = FindViewById<RatingBar>(Resource.Id.ratingBarRiderDestinationMatch);
             this.matchedUserRatingBar.Rating = 0;
 
+            this.matchedUserGoingTo = FindViewById<TextView>(Resource.Id.userMatchedDestination);
             this.matchedUserGoingTo.Text = Resources.GetString(Resource.String.matchLoading);
 
             this.matchedUserFrom = FindViewById<TextView>(Resource.Id.userMatchedOrigin);
@@ -84,10 +86,12 @@ namespace mRides_app
 
             // Capture the accept button
             this.acceptButton = FindViewById<Button>(Resource.Id.userMatchButtonAccept);
+            this.acceptButton.Visibility = ViewStates.Invisible;
             this.acceptButton.Click += delegate { this.Proceed(true); };
 
             // Capture the decline button
             this.declineButton = FindViewById<Button>(Resource.Id.userMatchButtonDecline);
+            this.declineButton.Visibility = ViewStates.Invisible;
             this.declineButton.Click += delegate { this.Proceed(false); };
 
             // Capture the done button
@@ -97,6 +101,7 @@ namespace mRides_app
             // Capture the chat button
             this.chatButton = FindViewById<Button>(Resource.Id.userMatchingChatButton);
             this.chatButton.Click += delegate { this.Chat(); };
+            this.chatButton.Visibility = ViewStates.Invisible;
             LinearLayout layout = FindViewById<LinearLayout>(Resource.Id.matchingLinearLayout3);
             // Set button colors sto the right color
             if (User.currentUser != null)
@@ -154,6 +159,10 @@ namespace mRides_app
         public void OnFindMatchComplete(List<Request> requests)
         {
             // Enable back the clicks on the elements
+            this.matchedUserPicture.Visibility = ViewStates.Visible;
+            this.chatButton.Visibility = ViewStates.Visible;
+            this.acceptButton.Visibility = ViewStates.Visible;
+            this.declineButton.Visibility = ViewStates.Visible;
 
             // Start giving the user choices of matched users
             this.matchedRequests = requests;
