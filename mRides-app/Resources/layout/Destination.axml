@@ -22,10 +22,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center|top"
                 android:background="@drawable/red_button"
-                android:id="@+id/mapButton"
-                android:text="Change origin"
                 android:layout_gravity="left|top"
                 android:id="@+id/modifyDestinationButton"
                 android:text="Modify Destination"
