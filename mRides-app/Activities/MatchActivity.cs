@@ -163,7 +163,6 @@ namespace mRides_app
                     this.declineButton.SetBackgroundResource(Resource.Drawable.red_button);
                     this.doneButton.SetBackgroundResource(Resource.Drawable.red_button);
                     this.chatButton.SetBackgroundResource(Resource.Drawable.smsiconred);
-                    //layout.SetBackgroundColor(new Android.Graphics.Color(Color.ParseColor("#f0524f")));
                     layout.SetBackgroundResource(Resource.Drawable.redRoundedBg);
                 }
             }
