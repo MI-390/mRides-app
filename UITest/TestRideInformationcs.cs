@@ -31,7 +31,7 @@ namespace UITest
             UserMapper userMapper = UserMapper.getInstance();
             User user = userMapper.GetUserByFacebookId(113083069215300);
             User.currentUser = user;
-            User.currentUser.currentType = "driver";
+            User.currentUser.currentType = "rider";
 
         }
 
@@ -75,7 +75,6 @@ namespace UITest
             Assert.AreNotEqual(valueOfSmokerRadio, isTrue); // Just to see that the opposite also works
 
             Assert.AreEqual("Female", results[0].Text);
-            app.Tap(c => c.Marked("buttonDone"));
         }
 
         [Test]
