@@ -93,6 +93,19 @@ namespace mRides_app
             autocompleteFragment = (PlaceAutocompleteFragment)FragmentManager.FindFragmentById(Resource.Id.place_autocomplete_fragment);
             autocompleteFragment.SetHint("Destination?");
 
+            // Set appropriate color to the button
+            if (User.currentUser != null)
+            {
+                if (User.currentUser.currentType == "rider")
+                {
+                    mapButton.SetBackgroundResource(Resource.Drawable.green_button);
+                }
+                else
+                {
+                    mapButton.SetBackgroundResource(Resource.Drawable.red_button);
+                }
+            }
+
             //AutocompleteFilter typeFilterDestination = new AutocompleteFilter.Builder().SetTypeFilter(AutocompleteFilter.TypeFilterEstablishment).Build();
             //autocompleteFragment.SetFilter(typeFilterDestination);
             // Register a listener to receive callbacks when a place has been selected or an error has occurred.
@@ -104,13 +117,13 @@ namespace mRides_app
             if (!mapButtonClicked)
             {
                 mapButtonClicked = true;
-                mapButton.Text = "Click to choose destination";
+                mapButton.Text = "Choose destination";
                 autocompleteFragment.SetHint("Origin?");
             }
             else
             {
                 mapButtonClicked = false;
-                mapButton.Text = "Click to choose origin";
+                mapButton.Text = "Choose origin";
                 autocompleteFragment.SetHint("Destination?");
             }
         }
@@ -580,6 +593,7 @@ namespace mRides_app
                     Window.SetNavigationBarColor(new Android.Graphics.Color(Color.ParseColor("#EF5350")));
                     Window.SetStatusBarColor(new Android.Graphics.Color(Color.ParseColor("#ba3c39")));
                     ActionBar.SetBackgroundDrawable(new Android.Graphics.Drawables.ColorDrawable(Color.ParseColor("#ba3c39")));
+                    mapButton.SetBackgroundResource(Resource.Drawable.red_button);
                 }
                 else
                 {
@@ -588,6 +602,7 @@ namespace mRides_app
                     Window.SetNavigationBarColor(Android.Graphics.Color.DarkGreen);
                     Window.SetStatusBarColor(Android.Graphics.Color.DarkGreen);
                     ActionBar.SetBackgroundDrawable(new Android.Graphics.Drawables.ColorDrawable(Color.ParseColor("#26A65B")));
+                    mapButton.SetBackgroundResource(Resource.Drawable.green_button);
                 }
 
                 // Prepare the next activity

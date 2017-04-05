@@ -2807,9 +2807,6 @@ namespace mRides_app
 			// aapt resource value: 0x7f0900cd
 			public const int place_autocomplete_separator = 2131296461;
 			
-			// aapt resource value: 0x7f0900f4
-			public const int profileBackground = 2131296500;
-			
 			// aapt resource value: 0x7f090006
 			public const int progress_circular = 2131296262;
 			
@@ -3133,6 +3130,9 @@ namespace mRides_app
 			
 			// aapt resource value: 0x7f0900fb
 			public const int userProfileGSD = 2131296507;
+			
+			// aapt resource value: 0x7f0900f4
+			public const int userProfileLinearLayout1 = 2131296500;
 			
 			// aapt resource value: 0x7f0900f5
 			public const int userProfileLinearLayout2 = 2131296501;
