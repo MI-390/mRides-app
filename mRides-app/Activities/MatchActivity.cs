@@ -152,7 +152,52 @@ namespace mRides_app
             {
                 matchedUser = currentRequest.driver;
             }
-            
+
+            // Display
+            SetContentView(Resource.Layout.Match);
+
+            // Capture the accept button
+            this.acceptButton = FindViewById<Button>(Resource.Id.userMatchButtonAccept);
+            this.acceptButton.Click += delegate { this.Proceed(true); };
+
+            // Capture the decline button
+            this.declineButton = FindViewById<Button>(Resource.Id.userMatchButtonDecline);
+            this.declineButton.Click += delegate { this.Proceed(false); };
+
+            // Capture the done button
+            this.doneButton = FindViewById<Button>(Resource.Id.userMatchButtonDone);
+            this.doneButton.Click += delegate { this.Finish(); };
+
+            // Capture the chat button
+            this.chatButton = FindViewById<Button>(Resource.Id.userMatchingChatButton);
+            this.chatButton.Click += delegate { this.Chat(); };
+            LinearLayout layout = FindViewById<LinearLayout>(Resource.Id.matchingLinearLayout3);
+            // Set button colors sto the right color
+            if (User.currentUser != null)
+            {
+                if (User.currentUser.currentType == "rider")
+                {
+                    this.acceptButton.SetBackgroundResource(Resource.Drawable.green_button);
+                    this.declineButton.SetBackgroundResource(Resource.Drawable.green_button);
+                    this.doneButton.SetBackgroundResource(Resource.Drawable.green_button);
+                    this.chatButton.SetBackgroundResource(Resource.Drawable.smsicongreen);
+                    layout.SetBackgroundResource(Resource.Drawable.greenRoundedBg);
+                }
+                else
+                {
+                    this.acceptButton.SetBackgroundResource(Resource.Drawable.red_button);
+                    this.declineButton.SetBackgroundResource(Resource.Drawable.red_button);
+                    this.doneButton.SetBackgroundResource(Resource.Drawable.red_button);
+                    this.chatButton.SetBackgroundResource(Resource.Drawable.smsiconred);
+                    layout.SetBackgroundResource(Resource.Drawable.redRoundedBg);
+                }
+            }
+
+            // Put the map fragment programatically
+            this.mapFragment = MapFragment.NewInstance();
+            var ft = FragmentManager.BeginTransaction();
+            ft.Add(Resource.Id.userMatchingMapPlaceHolder, mapFragment).Commit();
+
             // Display the rider's location
             this.mapFragment.GetMapAsync(this);
             
@@ -164,14 +209,6 @@ namespace mRides_app
             {
                 this.matchedUserPicture.SetImageBitmap(userPicture);
             }
-
-            // Set the time of the matched user's request
-            this.show_time = FindViewById<TextView>(Resource.Id.displayTime);
-            this.hour = currentRequest.dateTime.Hour;
-            this.minute = currentRequest.dateTime.Minute;
-            
-            string time = string.Format("{0}:{1}", hour, minute.ToString().PadLeft(2, '0'));
-            this.show_time.Text = time;
 
             // Display the matched user's name
             this.matchedUserName = FindViewById<TextView>(Resource.Id.matchedUserName);
