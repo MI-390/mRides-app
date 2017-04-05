@@ -577,16 +577,16 @@ namespace mRides_app
                     typeDisplayed = userDriver;
                     Toast.MakeText(ApplicationContext, usrType + " : " + typeDisplayed, ToastLength.Long).Show();
                     // Manually setting the theme color since you can only set the theme when creating a new activity
-                    Window.SetNavigationBarColor(new Android.Graphics.Color(Color.ParseColor("#EF5350")));
+                    Window.SetNavigationBarColor(new Android.Graphics.Color(Color.ParseColor("#ba3c39")));
                     Window.SetStatusBarColor(new Android.Graphics.Color(Color.ParseColor("#ba3c39")));
-                    ActionBar.SetBackgroundDrawable(new Android.Graphics.Drawables.ColorDrawable(Color.ParseColor("#ba3c39")));
+                    ActionBar.SetBackgroundDrawable(new Android.Graphics.Drawables.ColorDrawable(Color.ParseColor("#EF5350")));
                 }
                 else
                 {
                     typeDisplayed = userRider;
                     Toast.MakeText(ApplicationContext, usrType + " : " + typeDisplayed + " " + numOfPeople + " : " + numberOfPeople, ToastLength.Long).Show();
-                    Window.SetNavigationBarColor(Android.Graphics.Color.DarkGreen);
-                    Window.SetStatusBarColor(Android.Graphics.Color.DarkGreen);
+                    Window.SetNavigationBarColor(new Android.Graphics.Color(Color.ParseColor("#008000")));
+                    Window.SetStatusBarColor(new Android.Graphics.Color(Color.ParseColor("#008000")));
                     ActionBar.SetBackgroundDrawable(new Android.Graphics.Drawables.ColorDrawable(Color.ParseColor("#26A65B")));
                 }
 
