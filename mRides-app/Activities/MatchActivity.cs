@@ -13,6 +13,7 @@ using Android.Widget;
 using mRides_app.Models;
 using mRides_app.Constants;
 using mRides_app.Mappers;
+using mRides_app.Tasks;
 using Android.Graphics;
 using Newtonsoft.Json;
 using Android.Gms.Maps;
@@ -29,17 +30,14 @@ namespace mRides_app
     /// which makes up a route.
     /// </summary>
     [Activity(Label ="MatchActivity")]
-    public class MatchActivity : Activity, IOnMapReadyCallback
+    public class MatchActivity : Activity, IOnMapReadyCallback, IOnFindMatchCompleteCallback
     {
-
+        // Page elements
         private TextView show_time;
         private TextView matchedUserName;
         private TextView matchedUserFrom;
         private TextView matchedUserGoingTo;
         private TextView matchedUserRole;
-
-        private int hour;
-        private int minute;
         private ImageView matchedUserPicture;
         private Button acceptButton;
         private Button declineButton;
@@ -49,21 +47,48 @@ namespace mRides_app
         private GoogleMap matchedUserLocationMap;
         private MapFragment mapFragment;
 
+        // Request data
         private string userType;
-
+        private int hour;
+        private int minute;
         private List<Request> matchedRequests;
         private Request userRequest;
 
         // Keeps track of the index of the rider request currently displayed
         private int currentMatchedUserIndex;
 
+        // Mappers
         private UserMapper userMapper;
-        private ConsoleMapper consoleMapper; 
+        private ConsoleMapper consoleMapper;
 
         protected override void OnCreate(Bundle bundle)
         {
             UserMapper.getInstance().setTheme(this);
             base.OnCreate(bundle);
+
+            SetContentView(Resource.Layout.Match);
+
+            // Capture the accept button
+            this.acceptButton = FindViewById<Button>(Resource.Id.userMatchButtonAccept);
+            this.acceptButton.Click += delegate { this.Proceed(true); };
+
+            // Capture the decline button
+            this.declineButton = FindViewById<Button>(Resource.Id.userMatchButtonDecline);
+            this.declineButton.Click += delegate { this.Proceed(false); };
+
+            // Capture the done button
+            this.doneButton = FindViewById<Button>(Resource.Id.userMatchButtonDone);
+            this.doneButton.Click += delegate { this.Finish(); };
+
+            // Capture the chat button
+            this.chatButton = FindViewById<Button>(Resource.Id.userMatchingChatButton);
+            this.chatButton.Click += delegate { this.Chat(); };
+
+            // Put the map fragment programatically
+            this.mapFragment = MapFragment.NewInstance();
+            var ft = FragmentManager.BeginTransaction();
+            ft.Add(Resource.Id.userMatchingMapPlaceHolder, mapFragment).Commit();
+
 
             // Obtain the mapper instances
             this.userMapper = UserMapper.getInstance();
@@ -74,27 +99,21 @@ namespace mRides_app
             string json = Intent.GetStringExtra(IntentExtraNames.RouteCoordinatesJson);
             List <DestinationCoordinate> coordinates = JsonConvert.DeserializeObject<List<DestinationCoordinate>>(Intent.GetStringExtra(IntentExtraNames.RouteCoordinatesJson));
 
-            // Send the request to the server
-            this.userRequest = new Request
-            {
-                destinationCoordinates = coordinates,
-                destination = coordinates.Last().coordinate,
-                location = coordinates.First().coordinate,
-                type = this.userType
-            };
-            if(this.userType == Request.TYPE_DRIVER)
-            {
-                this.matchedRequests = consoleMapper.FindRiders(this.userRequest);
-            }
-            else
-            {
-                this.matchedRequests = consoleMapper.FindDrivers(this.userRequest);
-            }
-            
+            // Send an async request to find matches
+            FindMatchAsyncTask findMatchTask = new FindMatchAsyncTask(this.userType, coordinates, this);
+            findMatchTask.Execute();
+        }
 
+        /// <summary>
+        /// Method called when finding the match from the server is done
+        /// </summary>
+        /// <param name="requests">List of matched requests</param>
+        public void OnFindMatchComplete(List<Request> requests)
+        {
             // Start giving the user choices of matched users
+            this.matchedRequests = requests;
             this.currentMatchedUserIndex = 0;
-            if(this.matchedRequests.Count > 0)
+            if (this.matchedRequests.Count > 0)
             {
                 this.UpdateDisplay();
             }
@@ -126,31 +145,7 @@ namespace mRides_app
             {
                 matchedUser = currentRequest.driver;
             }
-
-            // Display
-            SetContentView(Resource.Layout.Match);
-
-            // Capture the accept button
-            this.acceptButton = FindViewById<Button>(Resource.Id.userMatchButtonAccept);
-            this.acceptButton.Click += delegate { this.Proceed(true); };
-
-            // Capture the decline button
-            this.declineButton = FindViewById<Button>(Resource.Id.userMatchButtonDecline);
-            this.declineButton.Click += delegate { this.Proceed(false); };
-
-            // Capture the done button
-            this.doneButton = FindViewById<Button>(Resource.Id.userMatchButtonDone);
-            this.doneButton.Click += delegate { this.Finish(); };
-
-            // Capture the chat button
-            this.chatButton = FindViewById<Button>(Resource.Id.userMatchingChatButton);
-            this.chatButton.Click += delegate { this.Chat(); };
-
-            // Put the map fragment programatically
-            this.mapFragment = MapFragment.NewInstance();
-            var ft = FragmentManager.BeginTransaction();
-            ft.Add(Resource.Id.userMatchingMapPlaceHolder, mapFragment).Commit();
-
+            
             // Display the rider's location
             this.mapFragment.GetMapAsync(this);
             
@@ -381,6 +376,6 @@ namespace mRides_app
             return formattedAddress;
         }
 
-
+        
     }
 }
