@@ -93,6 +93,22 @@ namespace mRides_app
             mapButton = (Button)FindViewById(Resource.Id.mapButton);
             mapButtonClicked = false;
             mapButton.Click += OnMapButtonClick;
+        
+
+            // Set appropriate color to the button
+            if (User.currentUser != null)
+            {
+                if (User.currentUser.currentType == "rider")
+                {
+                    mapButton.SetBackgroundResource(Resource.Drawable.green_button);
+                }
+                else
+                {
+                    mapButton.SetBackgroundResource(Resource.Drawable.red_button);
+                }
+            }
+
+
         }
 
         void OnMapButtonClick(object sender, EventArgs e)
@@ -100,13 +116,13 @@ namespace mRides_app
             if (!mapButtonClicked)
             {
                 mapButtonClicked = true;
-                mapButton.Text = "Click to choose destination";
+                mapButton.Text = "Choose destination";
                 autocompleteFragment.SetHint("Origin?");
             }
             else
             {
                 mapButtonClicked = false;
-                mapButton.Text = "Click to choose origin";
+                mapButton.Text = "Choose origin";
                 autocompleteFragment.SetHint("Destination?");
             }
         }
@@ -634,23 +650,26 @@ namespace mRides_app
             //         Window.SetNavigationBarColor(new Android.Graphics.Color(Color.ParseColor("#EF5350")));
             //         Window.SetStatusBarColor(new Android.Graphics.Color(Color.ParseColor("#ba3c39")));
             //         ActionBar.SetBackgroundDrawable(new Android.Graphics.Drawables.ColorDrawable(Color.ParseColor("#ba3c39")));
+            //         mapButton.SetBackgroundResource(Resource.Drawable.red_button);
             //    }
             //    else
             //    {
-            //        typeDisplayed = userRider;
-            //        Toast.MakeText(ApplicationContext, usrType + " : " + typeDisplayed + " " + numOfPeople + " : " + numberOfPeople, ToastLength.Long).Show();
-            //        Window.SetNavigationBarColor(Android.Graphics.Color.DarkGreen);
-            //        Window.SetStatusBarColor(Android.Graphics.Color.DarkGreen);
-            //        ActionBar.SetBackgroundDrawable(new Android.Graphics.Drawables.ColorDrawable(Color.ParseColor("#26A65B")));
+            //          typeDisplayed = userRider;
+            //          Toast.MakeText(ApplicationContext, usrType + " : " + typeDisplayed + " " + numOfPeople + " : " + numberOfPeople, ToastLength.Long).Show();
+            //          Window.SetNavigationBarColor(new Android.Graphics.Color(Color.ParseColor("#008000")));
+            //          Window.SetStatusBarColor(new Android.Graphics.Color(Color.ParseColor("#008000")));
+            //          ActionBar.SetBackgroundDrawable(new Android.Graphics.Drawables.ColorDrawable(Color.ParseColor("#26A65B")));
+            //          mapButton.SetBackgroundResource(Resource.Drawable.green_button);
+
             //    }
 
-                //    // Prepare the next activity
-                //    Intent matchActivity = new Intent(this, typeof(MatchActivity));
-                //    matchActivity.PutExtra(Constants.IntentExtraNames.RouteCoordinatesJson, JsonConvert.SerializeObject(destinationCoordinates));
-                //    matchActivity.PutExtra(Constants.IntentExtraNames.RequestType, type);
-                //    StartActivity(matchActivity);
-                //}
+            //    // Prepare the next activity
+            //    Intent matchActivity = new Intent(this, typeof(MatchActivity));
+            //    matchActivity.PutExtra(Constants.IntentExtraNames.RouteCoordinatesJson, JsonConvert.SerializeObject(destinationCoordinates));
+            //    matchActivity.PutExtra(Constants.IntentExtraNames.RequestType, type);
+            //    StartActivity(matchActivity);
+            //}
 
-            }
         }
+    }
     }

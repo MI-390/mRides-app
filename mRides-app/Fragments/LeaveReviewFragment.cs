@@ -50,11 +50,11 @@ namespace mRides_app
             {
                 if (User.currentUser.currentType == "rider")
                 {
-                    submitButton.SetBackgroundResource(Resource.Drawable.red_button);
+                    submitButton.SetBackgroundResource(Resource.Drawable.green_button);
                 }
                 else
                 {
-                    submitButton.SetBackgroundResource(Resource.Drawable.green_button);
+                    submitButton.SetBackgroundResource(Resource.Drawable.red_button);
                 }
             }
 
