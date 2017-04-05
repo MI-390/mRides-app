@@ -147,6 +147,10 @@ namespace mRides_app
             string json = Intent.GetStringExtra(IntentExtraNames.RouteCoordinatesJson);
             List <DestinationCoordinate> coordinates = JsonConvert.DeserializeObject<List<DestinationCoordinate>>(Intent.GetStringExtra(IntentExtraNames.RouteCoordinatesJson));
 
+            // Display the role of the matched user (opposite of the current user type)
+            this.matchedUserRole = FindViewById<TextView>(Resource.Id.matchedUserRole);
+            this.matchedUserRole.Text = this.userType == Request.TYPE_DRIVER ? Resources.GetString(Resource.String.user_rider) : Resources.GetString(Resource.String.user_driver);
+            
             // Send an async request to find matches
             this.userRequest = new Request
             {
@@ -221,7 +225,6 @@ namespace mRides_app
             this.mapFragment.GetMapAsync(this);
             
             // Set the profile picture
-            this.matchedUserPicture = FindViewById<ImageView>(Resource.Id.matchedUserPicture);
             this.matchedUserPicture.Click += delegate { this.OpenUserProfile(); };
             Bitmap userPicture = userMapper.GetUserFacebookProfilePicture(matchedUser.facebookID);
             if (userPicture != null)
@@ -230,13 +233,8 @@ namespace mRides_app
             }
 
             // Display the matched user's name
-            this.matchedUserName = FindViewById<TextView>(Resource.Id.matchedUserName);
             this.matchedUserName.Text = matchedUser.firstName + " " + matchedUser.lastName;
-
-            // Display the role of the matched user (opposite of the current user type)
-            this.matchedUserRole = FindViewById<TextView>(Resource.Id.matchedUserRole);
-            this.matchedUserRole.Text = this.userType == Request.TYPE_DRIVER ? Resources.GetString(Resource.String.user_rider) : Resources.GetString(Resource.String.user_driver);
-
+            
             // Obtain the matched user's origin and destination coordinates and set the addresses
             string[] matchedUserOriginCoordinates;
             string[] matchedUserDestinationCoordinates;
@@ -262,7 +260,6 @@ namespace mRides_app
             }
             
             // Update the rating bar to the average rating the rider received
-            this.matchedUserRatingBar = FindViewById<RatingBar>(Resource.Id.ratingBarRiderDestinationMatch);
             List<Models.Feedback> riderFeedbacks = UserMapper.getInstance().GetReviews(matchedUser.id);
 
             if (riderFeedbacks.Count > 0)
