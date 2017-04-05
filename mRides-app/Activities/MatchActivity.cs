@@ -185,14 +185,6 @@ namespace mRides_app
                 this.matchedUserPicture.SetImageBitmap(userPicture);
             }
 
-            //// Set the time of the matched user's request
-            //this.show_time = FindViewById<TextView>(Resource.Id.displayTime);
-            //this.hour = currentRequest.dateTime.Hour;
-            //this.minute = currentRequest.dateTime.Minute;
-            
-            //string time = string.Format("{0}:{1}", hour, minute.ToString().PadLeft(2, '0'));
-            //this.show_time.Text = time;
-
             // Display the matched user's name
             this.matchedUserName = FindViewById<TextView>(Resource.Id.matchedUserName);
             this.matchedUserName.Text = matchedUser.firstName + " " + matchedUser.lastName;
