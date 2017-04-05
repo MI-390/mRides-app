@@ -143,7 +143,7 @@ namespace mRides_app
             this.currentMatchedUserIndex = 0;
             if (this.matchedRequests.Count > 0)
             {
-                this.UpdateDisplay();
+                RunOnUiThread(() => this.UpdateDisplay());
             }
             else
             {
@@ -266,7 +266,7 @@ namespace mRides_app
             // Update to the view if there is a next one, otherwise finish this activity
             if (++this.currentMatchedUserIndex < this.matchedRequests.Count)
             {
-                this.UpdateDisplay();
+                RunOnUiThread(()=> this.UpdateDisplay());
             }
             else
             {
