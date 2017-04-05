@@ -83,6 +83,27 @@ namespace mRides_app
             // Capture the chat button
             this.chatButton = FindViewById<Button>(Resource.Id.userMatchingChatButton);
             this.chatButton.Click += delegate { this.Chat(); };
+            LinearLayout layout = FindViewById<LinearLayout>(Resource.Id.matchingLinearLayout3);
+            // Set button colors sto the right color
+            if (User.currentUser != null)
+            {
+                if (User.currentUser.currentType == "rider")
+                {
+                    this.acceptButton.SetBackgroundResource(Resource.Drawable.green_button);
+                    this.declineButton.SetBackgroundResource(Resource.Drawable.green_button);
+                    this.doneButton.SetBackgroundResource(Resource.Drawable.green_button);
+                    this.chatButton.SetBackgroundResource(Resource.Drawable.smsicongreen);
+                    layout.SetBackgroundResource(Resource.Drawable.greenRoundedBg);
+                }
+                else
+                {
+                    this.acceptButton.SetBackgroundResource(Resource.Drawable.red_button);
+                    this.declineButton.SetBackgroundResource(Resource.Drawable.red_button);
+                    this.doneButton.SetBackgroundResource(Resource.Drawable.red_button);
+                    this.chatButton.SetBackgroundResource(Resource.Drawable.smsiconred);
+                    layout.SetBackgroundResource(Resource.Drawable.redRoundedBg);
+                }
+            }
 
             // Put the map fragment programatically
             this.mapFragment = MapFragment.NewInstance();
@@ -151,46 +172,6 @@ namespace mRides_app
             else
             {
                 matchedUser = currentRequest.driver;
-            }
-
-            // Display
-            SetContentView(Resource.Layout.Match);
-
-            // Capture the accept button
-            this.acceptButton = FindViewById<Button>(Resource.Id.userMatchButtonAccept);
-            this.acceptButton.Click += delegate { this.Proceed(true); };
-
-            // Capture the decline button
-            this.declineButton = FindViewById<Button>(Resource.Id.userMatchButtonDecline);
-            this.declineButton.Click += delegate { this.Proceed(false); };
-
-            // Capture the done button
-            this.doneButton = FindViewById<Button>(Resource.Id.userMatchButtonDone);
-            this.doneButton.Click += delegate { this.Finish(); };
-
-            // Capture the chat button
-            this.chatButton = FindViewById<Button>(Resource.Id.userMatchingChatButton);
-            this.chatButton.Click += delegate { this.Chat(); };
-            LinearLayout layout = FindViewById<LinearLayout>(Resource.Id.matchingLinearLayout3);
-            // Set button colors sto the right color
-            if (User.currentUser != null)
-            {
-                if (User.currentUser.currentType == "rider")
-                {
-                    this.acceptButton.SetBackgroundResource(Resource.Drawable.green_button);
-                    this.declineButton.SetBackgroundResource(Resource.Drawable.green_button);
-                    this.doneButton.SetBackgroundResource(Resource.Drawable.green_button);
-                    this.chatButton.SetBackgroundResource(Resource.Drawable.smsicongreen);
-                    layout.SetBackgroundResource(Resource.Drawable.greenRoundedBg);
-                }
-                else
-                {
-                    this.acceptButton.SetBackgroundResource(Resource.Drawable.red_button);
-                    this.declineButton.SetBackgroundResource(Resource.Drawable.red_button);
-                    this.doneButton.SetBackgroundResource(Resource.Drawable.red_button);
-                    this.chatButton.SetBackgroundResource(Resource.Drawable.smsiconred);
-                    layout.SetBackgroundResource(Resource.Drawable.redRoundedBg);
-                }
             }
 
             // Put the map fragment programatically
