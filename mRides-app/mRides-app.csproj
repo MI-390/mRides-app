@@ -375,7 +375,6 @@
     <AndroidResource Include="Resources\drawable\mrides_logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <XliffResource Include="MultilingualResources\mRides-app.es.xlf" />
     <XliffResource Include="MultilingualResources\mRides-app.fr.xlf" />
   </ItemGroup>
   <ItemGroup>
@@ -429,9 +428,7 @@
     <AndroidResource Include="Resources\drawable\trashcanCancel.png" />
     <AndroidResource Include="Resources\drawable\loyolaTest.PNG" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\values-es\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\smsicongreen.png" />
   </ItemGroup>
