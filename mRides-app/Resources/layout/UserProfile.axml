@@ -9,6 +9,7 @@
         android:layout_width="fill_parent"
         android:layout_height="257.5dp"
         android:orientation="horizontal"
+        android:id="@+id/profileBackground"
         android:background="#f0524f"
         android:layout_marginTop="0dp">
         <LinearLayout

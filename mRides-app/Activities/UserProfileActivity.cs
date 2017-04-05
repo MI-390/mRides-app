@@ -65,6 +65,21 @@ namespace mRides_app
 
             }
 
+            LinearLayout layout = FindViewById<LinearLayout>(Resource.Id.profileBackground);
+
+            // Set background color to the right color
+            if (User.currentUser != null)
+            {
+                if (User.currentUser.currentType == "rider")
+                {
+                    layout.SetBackgroundColor(new Android.Graphics.Color(Color.ParseColor("#26A65B")));
+                }
+                else
+                {
+                    layout.SetBackgroundColor(new Android.Graphics.Color(Color.ParseColor("#EF5350")));
+                }
+            }
+
             var userProfileFeedbackAdapter = new UserProfileFeedbackAdapter(this, userFeedback);
             var feedbackListView = FindViewById<ListView>(Resource.Id.userProfileListView);
             feedbackListView.Adapter = userProfileFeedbackAdapter;
