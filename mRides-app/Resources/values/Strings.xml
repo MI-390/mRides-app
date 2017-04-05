@@ -104,7 +104,8 @@
   <string name="userMatchFrom">From:</string>
   <string name="matchRequestSent">A request has been sent to this rider</string>
   <string name="matchNoMoreMatch">No more match</string>
-  <string name="matchNoMatchFound">No more match found</string>
+  <string name="matchNoMatchFound">No match found</string>
+  <string name="matchLoading">Loading...</string>
   
   
  

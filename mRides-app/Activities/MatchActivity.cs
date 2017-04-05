@@ -68,6 +68,20 @@ namespace mRides_app
 
             SetContentView(Resource.Layout.Match);
 
+            // While loading, set the texts to loading, and disable click
+            this.matchedUserName = FindViewById<TextView>(Resource.Id.matchedUserName);
+            this.matchedUserName.Text = Resources.GetString(Resource.String.matchLoading);
+
+            this.matchedUserPicture = FindViewById<ImageView>(Resource.Id.matchedUserPicture);
+
+            this.matchedUserRatingBar = FindViewById<RatingBar>(Resource.Id.ratingBarRiderDestinationMatch);
+            this.matchedUserRatingBar.Rating = 0;
+
+            this.matchedUserGoingTo.Text = Resources.GetString(Resource.String.matchLoading);
+
+            this.matchedUserFrom = FindViewById<TextView>(Resource.Id.userMatchedOrigin);
+            this.matchedUserFrom.Text = Resources.GetString(Resource.String.matchLoading);
+
             // Capture the accept button
             this.acceptButton = FindViewById<Button>(Resource.Id.userMatchButtonAccept);
             this.acceptButton.Click += delegate { this.Proceed(true); };
@@ -105,6 +119,7 @@ namespace mRides_app
                 }
             }
 
+
             // Put the map fragment programatically
             this.mapFragment = MapFragment.NewInstance();
             var ft = FragmentManager.BeginTransaction();
@@ -138,6 +153,8 @@ namespace mRides_app
         /// <param name="requests">List of matched requests</param>
         public void OnFindMatchComplete(List<Request> requests)
         {
+            // Enable back the clicks on the elements
+
             // Start giving the user choices of matched users
             this.matchedRequests = requests;
             this.currentMatchedUserIndex = 0;

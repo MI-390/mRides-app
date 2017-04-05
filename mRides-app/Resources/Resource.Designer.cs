@@ -3699,11 +3699,11 @@ namespace mRides_app
 			// aapt resource value: 0x7f07005b
 			public const int dest = 2131165275;
 			
-			// aapt resource value: 0x7f07007e
-			public const int driverMatchAccept = 2131165310;
-			
 			// aapt resource value: 0x7f07007f
-			public const int driverMatchDecline = 2131165311;
+			public const int driverMatchAccept = 2131165311;
+			
+			// aapt resource value: 0x7f070080
+			public const int driverMatchDecline = 2131165312;
 			
 			// aapt resource value: 0x7f07006e
 			public const int enterCommentForUser = 2131165294;
@@ -3755,6 +3755,9 @@ namespace mRides_app
 			
 			// aapt resource value: 0x7f070061
 			public const int luggage = 2131165281;
+			
+			// aapt resource value: 0x7f07007e
+			public const int matchLoading = 2131165310;
 			
 			// aapt resource value: 0x7f07007d
 			public const int matchNoMatchFound = 2131165309;
