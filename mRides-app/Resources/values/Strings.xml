@@ -106,7 +106,7 @@
   <string name="matchNoMoreMatch">No more match</string>
   <string name="matchNoMatchFound">No match found</string>
   <string name="matchLoading">Loading...</string>
-  
+  <string name="matchDeclined">You have declined the match</string>
   
  
    

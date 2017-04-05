@@ -298,7 +298,11 @@ namespace mRides_app
                     consoleMapper.Confirm(this.matchedRequests[currentMatchedUserIndex].ID, this.userRequest.ID);
                 }
                 
-                Toast.MakeText(ApplicationContext, Resources.GetString(Resource.String.matchRequestSent), ToastLength.Long).Show();
+                Toast.MakeText(ApplicationContext, Resources.GetString(Resource.String.matchRequestSent), ToastLength.Short).Show();
+            }
+            else
+            {
+                Toast.MakeText(ApplicationContext, Resources.GetString(Resource.String.matchDeclined), ToastLength.Short).Show();
             }
 
             // Update to the view if there is a next one, otherwise finish this activity
