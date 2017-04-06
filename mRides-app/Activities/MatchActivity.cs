@@ -25,6 +25,7 @@ using static mRides_app.Models.Request;
 using System.Threading;
 using System.Threading.Tasks;
 using mRides_app.Tasks.Callbacks;
+using Android.Locations;
 
 namespace mRides_app
 {
@@ -35,6 +36,9 @@ namespace mRides_app
     [Activity(Label ="MatchActivity")]
     public class MatchActivity : Activity, IOnMapReadyCallback, IOnFindMatchCompleteCallback, IOnGetReviewsAverageCompleteCallback
     {
+        // Link to the google api to obtain geocoding
+        private const string REVERSE_GEOCODING_BASE_URL = "https://maps.googleapis.com/maps/api/geocode/";
+
         // Page elements
         private TextView show_time;
         private TextView matchedUserName;
@@ -216,11 +220,11 @@ namespace mRides_app
             }
             if(matchedUserOriginCoordinates.Length > 1)
             {
-                this.matchedUserFrom.Text = ReverseGeoCode(matchedUserOriginCoordinates[0], matchedUserOriginCoordinates[1]);
+                this.SetMatchedUserLocation(Double.Parse(matchedUserOriginCoordinates[0]), Double.Parse(matchedUserOriginCoordinates[1]));
             }
             if(matchedUserDestinationCoordinates.Length > 1)
             {
-                this.matchedUserGoingTo.Text = ReverseGeoCode(matchedUserDestinationCoordinates[0], matchedUserDestinationCoordinates[1]);
+                this.SetMatchedUserDestination(Double.Parse(matchedUserDestinationCoordinates[0]), Double.Parse(matchedUserDestinationCoordinates[1]));
             }
         }
 
@@ -333,28 +337,11 @@ namespace mRides_app
             }
             return riderId + " & " + currentUser;
         }
+        
 
-        /// <summary>
-        /// Reverse geocode using Google API. Given the latitude and longitude,
-        /// this method will return a string representing the approximate address
-        /// of the location.
-        /// </summary>
-        /// <param name="lat"></param>
-        /// <param name="lng"></param>
-        /// <returns>string approximate address</returns>
-        public string ReverseGeoCode(string latitude, string longitude)
+        public string GetReverseGeoCodeEndApi(string latitude, string longitude)
         {
-            string reverseGeoCodingBaseUrl = "https://maps.googleapis.com/maps/api/geocode/";
-            string reverseGeoEndApi = "json?latlng=" + latitude + "," + longitude;
-            
-            var client = new RestClient(reverseGeoCodingBaseUrl);
-            var request = new RestRequest(reverseGeoEndApi, Method.GET);
-
-            var response = client.Execute(request);
-            dynamic requestResults = JObject.Parse(response.Content);
-            string formattedAddress = (string)requestResults["results"][0]["formatted_address"];
-                
-            return formattedAddress;
+            return "json?latlng=" + latitude + "," + longitude;
         }
 
         /// <summary>
@@ -388,6 +375,30 @@ namespace mRides_app
             {
                 RunOnUiThread(() => this.matchedUserPicture.SetImageBitmap(userPicture));
             }
+        }
+
+        /// <summary>
+        /// Sets the address of the matched user's location
+        /// </summary>
+        /// <param name="latitude">Latitude coordinate</param>
+        /// <param name="longitude">Longitude coordinate</param>
+        public async void SetMatchedUserLocation(double latitude, double longitude)
+        {
+            Geocoder geocoder = new Geocoder(this);
+            IList<Address> addresses = await geocoder.GetFromLocationAsync(latitude, longitude, 1);
+            RunOnUiThread(() => this.matchedUserFrom.Text = addresses[0].GetAddressLine(0));
+        }
+
+        /// <summary>
+        /// Sets the address of the matched user's destination
+        /// </summary>
+        /// <param name="latitude">Latitude coordinate</param>
+        /// <param name="longitude">Longitude coordinate</param>
+        public async void SetMatchedUserDestination(double latitude, double longitude)
+        {
+            Geocoder geocoder = new Geocoder(this);
+            IList<Address> addresses = await geocoder.GetFromLocationAsync(latitude, longitude, 1);
+            RunOnUiThread(() => this.matchedUserGoingTo.Text = addresses[0].GetAddressLine(0));
         }
 
 
