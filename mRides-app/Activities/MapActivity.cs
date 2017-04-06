@@ -93,6 +93,23 @@ namespace mRides_app
             // Alert Dialog
             openDestinationAlertDialog();
 
+            //mapButton = (Button)FindViewById(Resource.Id.mapButton);
+            //mapButtonClicked = false;
+            //mapButton.Click += OnMapButtonClick;
+        
+
+            // Set appropriate color to the button
+            //if (User.currentUser != null)
+            //{
+            //    if (User.currentUser.currentType == "rider")
+            //    {
+            //        mapButton.SetBackgroundResource(Resource.Drawable.green_button);
+            //    }
+            //    else
+            //    {
+            //        mapButton.SetBackgroundResource(Resource.Drawable.red_button);
+            //    }
+            //}
             modifyDestinationButton = (Button)FindViewById(Resource.Id.modifyDestinationButton);
             modifyDestinationButton.Visibility = ViewStates.Invisible;
 
