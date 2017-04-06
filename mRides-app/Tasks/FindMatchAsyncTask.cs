@@ -31,13 +31,14 @@ namespace mRides_app.Tasks
 
         // Mapper used to make the request
         private ConsoleMapper consoleMapper;
-        
+
         /// <summary>
-        /// 
+        /// Constructor building an asynchronous task that is responsible of finding matched requests
+        /// given a request and the callback object that implements the interface IOnFindMatchCompleteCallback,
+        /// allowing the invokation of a method upon successfully obtaining the list of matched requests.
         /// </summary>
-        /// <param name="userType"></param>
-        /// <param name="coordinates"></param>
-        /// <param name="callBackObject"></param>
+        /// <param name="userRequest">The request to which other requests should be matched with</param>
+        /// <param name="callBackObject">The callback object that will be invoked upon obtaining the matched request list</param>
         public FindMatchAsyncTask(Request userRequest, IOnFindMatchCompleteCallback callBackObject)
         {
             this.userRequest = userRequest;
@@ -47,9 +48,9 @@ namespace mRides_app.Tasks
         }
 
         /// <summary>
-        /// 
+        /// Obtains the list of requests that match the user request from the server.
         /// </summary>
-        /// <param name="params"></param>
+        /// <param name="params">Void parameters</param>
         /// <returns></returns>
         protected override Java.Lang.Void RunInBackground(params Java.Lang.Void[] @params)
         {
@@ -67,9 +68,10 @@ namespace mRides_app.Tasks
         }
 
         /// <summary>
-        /// 
+        /// Invoked upon successfully obtaining the list of matched requests. 
+        /// This method will return that list to the callback object.
         /// </summary>
-        /// <param name="result"></param>
+        /// <param name="result">Void parameter</param>
         protected override void OnPostExecute(Java.Lang.Void result)
         {
             this.callBackObject.OnFindMatchComplete(this.listOfMatchedRequests);
