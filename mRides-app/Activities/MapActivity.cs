@@ -270,7 +270,8 @@ namespace mRides_app
                 locationRequest.SetInterval(1000);
                 LocationServices.FusedLocationApi.RequestLocationUpdates(googleApiClient, locationRequest, this);
                 Location lastUserLocation = LocationServices.FusedLocationApi.GetLastLocation(googleApiClient);
-                userLocation = new LatLng(lastUserLocation.Latitude, lastUserLocation.Longitude);
+                if (lastUserLocation != null)
+                    userLocation = new LatLng(lastUserLocation.Latitude, lastUserLocation.Longitude);
             }
         }
 
