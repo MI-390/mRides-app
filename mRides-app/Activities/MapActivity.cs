@@ -42,12 +42,12 @@ namespace mRides_app
         private Android.Gms.Maps.GoogleMap map;
         private GoogleApiClient googleApiClient;
         private LocationRequest locationRequest;
-        private LatLng lastUserLocation;
         private bool locationPermissionGranted;
         private Marker originMarker;
         private Marker destinationMarker;
         private Button modifyDestinationButton;
         private Button confirmRideButton;
+        private LatLng userLocation;
         private bool mapButtonClicked;
         private Dictionary<User, Marker> usersOnMap;
         private List<LatLng> directionList;
@@ -152,7 +152,8 @@ namespace mRides_app
                 map.SetPadding(0, 250, 0, 0);
                 map.MyLocationButtonClick += OnMyLocationButtonClick;
             }
-            UpdateCameraPosition(lastUserLocation);
+            if (User.currentUser.latitude != null && User.currentUser.longitude != null)
+            UpdateCameraPosition(new LatLng(User.currentUser.latitude, User.currentUser.longitude));
         }
 
         //When the user clicks on a marker
@@ -222,7 +223,7 @@ namespace mRides_app
         //Update the camera position to a latitude/longitude coordinate position
         private void UpdateCameraPosition(LatLng position)
         {
-            if (map != null)
+            if (map != null && position != null)
             {
                 CameraPosition.Builder builder = CameraPosition.InvokeBuilder();
                 builder.Target(position);
@@ -247,25 +248,35 @@ namespace mRides_app
             map.AnimateCamera(cameraUpdate);
         }
 
+        //private async Task checkPermission()
+        //{
+        //    if (CheckSelfPermission(Android.Manifest.Permission.AccessFineLocation) == Android.Content.PM.Permission.Granted)
+        //        locationPermissionGranted = true;
+        //    else
+        //        Android.Support.V4.App.ActivityCompat.RequestPermissions(this, new string[] { Android.Manifest.Permission.AccessFineLocation }, 1);
+        //}
 
         //Get users current location
-        private LatLng getCurrentLocation()
+        private void getCurrentLocation()
         {
+            //await checkPermission();
+
             if (CheckSelfPermission(Android.Manifest.Permission.AccessFineLocation) == Android.Content.PM.Permission.Granted)
                 locationPermissionGranted = true;
-            else
-                RequestPermissions(new string[] { Android.Manifest.Permission.AccessFineLocation }, 1); // 1 is the request code for AccessFineLocation
 
             if (locationPermissionGranted)
             {
-                locationRequest = new LocationRequest();
-                locationRequest.SetPriority(100); //HIGH ACCURACY
-                Location lastUserLocation = LocationServices.FusedLocationApi.GetLastLocation(googleApiClient);
+                locationRequest = LocationRequest.Create();
+                locationRequest.SetPriority(LocationRequest.PriorityHighAccuracy); //HIGH ACCURACY
+                locationRequest.SetFastestInterval(500);
+                locationRequest.SetInterval(1000);
                 LocationServices.FusedLocationApi.RequestLocationUpdates(googleApiClient, locationRequest, this);
-                return new LatLng(lastUserLocation.Latitude, lastUserLocation.Longitude);
+                Location lastUserLocation = LocationServices.FusedLocationApi.GetLastLocation(googleApiClient);
+                userLocation = new LatLng(lastUserLocation.Latitude, lastUserLocation.Longitude);
             }
             else
-                return null;
+            {
+            }
         }
 
         public async Task setDestinationData(string url)
@@ -619,10 +630,15 @@ namespace mRides_app
         //When Google API Client is connected
         public void OnConnected(Bundle bundle)
         {
-            lastUserLocation = getCurrentLocation();
             //GetMapAsync(this) invokes the OnMapReady operation when ready
             if (map == null)
                 FragmentManager.FindFragmentById<MapFragment>(Resource.Id.map).GetMapAsync(this);
+            getCurrentLocation();
+            if (userLocation != null)
+            {
+                User.currentUser.latitude = userLocation.Latitude;
+                User.currentUser.longitude = userLocation.Longitude;
+            }
         }
 
         //When Google API Client is disconnected

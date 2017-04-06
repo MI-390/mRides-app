@@ -48,8 +48,30 @@ namespace mRides_app
             createRideButton.Click += delegate
             {
                 createRideButton.Pressed = true;
-                Intent i = new Intent(this, typeof(MapActivity));
-                StartActivity(i);
+                if (CheckSelfPermission(Android.Manifest.Permission.AccessFineLocation) != Android.Content.PM.Permission.Granted)
+                {
+                    AlertDialog.Builder permissionAlert = new AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
+                    permissionAlert.SetTitle("Permission to access fine location");
+                    permissionAlert.SetMessage("To create a new ride, you need to give us permission to access your location");
+
+                    //When user clicks on "Proceed"
+                    permissionAlert.SetPositiveButton("Ok", new EventHandler<DialogClickEventArgs>((senderAlert, args) =>
+                    {
+                        if (CheckSelfPermission(Android.Manifest.Permission.AccessFineLocation) != Android.Content.PM.Permission.Granted)
+                            Android.Support.V4.App.ActivityCompat.RequestPermissions(this, new string[] { Android.Manifest.Permission.AccessFineLocation }, 1);
+                    }));
+
+                    Dialog destinationDialog = permissionAlert.Create();
+                    destinationDialog.SetCancelable(false);
+                    destinationDialog.SetCanceledOnTouchOutside(false);
+                    destinationDialog.Show();
+                }
+                else
+                {
+                    Intent i = new Intent(this, typeof(MapActivity));
+                    StartActivity(i);
+                }  
+                           
             };
 
             preferencesButton.Click += delegate
@@ -86,6 +108,8 @@ namespace mRides_app
                 //Will later include code that logs a user out of the application
             };
 
+            if (CheckSelfPermission(Android.Manifest.Permission.AccessFineLocation) != Android.Content.PM.Permission.Granted)
+                Android.Support.V4.App.ActivityCompat.RequestPermissions(this, new string[] { Android.Manifest.Permission.AccessFineLocation }, 1);
         }
     }
 }

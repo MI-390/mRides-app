@@ -17,7 +17,7 @@ using System.Linq;
 namespace mRides_app
 {
     //ggrrg
-    [Activity(Label = "mRides_app", Icon = "@drawable/red_logo")]
+    [Activity(Label = "MainActivity")]
     public class MainActivity : Activity
     {
         string userName;
