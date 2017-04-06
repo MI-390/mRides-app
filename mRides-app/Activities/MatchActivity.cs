@@ -22,6 +22,9 @@ using System.Net;
 using RestSharp;
 using Newtonsoft.Json.Linq;
 using static mRides_app.Models.Request;
+using System.Threading;
+using System.Threading.Tasks;
+using mRides_app.Tasks.Callbacks;
 
 namespace mRides_app
 {
@@ -30,7 +33,7 @@ namespace mRides_app
     /// which makes up a route.
     /// </summary>
     [Activity(Label ="MatchActivity")]
-    public class MatchActivity : Activity, IOnMapReadyCallback, IOnFindMatchCompleteCallback
+    public class MatchActivity : Activity, IOnMapReadyCallback, IOnFindMatchCompleteCallback, IOnGetReviewsAverageCompleteCallback
     {
         // Page elements
         private TextView show_time;
@@ -160,46 +163,9 @@ namespace mRides_app
                 type = this.userType
             };
             FindMatchAsyncTask findMatchTask = new FindMatchAsyncTask(this.userRequest, this);
-            findMatchTask.Execute();
+            findMatchTask.Execute(); // Upon completion, the OnFindMatchComplete method is invoked.
         }
-
-        /// <summary>
-        /// Method called when finding the match from the server is done
-        /// </summary>
-        /// <param name="requests">List of matched requests</param>
-        public void OnFindMatchComplete(List<Request> requests)
-        {
-            // Start giving the user choices of matched users
-            this.matchedRequests = requests;
-            this.currentMatchedUserIndex = 0;
-            if (this.matchedRequests.Count > 0)
-            {
-                RunOnUiThread(() => {
-                    this.SetClickableElementsVisible();
-                    this.UpdateDisplay();
-                });
-            }
-            else
-            {
-                // Display some message to the user
-                Toast.MakeText(ApplicationContext, Resources.GetString(Resource.String.matchNoMatchFound), ToastLength.Long).Show();
-                Finish();
-            }
-        }
-
-        /// <summary>
-        /// Sets the clickable elements that relies on the response of the asynchronous call to be
-        /// visible. 
-        /// </summary>
-        public void SetClickableElementsVisible()
-        {
-            // Enable back the clicks on the elements
-            this.matchedUserPicture.Visibility = ViewStates.Visible;
-            this.chatButton.Visibility = ViewStates.Visible;
-            this.acceptButton.Visibility = ViewStates.Visible;
-            this.declineButton.Visibility = ViewStates.Visible;
-        }
-
+        
         /// <summary>
         /// Updates the view of this activity with the information related to the current
         /// request defined by the attributes list of requests and by the current index of
@@ -226,15 +192,15 @@ namespace mRides_app
             
             // Set the profile picture
             this.matchedUserPicture.Click += delegate { this.OpenUserProfile(); };
-            Bitmap userPicture = userMapper.GetUserFacebookProfilePicture(matchedUser.facebookID);
-            if (userPicture != null)
-            {
-                this.matchedUserPicture.SetImageBitmap(userPicture);
-            }
+            this.SetMatchedUserProfilePicture(matchedUser.facebookID);
+
+            // Update the rating bar to the average rating the rider received
+            GetReviewsAverageAsyncTask getReviewsAvgAsyncTask = new GetReviewsAverageAsyncTask(matchedUser.id, this);
+            getReviewsAvgAsyncTask.Execute();
 
             // Display the matched user's name
             this.matchedUserName.Text = matchedUser.firstName + " " + matchedUser.lastName;
-            
+
             // Obtain the matched user's origin and destination coordinates and set the addresses
             string[] matchedUserOriginCoordinates;
             string[] matchedUserDestinationCoordinates;
@@ -250,28 +216,11 @@ namespace mRides_app
             }
             if(matchedUserOriginCoordinates.Length > 1)
             {
-                this.matchedUserFrom = FindViewById<TextView>(Resource.Id.userMatchedOrigin);
                 this.matchedUserFrom.Text = ReverseGeoCode(matchedUserOriginCoordinates[0], matchedUserOriginCoordinates[1]);
             }
             if(matchedUserDestinationCoordinates.Length > 1)
             {
-                this.matchedUserGoingTo = FindViewById<TextView>(Resource.Id.userMatchedDestination);
                 this.matchedUserGoingTo.Text = ReverseGeoCode(matchedUserDestinationCoordinates[0], matchedUserDestinationCoordinates[1]);
-            }
-            
-            // Update the rating bar to the average rating the rider received
-            List<Models.Feedback> riderFeedbacks = UserMapper.getInstance().GetReviews(matchedUser.id);
-
-            if (riderFeedbacks.Count > 0)
-            {
-                int sumStars = 0;
-                double averageStars = 0;
-                foreach (Models.Feedback feedback in riderFeedbacks)
-                {
-                    sumStars = feedback.stars;
-                }
-                averageStars = (double)sumStars / riderFeedbacks.Count;
-                this.matchedUserRatingBar.Rating = (int)Math.Round(averageStars);
             }
         }
 
@@ -314,50 +263,11 @@ namespace mRides_app
             }
         }
 
-        /// <summary>
-        /// Method called by google map once the map is finished loading
-        /// </summary>
-        /// <param name="googleMap"></param>
-        public void OnMapReady(GoogleMap googleMap)
-        {
-            // Set the instance of google map
-            this.matchedUserLocationMap = googleMap;
-
-            // Obtain the current matched user's request being processed
-            User currentMatchedUser = null;
-            string location;
-            if(this.userType == Request.TYPE_DRIVER)
-            {
-                RiderRequest currentRiderRequest = this.matchedRequests[this.currentMatchedUserIndex].riderRequests.First();
-                location = currentRiderRequest.location;
-                currentMatchedUser = currentRiderRequest.rider;
-            }
-            else
-            {
-                location = this.matchedRequests[this.currentMatchedUserIndex].location;
-                currentMatchedUser = this.matchedRequests[this.currentMatchedUserIndex].driver;
-            }
-            
-
-            // Create a custom marker for the rider's location
-            MarkerOptions userMarker = new MarkerOptions();
-            string[] splitCoordinates = location.Split(',');
-            LatLng riderCoordinates = new LatLng(Double.Parse(splitCoordinates[0]), Double.Parse(splitCoordinates[1]));
-            userMarker.SetPosition(riderCoordinates)
-                                  .SetTitle(currentMatchedUser.firstName?.ToString() + " " + currentMatchedUser.lastName?.ToString())
-                                  .SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.userIcon2)).Anchor(0.5f, 0.5f);
-            this.matchedUserLocationMap.AddMarker(userMarker);
-
-            // Move camera to the marker
-            CameraPosition.Builder builder = CameraPosition.InvokeBuilder();
-            builder.Target(riderCoordinates);
-            builder.Zoom(17);
-            builder.Bearing(45);
-            builder.Tilt(90);
-            CameraPosition cameraPosition = builder.Build();
-            CameraUpdate cameraUpdate = CameraUpdateFactory.NewCameraPosition(cameraPosition);
-            this.matchedUserLocationMap.AnimateCamera(cameraUpdate);
-        }
+        
+        
+        // ---------------------------------------------------------------------------------------------------------
+        // Event methods that require changing activity
+        // ---------------------------------------------------------------------------------------------------------
 
         /// <summary>
         /// Opens the user profile of the matched user
@@ -402,6 +312,12 @@ namespace mRides_app
             StartActivity(chatIntent);
         }
 
+
+
+        // ---------------------------------------------------------------------------------------------------------
+        // Supportive methods
+        // ---------------------------------------------------------------------------------------------------------
+
         /// <summary>
         /// Creates the chat name based on the user id to which we want to communicate with
         /// </summary>
@@ -433,11 +349,129 @@ namespace mRides_app
             
             var client = new RestClient(reverseGeoCodingBaseUrl);
             var request = new RestRequest(reverseGeoEndApi, Method.GET);
-            
+
             var response = client.Execute(request);
             dynamic requestResults = JObject.Parse(response.Content);
-            string formattedAddress = (string) requestResults["results"][0]["formatted_address"] ;
+            string formattedAddress = (string)requestResults["results"][0]["formatted_address"];
+                
             return formattedAddress;
+        }
+
+        /// <summary>
+        /// Sets the clickable elements that relies on the response of the asynchronous call to be
+        /// visible. 
+        /// </summary>
+        public void SetClickableElementsVisible()
+        {
+            // Enable back the clicks on the elements
+            this.matchedUserPicture.Visibility = ViewStates.Visible;
+            this.chatButton.Visibility = ViewStates.Visible;
+            this.acceptButton.Visibility = ViewStates.Visible;
+            this.declineButton.Visibility = ViewStates.Visible;
+        }
+
+
+
+        // ---------------------------------------------------------------------------------------------------------
+        // Methods that communicate with external actors and that may require more time to complete, thus
+        // asynchronous
+        // ---------------------------------------------------------------------------------------------------------
+
+        /// <summary>
+        /// Sets the user profile picture given its Facebook ID.
+        /// </summary>
+        /// <param name="facebookId">Facebook ID of the user whose profile picture is to be set</param>
+        public async void SetMatchedUserProfilePicture(long facebookId)
+        {
+            Bitmap userPicture = await userMapper.GetUserFacebookProfilePictureAsync(facebookId);
+            if (userPicture != null)
+            {
+                RunOnUiThread(() => this.matchedUserPicture.SetImageBitmap(userPicture));
+            }
+        }
+
+
+
+        // ---------------------------------------------------------------------------------------------------------
+        // Callback methods, invoked when an asynchronous task is complete
+        // ---------------------------------------------------------------------------------------------------------
+
+        /// <summary>
+        /// Method called by google map once the map is finished loading
+        /// </summary>
+        /// <param name="googleMap"></param>
+        public void OnMapReady(GoogleMap googleMap)
+        {
+            // Set the instance of google map
+            this.matchedUserLocationMap = googleMap;
+
+            // Obtain the current matched user's request being processed
+            User currentMatchedUser = null;
+            string location;
+            if (this.userType == Request.TYPE_DRIVER)
+            {
+                RiderRequest currentRiderRequest = this.matchedRequests[this.currentMatchedUserIndex].riderRequests.First();
+                location = currentRiderRequest.location;
+                currentMatchedUser = currentRiderRequest.rider;
+            }
+            else
+            {
+                location = this.matchedRequests[this.currentMatchedUserIndex].location;
+                currentMatchedUser = this.matchedRequests[this.currentMatchedUserIndex].driver;
+            }
+
+
+            // Create a custom marker for the rider's location
+            MarkerOptions userMarker = new MarkerOptions();
+            string[] splitCoordinates = location.Split(',');
+            LatLng riderCoordinates = new LatLng(Double.Parse(splitCoordinates[0]), Double.Parse(splitCoordinates[1]));
+            userMarker.SetPosition(riderCoordinates)
+                                  .SetTitle(currentMatchedUser.firstName?.ToString() + " " + currentMatchedUser.lastName?.ToString())
+                                  .SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.userIcon2)).Anchor(0.5f, 0.5f);
+            this.matchedUserLocationMap.AddMarker(userMarker);
+
+            // Move camera to the marker
+            CameraPosition.Builder builder = CameraPosition.InvokeBuilder();
+            builder.Target(riderCoordinates);
+            builder.Zoom(17);
+            builder.Bearing(45);
+            builder.Tilt(90);
+            CameraPosition cameraPosition = builder.Build();
+            CameraUpdate cameraUpdate = CameraUpdateFactory.NewCameraPosition(cameraPosition);
+            this.matchedUserLocationMap.AnimateCamera(cameraUpdate);
+        }
+
+        /// <summary>
+        /// Method called when finding the match from the server is done
+        /// </summary>
+        /// <param name="requests">List of matched requests</param>
+        public void OnFindMatchComplete(List<Request> requests)
+        {
+            // Start giving the user choices of matched users
+            this.matchedRequests = requests;
+            this.currentMatchedUserIndex = 0;
+            if (this.matchedRequests.Count > 0)
+            {
+                RunOnUiThread(() => {
+                    this.SetClickableElementsVisible();
+                    this.UpdateDisplay();
+                });
+            }
+            else
+            {
+                // Display some message to the user
+                Toast.MakeText(ApplicationContext, Resources.GetString(Resource.String.matchNoMatchFound), ToastLength.Long).Show();
+                Finish();
+            }
+        }
+
+        /// <summary>
+        /// Method called when the average number of stars is computed
+        /// </summary>
+        /// <param name="feedbacks"></param>
+        public void OnGetReviewsComplete(double feedbacksAverage)
+        {
+            RunOnUiThread(() => this.matchedUserRatingBar.Rating = (int)Math.Round(feedbacksAverage));
         }
     }
 }

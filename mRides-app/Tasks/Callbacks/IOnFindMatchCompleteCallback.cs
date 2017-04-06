@@ -12,7 +12,7 @@ using Android.Widget;
 
 using mRides_app.Models;
 
-namespace mRides_app.Tasks
+namespace mRides_app.Tasks.Callbacks
 {
     public interface IOnFindMatchCompleteCallback
     {
