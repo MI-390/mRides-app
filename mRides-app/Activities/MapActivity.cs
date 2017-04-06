@@ -706,10 +706,11 @@ namespace mRides_app
         //When Google API Client is connected
         public void OnConnected(Bundle bundle)
         {
+            getCurrentLocation();
             //GetMapAsync(this) invokes the OnMapReady operation when ready
             if (map == null)
                 FragmentManager.FindFragmentById<MapFragment>(Resource.Id.map).GetMapAsync(this);
-            getCurrentLocation();
+
             if (userLocation != null)
             {
                 User.currentUser.latitude = userLocation.Latitude;
