@@ -514,7 +514,7 @@ namespace mRides_app
             }));
 
             if (User.currentUser.currentType == mRides_app.Models.Request.TYPE_RIDER)
-                customMessage = "choose pick up location";
+                customMessage = "choose a pick up location";
 
             if (User.currentUser.currentType == mRides_app.Models.Request.TYPE_DRIVER)
                 customMessage = "choose a start location";
@@ -658,6 +658,15 @@ namespace mRides_app
                     if (negativeButton != null)
                         negativeButton.SetBackgroundResource(Resource.Drawable.green_button);
                 }
+            }
+            else
+            {
+                if (neutralButton != null)
+                    neutralButton.SetBackgroundResource(Resource.Drawable.red_button);
+                if (positiveButton != null)
+                    positiveButton.SetBackgroundResource(Resource.Drawable.red_button);
+                if (negativeButton != null)
+                    negativeButton.SetBackgroundResource(Resource.Drawable.red_button);
             }
         }
 
