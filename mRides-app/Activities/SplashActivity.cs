@@ -16,7 +16,7 @@ using Xamarin.Auth;
 
 namespace mRides_app
 {
-    [Activity(Theme = "@style/MyTheme.Splash", MainLauncher = true, NoHistory = true)]
+    [Activity(Theme = "@style/MyTheme.Splash", MainLauncher = true, NoHistory = true, Icon = "@drawable/icon", Label = "mRides")]
     public class SplashActivity : AppCompatActivity
     {
 

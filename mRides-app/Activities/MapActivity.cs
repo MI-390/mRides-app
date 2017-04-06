@@ -93,23 +93,6 @@ namespace mRides_app
             // Alert Dialog
             openDestinationAlertDialog();
 
-            //mapButton = (Button)FindViewById(Resource.Id.mapButton);
-            //mapButtonClicked = false;
-            //mapButton.Click += OnMapButtonClick;
-        
-
-            // Set appropriate color to the button
-            //if (User.currentUser != null)
-            //{
-            //    if (User.currentUser.currentType == "rider")
-            //    {
-            //        mapButton.SetBackgroundResource(Resource.Drawable.green_button);
-            //    }
-            //    else
-            //    {
-            //        mapButton.SetBackgroundResource(Resource.Drawable.red_button);
-            //    }
-            //}
             modifyDestinationButton = (Button)FindViewById(Resource.Id.modifyDestinationButton);
             modifyDestinationButton.Visibility = ViewStates.Invisible;
 
@@ -237,7 +220,10 @@ namespace mRides_app
             UpdateCameraPosition(position);
         }
 
-        //Update the camera position to a latitude/longitude coordinate position
+        /// <summary>
+        /// Update the camera position to a latitude/longitude coordinate position
+        /// </summary>
+        /// <param name="position"> The position to move the camera to.</param>
         private void UpdateCameraPosition(LatLng position)
         {
             if (map != null && position != null)
@@ -251,6 +237,9 @@ namespace mRides_app
             }
         }
 
+        /// <summary>
+        /// Update the camera position to see all the markers shown on the map
+        /// </summary>
         private void UpdateCameraPositionToMarkers()
         {
             int padding = 100; // offset from edges of the map in pixels
@@ -265,19 +254,11 @@ namespace mRides_app
             map.AnimateCamera(cameraUpdate);
         }
 
-        //private async Task checkPermission()
-        //{
-        //    if (CheckSelfPermission(Android.Manifest.Permission.AccessFineLocation) == Android.Content.PM.Permission.Granted)
-        //        locationPermissionGranted = true;
-        //    else
-        //        Android.Support.V4.App.ActivityCompat.RequestPermissions(this, new string[] { Android.Manifest.Permission.AccessFineLocation }, 1);
-        //}
-
-        //Get users current location
+        /// <summary>
+        /// Get the user's current location using the GoogleApiClient
+        /// </summary>
         private void getCurrentLocation()
         {
-            //await checkPermission();
-
             if (CheckSelfPermission(Android.Manifest.Permission.AccessFineLocation) == Android.Content.PM.Permission.Granted)
                 locationPermissionGranted = true;
 
@@ -291,11 +272,13 @@ namespace mRides_app
                 Location lastUserLocation = LocationServices.FusedLocationApi.GetLastLocation(googleApiClient);
                 userLocation = new LatLng(lastUserLocation.Latitude, lastUserLocation.Longitude);
             }
-            else
-            {
-            }
         }
 
+        /// <summary>
+        /// After the origin and destination were selected, setDestinationData gets asynchronously in JSON format
+        /// the response from the Google Web Service DirectionAPI.
+        /// </summary>
+        /// <param name="url"> The url used to call the Google web service.</param>
         public async Task setDestinationData(string url)
         {
             // Create an HTTP web request using the URL:
@@ -328,7 +311,10 @@ namespace mRides_app
             }
         }
 
-        //Send coordinates to the server and get a list of users
+        /// <summary>
+        /// Send coordinates to the server to get a list of users and display them on the map
+        /// </summary>
+        /// <param name="directionList"> The formatted LatLng list of direction coordinates obtained from the Google Directions API.</param>
         public void findNearbyUsers(List<LatLng> directionList)
         {
             List<DestinationCoordinate> destinationCoordinates = getFormattedDirectionList();
@@ -364,7 +350,10 @@ namespace mRides_app
             return destinationCoordinates;
         }
 
-        //Method to display the polyline path from the current user location to the destination
+        /// <summary>
+        /// Method to display the polyline path from the current user location to the destination.
+        /// </summary>
+        /// <param name="directionList">  The formatted LatLng list of direction coordinates obtained from the Google Directions API.</param>
         public void displayPathOnMap(List<LatLng> directionList)
         {
             PolylineOptions polylineOptions = new PolylineOptions().Geodesic(true).InvokeColor(Color.Blue).InvokeWidth(5).Clickable(true);
@@ -381,6 +370,10 @@ namespace mRides_app
                 polyline = map.AddPolyline(polylineOptions);
         }
 
+        /// <summary>
+        /// Method user to get the list of directions from the deserialized JSON obtained from the Google Directions API result.
+        /// </summary>
+        /// <param name="overview"> JSON Object of encoded polyline points.</param>
         public List<LatLng> getDirectionList(OverviewPolyline overview)
         {
             OverviewPolyline overviewPolyline = overview;
@@ -389,8 +382,11 @@ namespace mRides_app
             return directionList;
         }
 
-        // Decodes an encoded polyline path string into a list of LatLngs. This code is from the com.google.maps.android:android-maps-utils library
-        // and was translated from java to C#
+        /// <summary>
+        /// Decodes an encoded polyline path string into a list of LatLngs. This code is from the com.google.maps.android:android-maps-utils library
+        /// and was translated from java to C#.
+        /// </summary>
+        /// <param name="overview"> JSON Object of encoded polyline points</param>
         public static List<LatLng> decodePolyline(string encodedPolyline)
         {
             int len = encodedPolyline.Length;
@@ -430,7 +426,9 @@ namespace mRides_app
             return path;
         }
 
-        //Show users along a path
+        /// <summary>
+        /// SHow users on the map along the polyline path.
+        /// </summary>
         public void showNearbyUsers()
         {
             //Instantiate a new dictionary for the new destination
@@ -457,7 +455,11 @@ namespace mRides_app
             }
         }
 
-        //Used to start Google Maps Navigation to have real-time navigation system to pick up the selected user
+        /// <summary>
+        /// Used to start Google Maps Navigation to have real-time navigation system to pick up the selected user.
+        /// </summary>
+        /// <param name="latitude"> Destination latitude.</param>
+        /// <param name="longitude"> Destination longitude.</param>
         public void enterDriverMode(double latitude, double longitude)
         {
             try
@@ -474,8 +476,9 @@ namespace mRides_app
             }
         }
 
-        //Dialog methods below
-
+        /// <summary>
+        /// Used to open the dialog to ask the users their preference on custom location or default location.
+        /// </summary>
         private void openOriginAlertDialog()
         {
             string customMessage = "";
@@ -511,7 +514,7 @@ namespace mRides_app
             }));
 
             if (User.currentUser.currentType == mRides_app.Models.Request.TYPE_RIDER)
-                customMessage = "choose pick up location";
+                customMessage = "choose a pick up location";
 
             if (User.currentUser.currentType == mRides_app.Models.Request.TYPE_DRIVER)
                 customMessage = "choose a start location";
@@ -519,12 +522,16 @@ namespace mRides_app
             originAlert.SetTitle("Origin");
             originAlert.SetMessage("Do you want to use your default location or " + customMessage);
           
-            Dialog originDialog = originAlert.Create();
+            AlertDialog originDialog = originAlert.Create();
             originDialog.SetCancelable(false);
             originDialog.SetCanceledOnTouchOutside(false);
             originDialog.Show();
+            styleDialog(originDialog);
         }
 
+        /// <summary>
+        /// Used to open the dialog to welcome the user and proceed to select a destination.
+        /// </summary>
         private void openDestinationAlertDialog()
         {
             AlertDialog.Builder destinationAlert = new AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
@@ -537,12 +544,16 @@ namespace mRides_app
                 selectingDestination = true;
             }));
 
-            Dialog destinationDialog = destinationAlert.Create();
+            AlertDialog destinationDialog = destinationAlert.Create();
             destinationDialog.SetCancelable(false);
             destinationDialog.SetCanceledOnTouchOutside(false);
             destinationDialog.Show();
+            styleDialog(destinationDialog);
         }
 
+        /// <summary>
+        /// Used to open the dialog to ask the users the confirmation for the selected destination.
+        /// </summary>
         private void openDestinationSelectionAlertDialog(string destination, LatLng coordinates)
         {
             AlertDialog.Builder destinationChoiceAlert = new AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
@@ -574,12 +585,16 @@ namespace mRides_app
                 return;
             }));
 
-            Dialog destinationDialog = destinationChoiceAlert.Create();
+            AlertDialog destinationDialog = destinationChoiceAlert.Create();
             destinationDialog.SetCanceledOnTouchOutside(false);
             destinationDialog.SetCancelable(false);
             destinationDialog.Show();
+            styleDialog(destinationDialog);
         }
 
+        /// <summary>
+        /// Used to open the dialog to ask the users the confirmation for the selected origin.
+        /// </summary>
         private void openOriginSelectionAlertDialog(string origin, LatLng coordinates)
         {
             AlertDialog.Builder originChoiceAlert = new AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
@@ -606,10 +621,53 @@ namespace mRides_app
                 return;
             }));
 
-            Dialog originDialog = originChoiceAlert.Create();
+            AlertDialog originDialog = originChoiceAlert.Create();
             originDialog.SetCanceledOnTouchOutside(false);
             originDialog.SetCancelable(false);
             originDialog.Show();
+            styleDialog(originDialog);
+        }
+
+        /// <summary>
+        /// Used to style the dialog buttons according to the theme of driver/ride.
+        /// </summary>
+        /// <param name="dialog">The target dialog to style.</param>
+        void styleDialog(AlertDialog dialog)
+        {
+            Button positiveButton = dialog.GetButton(-1);
+            Button negativeButton = dialog.GetButton(-2);
+            Button neutralButton = dialog.GetButton(-3);
+
+            if (User.currentUser.currentType == mRides_app.Models.Request.TYPE_DRIVER || User.currentUser.currentType == mRides_app.Models.Request.TYPE_RIDER)
+            {
+                if (User.currentUser.currentType == mRides_app.Models.Request.TYPE_DRIVER)
+                {
+                    if (neutralButton != null)
+                        neutralButton.SetBackgroundResource(Resource.Drawable.red_button);
+                    if (positiveButton != null)
+                        positiveButton.SetBackgroundResource(Resource.Drawable.red_button);
+                    if (negativeButton != null)
+                        negativeButton.SetBackgroundResource(Resource.Drawable.red_button);
+                }
+                else
+                {
+                    if (neutralButton != null)
+                        neutralButton.SetBackgroundResource(Resource.Drawable.green_button);
+                    if (positiveButton != null)
+                        positiveButton.SetBackgroundResource(Resource.Drawable.green_button);
+                    if (negativeButton != null)
+                        negativeButton.SetBackgroundResource(Resource.Drawable.green_button);
+                }
+            }
+            else
+            {
+                if (neutralButton != null)
+                    neutralButton.SetBackgroundResource(Resource.Drawable.red_button);
+                if (positiveButton != null)
+                    positiveButton.SetBackgroundResource(Resource.Drawable.red_button);
+                if (negativeButton != null)
+                    negativeButton.SetBackgroundResource(Resource.Drawable.red_button);
+            }
         }
 
 
@@ -706,7 +764,12 @@ namespace mRides_app
             }
         }
 
-        //Overriden method from interface of UserTypeFragment.cs
+        /// <summary>
+        /// Overriden method from interface of UserTypeFragment.cs. Used to update the user selection on whether to continue as a rider
+        /// or a driver and the number of people in his company.
+        /// </summary>
+        /// <param name="number">The number of people with the user.</param>
+        /// <param name="type">The type of the user (driver or ride).</param>
         public void updateUserSelection(string type, int number)
         {
             //Set user to selected type
@@ -735,6 +798,8 @@ namespace mRides_app
                     Window.SetNavigationBarColor(new Android.Graphics.Color(Color.ParseColor("#EF5350")));
                     Window.SetStatusBarColor(new Android.Graphics.Color(Color.ParseColor("#ba3c39")));
                     ActionBar.SetBackgroundDrawable(new Android.Graphics.Drawables.ColorDrawable(Color.ParseColor("#ba3c39")));
+                    confirmRideButton.SetBackgroundResource(Resource.Drawable.red_button);
+                    modifyDestinationButton.SetBackgroundResource(Resource.Drawable.red_button);
                 }
                 else
                 {
@@ -742,6 +807,8 @@ namespace mRides_app
                     Window.SetNavigationBarColor(Android.Graphics.Color.DarkGreen);
                     Window.SetStatusBarColor(Android.Graphics.Color.DarkGreen);
                     ActionBar.SetBackgroundDrawable(new Android.Graphics.Drawables.ColorDrawable(Color.ParseColor("#26A65B")));
+                    confirmRideButton.SetBackgroundResource(Resource.Drawable.green_button);
+                    modifyDestinationButton.SetBackgroundResource(Resource.Drawable.green_button);
                 }
             }
         }
