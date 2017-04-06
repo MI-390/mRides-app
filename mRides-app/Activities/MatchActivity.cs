@@ -13,6 +13,7 @@ using Android.Widget;
 using mRides_app.Models;
 using mRides_app.Constants;
 using mRides_app.Mappers;
+using mRides_app.Tasks;
 using Android.Graphics;
 using Newtonsoft.Json;
 using Android.Gms.Maps;
@@ -21,6 +22,10 @@ using System.Net;
 using RestSharp;
 using Newtonsoft.Json.Linq;
 using static mRides_app.Models.Request;
+using System.Threading;
+using System.Threading.Tasks;
+using mRides_app.Tasks.Callbacks;
+using Android.Locations;
 
 namespace mRides_app
 {
@@ -29,17 +34,17 @@ namespace mRides_app
     /// which makes up a route.
     /// </summary>
     [Activity(Label ="MatchActivity")]
-    public class MatchActivity : Activity, IOnMapReadyCallback
+    public class MatchActivity : Activity, IOnMapReadyCallback, IOnFindMatchCompleteCallback, IOnGetReviewsAverageCompleteCallback
     {
+        // Link to the google api to obtain geocoding
+        private const string REVERSE_GEOCODING_BASE_URL = "https://maps.googleapis.com/maps/api/geocode/";
 
+        // Page elements
         private TextView show_time;
         private TextView matchedUserName;
         private TextView matchedUserFrom;
         private TextView matchedUserGoingTo;
         private TextView matchedUserRole;
-
-        private int hour;
-        private int minute;
         private ImageView matchedUserPicture;
         private Button acceptButton;
         private Button declineButton;
@@ -49,93 +54,63 @@ namespace mRides_app
         private GoogleMap matchedUserLocationMap;
         private MapFragment mapFragment;
 
+        // Request data
         private string userType;
-
+        private int hour;
+        private int minute;
         private List<Request> matchedRequests;
         private Request userRequest;
 
         // Keeps track of the index of the rider request currently displayed
         private int currentMatchedUserIndex;
 
+        // Mappers
         private UserMapper userMapper;
-        private ConsoleMapper consoleMapper; 
+        private ConsoleMapper consoleMapper;
 
+        /// <summary>
+        /// Method called upon creation of the activity. The page will be loaded, and elements
+        /// of importance contained in the page will be captured. A request to the server
+        /// is then sent to obtain the list of matched users.
+        /// </summary>
+        /// <param name="bundle"></param>
         protected override void OnCreate(Bundle bundle)
         {
-            UserMapper.getInstance().setTheme(this);
-            base.OnCreate(bundle);
-
             // Obtain the mapper instances
             this.userMapper = UserMapper.getInstance();
             this.consoleMapper = ConsoleMapper.getInstance();
 
-            // Obtain the type of the user for this request and deserialize the list of coordinates
-            this.userType = Intent.GetStringExtra(Constants.IntentExtraNames.RequestType);
-            string json = Intent.GetStringExtra(IntentExtraNames.RouteCoordinatesJson);
-            List <DestinationCoordinate> coordinates = JsonConvert.DeserializeObject<List<DestinationCoordinate>>(Intent.GetStringExtra(IntentExtraNames.RouteCoordinatesJson));
+            // Set the theme
+            this.userMapper.setTheme(this);
 
-            // Send the request to the server
-            this.userRequest = new Request
-            {
-                destinationCoordinates = coordinates,
-                destination = coordinates.Last().coordinate,
-                location = coordinates.First().coordinate,
-                type = this.userType
-            };
-            if(this.userType == Request.TYPE_DRIVER)
-            {
-                this.matchedRequests = consoleMapper.FindRiders(this.userRequest);
-            }
-            else
-            {
-                this.matchedRequests = consoleMapper.FindDrivers(this.userRequest);
-            }
-            
-
-            // Start giving the user choices of matched users
-            this.currentMatchedUserIndex = 0;
-            if(this.matchedRequests.Count > 0)
-            {
-                this.UpdateDisplay();
-            }
-            else
-            {
-                // Display some message to the user
-                Toast.MakeText(ApplicationContext, Resources.GetString(Resource.String.matchNoMatchFound), ToastLength.Long).Show();
-                Finish();
-            }
-        }
-
-        /// <summary>
-        /// Updates the view of this activity with the information related to the current
-        /// request defined by the attributes list of requests and by the current index of
-        /// that list. Provides a way to loop through all the list.
-        /// </summary>
-        private void UpdateDisplay()
-        {
-            // Get the matched user to display
-            Request currentRequest = this.matchedRequests[this.currentMatchedUserIndex];
-            RiderRequest matchedRiderRequest = null;
-            User matchedUser;
-            if (this.userType == Request.TYPE_DRIVER)
-            {
-                matchedRiderRequest = currentRequest.riderRequests.First();
-                matchedUser = matchedRiderRequest.rider;
-            }
-            else
-            {
-                matchedUser = currentRequest.driver;
-            }
-
-            // Display
+            // Display view
+            base.OnCreate(bundle);
             SetContentView(Resource.Layout.Match);
+
+            // While loading, set the texts to loading
+            this.matchedUserName = FindViewById<TextView>(Resource.Id.matchedUserName);
+            this.matchedUserName.Text = Resources.GetString(Resource.String.matchLoading);
+
+            this.matchedUserPicture = FindViewById<ImageView>(Resource.Id.matchedUserPicture);
+            this.matchedUserPicture.Visibility = ViewStates.Invisible;
+
+            this.matchedUserRatingBar = FindViewById<RatingBar>(Resource.Id.ratingBarRiderDestinationMatch);
+            this.matchedUserRatingBar.Rating = 0;
+
+            this.matchedUserGoingTo = FindViewById<TextView>(Resource.Id.userMatchedDestination);
+            this.matchedUserGoingTo.Text = Resources.GetString(Resource.String.matchLoading);
+
+            this.matchedUserFrom = FindViewById<TextView>(Resource.Id.userMatchedOrigin);
+            this.matchedUserFrom.Text = Resources.GetString(Resource.String.matchLoading);
 
             // Capture the accept button
             this.acceptButton = FindViewById<Button>(Resource.Id.userMatchButtonAccept);
+            this.acceptButton.Visibility = ViewStates.Invisible;
             this.acceptButton.Click += delegate { this.Proceed(true); };
 
             // Capture the decline button
             this.declineButton = FindViewById<Button>(Resource.Id.userMatchButtonDecline);
+            this.declineButton.Visibility = ViewStates.Invisible;
             this.declineButton.Click += delegate { this.Proceed(false); };
 
             // Capture the done button
@@ -145,7 +120,9 @@ namespace mRides_app
             // Capture the chat button
             this.chatButton = FindViewById<Button>(Resource.Id.userMatchingChatButton);
             this.chatButton.Click += delegate { this.Chat(); };
+            this.chatButton.Visibility = ViewStates.Invisible;
             LinearLayout layout = FindViewById<LinearLayout>(Resource.Id.matchingLinearLayout3);
+            
             // Set button colors sto the right color
             if (User.currentUser != null)
             {
@@ -171,26 +148,62 @@ namespace mRides_app
             this.mapFragment = MapFragment.NewInstance();
             var ft = FragmentManager.BeginTransaction();
             ft.Add(Resource.Id.userMatchingMapPlaceHolder, mapFragment).Commit();
-
-            // Display the rider's location
-            this.mapFragment.GetMapAsync(this);
             
-            // Set the profile picture
-            this.matchedUserPicture = FindViewById<ImageView>(Resource.Id.matchedUserPicture);
-            this.matchedUserPicture.Click += delegate { this.OpenUserProfile(); };
-            Bitmap userPicture = userMapper.GetUserFacebookProfilePicture(matchedUser.facebookID);
-            if (userPicture != null)
-            {
-                this.matchedUserPicture.SetImageBitmap(userPicture);
-            }
-
-            // Display the matched user's name
-            this.matchedUserName = FindViewById<TextView>(Resource.Id.matchedUserName);
-            this.matchedUserName.Text = matchedUser.firstName + " " + matchedUser.lastName;
+            // Obtain the type of the user for this request and deserialize the list of coordinates
+            this.userType = Intent.GetStringExtra(Constants.IntentExtraNames.RequestType);
+            string json = Intent.GetStringExtra(IntentExtraNames.RouteCoordinatesJson);
+            List <DestinationCoordinate> coordinates = JsonConvert.DeserializeObject<List<DestinationCoordinate>>(Intent.GetStringExtra(IntentExtraNames.RouteCoordinatesJson));
 
             // Display the role of the matched user (opposite of the current user type)
             this.matchedUserRole = FindViewById<TextView>(Resource.Id.matchedUserRole);
             this.matchedUserRole.Text = this.userType == Request.TYPE_DRIVER ? Resources.GetString(Resource.String.user_rider) : Resources.GetString(Resource.String.user_driver);
+            
+            // Send an async request to find matches
+            this.userRequest = new Request
+            {
+                destinationCoordinates = coordinates,
+                destination = coordinates.Last().coordinate,
+                location = coordinates.First().coordinate,
+                type = this.userType
+            };
+            FindMatchAsyncTask findMatchTask = new FindMatchAsyncTask(this.userRequest, this);
+            findMatchTask.Execute(); // Upon completion, the OnFindMatchComplete method is invoked.
+        }
+        
+        /// <summary>
+        /// Updates the view of this activity with the information related to the current
+        /// request defined by the attributes list of requests and by the current index of
+        /// that list. Provides a way to loop through all the list.
+        /// </summary>
+        private void UpdateDisplay()
+        {
+            // Get the matched user to display
+            Request currentRequest = this.matchedRequests[this.currentMatchedUserIndex];
+            RiderRequest matchedRiderRequest = null;
+            User matchedUser;
+            if (this.userType == Request.TYPE_DRIVER)
+            {
+                matchedRiderRequest = currentRequest.riderRequests.First();
+                matchedUser = matchedRiderRequest.rider;
+            }
+            else
+            {
+                matchedUser = currentRequest.driver;
+            }
+            
+            // Display the rider's location
+            this.mapFragment.GetMapAsync(this);
+            
+            // Set the profile picture
+            this.matchedUserPicture.Click += delegate { this.OpenUserProfile(); };
+            this.SetMatchedUserProfilePicture(matchedUser.facebookID);
+
+            // Update the rating bar to the average rating the rider received
+            GetReviewsAverageAsyncTask getReviewsAvgAsyncTask = new GetReviewsAverageAsyncTask(matchedUser.id, this);
+            getReviewsAvgAsyncTask.Execute();
+
+            // Display the matched user's name
+            this.matchedUserName.Text = matchedUser.firstName + " " + matchedUser.lastName;
 
             // Obtain the matched user's origin and destination coordinates and set the addresses
             string[] matchedUserOriginCoordinates;
@@ -207,29 +220,11 @@ namespace mRides_app
             }
             if(matchedUserOriginCoordinates.Length > 1)
             {
-                this.matchedUserFrom = FindViewById<TextView>(Resource.Id.userMatchedOrigin);
-                this.matchedUserFrom.Text = ReverseGeoCode(matchedUserOriginCoordinates[0], matchedUserOriginCoordinates[1]);
+                this.SetMatchedUserLocation(Double.Parse(matchedUserOriginCoordinates[0]), Double.Parse(matchedUserOriginCoordinates[1]));
             }
             if(matchedUserDestinationCoordinates.Length > 1)
             {
-                this.matchedUserGoingTo = FindViewById<TextView>(Resource.Id.userMatchedDestination);
-                this.matchedUserGoingTo.Text = ReverseGeoCode(matchedUserDestinationCoordinates[0], matchedUserDestinationCoordinates[1]);
-            }
-            
-            // Update the rating bar to the average rating the rider received
-            this.matchedUserRatingBar = FindViewById<RatingBar>(Resource.Id.ratingBarRiderDestinationMatch);
-            List<Models.Feedback> riderFeedbacks = UserMapper.getInstance().GetReviews(matchedUser.id);
-
-            if (riderFeedbacks.Count > 0)
-            {
-                int sumStars = 0;
-                double averageStars = 0;
-                foreach (Models.Feedback feedback in riderFeedbacks)
-                {
-                    sumStars = feedback.stars;
-                }
-                averageStars = (double)sumStars / riderFeedbacks.Count;
-                this.matchedUserRatingBar.Rating = (int)Math.Round(averageStars);
+                this.SetMatchedUserDestination(Double.Parse(matchedUserDestinationCoordinates[0]), Double.Parse(matchedUserDestinationCoordinates[1]));
             }
         }
 
@@ -253,13 +248,17 @@ namespace mRides_app
                     consoleMapper.Confirm(this.matchedRequests[currentMatchedUserIndex].ID, this.userRequest.ID);
                 }
                 
-                Toast.MakeText(ApplicationContext, Resources.GetString(Resource.String.matchRequestSent), ToastLength.Long).Show();
+                Toast.MakeText(ApplicationContext, Resources.GetString(Resource.String.matchRequestSent), ToastLength.Short).Show();
+            }
+            else
+            {
+                Toast.MakeText(ApplicationContext, Resources.GetString(Resource.String.matchDeclined), ToastLength.Short).Show();
             }
 
             // Update to the view if there is a next one, otherwise finish this activity
             if (++this.currentMatchedUserIndex < this.matchedRequests.Count)
             {
-                this.UpdateDisplay();
+                RunOnUiThread(()=> this.UpdateDisplay());
             }
             else
             {
@@ -268,50 +267,11 @@ namespace mRides_app
             }
         }
 
-        /// <summary>
-        /// Method called by google map once the map is finished loading
-        /// </summary>
-        /// <param name="googleMap"></param>
-        public void OnMapReady(GoogleMap googleMap)
-        {
-            // Set the instance of google map
-            this.matchedUserLocationMap = googleMap;
-
-            // Obtain the current matched user's request being processed
-            User currentMatchedUser = null;
-            string location;
-            if(this.userType == Request.TYPE_DRIVER)
-            {
-                RiderRequest currentRiderRequest = this.matchedRequests[this.currentMatchedUserIndex].riderRequests.First();
-                location = currentRiderRequest.location;
-                currentMatchedUser = currentRiderRequest.rider;
-            }
-            else
-            {
-                location = this.matchedRequests[this.currentMatchedUserIndex].location;
-                currentMatchedUser = this.matchedRequests[this.currentMatchedUserIndex].driver;
-            }
-            
-
-            // Create a custom marker for the rider's location
-            MarkerOptions userMarker = new MarkerOptions();
-            string[] splitCoordinates = location.Split(',');
-            LatLng riderCoordinates = new LatLng(Double.Parse(splitCoordinates[0]), Double.Parse(splitCoordinates[1]));
-            userMarker.SetPosition(riderCoordinates)
-                                  .SetTitle(currentMatchedUser.firstName?.ToString() + " " + currentMatchedUser.lastName?.ToString())
-                                  .SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.userIcon2)).Anchor(0.5f, 0.5f);
-            this.matchedUserLocationMap.AddMarker(userMarker);
-
-            // Move camera to the marker
-            CameraPosition.Builder builder = CameraPosition.InvokeBuilder();
-            builder.Target(riderCoordinates);
-            builder.Zoom(17);
-            builder.Bearing(45);
-            builder.Tilt(90);
-            CameraPosition cameraPosition = builder.Build();
-            CameraUpdate cameraUpdate = CameraUpdateFactory.NewCameraPosition(cameraPosition);
-            this.matchedUserLocationMap.AnimateCamera(cameraUpdate);
-        }
+        
+        
+        // ---------------------------------------------------------------------------------------------------------
+        // Event methods that require changing activity
+        // ---------------------------------------------------------------------------------------------------------
 
         /// <summary>
         /// Opens the user profile of the matched user
@@ -356,6 +316,12 @@ namespace mRides_app
             StartActivity(chatIntent);
         }
 
+
+
+        // ---------------------------------------------------------------------------------------------------------
+        // Supportive methods
+        // ---------------------------------------------------------------------------------------------------------
+
         /// <summary>
         /// Creates the chat name based on the user id to which we want to communicate with
         /// </summary>
@@ -371,29 +337,152 @@ namespace mRides_app
             }
             return riderId + " & " + currentUser;
         }
+        
+
+        public string GetReverseGeoCodeEndApi(string latitude, string longitude)
+        {
+            return "json?latlng=" + latitude + "," + longitude;
+        }
 
         /// <summary>
-        /// Reverse geocode using Google API. Given the latitude and longitude,
-        /// this method will return a string representing the approximate address
-        /// of the location.
+        /// Sets the clickable elements that relies on the response of the asynchronous call to be
+        /// visible. 
         /// </summary>
-        /// <param name="lat"></param>
-        /// <param name="lng"></param>
-        /// <returns>string approximate address</returns>
-        public string ReverseGeoCode(string latitude, string longitude)
+        public void SetClickableElementsVisible()
         {
-            string reverseGeoCodingBaseUrl = "https://maps.googleapis.com/maps/api/geocode/";
-            string reverseGeoEndApi = "json?latlng=" + latitude + "," + longitude;
-            
-            var client = new RestClient(reverseGeoCodingBaseUrl);
-            var request = new RestRequest(reverseGeoEndApi, Method.GET);
-            
-            var response = client.Execute(request);
-            dynamic requestResults = JObject.Parse(response.Content);
-            string formattedAddress = (string) requestResults["results"][0]["formatted_address"] ;
-            return formattedAddress;
+            // Enable back the clicks on the elements
+            this.matchedUserPicture.Visibility = ViewStates.Visible;
+            this.chatButton.Visibility = ViewStates.Visible;
+            this.acceptButton.Visibility = ViewStates.Visible;
+            this.declineButton.Visibility = ViewStates.Visible;
         }
 
 
+
+        // ---------------------------------------------------------------------------------------------------------
+        // Methods that communicate with external actors and that may require more time to complete, thus
+        // asynchronous
+        // ---------------------------------------------------------------------------------------------------------
+
+        /// <summary>
+        /// Sets the user profile picture given its Facebook ID.
+        /// </summary>
+        /// <param name="facebookId">Facebook ID of the user whose profile picture is to be set</param>
+        public async void SetMatchedUserProfilePicture(long facebookId)
+        {
+            Bitmap userPicture = await userMapper.GetUserFacebookProfilePictureAsync(facebookId);
+            if (userPicture != null)
+            {
+                RunOnUiThread(() => this.matchedUserPicture.SetImageBitmap(userPicture));
+            }
+        }
+
+        /// <summary>
+        /// Sets the address of the matched user's location
+        /// </summary>
+        /// <param name="latitude">Latitude coordinate</param>
+        /// <param name="longitude">Longitude coordinate</param>
+        public async void SetMatchedUserLocation(double latitude, double longitude)
+        {
+            Geocoder geocoder = new Geocoder(this);
+            IList<Address> addresses = await geocoder.GetFromLocationAsync(latitude, longitude, 1);
+            RunOnUiThread(() => this.matchedUserFrom.Text = addresses[0].GetAddressLine(0));
+        }
+
+        /// <summary>
+        /// Sets the address of the matched user's destination
+        /// </summary>
+        /// <param name="latitude">Latitude coordinate</param>
+        /// <param name="longitude">Longitude coordinate</param>
+        public async void SetMatchedUserDestination(double latitude, double longitude)
+        {
+            Geocoder geocoder = new Geocoder(this);
+            IList<Address> addresses = await geocoder.GetFromLocationAsync(latitude, longitude, 1);
+            RunOnUiThread(() => this.matchedUserGoingTo.Text = addresses[0].GetAddressLine(0));
+        }
+
+
+
+        // ---------------------------------------------------------------------------------------------------------
+        // Callback methods, invoked when an asynchronous task is complete
+        // ---------------------------------------------------------------------------------------------------------
+
+        /// <summary>
+        /// Method called by google map once the map is finished loading
+        /// </summary>
+        /// <param name="googleMap"></param>
+        public void OnMapReady(GoogleMap googleMap)
+        {
+            // Set the instance of google map
+            this.matchedUserLocationMap = googleMap;
+
+            // Obtain the current matched user's request being processed
+            User currentMatchedUser = null;
+            string location;
+            if (this.userType == Request.TYPE_DRIVER)
+            {
+                RiderRequest currentRiderRequest = this.matchedRequests[this.currentMatchedUserIndex].riderRequests.First();
+                location = currentRiderRequest.location;
+                currentMatchedUser = currentRiderRequest.rider;
+            }
+            else
+            {
+                location = this.matchedRequests[this.currentMatchedUserIndex].location;
+                currentMatchedUser = this.matchedRequests[this.currentMatchedUserIndex].driver;
+            }
+
+
+            // Create a custom marker for the rider's location
+            MarkerOptions userMarker = new MarkerOptions();
+            string[] splitCoordinates = location.Split(',');
+            LatLng riderCoordinates = new LatLng(Double.Parse(splitCoordinates[0]), Double.Parse(splitCoordinates[1]));
+            userMarker.SetPosition(riderCoordinates)
+                                  .SetTitle(currentMatchedUser.firstName?.ToString() + " " + currentMatchedUser.lastName?.ToString())
+                                  .SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.userIcon2)).Anchor(0.5f, 0.5f);
+            this.matchedUserLocationMap.AddMarker(userMarker);
+
+            // Move camera to the marker
+            CameraPosition.Builder builder = CameraPosition.InvokeBuilder();
+            builder.Target(riderCoordinates);
+            builder.Zoom(17);
+            builder.Bearing(45);
+            builder.Tilt(90);
+            CameraPosition cameraPosition = builder.Build();
+            CameraUpdate cameraUpdate = CameraUpdateFactory.NewCameraPosition(cameraPosition);
+            this.matchedUserLocationMap.AnimateCamera(cameraUpdate);
+        }
+
+        /// <summary>
+        /// Method called when finding the match from the server is done
+        /// </summary>
+        /// <param name="requests">List of matched requests</param>
+        public void OnFindMatchComplete(List<Request> requests)
+        {
+            // Start giving the user choices of matched users
+            this.matchedRequests = requests;
+            this.currentMatchedUserIndex = 0;
+            if (this.matchedRequests.Count > 0)
+            {
+                RunOnUiThread(() => {
+                    this.SetClickableElementsVisible();
+                    this.UpdateDisplay();
+                });
+            }
+            else
+            {
+                // Display some message to the user
+                Toast.MakeText(ApplicationContext, Resources.GetString(Resource.String.matchNoMatchFound), ToastLength.Long).Show();
+                Finish();
+            }
+        }
+
+        /// <summary>
+        /// Method called when the average number of stars is computed
+        /// </summary>
+        /// <param name="feedbacks"></param>
+        public void OnGetReviewsComplete(double feedbacksAverage)
+        {
+            RunOnUiThread(() => this.matchedUserRatingBar.Rating = (int)Math.Round(feedbacksAverage));
+        }
     }
 }

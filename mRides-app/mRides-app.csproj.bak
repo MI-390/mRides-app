@@ -17,7 +17,7 @@
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -249,6 +249,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="RidesAdapter.cs" />
+    <Compile Include="Tasks\FindMatchAsyncTask.cs" />
+    <Compile Include="Tasks\IOnFindMatchCompleteCallback.cs" />
     <Compile Include="UserCancelRideActivity.cs" />
     <Compile Include="UserProfileFeedbackAdapter.cs" />
     <Compile Include="Fragments\UserProfileFragment.cs" />
@@ -373,7 +375,6 @@
     <AndroidResource Include="Resources\drawable\mrides_logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <XliffResource Include="MultilingualResources\mRides-app.es.xlf" />
     <XliffResource Include="MultilingualResources\mRides-app.fr.xlf" />
   </ItemGroup>
   <ItemGroup>
@@ -427,9 +428,7 @@
     <AndroidResource Include="Resources\drawable\trashcanCancel.png" />
     <AndroidResource Include="Resources\drawable\loyolaTest.PNG" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\values-es\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\smsicongreen.png" />
   </ItemGroup>

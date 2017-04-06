@@ -3753,6 +3753,12 @@ namespace mRides_app
 			// aapt resource value: 0x7f070061
 			public const int luggage = 2131165281;
 			
+			// aapt resource value: 0x7f07007f
+			public const int matchDeclined = 2131165311;
+			
+			// aapt resource value: 0x7f07007e
+			public const int matchLoading = 2131165310;
+			
 			// aapt resource value: 0x7f07007d
 			public const int matchNoMatchFound = 2131165309;
 			
