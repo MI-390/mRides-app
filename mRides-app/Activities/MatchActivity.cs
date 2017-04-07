@@ -312,7 +312,7 @@ namespace mRides_app
             
             Intent chatIntent = new Intent(this, typeof(ChatActivity));
             chatIntent.PutExtra("ChatName", CreateChatName(matchedUserId));
-            chatIntent.PutExtra("id", matchedUserId);
+            chatIntent.PutExtra("id", matchedUserId.ToString());
             StartActivity(chatIntent);
         }
 

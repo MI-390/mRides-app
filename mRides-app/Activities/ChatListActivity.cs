@@ -82,6 +82,7 @@ namespace mRides_app
             firebase = new FirebaseClient(GetString(Resource.String.firebase_database_url));
             //chatList.Clear();
             var allObjects = firebase.Child("").OnceAsync<ChatList>();
+            var ss = firebase.Child("3 & 8").OnceAsync<object>();
             var f = 2;
             foreach(dynamic allObject in allObjects.Result)
             {

@@ -21,6 +21,7 @@ using Firebase.Iid;
 using Android.Util;
 using mRides_app.Models;
 using mRides_app.Mappers;
+using System.Threading.Tasks;
 
 namespace mRides_app
 {
@@ -38,6 +39,7 @@ namespace mRides_app
         private EditText editChat;
         private Button sendButton;
         string chatName;
+        int userId;
 
         private String userName = Models.User.currentUser.firstName+Models.User.currentUser.lastName;
 
@@ -54,6 +56,7 @@ namespace mRides_app
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Chat);
             chatName = Intent.GetStringExtra("ChatName");
+            userId = Convert.ToInt32(Intent.GetStringExtra("id"));
             firebase = new FirebaseClient(GetString(Resource.String.firebase_database_url));
             // adding listener to "chats" everytime this activity is run
             FirebaseDatabase.Instance.GetReference(chatName+"/messages").AddValueEventListener(this);
@@ -68,11 +71,12 @@ namespace mRides_app
                 PostMessage();
             };
         }
-        private async void createMetaFields()
+        private async Task<int> createMetaFields()
         {
-            int userId = Convert.ToInt32(Intent.GetStringExtra("id"));
             await firebase.Child(chatName + "/user1").PatchAsync(User.currentUser);
+            User user2 = UserMapper.getInstance().GetUser(userId);
             await firebase.Child(chatName + "/user2").PatchAsync(UserMapper.getInstance().GetUser(userId));
+            return 2;
         }
         /// <summary>
         /// Method to send a message to the chat interface
