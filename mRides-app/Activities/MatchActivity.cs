@@ -123,7 +123,7 @@ namespace mRides_app
             this.chatButton.Visibility = ViewStates.Invisible;
             LinearLayout layout = FindViewById<LinearLayout>(Resource.Id.matchingLinearLayout3);
             
-            // Set button colors sto the right color
+            // Set button colors to the right color
             if (User.currentUser != null)
             {
                 if (User.currentUser.currentType == "rider")
@@ -415,7 +415,6 @@ namespace mRides_app
         {
             // Set the instance of google map
             this.matchedUserLocationMap = googleMap;
-
             // Obtain the current matched user's request being processed
             User currentMatchedUser = null;
             string location;
@@ -444,9 +443,7 @@ namespace mRides_app
             // Move camera to the marker
             CameraPosition.Builder builder = CameraPosition.InvokeBuilder();
             builder.Target(riderCoordinates);
-            builder.Zoom(17);
-            builder.Bearing(45);
-            builder.Tilt(90);
+            builder.Zoom(15);
             CameraPosition cameraPosition = builder.Build();
             CameraUpdate cameraUpdate = CameraUpdateFactory.NewCameraPosition(cameraPosition);
             this.matchedUserLocationMap.AnimateCamera(cameraUpdate);
