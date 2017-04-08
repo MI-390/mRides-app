@@ -60,6 +60,7 @@ namespace mRides_app
         private bool selectingOrigin;
         private bool confirmingRide;
         int numberOfPeople;
+        string pathURL;
 
 
         protected override void OnCreate(Bundle bundle)
@@ -124,12 +125,8 @@ namespace mRides_app
             modifyDestinationButton.Visibility = ViewStates.Invisible;
             selectingOrigin = false;
             confirmingRide = false;
-            string pathURL = ("https://maps.googleapis.com/maps/api/directions/json?" +
-                              "origin=" + originMarker.Position.Latitude + "," + originMarker.Position.Longitude +
-                              "&destination=" + destinationMarker.Position.Latitude + "," + destinationMarker.Position.Longitude +
-                              "&key=" + googleApiKey);
 
-            await setDestinationData(pathURL);
+            await setDestinationList();
 
             // Prepare the match activity
             List<DestinationCoordinate> destinationCoordinates = this.getFormattedDirectionList();
@@ -143,7 +140,6 @@ namespace mRides_app
         {
             map = googleMap;
             map.MarkerClick += OnMarkerClick;
-            map.PolylineClick += OnPolylineClick;
             if (locationPermissionGranted)
             {
                 map.MyLocationEnabled = true;
@@ -174,42 +170,6 @@ namespace mRides_app
                         dialog.Arguments = args;
                         dialog.Show(transaction, "User profile fragment");
                     }
-                }
-            }
-        }
-
-        //When the user clicks on a polyline
-        private void OnPolylineClick(object sender, Android.Gms.Maps.GoogleMap.PolylineClickEventArgs e)
-        {
-            if (usersOnMap != null)
-            {
-                if (usersOnMap.Count > 0)
-                {
-                    string pathURL;
-                    string waypointString = "&waypoints=optimize:true";
-                    foreach (KeyValuePair<User, Marker> option in usersOnMap)
-                    {
-                        waypointString += "|" + option.Value.Position.Latitude + "," + option.Value.Position.Longitude;
-                    }
-
-                    if (originMarker != null)
-                    {
-                        pathURL = ("https://maps.googleapis.com/maps/api/directions/json?" +
-                       "origin=" + originMarker.Position.Latitude + "," + originMarker.Position.Longitude +
-                       "&destination=" + destinationData.routes[0].legs[destinationData.routes[0].legs.Count - 1].end_location.lat + "," +
-                       destinationData.routes[0].legs[destinationData.routes[0].legs.Count - 1].end_location.lng + waypointString +
-                       "&key=" + googleApiKey);
-                    }
-                    else
-                    {
-                        pathURL = ("https://maps.googleapis.com/maps/api/directions/json?" +
-                            "origin=" + User.currentUser.latitude + "," + User.currentUser.longitude +
-                            "&destination=" + destinationData.routes[0].legs[destinationData.routes[0].legs.Count - 1].end_location.lat + "," +
-                            destinationData.routes[0].legs[destinationData.routes[0].legs.Count - 1].end_location.lng + waypointString +
-                            "&key=" + googleApiKey);
-                    }
-
-                    setDestinationData(pathURL);
                 }
             }
         }
@@ -280,10 +240,14 @@ namespace mRides_app
         /// the response from the Google Web Service DirectionAPI.
         /// </summary>
         /// <param name="url"> The url used to call the Google web service.</param>
-        public async Task setDestinationData(string url)
+        public async Task setDestinationList()
         {
+            string pathURL = ("https://maps.googleapis.com/maps/api/directions/json?" +
+           "origin=" + originMarker.Position.Latitude + "," + originMarker.Position.Longitude +
+           "&destination=" + destinationMarker.Position.Latitude + "," + destinationMarker.Position.Longitude +
+           "&key=" + googleApiKey);
             // Create an HTTP web request using the URL:
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri(url));
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri(pathURL));
             request.ContentType = "application/json";
             request.Method = "GET";
 
@@ -304,7 +268,6 @@ namespace mRides_app
                                 directionList = getDirectionList(destinationData.routes[0].overview_polyline);
                                 //Show the polyline directions on the map
                                 displayPathOnMap(directionList);
-                                findNearbyUsers(directionList);
                             }
                         }
                     }
@@ -511,6 +474,9 @@ namespace mRides_app
                 else
                     originMarker = map.AddMarker(new MarkerOptions().SetPosition(new LatLng(User.currentUser.latitude, User.currentUser.longitude)).SetTitle("Location during ride request"));
 
+                if (destinationMarker != null && originMarker != null)
+                    setDestinationList();
+
                 UpdateCameraPositionToMarkers();
             }));
 
@@ -577,6 +543,9 @@ namespace mRides_app
                 else
                     destinationMarker = map.AddMarker(new MarkerOptions().SetPosition(coordinates).SetTitle("destination"));
 
+                if (destinationMarker != null && originMarker != null)
+                    setDestinationList();
+
                 modifyDestinationButton.Visibility = ViewStates.Visible;
             }));
 
@@ -599,7 +568,7 @@ namespace mRides_app
         private void openOriginSelectionAlertDialog(string origin, LatLng coordinates)
         {
             AlertDialog.Builder originChoiceAlert = new AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
-            originChoiceAlert.SetTitle("Destination");
+            originChoiceAlert.SetTitle("Origin");
             originChoiceAlert.SetMessage("Do you want to set your origin to " + origin + "?");
 
             //When user clicks on "Yes"
@@ -612,6 +581,10 @@ namespace mRides_app
                 }
                 else
                     originMarker = map.AddMarker(new MarkerOptions().SetPosition(coordinates).SetTitle("Location during ride request"));
+
+                if (destinationMarker != null && originMarker != null)
+                    setDestinationList();
+
                 confirmRideButton.Visibility = ViewStates.Visible;
                 UpdateCameraPositionToMarkers();
             }));
@@ -670,7 +643,6 @@ namespace mRides_app
                     negativeButton.SetBackgroundResource(Resource.Drawable.red_button);
             }
         }
-
 
         //Interface methods below
 

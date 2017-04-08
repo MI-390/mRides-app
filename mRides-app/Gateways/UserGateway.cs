@@ -17,6 +17,7 @@ using Newtonsoft.Json;
 using Android.Graphics;
 using System.Net;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace mRides_app.Gateways
 {
@@ -127,6 +128,7 @@ namespace mRides_app.Gateways
 
             return feedbacks;
         }
+        
 
 
         // ---------------------------------------------------------------------------
@@ -147,6 +149,28 @@ namespace mRides_app.Gateways
             try
             {
                 facebookPicture = GetImageBitmapFromUrl("http://graph.facebook.com/" + facebookId + "/picture?type=large");
+            }
+            catch (Exception e)
+            {
+                facebookPicture = null;
+            }
+            return facebookPicture;
+        }
+
+        /// <summary>
+        /// Given the facebook ID of a user, this method will retrieve the profile picture of 
+        /// the user asynchronously, and return a bitmap of that image, or null if any exceptions occur
+        /// while attempting to retrieve or convert the image, most likely because the provided
+        /// ID is wrong.
+        /// </summary>
+        /// <param name="facebookId">Facebook ID of the user for which we want the profile picture</param>
+        /// <returns>Bitmap object representing the picture</returns>
+        public async Task<Bitmap> GetUserFacebookProfilePictureAsync(long facebookId)
+        {
+            Bitmap facebookPicture;
+            try
+            {
+                facebookPicture = await GetImageBitmapFromUrlAsync("http://graph.facebook.com/" + facebookId + "/picture?type=large");
             }
             catch (Exception e)
             {
@@ -176,6 +200,28 @@ namespace mRides_app.Gateways
                 if (imageBytes != null && imageBytes.Length > 0)
                 {
                     imageBitmap = BitmapFactory.DecodeByteArray(imageBytes, 0, imageBytes.Length);
+                }
+            }
+
+            return imageBitmap;
+        }
+
+        /// <summary>
+        /// This method takes in the URL that goes to an image, and converts
+        /// the image into a bitmap to be returned asynchronously.
+        /// </summary>
+        /// <param name="url">URL representing the image</param>
+        /// <returns>Bitmap of the image</returns>
+        private async Task<Bitmap> GetImageBitmapFromUrlAsync(string url)
+        {
+            Bitmap imageBitmap = null;
+
+            using (var webClient = new WebClient())
+            {
+                var imageBytes = await webClient.DownloadDataTaskAsync(new Uri(url));
+                if (imageBytes != null && imageBytes.Length > 0)
+                {
+                    imageBitmap = await BitmapFactory.DecodeByteArrayAsync(imageBytes, 0, imageBytes.Length);
                 }
             }
 
