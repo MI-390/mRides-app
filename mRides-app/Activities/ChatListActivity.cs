@@ -49,7 +49,7 @@ namespace mRides_app
 
             listView = FindViewById<ListView>(Resource.Id.List); // get reference to the ListView in the layout
                                                                  // populate the listview with data
-            listView.Adapter = new ChatAdapter(this, chatList);
+            listView.Adapter = new ChatListAdapter(this, chatList);
             listView.ItemClick += OnListItemClick;  // to be defined
 
 
@@ -57,7 +57,22 @@ namespace mRides_app
             var chatMenuButton = FindViewById<Button>(Resource.Id.menu_map);
             chatMenuButton.Click += delegate
             {
-                Intent i = new Intent(this, typeof(MapActivity));
+                Intent i = new Intent(this, typeof(ChatListActivity));
+                StartActivity(i);
+            };
+
+            var userProfileButton = FindViewById<ImageButton>(Resource.Id.menu_user);
+            userProfileButton.Click += delegate
+            {
+                Intent i = new Intent(this, typeof(UserProfileActivity));
+                i.PutExtra("id", User.currentUser.id.ToString());
+                StartActivity(i);
+            };
+
+            var mainMenuButton = FindViewById<ImageButton>(Resource.Id.menu_home);
+            mainMenuButton.Click += delegate
+            {
+                Intent i = new Intent(this, typeof(MainMenuActivity));
                 StartActivity(i);
             };
 
@@ -69,9 +84,10 @@ namespace mRides_app
             string userID="";
             Intent i = new Intent(this, typeof(ChatActivity));
             i.PutExtra("ChatName", cl.ChatName);
-            
+            userID = cl.user1.id.ToString();
             if (User.currentUser.id == cl.user1.id)
                 userID = cl.user2.id.ToString();
+        
 
             i.PutExtra("id", userID);
             StartActivity(i);
@@ -82,6 +98,7 @@ namespace mRides_app
             firebase = new FirebaseClient(GetString(Resource.String.firebase_database_url));
             //chatList.Clear();
             var allObjects = firebase.Child("").OnceAsync<ChatList>();
+            var ss = firebase.Child("3 & 8").OnceAsync<object>();
             var f = 2;
             foreach(dynamic allObject in allObjects.Result)
             {

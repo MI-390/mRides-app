@@ -19,6 +19,7 @@ using System.Net;
 using System.Threading;
 using mRides_app.Gateways;
 using mRides_app.Cache;
+using System.Threading.Tasks;
 
 namespace mRides_app.Mappers
 {
@@ -110,7 +111,46 @@ namespace mRides_app.Mappers
         /// <returns>Bitmap object representing the picture</returns>
         public Bitmap GetUserFacebookProfilePicture(long facebookId)
         {
-            return userGateway.GetUserFacebookProfilePicture(facebookId);
+            Bitmap userPicture = this.userCache.FindUserFacebookProfilePicture(facebookId);
+            if (userPicture != null)
+            {
+                return userPicture;
+            }
+            else
+            {
+                userPicture = userGateway.GetUserFacebookProfilePicture(facebookId);
+                if (userPicture != null)
+                {
+                    this.userCache.AddUserFacebookProfilePicture(facebookId, userPicture);
+                }
+            }
+            return userPicture;
+        }
+
+        /// <summary>
+        /// Given the facebook ID of a user, this method will retrieve the profile picture of 
+        /// the user asynchronously, and return a bitmap of that image, or null if any exceptions occur
+        /// while attempting to retrieve or convert the image, most likely because the provided
+        /// ID is wrong.
+        /// </summary>
+        /// <param name="facebookId">Facebook ID of the user for which we want the profile picture</param>
+        /// <returns>Bitmap object representing the picture</returns>
+        public async Task<Bitmap> GetUserFacebookProfilePictureAsync(long facebookId)
+        {
+            Bitmap userPicture = this.userCache.FindUserFacebookProfilePicture(facebookId);
+            if(userPicture != null)
+            {
+                return userPicture;
+            }
+            else
+            {
+                userPicture = await userGateway.GetUserFacebookProfilePictureAsync(facebookId);
+                if(userPicture != null)
+                {
+                    this.userCache.AddUserFacebookProfilePicture(facebookId, userPicture);
+                }
+            }
+            return userPicture;
         }
 
         /// <summary>

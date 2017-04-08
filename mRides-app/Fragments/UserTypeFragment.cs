@@ -57,6 +57,8 @@ namespace mRides_app
             spinner = view.FindViewById<Spinner>(Resource.Id.numOfPeople);
             tv1 = view.FindViewById<TextView>(Resource.Id.textView3);
 
+            Dialog.SetCanceledOnTouchOutside(false);
+
             // Set the toggle to be at the position where the user has last placed
             if (User.currentUser != null)
             {
@@ -170,7 +172,7 @@ namespace mRides_app
         void PreviousButtonClicked(object sender, EventArgs e)
         {
             Dismiss();
-            Toast.MakeText(Activity, "Choose your destination", ToastLength.Short).Show();
+            Toast.MakeText(Activity, "Choose a destination", ToastLength.Short).Show();
         }
     }
 }

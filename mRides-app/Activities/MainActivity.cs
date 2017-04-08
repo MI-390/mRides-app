@@ -17,7 +17,7 @@ using System.Linq;
 namespace mRides_app
 {
     //ggrrg
-    [Activity(Label = "mRides_app", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "MainActivity")]
     public class MainActivity : Activity
     {
         string userName;
@@ -90,7 +90,7 @@ namespace mRides_app
             if (e.IsAuthenticated)
             {
                 AccountStore.Create(this).Save(e.Account, "Facebook");
-                LoginRequest.handleRequest(e.Account, this);              
+                LoginRequest.handleLoginRequest(e.Account, this);              
             }
         }
 

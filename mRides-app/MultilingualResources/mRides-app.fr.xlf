@@ -281,6 +281,16 @@
         <trans-unit id="menu_general" translate="yes" xml:space="preserve">
           <source>Menu</source>
           <target state="needs-review-translation" state-qualifier="tm-suggestion">Menu</target>
+          <source>No match found</source>
+          <target state="new">No match found</target>
+        </trans-unit>
+        <trans-unit id="matchLoading" translate="yes" xml:space="preserve">
+          <source>Loading...</source>
+          <target state="new">Loading...</target>
+        </trans-unit>
+        <trans-unit id="matchDeclined" translate="yes" xml:space="preserve">
+          <source>You have declined the match</source>
+          <target state="new">You have declined the match</target>
         </trans-unit>
       </group>
     </body>
