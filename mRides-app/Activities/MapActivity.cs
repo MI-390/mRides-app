@@ -769,11 +769,10 @@ namespace mRides_app
                 {
                     typeDisplayed = userDriver;
                     //Manually setting the theme color since you can only set the theme when creating a new activity
-                    Window.SetNavigationBarColor(new Android.Graphics.Color(Color.ParseColor("#EF5350")));
+                    Window.SetNavigationBarColor(new Android.Graphics.Color(Color.ParseColor("#ba3c39")));
                     Window.SetStatusBarColor(new Android.Graphics.Color(Color.ParseColor("#ba3c39")));
-                    ActionBar.SetBackgroundDrawable(new Android.Graphics.Drawables.ColorDrawable(Color.ParseColor("#ba3c39")));
-                    confirmRideButton.SetBackgroundResource(Resource.Drawable.red_button);
-                    modifyDestinationButton.SetBackgroundResource(Resource.Drawable.red_button);
+                    ActionBar.SetBackgroundDrawable(new Android.Graphics.Drawables.ColorDrawable(Color.ParseColor("#EF5350")));
+                    mapButton.SetBackgroundResource(Resource.Drawable.red_button);
                 }
                 else
                 {
