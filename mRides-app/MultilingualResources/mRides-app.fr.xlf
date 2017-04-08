@@ -8,7 +8,7 @@
       <group id="MRIDES-APP/RESOURCES/VALUES/STRINGS.XML" datatype="resx">
         <trans-unit id="Hello" translate="yes" xml:space="preserve">
           <source>Hello World, Click Me!</source>
-          <target state="new">Hello World, Click Me!</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Bonjour monde, cliquez-moi !</target>
         </trans-unit>
         <trans-unit id="ApplicationName" translate="yes" xml:space="preserve">
           <source>mRides-app</source>
@@ -16,203 +16,203 @@
         </trans-unit>
         <trans-unit id="Pref_Hi" translate="yes" xml:space="preserve">
           <source>Hi</source>
-          <target state="new">Hi</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Salut</target>
         </trans-unit>
         <trans-unit id="Pref_SetYourPreferences" translate="yes" xml:space="preserve">
           <source>Set Your Preferences</source>
-          <target state="new">Set Your Preferences</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Définir vos préférences</target>
         </trans-unit>
         <trans-unit id="Pref_Smoker" translate="yes" xml:space="preserve">
           <source>Smoker</source>
-          <target state="new">Smoker</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Fumeur</target>
         </trans-unit>
         <trans-unit id="Pref_NonSmoker" translate="yes" xml:space="preserve">
           <source>Non-Smoker</source>
-          <target state="new">Non-Smoker</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Non fumeur</target>
         </trans-unit>
         <trans-unit id="Pref_Male" translate="yes" xml:space="preserve">
           <source>Male</source>
-          <target state="new">Male</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Masculin</target>
         </trans-unit>
         <trans-unit id="Pref_Female" translate="yes" xml:space="preserve">
           <source>Female</source>
-          <target state="new">Female</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Féminin</target>
         </trans-unit>
         <trans-unit id="Pref_Luggage" translate="yes" xml:space="preserve">
           <source>Luggage</source>
-          <target state="new">Luggage</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Bagages</target>
         </trans-unit>
         <trans-unit id="Pref_NoLuggage" translate="yes" xml:space="preserve">
           <source>No Luggage</source>
-          <target state="new">No Luggage</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Aucun bagage</target>
         </trans-unit>
         <trans-unit id="Pref_Handicap" translate="yes" xml:space="preserve">
           <source>Physical Disability</source>
-          <target state="new">Physical Disability</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Déficience physique</target>
         </trans-unit>
         <trans-unit id="Pref_NoHandicap" translate="yes" xml:space="preserve">
           <source>No Physical Disability</source>
-          <target state="new">No Physical Disability</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Aucune déficience physique</target>
         </trans-unit>
         <trans-unit id="Pref_Pet" translate="yes" xml:space="preserve">
           <source>Pet</source>
-          <target state="new">Pet</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Animal de compagnie</target>
         </trans-unit>
         <trans-unit id="Pref_NoPet" translate="yes" xml:space="preserve">
           <source>No Pet</source>
-          <target state="new">No Pet</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Aucun animal de compagnie</target>
         </trans-unit>
         <trans-unit id="Pref_Prompt_Gender" translate="yes" xml:space="preserve">
           <source>Preferred Gender</source>
-          <target state="new">Preferred Gender</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Sexe préféré</target>
         </trans-unit>
         <trans-unit id="Pref_Back" translate="yes" xml:space="preserve">
           <source>Back</source>
-          <target state="new">Back</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Précédent</target>
         </trans-unit>
         <trans-unit id="Pref_Done" translate="yes" xml:space="preserve">
           <source>Done</source>
-          <target state="new">Done</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Terminé</target>
         </trans-unit>
         <trans-unit id="ExtraData_DataNotAvailable" translate="yes" xml:space="preserve">
           <source>Data not available</source>
-          <target state="new">Data not available</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Données non disponibles</target>
         </trans-unit>
         <trans-unit id="slogan" translate="yes" xml:space="preserve">
           <source>Travel together</source>
-          <target state="new">Travel together</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Voyager ensemble</target>
         </trans-unit>
         <trans-unit id="fblogin" translate="yes" xml:space="preserve">
           <source>To get started, sign in with a simple click:</source>
-          <target state="new">To get started, sign in with a simple click:</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Pour commencer, connectez-vous à l’aide d’un simple clic :</target>
         </trans-unit>
         <trans-unit id="fb" translate="yes" xml:space="preserve">
           <source>Login with Facebook</source>
-          <target state="new">Login with Facebook</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Connexion avec Facebook</target>
         </trans-unit>
         <trans-unit id="riderOrDriver" translate="yes" xml:space="preserve">
           <source>  Are you a Rider \nor a Driver? </source>
-          <target state="new">  Are you a Rider \nor a Driver? </target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">  Vous êtes un coureur \nor un pilote ? </target>
         </trans-unit>
         <trans-unit id="numberOfRiders" translate="yes" xml:space="preserve">
           <source>How many are you?</source>
-          <target state="new">How many are you?</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Combien êtes-vous ?</target>
         </trans-unit>
         <trans-unit id="previous" translate="yes" xml:space="preserve">
           <source>Previous</source>
-          <target state="new">Previous</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Précédent</target>
         </trans-unit>
         <trans-unit id="next" translate="yes" xml:space="preserve">
           <source>Next</source>
-          <target state="new">Next</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Suivant</target>
         </trans-unit>
         <trans-unit id="hello_map" translate="yes" xml:space="preserve">
           <source>Hello</source>
-          <target state="new">Hello</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Hello</target>
         </trans-unit>
         <trans-unit id="dest" translate="yes" xml:space="preserve">
           <source>Destination</source>
-          <target state="new">Destination</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Destination</target>
         </trans-unit>
         <trans-unit id="user_driver" translate="yes" xml:space="preserve">
           <source>Driver</source>
-          <target state="new">Driver</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Pilote</target>
         </trans-unit>
         <trans-unit id="user_rider" translate="yes" xml:space="preserve">
           <source>Rider</source>
-          <target state="new">Rider</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Rider</target>
         </trans-unit>
         <trans-unit id="user_type" translate="yes" xml:space="preserve">
           <source>User type</source>
-          <target state="new">User type</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Type d'utilisateur</target>
         </trans-unit>
         <trans-unit id="number_of_people" translate="yes" xml:space="preserve">
           <source>Number of people</source>
-          <target state="new">Number of people</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Nombre de personnes</target>
         </trans-unit>
         <trans-unit id="smoker" translate="yes" xml:space="preserve">
           <source>Smoker</source>
-          <target state="new">Smoker</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Fumeur</target>
         </trans-unit>
         <trans-unit id="luggage" translate="yes" xml:space="preserve">
           <source>Luggage</source>
-          <target state="new">Luggage</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Bagages</target>
         </trans-unit>
         <trans-unit id="handicap" translate="yes" xml:space="preserve">
           <source>Handicap</source>
-          <target state="new">Handicap</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Handicapés</target>
         </trans-unit>
         <trans-unit id="pet" translate="yes" xml:space="preserve">
           <source>Pet</source>
-          <target state="new">Pet</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Animal de compagnie</target>
         </trans-unit>
         <trans-unit id="gender" translate="yes" xml:space="preserve">
           <source>Gender</source>
-          <target state="new">Gender</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Sexe</target>
         </trans-unit>
         <trans-unit id="person_profile" translate="yes" xml:space="preserve">
           <source>Person</source>
-          <target state="new">Person</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Personne</target>
         </trans-unit>
         <trans-unit id="ratings_reviews" translate="yes" xml:space="preserve">
           <source>Ratings and Reviews</source>
-          <target state="new">Ratings and Reviews</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Notes et commentaires</target>
         </trans-unit>
         <trans-unit id="ratingsAndReviews" translate="yes" xml:space="preserve">
           <source>Ratings and Reviews</source>
-          <target state="new">Ratings and Reviews</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Notes et commentaires</target>
         </trans-unit>
         <trans-unit id="personUser" translate="yes" xml:space="preserve">
           <source>Person</source>
-          <target state="new">Person</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Personne</target>
         </trans-unit>
         <trans-unit id="dateOfFeedback" translate="yes" xml:space="preserve">
           <source>Date of feedback</source>
-          <target state="new">Date of feedback</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Date de retour</target>
         </trans-unit>
         <trans-unit id="p_erson" translate="yes" xml:space="preserve">
           <source>Person</source>
-          <target state="new">Person</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Personne</target>
         </trans-unit>
         <trans-unit id="user_review" translate="yes" xml:space="preserve">
           <source>Review</source>
-          <target state="new">Review</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Révision</target>
         </trans-unit>
         <trans-unit id="leaveReviewForUser" translate="yes" xml:space="preserve">
           <source>How would you rate this user?</source>
-          <target state="new">How would you rate this user?</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Comment évaluez-vous cet utilisateur ?</target>
         </trans-unit>
         <trans-unit id="reviewSubmit" translate="yes" xml:space="preserve">
           <source>Submit</source>
-          <target state="new">Submit</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Envoyer</target>
         </trans-unit>
         <trans-unit id="viewUserProfile" translate="yes" xml:space="preserve">
           <source>View Profile</source>
-          <target state="new">View Profile</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Afficher le profil</target>
         </trans-unit>
         <trans-unit id="reviewUser" translate="yes" xml:space="preserve">
           <source>Review</source>
-          <target state="new">Review</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Révision</target>
         </trans-unit>
         <trans-unit id="feedbackPopup" translate="yes" xml:space="preserve">
           <source>Click for Feedback popup!</source>
-          <target state="new">Click for Feedback popup!</target>
+          <target state="translated">Cliquez pour popup comentaires !</target>
         </trans-unit>
         <trans-unit id="going_to_destination" translate="yes" xml:space="preserve">
           <source>Going to:</source>
-          <target state="new">Going to:</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Sur le point de :</target>
         </trans-unit>
         <trans-unit id="Pref_Gender" translate="yes" xml:space="preserve">
           <source>"Any","Male","Female"</source>
-          <target state="new">"Any","Male","Female"</target>
+          <target state="translated">"Toute", "masculin", "Femme"</target>
         </trans-unit>
         <trans-unit id="numbers_array" translate="yes" xml:space="preserve">
           <source>""1"",""2"",""3"",""4"",""5"",""6""</source>
-          <target state="new">""1"",""2"",""3"",""4"",""5"",""6""</target>
+          <target state="translated">"1","2","3","4","5","6"</target>
         </trans-unit>
         <trans-unit id="message" translate="yes" xml:space="preserve">
           <source>Chat</source>
-          <target state="new">Chat</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Conversation</target>
         </trans-unit>
         <trans-unit id="firebase_database_url" translate="yes" xml:space="preserve">
           <source>https://mrides-155403.firebaseio.com/</source>
@@ -220,45 +220,67 @@
         </trans-unit>
         <trans-unit id="feedbackTitle" translate="yes" xml:space="preserve">
           <source>Leave a feedback!</source>
-          <target state="new">Leave a feedback!</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Laissez un commentaires !</target>
         </trans-unit>
         <trans-unit id="enterCommentForUser" translate="yes" xml:space="preserve">
           <source>Enter your comment here</source>
-          <target state="new">Enter your comment here</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Entrez votre commentaire ici</target>
         </trans-unit>
         <trans-unit id="closeFeedback" translate="yes" xml:space="preserve">
           <source>Close</source>
-          <target state="new">Close</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Fermer</target>
         </trans-unit>
         <trans-unit id="userMatchAccept" translate="yes" xml:space="preserve">
           <source>Accept</source>
-          <target state="new">Accept</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Accepter</target>
         </trans-unit>
         <trans-unit id="userMatchDecline" translate="yes" xml:space="preserve">
           <source>Decline</source>
-          <target state="new">Decline</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Refuser</target>
         </trans-unit>
         <trans-unit id="userMatchDone" translate="yes" xml:space="preserve">
           <source>Done</source>
-          <target state="new">Done</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Terminé</target>
         </trans-unit>
         <trans-unit id="matchedWith" translate="yes" xml:space="preserve">
           <source>You are matched with:</source>
-          <target state="new">You are matched with:</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Vous êtes jumelé avec :</target>
         </trans-unit>
         <trans-unit id="userMatchFrom" translate="yes" xml:space="preserve">
           <source>From:</source>
-          <target state="new">From:</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Du :</target>
         </trans-unit>
         <trans-unit id="matchRequestSent" translate="yes" xml:space="preserve">
           <source>A request has been sent to this rider</source>
-          <target state="new">A request has been sent to this rider</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Une demande a été envoyée à cet avenant</target>
         </trans-unit>
         <trans-unit id="matchNoMoreMatch" translate="yes" xml:space="preserve">
           <source>No more match</source>
-          <target state="new">No more match</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Ne plus correspondre</target>
         </trans-unit>
         <trans-unit id="matchNoMatchFound" translate="yes" xml:space="preserve">
+          <source>No more match found</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Plus aucune correspondance trouvée</target>
+        </trans-unit>
+        <trans-unit id="menu_my_rides" translate="yes" xml:space="preserve">
+          <source>Rides</source>
+          <target state="translated">Trajets</target>
+        </trans-unit>
+        <trans-unit id="menu_my_profile" translate="yes" xml:space="preserve">
+          <source>Profile</source>
+          <target state="translated">Profil</target>
+        </trans-unit>
+        <trans-unit id="menu_chat" translate="yes" xml:space="preserve">
+          <source>Messages</source>
+          <target state="translated">Messages</target>
+        </trans-unit>
+        <trans-unit id="menu_settings" translate="yes" xml:space="preserve">
+          <source>Settings</source>
+          <target state="translated">Outils</target>
+        </trans-unit>
+        <trans-unit id="menu_general" translate="yes" xml:space="preserve">
+          <source>Menu</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Menu</target>
           <source>No match found</source>
           <target state="new">No match found</target>
         </trans-unit>
