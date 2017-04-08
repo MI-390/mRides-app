@@ -57,6 +57,14 @@ namespace mRides_app.Mappers
         }
 
         /// <summary>
+        /// This method returns a user object given its user ID.
+        /// </summary>
+        public List<Request> GetRequests(int userId)
+        {
+            return userGateway.GetRequests(userId);
+        }
+
+        /// <summary>
         /// Obtain a user object given its Facebook ID.
         /// </summary>
         public User GetUserByFacebookId(long facebookId)
