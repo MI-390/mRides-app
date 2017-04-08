@@ -67,13 +67,13 @@ namespace UnitTests
             {
                 var db = new SQLiteConnection(localDB.pathToLocalDatabase);
                 User foundUser = db.Find<User>(userId);
-                Assert.True(foundUser != null);
-                Assert.True(foundUser.id == userId);
-                Assert.True(foundUser.facebookID == userId);
-                Assert.True(!foundUser.isHandicap);
-                Assert.True(!foundUser.isSmoker);
-                Assert.True(foundUser.hasLuggage);
-                Assert.True(foundUser.hasPet);
+                Assert.True(foundUser != null
+                    && foundUser.id == userId
+                    && foundUser.facebookID == userId
+                    && !foundUser.isHandicap
+                    && !foundUser.isSmoker
+                    && foundUser.hasLuggage
+                    && foundUser.hasPet);
             }
             catch (SQLiteException e)
             {
@@ -127,13 +127,13 @@ namespace UnitTests
             var db = new SQLiteConnection(localDB.pathToLocalDatabase);
             User foundUser = db.Find<User>(userId);
 
-            Assert.True(foundUser != null);
-            Assert.True(foundUser.id == userId);
-            Assert.True(foundUser.facebookID == 54321);
-            Assert.True(!foundUser.isHandicap);
-            Assert.True(!foundUser.isSmoker);
-            Assert.True(!foundUser.hasLuggage);
-            Assert.True(!foundUser.hasPet);
+            Assert.True(foundUser != null
+                && foundUser.id == userId
+                && foundUser.facebookID == 54321
+                && !foundUser.isHandicap
+                && !foundUser.isSmoker
+                && !foundUser.hasLuggage
+                && !foundUser.hasPet);
         }
 
         [Test]
@@ -172,13 +172,13 @@ namespace UnitTests
 
             // Find the user
             User foundUser = userLocalGateway.FindUserById(userId);
-            Assert.True(foundUser != null);
-            Assert.True(foundUser.id == userId);
-            Assert.True(foundUser.facebookID == userId);
-            Assert.True(!foundUser.isHandicap);
-            Assert.True(foundUser.isSmoker);
-            Assert.True(foundUser.hasLuggage);
-            Assert.True(foundUser.hasPet);
+            Assert.True(foundUser != null
+                && foundUser.id == userId
+                && foundUser.facebookID == userId
+                && !foundUser.isHandicap
+                && foundUser.isSmoker
+                && foundUser.hasLuggage
+                && foundUser.hasPet);
         }
 
         [Test]
