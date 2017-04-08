@@ -21,6 +21,7 @@ namespace mRides_app
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            UserMapper.getInstance().setTheme(this);
             base.OnCreate(savedInstanceState);
             string facebookFirstName = Intent.GetStringExtra(IntentExtraNames.UserFacebookFirstName);
 

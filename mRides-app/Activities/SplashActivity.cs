@@ -38,7 +38,7 @@ namespace mRides_app
             Log.Debug(typeof(SplashActivity).Name, "Performing startup work that takes time.");
             var account = AccountStore.Create(this).FindAccountsForService("Facebook").FirstOrDefault();
             if (account != null)
-                LoginRequest.handleRequest(account, this);
+                LoginRequest.handleLoginRequest(account, this);
             else
                 StartActivity(new Intent(this, typeof(MainActivity)));
         }

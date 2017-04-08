@@ -57,6 +57,14 @@ namespace mRides_app.Mappers
         }
 
         /// <summary>
+        /// This method returns a user object given its user ID.
+        /// </summary>
+        public List<Request> GetRequests(int userId)
+        {
+            return userGateway.GetRequests(userId);
+        }
+
+        /// <summary>
         /// Obtain a user object given its Facebook ID.
         /// </summary>
         public User GetUserByFacebookId(long facebookId)
@@ -111,7 +119,20 @@ namespace mRides_app.Mappers
         /// <returns>Bitmap object representing the picture</returns>
         public Bitmap GetUserFacebookProfilePicture(long facebookId)
         {
-            return userGateway.GetUserFacebookProfilePicture(facebookId);
+            Bitmap userPicture = this.userCache.FindUserFacebookProfilePicture(facebookId);
+            if (userPicture != null)
+            {
+                return userPicture;
+            }
+            else
+            {
+                userPicture = userGateway.GetUserFacebookProfilePicture(facebookId);
+                if (userPicture != null)
+                {
+                    this.userCache.AddUserFacebookProfilePicture(facebookId, userPicture);
+                }
+            }
+            return userPicture;
         }
 
         /// <summary>
@@ -124,7 +145,20 @@ namespace mRides_app.Mappers
         /// <returns>Bitmap object representing the picture</returns>
         public async Task<Bitmap> GetUserFacebookProfilePictureAsync(long facebookId)
         {
-            return await userGateway.GetUserFacebookProfilePictureAsync(facebookId);
+            Bitmap userPicture = this.userCache.FindUserFacebookProfilePicture(facebookId);
+            if(userPicture != null)
+            {
+                return userPicture;
+            }
+            else
+            {
+                userPicture = await userGateway.GetUserFacebookProfilePictureAsync(facebookId);
+                if(userPicture != null)
+                {
+                    this.userCache.AddUserFacebookProfilePicture(facebookId, userPicture);
+                }
+            }
+            return userPicture;
         }
 
         /// <summary>

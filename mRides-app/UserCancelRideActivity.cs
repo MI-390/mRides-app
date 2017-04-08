@@ -73,23 +73,9 @@ namespace mRides_app
         private void DisplayRides()
         {
             ridesList.Clear();
-            //int usrID = User.currentUser.id;
-
-            // get all the rides with the user id
-            //if (User.currentUser.currentType == "driver")
-            //{
-            //    //foreach (var ride in User.currentUser.ridesAsDriver)
-            //    //{
-            //    //    ridesList.Add(ride);
-            //    //}
-            //}
-            //if (User.currentUser.currentType == "rider")
-            //{
-            //    //foreach (var userRide in User.currentUser.ridesAsRider)
-            //    //{
-            //    //    ridesList.Add(userRide);
-            //    //}
-            //}
+            int usrID = User.currentUser.id;
+            //ridesList=UserMapper.getInstance().GetReviews(User.currentUser.id);
+            
 
             listView = FindViewById<ListView>(Resource.Id.list_of_rides); // get reference to the ListView in the layout
             RidesAdapter adapter = new RidesAdapter(this, ridesList);

@@ -79,6 +79,11 @@ namespace mRides_app.Gateways
             SendPost<object>(ApiEndPointUrl.updateFcmToken, fcmTokenObject, true);
         }
 
+        public List<Request> GetRequests(int userId)
+        {
+            return SendGetWithUrlSegment<List<Request>>(ApiEndPointUrl.getUser, "id", userId.ToString());
+        }
+
         /// <summary>
         /// Creates a new review.
         /// </summary>

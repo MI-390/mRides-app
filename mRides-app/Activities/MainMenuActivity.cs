@@ -23,6 +23,7 @@ namespace mRides_app
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            UserMapper.getInstance().setTheme(this);
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.MainMenu);
@@ -107,6 +108,7 @@ namespace mRides_app
             logOutButton.Click += delegate
             {
                 logOutButton.Pressed = true;
+                LoginRequest.handleLogoutRequest(this);
                 //Will later include code that logs a user out of the application
             };
 
