@@ -650,16 +650,15 @@ namespace mRides_app
         {
             base.OnResume();
 
-            //MenuBar
-            var chatMenuButton = FindViewById<Button>(Resource.Id.menu_chat);
+            //Menu bottom bar
+            var chatMenuButton = FindViewById<ImageButton>(Resource.Id.menu_chat);
             chatMenuButton.Click += delegate
             {
                 Intent i = new Intent(this, typeof(ChatListActivity));
                 StartActivity(i);
             };
 
-            //MenuBar
-            var userProfileButton = FindViewById<Button>(Resource.Id.menu_user);
+            var userProfileButton = FindViewById<ImageButton>(Resource.Id.menu_user);
             userProfileButton.Click += delegate
             {
                 Intent i = new Intent(this, typeof(UserProfileActivity));
