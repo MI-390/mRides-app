@@ -24,7 +24,7 @@ namespace mRides_app.Cache.MemoryCache
         // ---------------------------------------------------------------------------
 
         // Maximum size of the cache
-        private const int cacheMaxSize = 4 * 1024 * 1024; // 4MB
+        public const int cacheMaxSize = 4 * 1024 * 1024; // 4MB
 
         // ---------------------------------------------------------------------------
         // Static variables
@@ -121,7 +121,15 @@ namespace mRides_app.Cache.MemoryCache
                 while (this.cacheCurrentSize + bitmap.ByteCount > cacheMaxSize)
                 {
                     long userFacebookIdToRemove = this.listUserFacebookIdRecentlyAccessed.Last();
+
+                    Bitmap bitmapToRemove;
+                    this.lruCache.TryGetValue(userFacebookIdToRemove, out bitmapToRemove);
+                    if (bitmapToRemove != null)
+                    {
+                        this.cacheCurrentSize -= bitmapToRemove.ByteCount;
+                    }
                     this.lruCache.Remove(userFacebookIdToRemove);
+
                     this.listUserFacebookIdRecentlyAccessed.Remove(userFacebookIdToRemove);
                 }
             }
@@ -131,6 +139,7 @@ namespace mRides_app.Cache.MemoryCache
             lock(this.cacheLock)
             {
                 this.lruCache.Add(userFacebookId, bitmap);
+                this.cacheCurrentSize += bitmap.ByteCount;
             }
 
             // Update list
@@ -148,6 +157,12 @@ namespace mRides_app.Cache.MemoryCache
             {
                 if (this.lruCache.ContainsKey(userFacebookId))
                 {
+                    Bitmap bitmap;
+                    this.lruCache.TryGetValue(userFacebookId, out bitmap);
+                    if(bitmap != null)
+                    {
+                        this.cacheCurrentSize -= bitmap.ByteCount;
+                    }
                     this.lruCache.Remove(userFacebookId);
                 }
 
