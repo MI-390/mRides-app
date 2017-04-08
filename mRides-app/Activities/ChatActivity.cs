@@ -22,6 +22,7 @@ using Android.Util;
 using mRides_app.Models;
 using mRides_app.Mappers;
 using System.Threading.Tasks;
+using Android.Views.InputMethods;
 
 namespace mRides_app
 {
@@ -29,7 +30,6 @@ namespace mRides_app
     /// <summary>
     /// Implementation of the chat activity
     /// </summary>
-    // [Activity(Label = "ChatActivity", Icon = "@drawable/icon", Theme = "@style/Theme.AppCompat.Light.NoActionBar")]
     [Activity(Label = "ChatActivity", Icon = "@drawable/icon")]
     public class ChatActivity : Activity, IValueEventListener
     {
@@ -50,6 +50,10 @@ namespace mRides_app
             base.OnActivityResult(requestCode, resultCode, data);
         }
 
+        /// <summary>
+        /// Method that is invoked when activity is first created
+        /// </summary>
+        /// <param name="bundle"></param>
         protected override void OnCreate(Bundle bundle)
         {
             UserMapper.getInstance().setTheme(this);
@@ -58,19 +62,28 @@ namespace mRides_app
             chatName = Intent.GetStringExtra("ChatName");
             userId = Convert.ToInt32(Intent.GetStringExtra("id"));
             firebase = new FirebaseClient(GetString(Resource.String.firebase_database_url));
-            // adding listener to "chats" everytime this activity is run
+            // adding listener to the right chat name everytime this activity is run
             FirebaseDatabase.Instance.GetReference(chatName+"/messages").AddValueEventListener(this);
+
             sendButton = FindViewById<Button>(Resource.Id.sendMsgButton);
             editChat = FindViewById<EditText>(Resource.Id.chatMsg);
             listChat = FindViewById<ListView>(Resource.Id.list_of_messages);
+
             createMetaFields();
+
             DisplayChatMessage();
+
             Log.Debug("CHAT", "InstanceID token: " + FirebaseInstanceId.Instance.Token);
             sendButton.Click += delegate
             {
                 PostMessage();
             };
         }
+
+       /// <summary>
+       /// 
+       /// </summary>
+       /// <returns>A task</returns>
         private async Task<int> createMetaFields()
         {
             await firebase.Child(chatName + "/user1").PatchAsync(User.currentUser);
@@ -78,13 +91,13 @@ namespace mRides_app
             await firebase.Child(chatName + "/user2").PatchAsync(UserMapper.getInstance().GetUser(userId));
             return 2;
         }
+
         /// <summary>
         /// Method to send a message to the chat interface
-        /// ***We will have to get the user's name and replace it 
         /// </summary>
         private async void PostMessage()
         {
-            // Post a message to "chats" specifically by creating a new MessageContent which takes a username and a text as parameters
+            // Post a message to the right chat name by creating a new MessageContent which takes a username and a text as parameters
             var items = await firebase.Child(chatName+"/messages").PostAsync(new MessagingService.MessageContent(userName, editChat.Text));
             editChat.Text = ""; // empty the text field
         }
@@ -97,14 +110,13 @@ namespace mRides_app
         /// <summary>
         /// Method that will display the message after a user posts a message
         /// </summary>
-        /// <param name="snapshot"></param>
-        public void OnDataChange(DataSnapshot snapshot)
+        public async void OnDataChange(DataSnapshot snapshot)
         {
             DisplayChatMessage();
         }
 
         /// <summary>
-        /// Method to display the message on the interface
+        /// Method to display all chat messages
         /// </summary>
         private async void DisplayChatMessage()
         {
@@ -112,12 +124,13 @@ namespace mRides_app
             var items = await firebase.Child(chatName+"/messages")
                 .OnceAsync<MessagingService.MessageContent>();
             
-            foreach (var ImageButton in items)
-                listMessage.Add(ImageButton.Object);
+            foreach (var item in items)
+                listMessage.Add(item.Object);
 
             // create a new adapter that takes the list of messages
-            MessagingService.ListViewAdapter adapter = new MessagingService.ListViewAdapter(this, listMessage);
+            MessagingService.ChatAdapter adapter = new MessagingService.ChatAdapter(this, listMessage);
             listChat.Adapter = adapter;
+            listChat.SetSelection(adapter.Count - 1);
         }
     }
 }

@@ -49,7 +49,7 @@ namespace mRides_app
 
             listView = FindViewById<ListView>(Resource.Id.List); // get reference to the ListView in the layout
                                                                  // populate the listview with data
-            listView.Adapter = new ChatAdapter(this, chatList);
+            listView.Adapter = new ChatListAdapter(this, chatList);
             listView.ItemClick += OnListItemClick;  // to be defined
 
 
