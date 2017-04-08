@@ -38,14 +38,15 @@ namespace mRides_app
                 User user = userMapper.GetUserByFacebookId(facebookId);
 
                 // If the user already exists, set the current user to it
-                // and go to map activity
+                // and go to main menu activity
                 if (user != null)
                 {
                     User.currentUser = user;
                     string token = FirebaseInstanceId.Instance.Token;
                     UserMapper.getInstance().updateFcmToken(token);
-                    var mapActivity = new Intent(context, typeof(MapActivity));
-                    context.StartActivity(mapActivity);
+                    var mainMenuActivity = new Intent(context, typeof(MainMenuActivity));
+                    mainMenuActivity.PutExtra("id", User.currentUser.id.ToString());
+                    context.StartActivity(mainMenuActivity);
                 }
                 // Otherwise, go to the preference activity
                 else
