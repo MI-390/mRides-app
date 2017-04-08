@@ -22,7 +22,7 @@
             android:textColor="#000000"
             android:gravity="center"
             android:textSize="25dp"
-            android:layout_marginBottom="8dp" />
+            android:layout_marginBottom="6dp" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="fill_parent"
@@ -30,79 +30,168 @@
         android:gravity="center_horizontal"
         android:id="@+id/mainMenuLinearLayout2"
         android:orientation="horizontal">
-        <Button
-            android:layout_width="150dp"
-            android:layout_height="150.0dp"
-            android:background="@drawable/menu_createride"
-            android:paddingBottom="5dp"
-            android:paddingTop="8dp"
-            android:id="@+id/createRideButton"
-            android:layout_marginBottom="10dp"
-            android:textColor="#000000" />
-        <Button
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/menu_preferences"
-            android:paddingBottom="5dp"
-            android:paddingTop="8dp"
-            android:id="@+id/preferencesButton"
-            android:textColor="#000000" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:id="@+id/mainMenuLinearLayout6"
+            android:orientation="vertical">
+            <Button
+                android:layout_width="135dp"
+                android:layout_height="135dp"
+                android:background="@drawable/menu_createride"
+                android:paddingBottom="5dp"
+                android:paddingTop="8dp"
+                android:id="@+id/createRideButton"
+                android:textColor="#000000" />
+            <TextView
+                android:text="CREATE RIDE"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/mainMenuTextView1"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textSize="@dimen/abc_text_size_medium_material" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:id="@+id/mainMenuLinearLayout7"
+            android:orientation="vertical"
+            android:layout_marginLeft="20dp">
+            <Button
+                android:layout_width="135dp"
+                android:layout_height="135dp"
+                android:background="@drawable/menu_preferences"
+                android:paddingBottom="5dp"
+                android:paddingTop="8dp"
+                android:id="@+id/preferencesButton"
+                android:textColor="#000000" />
+            <TextView
+                android:text="PREFERENCES"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/mainMenuTextView2"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textSize="@dimen/abc_text_size_medium_material" />
+        </LinearLayout>
     </LinearLayout>
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:id="@+id/mainMenuLinearLayout2"
-        android:orientation="horizontal">
-        <Button
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:background="@drawable/menu_myrides"
-            android:paddingBottom="5dp"
-            android:paddingTop="8dp"
-            android:id="@+id/myRidesButton"
-            android:layout_marginBottom="10dp"
-            android:textColor="#000000" />
-        <Button
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/menu_chat"
-            android:paddingBottom="5dp"
-            android:paddingTop="8dp"
-            android:id="@+id/chatButton"
-            android:textColor="#000000" />
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:id="@+id/mainMenuLinearLayout8"
+            android:orientation="vertical">
+            <Button
+                android:layout_width="135dp"
+                android:layout_height="135dp"
+                android:background="@drawable/menu_myrides"
+                android:paddingBottom="5dp"
+                android:paddingTop="8dp"
+                android:id="@+id/myRidesButton"
+                android:textColor="#000000" />
+            <TextView
+                android:text="MY RIDES"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/mainMenuTextView3"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textSize="@dimen/abc_text_size_medium_material" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:id="@+id/mainMenuLinearLayout9"
+            android:orientation="vertical"
+            android:layout_marginLeft="20dp">
+            <Button
+                android:layout_width="135dp"
+                android:layout_height="135dp"
+                android:background="@drawable/menu_chat"
+                android:paddingBottom="5dp"
+                android:paddingTop="8dp"
+                android:id="@+id/chatButton"
+                android:textColor="#000000" />
+            <TextView
+                android:text="CHAT"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/mainMenuTextView4"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textSize="@dimen/abc_text_size_medium_material" />
+        </LinearLayout>
     </LinearLayout>
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:id="@+id/mainMenuLinearLayout3"
-        android:orientation="horizontal">
-        <Button
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:background="@drawable/menu_myprofile"
-            android:paddingBottom="5dp"
-            android:paddingTop="8dp"
-            android:id="@+id/myProfileButton"
-            android:layout_marginBottom="10dp"
-            android:textColor="#000000" />
-        <Button
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/menu_logout"
-            android:paddingBottom="5dp"
-            android:paddingTop="8dp"
-            android:id="@+id/logOutButton"
-            android:textColor="#000000" />
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:id="@+id/mainMenuLinearLayout10"
+            android:orientation="vertical">
+            <Button
+                android:layout_width="135dp"
+                android:layout_height="135dp"
+                android:background="@drawable/menu_myprofile"
+                android:paddingBottom="5dp"
+                android:paddingTop="8dp"
+                android:id="@+id/myProfileButton"
+                android:textColor="#000000" />
+            <TextView
+                android:text="MY PROFILE"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/mainMenuTextView5"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textSize="@dimen/abc_text_size_medium_material" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:id="@+id/mainMenuLinearLayout11"
+            android:orientation="vertical"
+            android:layout_marginLeft="20dp">
+            <Button
+                android:layout_width="135dp"
+                android:layout_height="135dp"
+                android:background="@drawable/menu_logout"
+                android:paddingBottom="5dp"
+                android:paddingTop="8dp"
+                android:id="@+id/logOutButton"
+                android:textColor="#000000" />
+            <TextView
+                android:text="LOG OUT"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/mainMenuTextView6"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textSize="@dimen/abc_text_size_medium_material" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
