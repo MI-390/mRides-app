@@ -17,7 +17,7 @@
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -217,6 +217,7 @@
     <Compile Include="Cache\UserCache.cs" />
     <Compile Include="Activities\ChatListActivity.cs" />
     <Compile Include="Activities\ChatActivity.cs" />
+    <Compile Include="ChatListAdapter.cs" />
     <Compile Include="Cache\MemoryCache\UserFacebookProfilePictureCache.cs" />
     <Compile Include="ChatAdapter.cs" />
     <Compile Include="Constants\ActivityNames.cs" />
@@ -226,7 +227,7 @@
     <Compile Include="Gateways\ConsoleGateway.cs" />
     <Compile Include="Gateways\UserGateway.cs" />
     <Compile Include="LoginRequest.cs" />
-    <Compile Include="MessagingService\ListViewAdapter.cs" />
+    <Compile Include="MessagingService\ChatAdapter.cs" />
     <Compile Include="MessagingService\MessageContent.cs" />
     <Compile Include="MessagingService\FirebaseIIDService.cs" />
     <Compile Include="Activities\MatchActivity.cs" />

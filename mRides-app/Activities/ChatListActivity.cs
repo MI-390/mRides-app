@@ -84,9 +84,10 @@ namespace mRides_app
             string userID="";
             Intent i = new Intent(this, typeof(ChatActivity));
             i.PutExtra("ChatName", cl.ChatName);
-            
+            userID = cl.user1.id.ToString();
             if (User.currentUser.id == cl.user1.id)
                 userID = cl.user2.id.ToString();
+        
 
             i.PutExtra("id", userID);
             StartActivity(i);
