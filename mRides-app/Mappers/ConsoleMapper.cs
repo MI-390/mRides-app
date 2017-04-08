@@ -99,6 +99,16 @@ namespace mRides_app.Mappers
             return consoleGateway.AcceptConfirmation(riderRequestId, driverRequestId);
         }
 
-        
+        /// <summary>
+        /// Sets the distance travelled in a ride in order to keep track
+        /// of ride metrics.
+        /// </summary>
+        /// <param name="rideId">ID of the ride in question</param>
+        /// <param name="distanceMetric">Value of the distance travelled</param>
+        public void setDistanceTravelled(int rideId, double distanceMetric)
+        {
+            consoleGateway.setDistanceTravelled(rideId, distanceMetric);
+        }
+
     }
 }

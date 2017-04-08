@@ -146,5 +146,21 @@ namespace mRides_app.Gateways
             };
             return SendPost<bool>(ApiEndPointUrl.acceptConfirm, confirmationAcceptance, true);
         }
+
+        /// <summary>
+        /// Sets the distance travelled in a ride in order to keep track
+        /// of ride metrics.
+        /// </summary>
+        /// <param name="rideId">ID of the ride in question</param>
+        /// <param name="distanceMetric">Value of the distance travelled</param>
+        public void setDistanceTravelled(int rideID, double distanceMetric)
+        {
+            object objectSent = new
+            {
+                rideId = rideID,
+                distanceTravelled = distanceMetric
+            };
+            SendPost<object>(ApiEndPointUrl.setDistanceTravelled, objectSent, false);
+        }
     }
 }

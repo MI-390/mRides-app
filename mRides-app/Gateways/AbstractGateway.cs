@@ -236,5 +236,7 @@ namespace mRides_app.Gateways
         public const string createRide = "Ride/createRide";
         public const string addRiderToRide = "Ride/addRiderToRide";
         public const string getRide = "Ride/getRide/{id}";
+        public const string setDistanceTravelled = "Ride/setDistanceTravelled";
+
     }
 }

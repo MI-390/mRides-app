@@ -20,6 +20,7 @@ namespace mRides_app.Models
         public DateTime dateTime { get; set; }
         public Boolean isWeekly { get; set; }
         public string type;
+        public double distanceTravelled { get; set; }
 
         //1 Driver per Ride
         public int? DriverID { get; set; }
