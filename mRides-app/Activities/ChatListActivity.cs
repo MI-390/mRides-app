@@ -53,8 +53,8 @@ namespace mRides_app
             listView.ItemClick += OnListItemClick;  // to be defined
 
 
-            //Menu bottom bar
-            var chatMenuButton = FindViewById<ImageButton>(Resource.Id.menu_chat);
+            //Menu bar
+            var chatMenuButton = FindViewById<Button>(Resource.Id.menu_map);
             chatMenuButton.Click += delegate
             {
                 Intent i = new Intent(this, typeof(ChatListActivity));

@@ -1,0 +1,455 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="mRides_app.ChatActivity" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAIBAAAACAAEAAAAAAAAgEgCAQABAAABQAAAEAAAA=</HashCode>
+      <FileName>Activities\ChatActivity.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="mRides_app.ChatListActivity" Collapsed="true">
+    <Position X="15.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAAAAAAAAAACAAABAAAABAAIAAAAA=</HashCode>
+      <FileName>Activities\ChatListActivity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.MainActivity" Collapsed="true">
+    <Position X="8.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAKAAAgAAAAAAAgIACAAAAAAAAAACgEAAAA=</HashCode>
+      <FileName>Activities\MainActivity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.MapActivity" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>oESIMEIMEECAAQpUGBgAAAAggCBAAQOAkgAIAARACAA=</HashCode>
+      <FileName>Activities\MapActivity.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="mRides_app.MatchActivity" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAACAQAAwAAAAFAgAEALAAACACAAAAgAABwjIKAoQAE=</HashCode>
+      <FileName>Activities\MatchActivity.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="mRides_app.MessagingActivity" Collapsed="true">
+    <Position X="15.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAACAAAAACAAAAAAACAAA=</HashCode>
+      <FileName>Activities\MessagingActivity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.PreferencesActivity" Collapsed="true">
+    <Position X="10.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Activities\PreferencesActivity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.SplashActivity" Collapsed="true">
+    <Position X="10.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAAAAACAAIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Activities\SplashActivity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.UserProfileActivity" Collapsed="true">
+    <Position X="10.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Activities\UserProfileActivity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.ChatAdapter" Collapsed="true">
+    <Position X="12.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAICAAAAAAAAAEAACAgAAAQAAAAAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>ChatAdapter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.GeocodedWaypoint" Collapsed="true">
+    <Position X="12.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAAAIAAAAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>DestinationJSON.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.Northeast" Collapsed="true">
+    <Position X="5.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DestinationJSON.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.Southwest" Collapsed="true">
+    <Position X="8.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DestinationJSON.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.Bounds" Collapsed="true">
+    <Position X="8.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DestinationJSON.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.Distance" Collapsed="true">
+    <Position X="5.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAACAIAAAAAAAAAAA=</HashCode>
+      <FileName>DestinationJSON.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.Duration" Collapsed="true">
+    <Position X="8.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAACAIAAAAAAAAAAA=</HashCode>
+      <FileName>DestinationJSON.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.EndLocation" Collapsed="true">
+    <Position X="12.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DestinationJSON.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.StartLocation" Collapsed="true">
+    <Position X="12.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DestinationJSON.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.Distance2" Collapsed="true">
+    <Position X="7" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAACAIAAAAAAAAAAA=</HashCode>
+      <FileName>DestinationJSON.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.Duration2" Collapsed="true">
+    <Position X="10.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAACAIAAAAAAAAAAA=</HashCode>
+      <FileName>DestinationJSON.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.EndLocation2" Collapsed="true">
+    <Position X="14" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DestinationJSON.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.Polyline" Collapsed="true">
+    <Position X="8.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DestinationJSON.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.StartLocation2" Collapsed="true">
+    <Position X="14" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DestinationJSON.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.Step" Collapsed="true">
+    <Position X="15.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgIAAAIAAAAAAAIABAAAAAAAAEAAAAAABAAAAAAAQAA=</HashCode>
+      <FileName>DestinationJSON.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.Leg" Collapsed="true">
+    <Position X="17.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAiAAAIAAQAAAAABBAAAAAAAAEAAAAAAAAAAgAAAQAA=</HashCode>
+      <FileName>DestinationJSON.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.OverviewPolyline" Collapsed="true">
+    <Position X="7" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DestinationJSON.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.Route" Collapsed="true">
+    <Position X="7" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAIAAAAQAAABAAAAAAAACACAAgAA=</HashCode>
+      <FileName>DestinationJSON.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.DestinationJSON" Collapsed="true">
+    <Position X="17.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAQABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DestinationJSON.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.LeaveReviewFragment" Collapsed="true">
+    <Position X="15.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAQAAAACAgAEAAEAYAAAAAAACABAAAAgAA=</HashCode>
+      <FileName>Fragments\LeaveReviewFragment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.TestFragments" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="17.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAACAAAAAAAggAAAAAAAA=</HashCode>
+      <FileName>Fragments\TestFragments.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="mRides_app.UserProfileFragment" Collapsed="true">
+    <Position X="14" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgACABEAAAAAAgAAiAgAIAECAIAIAAAAAAABAAQAAAA=</HashCode>
+      <FileName>Fragments\UserProfileFragment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.UserTypeFragment" Collapsed="true">
+    <Position X="17.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAgAAAAAAAAoRAACAAIAAAAAAAUBBAAoAAQA=</HashCode>
+      <FileName>Fragments\UserTypeFragment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.LoginRequest" Collapsed="true">
+    <Position X="7" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>LoginRequest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.Resource" Collapsed="true">
+    <Position X="14" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.RidesAdapter" Collapsed="true">
+    <Position X="5.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAICAAAAAAAAAEAACAAAAAQAAAAAAAAAEAABAAAAAAA=</HashCode>
+      <FileName>RidesAdapter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.UserCancelRideActivity" Collapsed="true">
+    <Position X="8.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AADAAAAAAAAAAACAAAAAAAAAACAAAAAAAAAABIAAAAA=</HashCode>
+      <FileName>UserCancelRideActivity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.UserProfileFeedbackAdapter" Collapsed="true">
+    <Position X="12.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAICAAAAAAAAAEIAAAAAAAQAAAAAAAEAAAABAAAAAAA=</HashCode>
+      <FileName>UserProfileFeedbackAdapter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.Authentication.Facebook" Collapsed="true">
+    <Position X="15.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Authentication\Facebook.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.Cache.UserCache" Collapsed="true">
+    <Position X="7" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAQQAAAAAAAAgADAgEAAABABAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Cache\UserCache.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.Constants.ActivityNames" Collapsed="true">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>Constants\ActivityNames.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.Constants.IntentExtraNames" Collapsed="true">
+    <Position X="14" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAABIAAAAAAAAAAAAAAgAAAAAAFAAAAAAAAAAQCA=</HashCode>
+      <FileName>Constants\IntentExtraNames.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.Feedback.FeedbackTest" Collapsed="true">
+    <Position X="5.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Feedback\FeedbackTest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.Gateways.AbstractGateway" Collapsed="true">
+    <Position X="1.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAQACAAAAAAAAAAAgACAAgAAAAAAAAABA=</HashCode>
+      <FileName>Gateways\AbstractGateway.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.Gateways.ApiEndPointUrl" Collapsed="true">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAIAYQCAAAAAsAIAQAAIAAAABAAwACABIBAAAAA=</HashCode>
+      <FileName>Gateways\AbstractGateway.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.Gateways.ConsoleGateway" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAQAAAAAAAAAAACBABAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Gateways\ConsoleGateway.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.Gateways.UserGateway" Collapsed="true">
+    <Position X="2.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAIBYQAAAAAQAAAAAAAABBBAAAAAEAAAAAAoAAA=</HashCode>
+      <FileName>Gateways\UserGateway.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.Mappers.AbstractMapper" Collapsed="true">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Mappers\AbstractMapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.Mappers.ConsoleMapper" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAQAAAAAAAAAAACAABgAAQgAAAAAAAAAAA=</HashCode>
+      <FileName>Mappers\ConsoleMapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.Mappers.UserMapper" Collapsed="true">
+    <Position X="2.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEBAAAIAYQAAAAEQAAAAAAAIABBAAAQAEAEAAAAgAAA=</HashCode>
+      <FileName>Mappers\UserMapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MRidesJSON.FindDriversJson" Collapsed="true">
+    <Position X="7" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>Mappers\MRidesJSON\FindDriversJson.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MRidesJSON.FindRidersJson" Collapsed="true">
+    <Position X="8.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAIAA=</HashCode>
+      <FileName>Mappers\MRidesJSON\FindRidersJson.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.MessagingService.FirebaseIIDService" Collapsed="true">
+    <Position X="10.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAEAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>MessagingService\FirebaseIIDService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.MessagingService.MyFirebaseMessagingService" Collapsed="true">
+    <Position X="17.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>MessagingService\FirebaseMessagingService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.MessagingService.ListViewAdapter" Collapsed="true">
+    <Position X="5.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABIAABAAAAAAAEAAAAAAAAQAAAAAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>MessagingService\ListViewAdapter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.MessagingService.MessageContent" Collapsed="true">
+    <Position X="14" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAIAAAAQA=</HashCode>
+      <FileName>MessagingService\MessageContent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.Models.ChatList" Collapsed="true">
+    <Position X="14" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAEAAAAAAACAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ChatList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.Models.Feedback" Collapsed="true">
+    <Position X="17.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABBAABAAAAAQAAAAEAAIAAAAEAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Feedback.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.Models.Request" Collapsed="true">
+    <Position X="12.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAQAAAgggAAAAAAAICCBAABAAAAAAAABAAABAA=</HashCode>
+      <FileName>Models\Request.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.Models.Ride" Collapsed="true">
+    <Position X="15.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAggAAAAAAAAACBAABiAAAAAAABAAAAAA=</HashCode>
+      <FileName>Models\Ride.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.Models.RiderRequest" Collapsed="true">
+    <Position X="17.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAFAAAAQAAAAAAAAACAAAAAAAAAAAABAAAAgA=</HashCode>
+      <FileName>Models\RiderRequest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.Models.User" Collapsed="true">
+    <Position X="5.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAUAAAAARAAACAAEAAiDAgDAAgAABSAAABSAAAAgA=</HashCode>
+      <FileName>Models\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRides_app.Models.UserRides" Collapsed="true">
+    <Position X="15.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAABBAAAAgDAAAAAAAAECAAACAAAAAAAABAAAEAA=</HashCode>
+      <FileName>Models\UserRides.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="mRides_app.IStartDrivingModeListener" Collapsed="true">
+    <Position X="7" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Fragments\UserProfileFragment.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="mRides_app.IEditUserSelectionListener" Collapsed="true">
+    <Position X="5.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Fragments\UserTypeFragment.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
