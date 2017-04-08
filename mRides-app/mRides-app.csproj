@@ -221,7 +221,6 @@
     <Compile Include="Activities\ChatActivity.cs" />
     <Compile Include="ChatListAdapter.cs" />
     <Compile Include="Cache\MemoryCache\UserFacebookProfilePictureCache.cs" />
-    <Compile Include="ChatAdapter.cs" />
     <Compile Include="Constants\ActivityNames.cs" />
     <Compile Include="Constants\IntentExtraNames.cs" />
     <Compile Include="DestinationJSON.cs" />
