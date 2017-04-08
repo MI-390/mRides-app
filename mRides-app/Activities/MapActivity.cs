@@ -119,14 +119,14 @@ namespace mRides_app
             }
         }
 
-        async void OnConfirmRideButtonClick(object sender, EventArgs e)
+        void OnConfirmRideButtonClick(object sender, EventArgs e)
         {
             confirmRideButton.Visibility = ViewStates.Invisible;
             modifyDestinationButton.Visibility = ViewStates.Invisible;
             selectingOrigin = false;
             confirmingRide = false;
 
-            await setDestinationList();
+            setDestinationList();
 
             // Prepare the match activity
             List<DestinationCoordinate> destinationCoordinates = this.getFormattedDirectionList();
@@ -772,7 +772,8 @@ namespace mRides_app
                     Window.SetNavigationBarColor(new Android.Graphics.Color(Color.ParseColor("#ba3c39")));
                     Window.SetStatusBarColor(new Android.Graphics.Color(Color.ParseColor("#ba3c39")));
                     ActionBar.SetBackgroundDrawable(new Android.Graphics.Drawables.ColorDrawable(Color.ParseColor("#EF5350")));
-                    mapButton.SetBackgroundResource(Resource.Drawable.red_button);
+                    confirmRideButton.SetBackgroundResource(Resource.Drawable.red_button);
+                    modifyDestinationButton.SetBackgroundResource(Resource.Drawable.red_button);
                 }
                 else
                 {

@@ -38,6 +38,7 @@ namespace mRides_app
         private ListView listChat;
         private EditText editChat;
         private Button sendButton;
+        int ctr = 0;
         string chatName;
         int userId;
 
@@ -62,7 +63,9 @@ namespace mRides_app
             chatName = Intent.GetStringExtra("ChatName");
             userId = Convert.ToInt32(Intent.GetStringExtra("id"));
             firebase = new FirebaseClient(GetString(Resource.String.firebase_database_url));
+
             // adding listener to the right chat name everytime this activity is run
+            FirebaseDatabase.Instance.GetReference(chatName + "/messages").RemoveEventListener(this);
             FirebaseDatabase.Instance.GetReference(chatName+"/messages").AddValueEventListener(this);
 
             sendButton = FindViewById<Button>(Resource.Id.sendMsgButton);
@@ -107,12 +110,16 @@ namespace mRides_app
 
         }
 
+
         /// <summary>
         /// Method that will display the message after a user posts a message
         /// </summary>
         public async void OnDataChange(DataSnapshot snapshot)
         {
-            DisplayChatMessage();
+            if (ctr > 0)
+            {
+                DisplayChatMessage();
+            }
         }
 
         /// <summary>
@@ -131,6 +138,7 @@ namespace mRides_app
             MessagingService.ChatAdapter adapter = new MessagingService.ChatAdapter(this, listMessage);
             listChat.Adapter = adapter;
             listChat.SetSelection(adapter.Count - 1);
+            ctr++;
         }
     }
 }
