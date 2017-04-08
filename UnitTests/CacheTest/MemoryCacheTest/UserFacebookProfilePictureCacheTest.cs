@@ -106,8 +106,7 @@ namespace UnitTests
 
             // Check what we can find from the cache
             Bitmap bitmapFound = userFbPicCache.FindUserFacebookProfilePicture(facebookId);
-            Assert.True(bitmapFound != null);
-            Assert.True(bitmapFound.Equals(imageBitmap));
+            Assert.True(bitmapFound != null && bitmapFound.Equals(imageBitmap));
         }
 
         /// <summary>
@@ -142,9 +141,9 @@ namespace UnitTests
             userFbPicCache.RemoveUserFacebookProfilePictureFromCache(facebookId);
 
             // Ensure that it is no longer in the cache and in the list
-            Assert.True(!cache.ContainsKey(facebookId));
-            Assert.True(!cache.ContainsValue(imageBitmap));
-            Assert.True(!listRecentlyAccessed.Contains(facebookId));
+            Assert.True(!cache.ContainsKey(facebookId)
+                && !cache.ContainsValue(imageBitmap)
+                && !listRecentlyAccessed.Contains(facebookId));
         }
 
 
@@ -194,15 +193,13 @@ namespace UnitTests
             List<long> listRecentlyAccessed = GetObjectField<List<long>>(userFbPicCache, "listUserFacebookIdRecentlyAccessed");
 
             // Ensure that the first is now at the end of the list and the second at the beginning
-            Assert.True(listRecentlyAccessed[0] == facebookId2);
-            Assert.True(listRecentlyAccessed[1] == facebookId1);
+            Assert.True(listRecentlyAccessed[0] == facebookId2 && listRecentlyAccessed[1] == facebookId1);
 
             // Access the first facebook id picture
             userFbPicCache.FindUserFacebookProfilePicture(facebookId1);
 
             // Ensure that the first is now on the beginning and the second at the endo f the list
-            Assert.True(listRecentlyAccessed[0] == facebookId1);
-            Assert.True(listRecentlyAccessed[1] == facebookId2);
+            Assert.True(listRecentlyAccessed[0] == facebookId1 && listRecentlyAccessed[1] == facebookId2);
         }
 
         /// <summary>
@@ -250,23 +247,23 @@ namespace UnitTests
             // in the cache
             int numberElementsInCache = cache.Count;
             int numberElementsInList = listRecentlyAccessed.Count;
-            Assert.True(numberElementsInCache == numberElementsInList);
-            Assert.True(listRecentlyAccessed[numberElementsInList - 1] == 1);
-            Assert.True(cache.ContainsKey(1));
+            Assert.True(numberElementsInCache == numberElementsInList
+                && listRecentlyAccessed[numberElementsInList - 1] == 1
+                && cache.ContainsKey(1));
 
             // Add the new image
             userFbPicCache.AddUserFacebookProfilePicture(facebookIdCounter, Bitmap.CreateBitmap(200, 200, Bitmap.Config.Argb8888));
 
             // Now the first one should have been removed from the cache
-            Assert.True(!listRecentlyAccessed.Contains(1));
-            Assert.True(!cache.ContainsKey(1));
+            Assert.True(!listRecentlyAccessed.Contains(1)
+                && !cache.ContainsKey(1));
 
             // The last one in the list is now 2
             Assert.True(listRecentlyAccessed[numberElementsInList - 1] == 2);
 
             // The most recently accessed is the new element that was added, and it is present in the cache.
-            Assert.True(listRecentlyAccessed[0] == facebookIdCounter);
-            Assert.True(cache.ContainsKey(facebookIdCounter));
+            Assert.True(listRecentlyAccessed[0] == facebookIdCounter
+                && cache.ContainsKey(facebookIdCounter));
         }
 
 
