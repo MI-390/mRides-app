@@ -217,6 +217,7 @@
     <Compile Include="Cache\UserCache.cs" />
     <Compile Include="Activities\ChatListActivity.cs" />
     <Compile Include="Activities\ChatActivity.cs" />
+    <Compile Include="Cache\MemoryCache\UserFacebookProfilePictureCache.cs" />
     <Compile Include="ChatAdapter.cs" />
     <Compile Include="Constants\ActivityNames.cs" />
     <Compile Include="Constants\IntentExtraNames.cs" />
@@ -381,7 +382,6 @@
     <AndroidResource Include="Resources\drawable\mrides_logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <XliffResource Include="MultilingualResources\mRides-app.es.xlf" />
     <XliffResource Include="MultilingualResources\mRides-app.fr.xlf" />
   </ItemGroup>
   <ItemGroup>
@@ -403,7 +403,7 @@
     <AndroidResource Include="Resources\drawable\ic_stat_ic_notification.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\values\styles.xml" />
+    <AndroidResource Include="Resources\values\Styles.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\toolbar.axml">
@@ -435,9 +435,7 @@
     <AndroidResource Include="Resources\drawable\trashcanCancel.png" />
     <AndroidResource Include="Resources\drawable\loyolaTest.PNG" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\values-es\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\smsicongreen.png" />
   </ItemGroup>

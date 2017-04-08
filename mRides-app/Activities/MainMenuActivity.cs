@@ -107,6 +107,7 @@ namespace mRides_app
             logOutButton.Click += delegate
             {
                 logOutButton.Pressed = true;
+                LoginRequest.handleLogoutRequest(this);
                 //Will later include code that logs a user out of the application
             };
 

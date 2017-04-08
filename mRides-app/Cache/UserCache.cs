@@ -10,6 +10,8 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using mRides_app.Models;
+using Android.Graphics;
+using mRides_app.Cache.MemoryCache;
 
 namespace mRides_app.Cache
 {
@@ -34,6 +36,11 @@ namespace mRides_app.Cache
 
 
         // --------------------------------------------------------
+        // Instance variables
+        // --------------------------------------------------------
+        private UserFacebookProfilePictureCache userFacebookProfilePictureCache;
+
+        // --------------------------------------------------------
         // Single instance of the class
         // --------------------------------------------------------
         private static UserCache instance;
@@ -41,7 +48,10 @@ namespace mRides_app.Cache
         /// <summary>
         /// Private constructor as this class is a Singleton.
         /// </summary>
-        private UserCache() { }
+        private UserCache()
+        {
+            this.userFacebookProfilePictureCache = UserFacebookProfilePictureCache.GetInstance();
+        }
 
         /// <summary>
         /// Singleton getter
@@ -123,5 +133,42 @@ namespace mRides_app.Cache
 
             return preferencesDictionary;
         }
+
+
+        // --------------------------------------------------------
+        // Facebook Picture related methods
+        // --------------------------------------------------------
+
+        /// <summary>
+        /// Queries the cache to see if the profile picture of a user is already loaded
+        /// as a Bitmap.
+        /// </summary>
+        /// <param name="userFacebookId">ID of the user for which the profile picture should be looked for</param>
+        /// <returns>Bitmap representing the picture of the user, or null if not found</returns>
+        public Bitmap FindUserFacebookProfilePicture(long userFacebookId)
+        {
+            return this.userFacebookProfilePictureCache.FindUserFacebookProfilePicture(userFacebookId);
+        }
+
+        /// <summary>
+        /// Add a new facebook profile picture of a user to the cache. The picture will not
+        /// get added if it exceeds the maximum size of the cache.
+        /// </summary>
+        /// <param name="userFacebookId">ID of the user associated with the picture</param>
+        /// <param name="bitmap">Bitmap representing the profile picture of the user</param>
+        public void AddUserFacebookProfilePicture(long userFacebookId, Bitmap bitmap)
+        {
+            this.userFacebookProfilePictureCache.AddUserFacebookProfilePicture(userFacebookId, bitmap);
+        }
+
+        /// <summary>
+        /// Removes the bitmap associated with a user ID from the cache.
+        /// </summary>
+        /// <param name="userFacebookId">ID of the user associated with the bitmap to be removed</param>
+        public void RemoveUserFacebookProfilePictureFromCache(long userFacebookId)
+        {
+            this.userFacebookProfilePictureCache.RemoveUserFacebookProfilePictureFromCache(userFacebookId);
+        }
+
     }
 }
