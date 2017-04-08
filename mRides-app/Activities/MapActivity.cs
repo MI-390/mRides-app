@@ -65,6 +65,9 @@ namespace mRides_app
 
         protected override void OnCreate(Bundle bundle)
         {
+            User.currentUser.currentType = mRides_app.Models.Request.TYPE_DRIVER;
+            UserMapper.getInstance().setTheme(this);
+
             base.OnCreate(bundle);
 
             // Create an instance of GoogleAPIClient.
@@ -102,6 +105,7 @@ namespace mRides_app
 
             modifyDestinationButton.Click += OnModifyDestinationButtonClick;
             confirmRideButton.Click += OnConfirmRideButtonClick;
+
         }
 
         void OnModifyDestinationButtonClick(object sender, EventArgs e)
