@@ -19,8 +19,12 @@ namespace mRides_app
 {
     class LoginRequest
     {
-
-        public static async void handleRequest(Account account, Context context)
+        /// <summary>
+        /// This method handles the login request by passing an existing account and the activity context
+        /// </summary>
+        /// <param name="account"> The account to authenticate.</param>
+        /// <param name="context"> The context of the activity calling this method</param>
+        public static async void handleLoginRequest(Account account, Context context)
         {
             var request = new OAuth2Request("GET", new Uri("https://graph.facebook.com/me?fields=email,first_name,last_name,gender,picture"), null, account);
             var response = await request.GetResponseAsync();
@@ -60,6 +64,19 @@ namespace mRides_app
                     context.StartActivity(preferencesActivity);
                 }
             }
+        }
+
+
+        /// <summary>
+        /// This method handles the logout request and deletes the account from the AccountStore of Xamarin.Auth
+        /// </summary>
+        /// <param name="context"> The context of the activity calling this method</param>
+        public static void handleLogoutRequest(Context context)
+        {
+            var account = AccountStore.Create(context).FindAccountsForService("Facebook").FirstOrDefault();
+            AccountStore.Create(context).Delete(account, "Facebook");
+            Intent i = new Intent(context, typeof(MainActivity));
+            context.StartActivity(i);
         }
     }
 }

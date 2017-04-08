@@ -10,7 +10,7 @@ namespace mRides_app.MessagingService
     /// <summary>
     /// Implementation of an adapter class
     /// </summary>
-    internal class ListViewAdapter : BaseAdapter
+    internal class ChatAdapter : BaseAdapter
     {
         private List<MessageContent> lstMessage;
         private ChatActivity chatActivity;
@@ -20,7 +20,7 @@ namespace mRides_app.MessagingService
         /// </summary>
         /// <param name="chatActivity">An instance of chatActivity</param>
         /// <param name="lstMessage">A list of MessageContent</param>
-        public ListViewAdapter(ChatActivity chatActivity, List<MessageContent> lstMessage)
+        public ChatAdapter(ChatActivity chatActivity, List<MessageContent> lstMessage)
         {
             this.chatActivity = chatActivity;
             this.lstMessage = lstMessage;
@@ -50,7 +50,9 @@ namespace mRides_app.MessagingService
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
             LayoutInflater inflater = (LayoutInflater)chatActivity.BaseContext.GetSystemService(Context.LayoutInflaterService);
-            View itemView = inflater.Inflate(Resource.Layout.List_Item, null);
+            View itemView = convertView;
+            if (itemView == null) // no view to re-use, create new
+                itemView = inflater.Inflate(Resource.Layout.List_Item, null);
 
             TextView message_user, message_time, message_content;
             message_user = itemView.FindViewById<TextView>(Resource.Id.message_user);
