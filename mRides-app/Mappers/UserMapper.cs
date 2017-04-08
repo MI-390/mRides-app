@@ -61,7 +61,7 @@ namespace mRides_app.Mappers
         /// </summary>
         public List<Request> GetRequests(int userId)
         {
-            return userGateway.GgetRequests(userId);
+            return userGateway.GetRequests(userId);
         }
 
         /// <summary>
