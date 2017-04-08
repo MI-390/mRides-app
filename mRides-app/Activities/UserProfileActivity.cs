@@ -58,7 +58,7 @@ namespace mRides_app
                 Drawable femaleIcon = Resources.GetDrawable(Resource.Drawable.girl);
                 genderIcon.SetImageDrawable(femaleIcon);
             }
-            else if (facebookGender.Equals("male"))
+            else
             {
                 Drawable maleIcon = Resources.GetDrawable(Resource.Drawable.boy);
                 genderIcon.SetImageDrawable(maleIcon);
