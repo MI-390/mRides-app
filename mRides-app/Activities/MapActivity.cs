@@ -446,7 +446,7 @@ namespace mRides_app
                 getCurrentLocation();
 
             //MenuBar
-            var chatMenuButton = FindViewById<ImageButton>(Resource.Id.menu_chat);
+            var chatMenuButton = FindViewById<Button>(Resource.Id.menu_chat);
             chatMenuButton.Click += delegate
             {
                 Intent i = new Intent(this, typeof(ChatListActivity));
@@ -454,7 +454,7 @@ namespace mRides_app
             };
 
             //MenuBar
-            var userProfileButton = FindViewById<ImageButton>(Resource.Id.menu_user);
+            var userProfileButton = FindViewById<Button>(Resource.Id.menu_user);
             userProfileButton.Click += delegate
             {
                 Intent i = new Intent(this, typeof(UserProfileActivity));

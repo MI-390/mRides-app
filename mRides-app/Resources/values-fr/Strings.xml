@@ -73,4 +73,9 @@
   <string name="matchRequestSent">Une demande a été envoyée à cet avenant</string>
   <string name="matchNoMoreMatch">Ne plus correspondre</string>
   <string name="matchNoMatchFound">Plus aucune correspondance trouvée</string>
+  <string name="menu_my_rides">Trajets</string>
+  <string name="menu_my_profile">Profil</string>
+  <string name="menu_chat">Messages</string>
+  <string name="menu_settings">Outils</string>
+  <string name="menu_general">Menu</string>
 </resources>

@@ -107,8 +107,12 @@
   <string name="matchNoMatchFound">No more match found</string>
   
   
- 
-   
-
-
+  <!--STRINGS FOR BOTTOM BAR-->
+  <string name="menu_my_rides">Rides</string>
+  <string name="menu_my_profile">Profile</string>
+  <string name="menu_general">Menu</string>
+  <string name="menu_chat">Messages</string>
+  <string name="menu_settings">Settings</string>
+  
+  
 </resources>

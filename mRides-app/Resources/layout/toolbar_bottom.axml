@@ -2,21 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:local="http://schemas.android.com/apk/res-auto"
     android:id="@+id/topBorderedLayout"
-    android:layout_height="44dp"
-    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:layout_marginLeft="0dp"
+    android:layout_width="wrap_content"
     android:layout_alignParentBottom="true"
     android:gravity="bottom"
+    android:background="#FFFFFF"
     android:orientation="vertical">
-    <View
+
+  <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#D3D3D3"
+        android:background="#454444"
         android:id="@+id/view_toolbar" />
+ 
     <Toolbar
         android:gravity="center"
         android:id="@+id/toolbar_bot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:background="#ffffff"
         android:theme="@android:style/ThemeOverlay.Material.Dark.ActionBar">
         <LinearLayout
@@ -24,7 +29,7 @@
             local:contentInsetLeft="0dp"
             local:contentInsetStart="0dp"
             android:layout_width="fill_parent"
-            android:layout_height="match_parent"
+            android:layout_height="90dp"
             android:orientation="horizontal"
             android:background="@drawable/top_border">
             <include

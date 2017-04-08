@@ -332,6 +332,9 @@
     <AndroidResource Include="Resources\layout\toolbar_bottom.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\layout2.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">
@@ -431,7 +434,9 @@
     <AndroidResource Include="Resources\drawable\trashcanCancel.png" />
     <AndroidResource Include="Resources\drawable\loyolaTest.PNG" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\house_menu.png" />
+  </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\smsicongreen.png" />
   </ItemGroup>

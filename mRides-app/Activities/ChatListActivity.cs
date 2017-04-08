@@ -54,7 +54,7 @@ namespace mRides_app
 
 
             //Menu bar
-            var chatMenuButton = FindViewById<ImageButton>(Resource.Id.menu_map);
+            var chatMenuButton = FindViewById<Button>(Resource.Id.menu_map);
             chatMenuButton.Click += delegate
             {
                 Intent i = new Intent(this, typeof(MapActivity));

@@ -262,6 +262,26 @@
           <source>No more match found</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Plus aucune correspondance trouvée</target>
         </trans-unit>
+        <trans-unit id="menu_my_rides" translate="yes" xml:space="preserve">
+          <source>Rides</source>
+          <target state="translated">Trajets</target>
+        </trans-unit>
+        <trans-unit id="menu_my_profile" translate="yes" xml:space="preserve">
+          <source>Profile</source>
+          <target state="translated">Profil</target>
+        </trans-unit>
+        <trans-unit id="menu_chat" translate="yes" xml:space="preserve">
+          <source>Messages</source>
+          <target state="translated">Messages</target>
+        </trans-unit>
+        <trans-unit id="menu_settings" translate="yes" xml:space="preserve">
+          <source>Settings</source>
+          <target state="translated">Outils</target>
+        </trans-unit>
+        <trans-unit id="menu_general" translate="yes" xml:space="preserve">
+          <source>Menu</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Menu</target>
+        </trans-unit>
       </group>
     </body>
   </file>
