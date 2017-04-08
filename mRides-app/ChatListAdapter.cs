@@ -16,11 +16,11 @@ using mRides_app.Mappers;
 
 namespace mRides_app
 {
-    internal class ChatAdapter : BaseAdapter<ChatList>
+    internal class ChatListAdapter : BaseAdapter<ChatList>
     {
         private List<ChatList> items;
         private Activity context;
-        public ChatAdapter(ChatListActivity context, List<ChatList> items):base()
+        public ChatListAdapter(ChatListActivity context, List<ChatList> items):base()
         {
             this.context = context;
             this.items = items;
