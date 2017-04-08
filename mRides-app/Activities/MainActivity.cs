@@ -90,7 +90,7 @@ namespace mRides_app
             if (e.IsAuthenticated)
             {
                 AccountStore.Create(this).Save(e.Account, "Facebook");
-                LoginRequest.handleRequest(e.Account, this);              
+                LoginRequest.handleLoginRequest(e.Account, this);              
             }
         }
 

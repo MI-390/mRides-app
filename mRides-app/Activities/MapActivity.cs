@@ -119,14 +119,14 @@ namespace mRides_app
             }
         }
 
-        async void OnConfirmRideButtonClick(object sender, EventArgs e)
+        void OnConfirmRideButtonClick(object sender, EventArgs e)
         {
             confirmRideButton.Visibility = ViewStates.Invisible;
             modifyDestinationButton.Visibility = ViewStates.Invisible;
             selectingOrigin = false;
             confirmingRide = false;
 
-            await setDestinationList();
+            setDestinationList();
 
             // Prepare the match activity
             List<DestinationCoordinate> destinationCoordinates = this.getFormattedDirectionList();
