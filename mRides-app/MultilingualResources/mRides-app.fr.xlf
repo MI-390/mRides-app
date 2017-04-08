@@ -259,8 +259,16 @@
           <target state="new">No more match</target>
         </trans-unit>
         <trans-unit id="matchNoMatchFound" translate="yes" xml:space="preserve">
-          <source>No more match found</source>
-          <target state="new">No more match found</target>
+          <source>No match found</source>
+          <target state="new">No match found</target>
+        </trans-unit>
+        <trans-unit id="matchLoading" translate="yes" xml:space="preserve">
+          <source>Loading...</source>
+          <target state="new">Loading...</target>
+        </trans-unit>
+        <trans-unit id="matchDeclined" translate="yes" xml:space="preserve">
+          <source>You have declined the match</source>
+          <target state="new">You have declined the match</target>
         </trans-unit>
       </group>
     </body>
