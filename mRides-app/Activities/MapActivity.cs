@@ -91,7 +91,7 @@ namespace mRides_app
             autocompleteFragment = (PlaceAutocompleteFragment)FragmentManager.FindFragmentById(Resource.Id.place_autocomplete_fragment);
             // Register a listener to receive callbacks when a place has been selected or an error has occurred.
             autocompleteFragment.SetOnPlaceSelectedListener(this);
-            autocompleteFragment.SetHint("Destination?");
+            autocompleteFragment.SetHint(GetString(Resource.String.dest) + "?");
 
             // Alert Dialog
             openDestinationAlertDialog();
@@ -131,7 +131,7 @@ namespace mRides_app
                 confirmingRide = false;
                 confirmRideButton.Visibility = ViewStates.Invisible;
                 modifyDestinationButton.Visibility = ViewStates.Invisible;
-                autocompleteFragment.SetHint("Destination?");
+                autocompleteFragment.SetHint(GetString(Resource.String.dest) + "?");
                 autocompleteFragment.SetText("");
                 destinationMarker.Visible = false;
                 openDestinationAlertDialog();
@@ -455,7 +455,7 @@ namespace mRides_app
             }
             catch (PackageManager.NameNotFoundException e)
             {
-                Toast.MakeText(ApplicationContext, "Google Maps is not installed", ToastLength.Long).Show();
+                Toast.MakeText(ApplicationContext, GetString(Resource.String.google_not_installed), ToastLength.Long).Show();
             }
         }
 
@@ -468,7 +468,7 @@ namespace mRides_app
             AlertDialog.Builder originAlert = new AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
 
             //When user clicks on "Custom Location"
-            originAlert.SetPositiveButton("Custom Location", new EventHandler<DialogClickEventArgs>((senderAlert, args) =>
+            originAlert.SetPositiveButton(GetString(Resource.String.custom_location), new EventHandler<DialogClickEventArgs>((senderAlert, args) =>
             {
                 UpdateCameraPositionToMarkers();
 
@@ -480,7 +480,7 @@ namespace mRides_app
             }));
 
             //When user clicks on "Default Location"
-            originAlert.SetNeutralButton("Default Location", new EventHandler<DialogClickEventArgs>((senderAlert, args) =>
+            originAlert.SetNeutralButton(GetString(Resource.String.current_location), new EventHandler<DialogClickEventArgs>((senderAlert, args) =>
             {
                 modifyDestinationButton.Visibility = ViewStates.Visible;
                 confirmRideButton.Visibility = ViewStates.Visible;
@@ -488,10 +488,10 @@ namespace mRides_app
                 if (originMarker != null)
                 {
                     originMarker.Position = new LatLng(User.currentUser.latitude, User.currentUser.longitude);
-                    originMarker.Title = "Location during ride request";
+                    originMarker.Title = GetString(Resource.String.ride_request_location);
                 }
                 else
-                    originMarker = map.AddMarker(new MarkerOptions().SetPosition(new LatLng(User.currentUser.latitude, User.currentUser.longitude)).SetTitle("Location during ride request"));
+                    originMarker = map.AddMarker(new MarkerOptions().SetPosition(new LatLng(User.currentUser.latitude, User.currentUser.longitude)).SetTitle(GetString(Resource.String.ride_request_location)));
 
                 if (destinationMarker != null && originMarker != null)
                     setDestinationList();
@@ -500,13 +500,13 @@ namespace mRides_app
             }));
 
             if (User.currentUser.currentType == mRides_app.Models.Request.TYPE_RIDER)
-                customMessage = "choose a pick up location";
+                customMessage = GetString(Resource.String.choose_pickup);
 
             if (User.currentUser.currentType == mRides_app.Models.Request.TYPE_DRIVER)
-                customMessage = "choose a start location";
+                customMessage = GetString(Resource.String.choose_start);
 
-            originAlert.SetTitle("Origin");
-            originAlert.SetMessage("Do you want to use your default location or " + customMessage);
+            originAlert.SetTitle(GetString(Resource.String.origin));
+            originAlert.SetMessage(GetString(Resource.String.location_question) + customMessage);
           
             AlertDialog originDialog = originAlert.Create();
             originDialog.SetCancelable(false);
@@ -521,11 +521,11 @@ namespace mRides_app
         private void openDestinationAlertDialog()
         {
             AlertDialog.Builder destinationAlert = new AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
-            destinationAlert.SetTitle("Create a new ride");
-            destinationAlert.SetMessage(GetString(Resource.String.hello_map) + " " + mRides_app.Models.User.currentUser.firstName + ".\nTo get started, choose your destination.");
+            destinationAlert.SetTitle(GetString(Resource.String.create_newride));
+            destinationAlert.SetMessage(GetString(Resource.String.hello_map) + " " + mRides_app.Models.User.currentUser.firstName + ".\n" + GetString(Resource.String.choose_destination));
 
             //When user clicks on "Proceed"
-            destinationAlert.SetPositiveButton("Proceed", new EventHandler<DialogClickEventArgs>((senderAlert, args) =>
+            destinationAlert.SetPositiveButton(GetString(Resource.String.next), new EventHandler<DialogClickEventArgs>((senderAlert, args) =>
             {
                 selectingDestination = true;
             }));
@@ -543,11 +543,11 @@ namespace mRides_app
         private void openDestinationSelectionAlertDialog(string destination, LatLng coordinates)
         {
             AlertDialog.Builder destinationChoiceAlert = new AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
-            destinationChoiceAlert.SetTitle("Destination");
-            destinationChoiceAlert.SetMessage("Do you want to set your destination to " + destination + "?");
+            destinationChoiceAlert.SetTitle(GetString(Resource.String.dest));
+            destinationChoiceAlert.SetMessage(GetString(Resource.String.set_destination) + destination + "?");
 
             //When user clicks on "Yes"
-            destinationChoiceAlert.SetPositiveButton("Yes", new EventHandler<DialogClickEventArgs>((senderAlert, args) =>
+            destinationChoiceAlert.SetPositiveButton(GetString(Resource.String.yes), new EventHandler<DialogClickEventArgs>((senderAlert, args) =>
             {
                 FragmentTransaction transaction = FragmentManager.BeginTransaction();
                 UserTypeFragment dialog = new UserTypeFragment();
@@ -560,7 +560,7 @@ namespace mRides_app
                     destinationMarker.Title = destination;
                 }
                 else
-                    destinationMarker = map.AddMarker(new MarkerOptions().SetPosition(coordinates).SetTitle("destination"));
+                    destinationMarker = map.AddMarker(new MarkerOptions().SetPosition(coordinates).SetTitle(destination));
 
                 if (destinationMarker != null && originMarker != null)
                     setDestinationList();
@@ -569,7 +569,7 @@ namespace mRides_app
             }));
 
             //When user clicks on "No"
-            destinationChoiceAlert.SetNegativeButton("No", new EventHandler<DialogClickEventArgs>((senderAlert, args) =>
+            destinationChoiceAlert.SetNegativeButton(GetString(Resource.String.no), new EventHandler<DialogClickEventArgs>((senderAlert, args) =>
             {
                 return;
             }));
@@ -587,11 +587,11 @@ namespace mRides_app
         private void openOriginSelectionAlertDialog(string origin, LatLng coordinates)
         {
             AlertDialog.Builder originChoiceAlert = new AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
-            originChoiceAlert.SetTitle("Origin");
-            originChoiceAlert.SetMessage("Do you want to set your origin to " + origin + "?");
+            originChoiceAlert.SetTitle(GetString(Resource.String.origin));
+            originChoiceAlert.SetMessage(GetString(Resource.String.set_origin) + origin + "?");
 
             //When user clicks on "Yes"
-            originChoiceAlert.SetPositiveButton("Yes", new EventHandler<DialogClickEventArgs>((senderAlert, args) =>
+            originChoiceAlert.SetPositiveButton(GetString(Resource.String.yes), new EventHandler<DialogClickEventArgs>((senderAlert, args) =>
             {
                 if (originMarker != null)
                 {
@@ -599,7 +599,7 @@ namespace mRides_app
                     originMarker.Title = origin;
                 }
                 else
-                    originMarker = map.AddMarker(new MarkerOptions().SetPosition(coordinates).SetTitle("Location during ride request"));
+                    originMarker = map.AddMarker(new MarkerOptions().SetPosition(coordinates).SetTitle(GetString(Resource.String.ride_request_location)));
 
                 if (destinationMarker != null && originMarker != null)
                     setDestinationList();
@@ -609,7 +609,7 @@ namespace mRides_app
             }));
 
             //When user clicks on "No"
-            originChoiceAlert.SetNegativeButton("No", new EventHandler<DialogClickEventArgs>((senderAlert, args) =>
+            originChoiceAlert.SetNegativeButton(GetString(Resource.String.no), new EventHandler<DialogClickEventArgs>((senderAlert, args) =>
             {
                 return;
             }));
@@ -772,7 +772,7 @@ namespace mRides_app
             selectingOrigin = true;
             selectingDestination = false;
             autocompleteFragment.SetText("");
-            autocompleteFragment.SetHint("Origin?");
+            autocompleteFragment.SetHint(GetString(Resource.String.origin) + "?");
             //// Get the list of coordinates
 
             // For multilingual purposes

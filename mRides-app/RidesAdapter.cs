@@ -12,6 +12,7 @@ using Android.Widget;
 using Java.Lang;
 using mRides_app.Models;
 using mRides_app.Mappers;
+using Android.Locations;
 
 namespace mRides_app
 {
@@ -71,15 +72,25 @@ namespace mRides_app
             riderName = itemView.FindViewById<TextView>(Resource.Id.CancelRides_nameRider);
             location = itemView.FindViewById<TextView>(Resource.Id.CancelRides_location);
             deletecheck = itemView.FindViewById<CheckBox>(Resource.Id.CancelRides_Checkbox);
+            if (item.driverID != User.currentUser.id)
+            {
+                riderName.Text = item.driver.firstName + " " + item.driver.lastName;
+                Geocoder geocoder = new Geocoder(context);
 
-            riderName.Text = item.riderRequests.First().rider.firstName;
-            location.Text = item.location;
+                IList<Address> addresses = geocoder.GetFromLocation(System.Double.Parse(item.location.Split(',')[0]), System.Double.Parse(item.location.Split(',')[1]), 1);
+                location.Text=addresses[0].GetAddressLine(0);
+            }
+            else
+            {
+                riderName.Text = item.driver.firstName + " " + item.driver.lastName;
+                Geocoder geocoder = new Geocoder(context);
 
-            deletecheck.Tag = item.riderRequests.First().rider.firstName;
+                IList<Address> addresses = geocoder.GetFromLocation(System.Double.Parse(item.location.Split(',')[0]), System.Double.Parse(item.location.Split(',')[1]), 1);
+                location.Text = addresses[0].GetAddressLine(0);
+            }
 
-            deletecheck.SetOnCheckedChangeListener(null); // need to do this because changing value will fire the event
-            deletecheck.Checked = false;
-            deletecheck.SetOnCheckedChangeListener(new CheckedChangeListener(this.context));
+
+        
 
             return itemView;
         }
