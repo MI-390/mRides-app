@@ -72,6 +72,16 @@ namespace mRides_app.Mappers
         }
 
         /// <summary>
+        /// Updates a user by saving its preferences in the phone storage, and sending the 
+        /// updated user to the server.
+        /// </summary>
+        /// <param name="user"></param>
+        public void UpdateUser(User user)
+        {
+            this.userCache.SaveUserPreferences(user.id, user.isSmoker, user.isHandicap, user.hasLuggage, user.hasPet, user.genderPreference);
+        }
+
+        /// <summary>
         /// This method returns a user object given its user ID.
         /// </summary>
         public List<Request> GetRequests(int userId)

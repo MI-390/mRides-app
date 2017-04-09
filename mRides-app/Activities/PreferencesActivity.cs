@@ -65,15 +65,39 @@ namespace mRides_app
             petPreferences.AddPreference(rbPet);
             petPreferences.AddPreference(rbNoPet);
 
-            // Set the default checked values
-            rbSmoker.Checked = true;
-            rbLuggage.Checked = true;
-            rbHandicap.Checked = true;
-            rbPet.Checked = true;
-            smokerPreferences.Click(rbSmoker);
-            luggagePreferences.Click(rbLuggage);
-            handicapPreferences.Click(rbHandicap);
-            petPreferences.Click(rbPet);
+            // Set the default checked values if it is the first time, otherwise set the current user's preferences
+            if(User.currentUser == null)
+            {
+                rbSmoker.Checked = true;
+                rbLuggage.Checked = true;
+                rbHandicap.Checked = true;
+                rbPet.Checked = true;
+
+                smokerPreferences.Click(rbSmoker);
+                luggagePreferences.Click(rbLuggage);
+                handicapPreferences.Click(rbHandicap);
+                petPreferences.Click(rbPet);
+            }
+            else
+            {
+                rbSmoker.Checked  = User.currentUser.isSmoker;
+                rbNonSmoker.Checked = !User.currentUser.isSmoker;
+                smokerPreferences.Click(User.currentUser.isSmoker ? rbSmoker : rbNonSmoker);
+
+                rbLuggage.Checked = User.currentUser.hasLuggage;
+                rbNoLuggage.Checked = !User.currentUser.hasLuggage;
+                luggagePreferences.Click(User.currentUser.hasLuggage ? rbLuggage : rbNoLuggage);
+
+                rbHandicap.Checked = User.currentUser.isHandicap;
+                rbNoHandicap.Checked = !User.currentUser.isHandicap;
+                handicapPreferences.Click(User.currentUser.isHandicap ? rbHandicap : rbNoHandicap);
+
+                rbPet.Checked = User.currentUser.hasPet;
+                rbNoPet.Checked = !User.currentUser.hasPet;
+                petPreferences.Click(User.currentUser.hasPet ? rbPet : rbNoPet);
+            }
+            
+            
 
             // Populate the gender spinner
             Spinner spinnerGender = FindViewById<Spinner>(Resource.Id.spinnerGender);
@@ -81,6 +105,21 @@ namespace mRides_app
                     this, Resource.Array.Pref_Gender, Android.Resource.Layout.SimpleSpinnerItem);
             adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
             spinnerGender.Adapter = adapter;
+            if(User.currentUser != null)
+            {
+                if(User.currentUser.genderPreference.Equals(User.PREFERENCE_GENDER_ANY))
+                {
+                    spinnerGender.SetSelection(0);
+                }
+                else if (User.currentUser.genderPreference.Equals(User.PREFERENCE_GENDER_MALE))
+                {
+                    spinnerGender.SetSelection(1);
+                }
+                else if(User.currentUser.genderPreference.Equals(User.PREFERENCE_GENDER_FEMALE))
+                {
+                    spinnerGender.SetSelection(2);
+                }
+            }
 
             // Set the done button to save and continue to the next activity
             Button doneButton = FindViewById<Button>(Resource.Id.buttonDone);
@@ -101,22 +140,25 @@ namespace mRides_app
                     layout.SetBackgroundResource(Resource.Drawable.redRoundedBg);
                 }
             }
-
-            string genderPreference = "";
-            int selectedGenderPref = (int)spinnerGender.SelectedItemId;
-            if (selectedGenderPref == 0)
+            
+            doneButton.Click += delegate 
             {
-                genderPreference = User.PREFERENCE_GENDER_ANY;
-            }
-            else if (selectedGenderPref == 1)
-            {
-                genderPreference = User.PREFERENCE_GENDER_MALE;
-            }
-            else
-            {
-                genderPreference = User.PREFERENCE_GENDER_FEMALE;
-            }
-            doneButton.Click += delegate { this.SaveAndContinue(rbSmoker.Checked, rbLuggage.Checked, rbHandicap.Checked, rbPet.Checked, genderPreference); };
+                string genderPreference = "";
+                int selectedGenderPref = (int)spinnerGender.SelectedItemId;
+                if (selectedGenderPref == 0)
+                {
+                    genderPreference = User.PREFERENCE_GENDER_ANY;
+                }
+                else if (selectedGenderPref == 1)
+                {
+                    genderPreference = User.PREFERENCE_GENDER_MALE;
+                }
+                else
+                {
+                    genderPreference = User.PREFERENCE_GENDER_FEMALE;
+                }
+                this.SaveAndContinue(rbSmoker.Checked, rbLuggage.Checked, rbHandicap.Checked, rbPet.Checked, genderPreference);
+            };
 
         }
 
@@ -160,7 +202,7 @@ namespace mRides_app
                 User.currentUser.isHandicap = handicap;
                 User.currentUser.genderPreference = gender;
                 User.currentUser.hasPet = pet;
-                //UserMapper.getInstance().UpdateUser(User.currentUser);
+                UserMapper.getInstance().UpdateUser(User.currentUser);
 
                 // Go back to the previous activity
                 this.Finish();
