@@ -214,6 +214,7 @@
   <ItemGroup>
     <Compile Include="Activities\RequestListActivity.cs" />
     <Compile Include="Activities\MainMenuActivity.cs" />
+    <Compile Include="Activities\RideActivity.cs" />
     <Compile Include="Activities\SplashActivity.cs" />
     <Compile Include="Cache\LocalDatabase\MRidesLocalDatabase.cs" />
     <Compile Include="Cache\LocalDataGateways\UserLocalDataGateway.cs" />
