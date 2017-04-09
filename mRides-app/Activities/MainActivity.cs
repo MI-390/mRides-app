@@ -21,52 +21,53 @@ namespace mRides_app
     public class MainActivity : Activity
     {
         string userName;
+
         // For UI testing
-        [Java.Interop.Export("StartActivityOne")]
-        // Test PreferencesActivity
-        public void StartActivityOne()
-        {
-            Intent i = new Intent(this, typeof(PreferencesActivity));
-            StartActivity(i);
-        }
-        //Test MapActivity
-        [Java.Interop.Export("StartActivityTwo")]
-        public void StartActivityTwo()
-        {
-            Intent i = new Intent(this, typeof(MapActivity));
-            StartActivity(i);
-        }
-        //For testing fragments, an activity is used that contains buttons to open those fragments
-        [Java.Interop.Export("StartActivityThree")]
+
+        // To test fragments, an activity was created and solely used for the purpose of opening
+        // the fragments
+        [Java.Interop.Export("StartTestFragmentsActivity")]
         public void StartActivityThree()
         {
+            UserMapper userMapper = UserMapper.getInstance();
+            User user = userMapper.GetUserByFacebookId(113083069215300);
+            User.currentUser = user;
             Intent i = new Intent(this, typeof(TestFragments));
             StartActivity(i);
         }
 
-        [Java.Interop.Export("StartActivityFour")]
-        public void StartActivityFour()
-        {
-            Intent i = new Intent(this, typeof(UserProfileActivity));
-            i.PutExtra("id", "8");
-            StartActivity(i);
-        }
-
-        [Java.Interop.Export("StartActivityFive")]
-        public void StartActivityFive()
-        {
-            Intent i = new Intent(this, typeof(ChatActivity));
-            i.PutExtra("ChatName", "UITEST");
-            i.PutExtra("id", "172");
-            StartActivity(i);
-        }
-
-        [Java.Interop.Export("StartActivitySix")]
+        [Java.Interop.Export("StartEnterDrivingMode")]
         public void StartActivitySix()
         {
             Intent intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse("http://maps.google.com/maps?" + "saddr=" + "45.222,-72.70&daddr=45.4581,-73.6403"));
             intent.SetClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
             StartActivity(intent);
+        }
+
+        [Java.Interop.Export("StartMainMenuActivity")]
+        public void StartMainMenuActivity()
+        {
+            UserMapper userMapper = UserMapper.getInstance();
+            User user = userMapper.GetUserByFacebookId(113083069215300);
+            User.currentUser = user;
+            string token = FirebaseInstanceId.Instance.Token;
+            UserMapper.getInstance().updateFcmToken(token);
+            var mainMenuActivity = new Intent(this, typeof(MainMenuActivity));
+            mainMenuActivity.PutExtra("id", User.currentUser.id.ToString());
+            this.StartActivity(mainMenuActivity);
+            Intent intent = new Intent(this, typeof(MainMenuActivity));
+            StartActivity(intent);
+        }
+
+        [Java.Interop.Export("StartMatchActivity")]
+        public void StartMatchActivity()
+        {
+            UserMapper userMapper = UserMapper.getInstance();
+            User user = userMapper.GetUserByFacebookId(113083069215300);
+            User.currentUser = user;
+            Intent matchActivity = new Intent(this, typeof(MatchActivity));
+            matchActivity.PutExtra(Constants.IntentExtraNames.RequestType, User.currentUser.currentType);
+            StartActivity(matchActivity);
         }
 
         void LoginToFacebook(bool allowCancel)

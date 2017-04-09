@@ -62,7 +62,6 @@ namespace mRides_app
 
         protected override void OnCreate(Bundle bundle)
         {
-            User.currentUser.currentType = mRides_app.Models.Request.TYPE_DRIVER;
             UserMapper.getInstance().setTheme(this);
 
             base.OnCreate(bundle);
@@ -102,6 +101,22 @@ namespace mRides_app
 
             modifyDestinationButton.Click += OnModifyDestinationButtonClick;
             confirmRideButton.Click += OnConfirmRideButtonClick;
+
+            // Set buttons color to the right color
+            if (User.currentUser != null)
+            {
+                if (User.currentUser.currentType == mRides_app.Models.Request.TYPE_RIDER)
+                {
+                    confirmRideButton.SetBackgroundResource(Resource.Drawable.green_button);
+                    modifyDestinationButton.SetBackgroundResource(Resource.Drawable.green_button);
+                }
+                else
+                {
+                    confirmRideButton.SetBackgroundResource(Resource.Drawable.red_button);
+                    modifyDestinationButton.SetBackgroundResource(Resource.Drawable.red_button);
+                }
+            }
+
 
         }
 
@@ -686,8 +701,8 @@ namespace mRides_app
                 else
                 {
                     typeDisplayed = userRider;
-                    Window.SetNavigationBarColor(Android.Graphics.Color.DarkGreen);
-                    Window.SetStatusBarColor(Android.Graphics.Color.DarkGreen);
+                    Window.SetNavigationBarColor(new Android.Graphics.Color(Color.ParseColor("#008000")));
+                    Window.SetStatusBarColor(new Android.Graphics.Color(Color.ParseColor("#008000")));
                     ActionBar.SetBackgroundDrawable(new Android.Graphics.Drawables.ColorDrawable(Color.ParseColor("#26A65B")));
                     confirmRideButton.SetBackgroundResource(Resource.Drawable.green_button);
                     modifyDestinationButton.SetBackgroundResource(Resource.Drawable.green_button);
