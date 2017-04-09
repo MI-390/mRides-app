@@ -46,7 +46,8 @@ namespace mRides_app.Activities
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            FragmentManager.FindFragmentById<MapFragment>(Resource.Id.map).GetMapAsync(this);
+            SetContentView(Resource.Layout.RideMap);
+            FragmentManager.FindFragmentById<MapFragment>(Resource.Id.rideMap).GetMapAsync(this);
         }
 
         /// <summary>

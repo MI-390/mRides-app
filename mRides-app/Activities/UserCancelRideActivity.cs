@@ -13,6 +13,7 @@ using Android.Widget;
 using Android.Support.V7.App;
 using mRides_app.Models;
 using mRides_app.Mappers;
+using mRides_app.Activities;
 
 namespace mRides_app
 {
@@ -35,14 +36,13 @@ namespace mRides_app
             SetContentView(Resource.Layout.UserCancelRide);
             Button trashCanButton = FindViewById<Button>(Resource.Id.trashcanButton);
             Button startRide = FindViewById<Button>(Resource.Id.start_ride);
-           
-            //NASSIM LOOK HERE  ALSO DONT DELETE
-            //startRide.Click += delegate
-            //{
-            //    Intent i = new Intent(this, typeof(MapActivity));
-            //    i.PutExtra("id", Intent.GetStringExtra("id"));
-            //    StartActivity(i);
-            //};
+
+            startRide.Click += delegate
+            {
+                Intent i = new Intent(this, typeof(RideActivity));
+                i.PutExtra("id", Intent.GetStringExtra("id"));
+                StartActivity(i);
+            };
 
             DisplayRides();
 
