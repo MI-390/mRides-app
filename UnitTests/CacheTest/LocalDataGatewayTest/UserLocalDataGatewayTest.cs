@@ -44,12 +44,13 @@ namespace UnitTests
         {
             // Id of the user used for testing
             int userId = 12345;
+            long facebookId = 67890;
             
             // Create a mock user to be stored in the database
             User user = new User
             {
                 id = userId,
-                facebookID = userId,
+                facebookID = facebookId,
                 isHandicap = false,
                 isSmoker = false,
                 hasLuggage = true,
@@ -69,7 +70,7 @@ namespace UnitTests
                 User foundUser = db.Find<User>(userId);
                 Assert.True(foundUser != null
                     && foundUser.id == userId
-                    && foundUser.facebookID == userId
+                    && foundUser.facebookID == facebookId
                     && !foundUser.isHandicap
                     && !foundUser.isSmoker
                     && foundUser.hasLuggage
@@ -88,12 +89,12 @@ namespace UnitTests
         {
             // Id of the user used for testing
             int userId = 12345;
-
+            long facebookId = 567890;
             // Create a mock user to be stored in the database
             User user = new User
             {
                 id = userId,
-                facebookID = userId,
+                facebookID = facebookId,
                 isHandicap = false,
                 isSmoker = false,
                 hasLuggage = true,
@@ -141,12 +142,12 @@ namespace UnitTests
         {
             // Id of the user used for testing
             int userId = 12345;
-
+            long facebookId = 567890;
             // Create a mock user to be stored in the database
             User user = new User
             {
                 id = userId,
-                facebookID = userId,
+                facebookID = facebookId,
                 isHandicap = false,
                 isSmoker = true,
                 hasLuggage = true,
@@ -174,7 +175,7 @@ namespace UnitTests
             User foundUser = userLocalGateway.FindUserById(userId);
             Assert.True(foundUser != null
                 && foundUser.id == userId
-                && foundUser.facebookID == userId
+                && foundUser.facebookID == facebookId
                 && !foundUser.isHandicap
                 && foundUser.isSmoker
                 && foundUser.hasLuggage
@@ -186,12 +187,13 @@ namespace UnitTests
         {
             // Id of the user used for testing
             int userId = 12345;
+            long facebookId = 567890;
 
             // Create a mock user to be stored in the database
             User user = new User
             {
                 id = userId,
-                facebookID = userId,
+                facebookID = facebookId,
                 isHandicap = false,
                 isSmoker = false,
                 hasLuggage = true,
