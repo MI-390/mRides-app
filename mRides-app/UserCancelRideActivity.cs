@@ -73,10 +73,15 @@ namespace mRides_app
         private void DisplayRides()
         {
             ridesList.Clear();
-            int usrID = User.currentUser.id;
-            ridesList=UserMapper.getInstance().GetRequests(User.currentUser.id);
-            
-
+            int requestId = Convert.ToInt32(Intent.GetStringExtra("id"));
+            Request request=ConsoleMapper.getInstance().GetRequest(requestId);
+             
+            foreach(RiderRequest rr in request.riderRequests)
+            {
+                ridesList.Add(rr);
+            }
+            var driverName=FindViewById<TextView>(Resource.Id.driver_name);
+            driverName.Text =request.driver.firstName;
             listView = FindViewById<ListView>(Resource.Id.list_of_rides); // get reference to the ListView in the layout
             RidesAdapter adapter = new RidesAdapter(this, ridesList);
             listView.Adapter = new RidesAdapter(this, ridesList);
