@@ -52,7 +52,7 @@ namespace mRides_app
                 if (view == null) // no view to re-use, create new
                     view = context.LayoutInflater.Inflate(Resource.Layout.RequestRow, null);
 
-
+                view.FindViewById<TextView>(Resource.Id.driver_name).Text = item.driver.firstName+" "+item.driver.lastName;
                 view.FindViewById<TextView>(Resource.Id.ride_id).Text = item.ID.ToString();
 
                 IList<Address> addresses = geocoder.GetFromLocation(System.Double.Parse(item.location.Split(',')[0]), System.Double.Parse(item.location.Split(',')[1]), 1);
