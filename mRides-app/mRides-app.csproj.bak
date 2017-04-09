@@ -17,7 +17,7 @@
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -266,7 +266,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="ClassDiagram1.cd" />
     <None Include="GettingStarted.Xamarin" />
     <GoogleServicesJson Include="google-services.json" />
     <None Include="packages.config" />
@@ -308,6 +307,7 @@
     <AndroidResource Include="Resources\layout\List_Item.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\toolbar_bottom" />
     <AndroidResource Include="Resources\layout\Chats.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
@@ -336,12 +336,6 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\MainMenu.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\toolbar_bottom.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\layout2.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -403,9 +397,7 @@
     <AndroidResource Include="Resources\drawable\userIcon2.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\values-fr\Strings.xml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
+    <AndroidResource Include="Resources\values-fr\Strings.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\ic_stat_ic_notification.png" />
@@ -443,9 +435,7 @@
     <AndroidResource Include="Resources\drawable\trashcanCancel.png" />
     <AndroidResource Include="Resources\drawable\loyolaTest.PNG" />
   </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\house_menu.png" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\smsicongreen.png" />
   </ItemGroup>
