@@ -12,6 +12,7 @@ using Android.Widget;
 using mRides_app.Models;
 using Android.Graphics;
 using mRides_app.Cache.MemoryCache;
+using mRides_app.Cache.LocalDataGateways;
 
 namespace mRides_app.Cache
 {
@@ -39,6 +40,7 @@ namespace mRides_app.Cache
         // Instance variables
         // --------------------------------------------------------
         private UserFacebookProfilePictureCache userFacebookProfilePictureCache;
+        private UserLocalDataGateway userLocalDataGateway;
 
         // --------------------------------------------------------
         // Single instance of the class
@@ -51,6 +53,7 @@ namespace mRides_app.Cache
         private UserCache()
         {
             this.userFacebookProfilePictureCache = UserFacebookProfilePictureCache.GetInstance();
+            this.userLocalDataGateway = UserLocalDataGateway.GetInstance();
         }
 
         /// <summary>
@@ -133,6 +136,27 @@ namespace mRides_app.Cache
 
             return preferencesDictionary;
         }
+
+        /// <summary>
+        /// Adds or updates a user on the local storage
+        /// </summary>
+        /// <param name="user">User object to be added/updated</param>
+        /// <returns>bool: true if the operation was successful, false otherwise</returns>
+        public bool AddUpdateUser(User user)
+        {
+            return this.userLocalDataGateway.AddUpdateUser(user);
+        }
+
+        /// <summary>
+        /// Obtain a user from the local storage given its ID
+        /// </summary>
+        /// <param name="userId">ID of the user to be obtained from the local storage</param>
+        /// <returns>User associated with the ID, or null or none found or if an error occurred</returns>
+        public User FindUserById(int userId)
+        {
+            return this.userLocalDataGateway.FindUserById(userId);
+        }
+
 
 
         // --------------------------------------------------------
