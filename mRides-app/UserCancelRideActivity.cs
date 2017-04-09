@@ -23,7 +23,7 @@ namespace mRides_app
     public class UserCancelRideActivity : AppCompatActivity
     {
         ListView listView;
-        List<Request> ridesList = new List<Request>();
+        List<RiderRequest> ridesList = new List<RiderRequest>();
 
         /// <summary>
         /// Method that is called when the activity is created
