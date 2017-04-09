@@ -110,5 +110,16 @@ namespace mRides_app.Mappers
             consoleGateway.setDistanceTravelled(rideId, distanceMetric);
         }
 
+        /// <summary>
+        /// Sets the duration of travel in a ride in order to keep track
+        /// of ride metrics.
+        /// </summary>
+        /// <param name="rideId">ID of the ride in question</param>
+        /// <param name="durationMetric">Value of the duration of time travelled</param>
+        public void setDurationTime(int rideId, long durationMetric)
+        {
+            consoleGateway.setDurationTime(rideId, durationMetric);
+        }
+
     }
 }

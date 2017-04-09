@@ -162,5 +162,22 @@ namespace mRides_app.Gateways
             };
             SendPost<object>(ApiEndPointUrl.setDistanceTravelled, objectSent, false);
         }
+
+        /// <summary>
+        /// Sets the duration of travel in a ride in order to keep track
+        /// of ride metrics.
+        /// </summary>
+        /// <param name="rideId">ID of the ride in question</param>
+        /// <param name="durationMetric">Value of the duration of travel</param>
+        public void setDurationTime(int rideID, long durationMetric)
+        {
+            object objectSent = new
+            {
+                rideId = rideID,
+                duration = durationMetric
+            };
+            SendPost<object>(ApiEndPointUrl.setDuration, objectSent, false);
+        }
+
     }
 }
