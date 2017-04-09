@@ -13,6 +13,9 @@ using mRides_app.Models;
 
 namespace UITest
 {
+    /// <summary>
+    /// Class to test the UI of the LeaveReview activity
+    /// </summary>
     [TestFixture]
     public class TestFeedback
     {
@@ -21,40 +24,36 @@ namespace UITest
         [SetUp]
         public void BeforeEachTest()
         {
-            // TODO: If the Android app being tested is included in the solution then open
-            // the Unit Tests window, right click Test Apps, select Add App Project
-            // and select the app projects that should be tested.
             app = ConfigureApp
             .Android
-            .ApkFile("D:/Projects/mRides-app/mRides-app/bin/Release//mRides_app.mRides_app-Signed.apk") //CHANGE THIS APK PATH
+            .ApkFile("D:/Projects/mRides-app/mRides-app/bin/Release//mRides_app.mRides_app-Signed.apk")
             .EnableLocalScreenshots().StartApp();
-            UserMapper userMapper = UserMapper.getInstance();
-            User user = userMapper.GetUserByFacebookId(113083069215300);
-            User.currentUser = user;
-
         }
 
+        /// <summary>
+        /// Method to test that required elements are visibible on the feedback UI
+        /// </summary>
         [Test]
-        public void IsRatingBarVisible()
+        public void VerifyAllFeedbackElements()
         {
-            app.Invoke("StartActivityThree");
+            app.Invoke("StartTestFragmentsActivity");
             app.Tap(c => c.Marked("testFragment2"));
+
+            // Visibility of the rating bar
             app.WaitForElement(c => c.Marked("reviewRatingBar1"));
             app.Flash(c => c.Marked("reviewRatingBar1"));
-        }
 
-        [Test]
-        public void IsReviewLineVisible()
-        {
-            app.Invoke("StartActivityThree");
-            app.Tap(c => c.Marked("testFragment2"));
+            // Visibility of the comment line
             app.WaitForElement(c => c.Marked("reviewEdit1"));
         }
 
+        /// <summary>
+        /// Method to test leaving a feedback on the UI
+        /// </summary>
         [Test]
         public void GiveFeedbackToUser()
         {
-            app.Invoke("StartActivityThree");
+            app.Invoke("StartTestFragmentsActivity");
             app.Tap(c => c.Marked("testFragment2"));
             app.Tap(c => c.Marked("reviewRatingBar1"));
             string uiTest = "Best driver! (UI Test)";
