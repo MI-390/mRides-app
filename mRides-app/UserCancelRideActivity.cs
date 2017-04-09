@@ -74,7 +74,7 @@ namespace mRides_app
         {
             ridesList.Clear();
             int usrID = User.currentUser.id;
-            //ridesList=UserMapper.getInstance().GetReviews(User.currentUser.id);
+            ridesList=UserMapper.getInstance().GetRequests(User.currentUser.id);
             
 
             listView = FindViewById<ListView>(Resource.Id.list_of_rides); // get reference to the ListView in the layout

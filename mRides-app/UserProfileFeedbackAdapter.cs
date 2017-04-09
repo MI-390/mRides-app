@@ -57,7 +57,7 @@ namespace mRides_app
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
 
-                var view = convertView ?? context.LayoutInflater.Inflate(Resource.Layout.UserProfileFeedbackFragment, parent, false);
+            var view = convertView ?? context.LayoutInflater.Inflate(Resource.Layout.UserProfileFeedbackFragment, parent, false);
 
             var dateOfFeedback = view.FindViewById<TextView>(Resource.Id.feedbackDateProfileFragment);
             var userNameGivingFeedback = view.FindViewById<TextView>(Resource.Id.feedbackFragmentUserName);

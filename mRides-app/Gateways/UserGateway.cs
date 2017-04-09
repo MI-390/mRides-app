@@ -81,7 +81,7 @@ namespace mRides_app.Gateways
 
         public List<Request> GetRequests(int userId)
         {
-            return SendGetWithUrlSegment<List<Request>>(ApiEndPointUrl.getUser, "id", userId.ToString());
+            return SendGetWithUrlSegment<List<Request>>(ApiEndPointUrl.getRequests, "id", userId.ToString());
         }
 
         /// <summary>
