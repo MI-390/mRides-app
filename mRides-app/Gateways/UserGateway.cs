@@ -125,10 +125,13 @@ namespace mRides_app.Gateways
 
             // Build the list of feedbacks to be returns
             List<Models.Feedback> feedbacks = new List<Models.Feedback>();
-            foreach (dynamic oFeedback in oFeedbacks)
+            if(oFeedbacks != null)
             {
-                Models.Feedback feedback = JsonConvert.DeserializeObject<Models.Feedback>(oFeedback.ToString());
-                feedbacks.Add(feedback);
+                foreach (dynamic oFeedback in oFeedbacks)
+                {
+                    Models.Feedback feedback = JsonConvert.DeserializeObject<Models.Feedback>(oFeedback.ToString());
+                    feedbacks.Add(feedback);
+                }
             }
 
             return feedbacks;
