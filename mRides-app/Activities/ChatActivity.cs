@@ -64,8 +64,7 @@ namespace mRides_app
             userId = Convert.ToInt32(Intent.GetStringExtra("id"));
             firebase = new FirebaseClient(GetString(Resource.String.firebase_database_url));
 
-            // adding listener to the right chat name everytime this activity is run
-            FirebaseDatabase.Instance.GetReference(chatName + "/messages").RemoveEventListener(this);
+            // adding listener to the right chat name everytime this activity is run;
             FirebaseDatabase.Instance.GetReference(chatName+"/messages").AddValueEventListener(this);
 
             sendButton = FindViewById<Button>(Resource.Id.sendMsgButton);
@@ -84,7 +83,7 @@ namespace mRides_app
         }
 
        /// <summary>
-       /// 
+       /// Method to create meta fields in the firebase real-time database to categorize chat names, users and messages
        /// </summary>
        /// <returns>A task</returns>
         private async Task<int> createMetaFields()
