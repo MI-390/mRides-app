@@ -201,14 +201,15 @@ namespace mRides_app.Mappers
         /// <param name="context">Current activity</param>
         public void setTheme(Activity context)
         {
-            if (User.currentUser.currentType == "driver")
-            {
-                context.SetTheme(Resource.Style.mRidesTheme);
-            }
-            else if (User.currentUser.currentType == "rider")
+            if (User.currentUser.currentType == "rider")
             {
                 context.SetTheme(Resource.Style.mRidesThemeRider);
             }
+            else
+            {
+                context.SetTheme(Resource.Style.mRidesTheme);
+            }
+           
         }
 
     }
