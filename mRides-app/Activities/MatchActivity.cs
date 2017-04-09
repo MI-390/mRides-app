@@ -115,7 +115,7 @@ namespace mRides_app
 
             // Capture the done button
             this.doneButton = FindViewById<Button>(Resource.Id.userMatchButtonDone);
-            this.doneButton.Click += delegate { this.Finish(); };
+            this.doneButton.Click += delegate { this.Done(); };
 
             // Capture the chat button
             this.chatButton = FindViewById<Button>(Resource.Id.userMatchingChatButton);
@@ -169,7 +169,7 @@ namespace mRides_app
             FindMatchAsyncTask findMatchTask = new FindMatchAsyncTask(this.userRequest, this);
             findMatchTask.Execute(); // Upon completion, the OnFindMatchComplete method is invoked.
         }
-        
+
         /// <summary>
         /// Updates the view of this activity with the information related to the current
         /// request defined by the attributes list of requests and by the current index of
@@ -239,32 +239,49 @@ namespace mRides_app
             // Send confirmation message to the server if driver accepted
             if(accept)
             {
-                if(this.userType == Request.TYPE_DRIVER)
+                Toast.MakeText(ApplicationContext, Resources.GetString(Resource.String.matchRequestSent), ToastLength.Short).Show();
+                if (this.userType == Request.TYPE_DRIVER)
                 {
                     consoleMapper.Confirm(this.matchedRequests[currentMatchedUserIndex].riderRequests.First().requestID, this.userRequest.ID);
+                    this.LoadNextMatchedRequest();
                 }
                 else
                 {
                     consoleMapper.Confirm(this.matchedRequests[currentMatchedUserIndex].ID, this.userRequest.ID);
+                    this.Done();
                 }
-                
-                Toast.MakeText(ApplicationContext, Resources.GetString(Resource.String.matchRequestSent), ToastLength.Short).Show();
             }
             else
             {
                 Toast.MakeText(ApplicationContext, Resources.GetString(Resource.String.matchDeclined), ToastLength.Short).Show();
-            }
+                this.LoadNextMatchedRequest();
+            }            
+        }
 
-            // Update to the view if there is a next one, otherwise finish this activity
+        /// <summary>
+        /// Update to the view if there is a next one, otherwise finish this activity
+        /// </summary>
+        private void LoadNextMatchedRequest()
+        {
             if (++this.currentMatchedUserIndex < this.matchedRequests.Count)
             {
-                RunOnUiThread(()=> this.UpdateDisplay());
+                RunOnUiThread(() => this.UpdateDisplay());
             }
             else
             {
                 Toast.MakeText(ApplicationContext, Resources.GetString(Resource.String.matchNoMoreMatch), ToastLength.Long).Show();
-                this.Finish();
+                this.Done();
             }
+        }
+
+        /// <summary>
+        /// Goes to the UserCancelRideActivity when the matching session is finished
+        /// </summary>
+        private void Done()
+        {
+            Intent intent = new Intent(this, typeof(UserCancelRideActivity));
+            this.StartActivity(intent);
+            this.Finish();
         }
 
         
