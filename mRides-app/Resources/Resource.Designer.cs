@@ -3050,9 +3050,6 @@ namespace mRides_app
 			// aapt resource value: 0x7f090020
 			public const int showTitle = 2131296288;
 			
-			// aapt resource value: 0x7f09010d
-			public const int skipButton = 2131296525;
-			
 			// aapt resource value: 0x7f090086
 			public const int snackbar_action = 2131296390;
 			
@@ -3085,6 +3082,9 @@ namespace mRides_app
 			
 			// aapt resource value: 0x7f09003e
 			public const int start = 2131296318;
+			
+			// aapt resource value: 0x7f09010d
+			public const int start_ride = 2131296525;
 			
 			// aapt resource value: 0x7f0900d3
 			public const int status_bar_latest_event_content = 2131296467;

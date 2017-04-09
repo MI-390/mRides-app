@@ -34,7 +34,15 @@ namespace mRides_app
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.UserCancelRide);
             Button trashCanButton = FindViewById<Button>(Resource.Id.trashcanButton);
-            Button skipButton = FindViewById<Button>(Resource.Id.skipButton);
+            Button startRide = FindViewById<Button>(Resource.Id.start_ride);
+           
+            //NASSIM LOOK HERE  ALSO DONT DELETE
+            //startRide.Click += delegate
+            //{
+            //    Intent i = new Intent(this, typeof(MapActivity));
+            //    i.PutExtra("id", Intent.GetStringExtra("id"));
+            //    StartActivity(i);
+            //};
 
             DisplayRides();
 
