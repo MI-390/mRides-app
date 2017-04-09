@@ -85,16 +85,20 @@ namespace mRides_app
             // Set the done button to save and continue to the next activity
             Button doneButton = FindViewById<Button>(Resource.Id.buttonDone);
 
-            // Set 'Done' button color to the right color
+            LinearLayout layout = FindViewById<LinearLayout>(Resource.Id.preferenceLinearLayout);
+
+            // Set elements to the right color
             if (User.currentUser != null)
             {
                 if (User.currentUser.currentType == "rider")
                 {
                     doneButton.SetBackgroundResource(Resource.Drawable.green_button);
+                    layout.SetBackgroundResource(Resource.Drawable.greenRoundedBg);
                 }
                 else
                 {
                     doneButton.SetBackgroundResource(Resource.Drawable.red_button);
+                    layout.SetBackgroundResource(Resource.Drawable.redRoundedBg);
                 }
             }
 

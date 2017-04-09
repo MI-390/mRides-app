@@ -53,7 +53,22 @@ namespace mRides_app.Mappers
         /// </summary>
         public User GetUser(int userId)
         {
-            return userGateway.GetUser(userId);
+            User user;
+
+            // Try to find the user in the cache
+            user = this.userCache.FindUserById(userId);
+            if(user == null)
+            {
+                // If the user is not found, find it from the server and 
+                // save a copy in the cache
+                user = userGateway.GetUser(userId);
+                if (user != null)
+                {
+                    this.userCache.AddUpdateUser(user);
+                }
+            }
+
+            return user;
         }
 
         /// <summary>
@@ -201,14 +216,15 @@ namespace mRides_app.Mappers
         /// <param name="context">Current activity</param>
         public void setTheme(Activity context)
         {
-            if (User.currentUser.currentType == "driver")
-            {
-                context.SetTheme(Resource.Style.mRidesTheme);
-            }
-            else if (User.currentUser.currentType == "rider")
+            if (User.currentUser.currentType == "rider")
             {
                 context.SetTheme(Resource.Style.mRidesThemeRider);
             }
+            else
+            {
+                context.SetTheme(Resource.Style.mRidesTheme);
+            }
+           
         }
 
     }

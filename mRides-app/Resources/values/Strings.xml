@@ -48,12 +48,26 @@
   <string name="next">Next</string>
 
   <!-- STRINGS FOR MAP ACTIVITY -->
+  <string name="modifyButton">Modify destination</string>
+  <string name="confirmButton">Confirm ride request</string>
   <string name="hello_map">Hello</string>
   <string name="dest">Destination</string>
-
+  <string name="origin">Origin</string>
   <string name="user_driver">Driver</string>
   <string name="user_rider">Rider</string>
-  
+  <string name="google_not_installed">Google Maps is not installed</string>
+  <string name="custom_location">Custom location</string>
+  <string name="current_location">Current location</string>
+  <string name="ride_request_location">Location during ride request</string>
+  <string name="location_question">Do you want to use your current location or </string>
+  <string name="set_origin">Do you want to set your origin to </string>
+  <string name="create_newride">Create a new ride</string>
+  <string name="choose_pickup">choose a pick up location</string>
+  <string name="choose_start">choose a start location</string>
+  <string name="choose_destination">To get started, choose your destination.</string>
+  <string name="set_destination">Do you want to set your destination to </string>
+  <string name="yes">Yes</string>
+  <string name="no">No</string>
   <string name="user_type">User type</string>
   <string name="number_of_people">Number of people</string>
   <string name="smoker">Smoker</string>

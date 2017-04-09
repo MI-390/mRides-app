@@ -4,7 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:background="@drawable/background_mrides">
+    android:background="#FFFFFF">
+  <LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/redRoundedBg"
+    android:id="@+id/preferenceLinearLayout">
     <TextView
         android:text="@string/Pref_Hi"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -13,7 +19,8 @@
         android:gravity="center"
         android:textAllCaps="true"
         android:id="@+id/textViewHi"
-        android:paddingTop="30dp" />
+        android:paddingTop="30dp"
+        android:textColor="#FFFFFF"/>
     <TextView
         android:text="@string/Pref_SetYourPreferences"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -22,7 +29,8 @@
         android:gravity="center"
         android:textAllCaps="true"
         android:id="@+id/textViewSetYourPreferences"
-        android:paddingBottom="20dp" />
+        android:paddingBottom="20dp"
+        android:textColor="#FFFFFF"/>
     <TableLayout
         android:minWidth="25px"
         android:minHeight="25px"
@@ -44,14 +52,16 @@
                 android:checked="true"
                 android:text="@string/Pref_Smoker"
                 android:id="@+id/radioButtonSmoker"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"/>
             <RadioButton
                 android:layout_column="2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Pref_NonSmoker"
                 android:id="@+id/radioButtonNonSmoker"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"/>
         </TableRow>
         <TableRow
             android:id="@+id/tableRowLuggage"
@@ -66,14 +76,16 @@
                 android:checked="true"
                 android:text="@string/Pref_Luggage"
                 android:id="@+id/radioButtonLuggage"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"/>
             <RadioButton
                 android:layout_column="2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Pref_NoLuggage"
                 android:id="@+id/radioButtonNoLuggage"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"/>
         </TableRow>
         <TableRow
             android:id="@+id/tableRowHandicap"
@@ -88,14 +100,16 @@
                 android:checked="true"
                 android:text="@string/Pref_Handicap"
                 android:id="@+id/radioButtonHandicap"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"/>
             <RadioButton
                 android:layout_column="2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Pref_NoHandicap"
                 android:id="@+id/radioButtonNoHandicap"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"/>
         </TableRow>
         <TableRow
             android:id="@+id/tableRowHandicap"
@@ -110,21 +124,24 @@
                 android:checked="true"
                 android:text="@string/Pref_Pet"
                 android:id="@+id/radioButtonPet"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"/>
             <RadioButton
                 android:layout_column="2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Pref_NoPet"
                 android:id="@+id/radioButtonNoPet"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"/>
         </TableRow>
         <TableRow
             android:id="@+id/tableRowGender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:layout_gravity="center_horizontal">
+            android:layout_gravity="center_horizontal"
+            android:padding="10dp">
             <TextView
                 android:layout_column="1"
                 android:text="@string/Pref_Prompt_Gender"
@@ -132,7 +149,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:id="@+id/textViewGenderPref"
-                android:layout_marginTop="20.0dp"
+                android:layout_marginTop="15.0dp"
                 android:textStyle="bold"
                 android:textColor="#ffffff" />
             <Spinner
@@ -140,33 +157,33 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/spinnerGender"
-                android:layout_marginTop="20.5dp" />
+                android:layout_marginTop="15.0dp"
+                android:textColor="#FFFFFF"/>
         </TableRow>
     </TableLayout>
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="15dp"
-        android:gravity="bottom"
-        android:layout_weight="1">
-        <Button
-            android:text="@string/Pref_Back"
-            android:layout_width="87.5dp"
-            android:layout_height="37.0dp"
-            android:id="@+id/buttonBack"
-            android:background="@drawable/grey_button"
-            style="@style/button_text"/>
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-        <Button
-            android:text="@string/Pref_Done"
-            android:layout_width="87.5dp"
-            android:layout_height="37.0dp"
-            android:id="@+id/buttonDone"
-            android:background="@drawable/red_button"
-            style="@style/button_text"/>
+      android:orientation="horizontal"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:padding="20dp">
+      <Button
+          android:text="@string/Pref_Back"
+          android:layout_width="87.5dp"
+          android:layout_height="35.0dp"
+          android:id="@+id/buttonBack"
+          android:background="@drawable/grey_button"
+          style="@style/button_text" />
+      <Space
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_weight="1" />
+      <Button
+          android:text="@string/Pref_Done"
+          android:layout_width="87.5dp"
+          android:layout_height="35.0dp"
+          android:id="@+id/buttonDone"
+          android:background="@drawable/red_button"
+          style="@style/button_text" />
+    </LinearLayout>
     </LinearLayout>
 </LinearLayout>
