@@ -231,7 +231,7 @@ namespace mRides_app.Gateways
         public const string setGSD = "User/setGSD";
         public const string getGender = "User/getGender/{id}";
         public const string setGender = "User/setGender";
-        public const string getRequest = "User/getRequest/{id}";
+        public const string getRequests = "User/getRequests/{id}";
 
         // Ride related url
         public const string createRide = "Ride/createRide";

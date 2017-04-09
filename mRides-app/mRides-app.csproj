@@ -214,6 +214,8 @@
   <ItemGroup>
     <Compile Include="Activities\MainMenuActivity.cs" />
     <Compile Include="Activities\SplashActivity.cs" />
+    <Compile Include="Cache\LocalDatabase\MRidesLocalDatabase.cs" />
+    <Compile Include="Cache\LocalDataGateways\UserLocalDataGateway.cs" />
     <Compile Include="Cache\UserCache.cs" />
     <Compile Include="Activities\ChatListActivity.cs" />
     <Compile Include="Activities\ChatActivity.cs" />
@@ -251,6 +253,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="RidesAdapter.cs" />
+    <Compile Include="Cache\LocalDatabase\SQLite.cs" />
+    <Compile Include="Cache\LocalDatabase\SQLiteAsync.cs" />
     <Compile Include="Tasks\Callbacks\IOnGetReviewsAverageCompleteCallback.cs" />
     <Compile Include="Tasks\FindMatchAsyncTask.cs" />
     <Compile Include="Tasks\GetReviewsAverageAsyncTask.cs" />
