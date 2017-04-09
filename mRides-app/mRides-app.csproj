@@ -251,6 +251,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="RidesAdapter.cs" />
+    <Compile Include="SQLite.cs" />
+    <Compile Include="SQLiteAsync.cs" />
     <Compile Include="Tasks\Callbacks\IOnGetReviewsAverageCompleteCallback.cs" />
     <Compile Include="Tasks\FindMatchAsyncTask.cs" />
     <Compile Include="Tasks\GetReviewsAverageAsyncTask.cs" />
@@ -397,7 +399,9 @@
     <AndroidResource Include="Resources\drawable\userIcon2.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\values-fr\Strings.xml" />
+    <AndroidResource Include="Resources\values-fr\Strings.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\ic_stat_ic_notification.png" />
