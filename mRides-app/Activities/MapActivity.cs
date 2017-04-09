@@ -797,8 +797,8 @@ namespace mRides_app
                 else
                 {
                     typeDisplayed = userRider;
-                    Window.SetNavigationBarColor(Android.Graphics.Color.DarkGreen);
-                    Window.SetStatusBarColor(Android.Graphics.Color.DarkGreen);
+                    Window.SetNavigationBarColor(new Android.Graphics.Color(Color.ParseColor("#008000")));
+                    Window.SetStatusBarColor(new Android.Graphics.Color(Color.ParseColor("#008000")));
                     ActionBar.SetBackgroundDrawable(new Android.Graphics.Drawables.ColorDrawable(Color.ParseColor("#26A65B")));
                     confirmRideButton.SetBackgroundResource(Resource.Drawable.green_button);
                     modifyDestinationButton.SetBackgroundResource(Resource.Drawable.green_button);
