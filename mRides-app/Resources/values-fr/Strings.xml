@@ -1,2 +1,70 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<resources />
+<resources>
+  <string name="ApplicationName">mRides-app</string>
+  <string name="Pref_Hi">Salut</string>
+  <string name="Pref_SetYourPreferences">Définir vos préférences</string>
+  <string name="Pref_Smoker">Fumeur</string>
+  <string name="Pref_NonSmoker">Non fumeur</string>
+  <string name="Pref_Male">Masculin</string>
+  <string name="Pref_Female">Féminin</string>
+  <string name="Pref_Luggage">Bagages</string>
+  <string name="Pref_NoLuggage">Aucun bagage</string>
+  <string name="Pref_Handicap">Déficience physique</string>
+  <string name="Pref_NoHandicap">Aucune déficience physique</string>
+  <string name="Pref_Pet">Animal de compagnie</string>
+  <string name="Pref_NoPet">Aucun animal de compagnie</string>
+  <string name="Pref_Prompt_Gender">Sexe préféré</string>
+  <string name="Pref_Back">Précédent</string>
+  <string name="Pref_Done">Terminé</string>
+  <string name="ExtraData_DataNotAvailable">Données non disponibles</string>
+  <string name="slogan">Voyager ensemble</string>
+  <string name="fblogin">Pour commencer, connectez-vous à l’aide d’un simple clic :</string>
+  <string name="fb">Connexion avec Facebook</string>
+  <string name="riderOrDriver">  Vous êtes un passager \nor un conducteur? </string>
+  <string name="numberOfRiders">Combien êtes-vous ?</string>
+  <string name="previous">Précédent</string>
+  <string name="next">Suivant</string>
+  <string name="hello_map">Hello</string>
+  <string name="dest">Destination</string>
+  <string name="user_driver">Pilote</string>
+  <string name="user_rider">Rider</string>
+  <string name="user_type">Type d\'utilisateur</string>
+  <string name="number_of_people">Nombre de personnes</string>
+  <string name="smoker">Fumeur</string>
+  <string name="luggage">Bagages</string>
+  <string name="handicap">Handicapés</string>
+  <string name="pet">Animal de compagnie</string>
+  <string name="gender">Sexe</string>
+  <string name="person_profile">Personne</string>
+  <string name="ratings_reviews">Notes et commentaires</string>
+  <string name="ratingsAndReviews">Notes et commentaires</string>
+  <string name="personUser">Personne</string>
+  <string name="dateOfFeedback">Date de retour</string>
+  <string name="p_erson">Personne</string>
+  <string name="user_review">Révision</string>
+  <string name="leaveReviewForUser">Comment évaluez-vous cet utilisateur ?</string>
+  <string name="reviewSubmit">Envoyer</string>
+  <string name="viewUserProfile">Afficher le profil</string>
+  <string name="reviewUser">Révision</string>
+  <string name="feedbackPopup">Cliquez pour popup Feedback !</string>
+  <string name="going_to_destination">Sur le point de :</string>
+  <string-array name="Pref_Gender">
+    <item>Toute</item>
+    <item>masculin</item>
+    <item>Femelle</item>
+  </string-array>
+  <string name="message">Conversation</string>
+  <string name="feedbackTitle">Laissez un commentaires !</string>
+  <string name="enterCommentForUser">Entrez votre commentaire ici</string>
+  <string name="closeFeedback">Fermer</string>
+  <string name="userMatchAccept">Accepter</string>
+  <string name="userMatchDecline">Refuser</string>
+  <string name="userMatchDone">Terminé</string>
+  <string name="matchedWith">Vous êtes jumelé avec :</string>
+  <string name="userMatchFrom">De :</string>
+  <string name="matchRequestSent">Une demande a été envoyée à cet avenant</string>
+  <string name="matchNoMoreMatch">Ne plus correspondre</string>
+  <string name="matchNoMatchFound">Aucune correspondance trouvée</string>
+  <string name="matchLoading">Chargement en cours...</string>
+  <string name="matchDeclined">Vous avez diminué le match</string>
+</resources>
