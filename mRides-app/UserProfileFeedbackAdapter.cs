@@ -21,7 +21,7 @@ namespace mRides_app
         Activity context;
         int counter = 0;
 
-        public UserProfileFeedbackAdapter(Activity context, List<Models.Feedback> fbList) : base() { //change the FeedbackForNow parameter to Feedback later when it is implemented
+        public UserProfileFeedbackAdapter(Activity context, List<Models.Feedback> fbList) : base() { 
             if (counter == 0)
             {
                 this.context = context;
@@ -44,8 +44,6 @@ namespace mRides_app
 
         public override Java.Lang.Object GetItem(int position)
         {
-            // could wrap a Contact in a Java.Lang.Object
-            // to return it here if needed
             return null;
         }
 
@@ -65,7 +63,38 @@ namespace mRides_app
             var reviewOfFeedback = view.FindViewById<TextView>(Resource.Id.feedbackFragmentReview);
 
             userNameGivingFeedback.Text = feedbackList.ElementAt(position).givenBy.firstName;
-            dateOfFeedback.Text = feedbackList.ElementAt(position).time;
+
+            string[] dateTextArray = feedbackList.ElementAt(position).time.Split('T');
+            string[] dayArray = dateTextArray[0].Split('-');
+            string[] timeArray = dateTextArray[1].Split(':');
+
+            if (dayArray[1].Equals("01"))
+                dayArray[1] = "January";
+            else if (dayArray[1].Equals("02"))
+                dayArray[1] = "February";
+            else if (dayArray[1].Equals("03"))
+                dayArray[1] = "March";
+            else if (dayArray[1].Equals("04"))
+                dayArray[1] = "April";
+            else if (dayArray[1].Equals("05"))
+                dayArray[1] = "May";
+            else if (dayArray[1].Equals("06"))
+                dayArray[1] = "June";
+            else if (dayArray[1].Equals("07"))
+                dayArray[1] = "July";
+            else if (dayArray[1].Equals("08"))
+                dayArray[1] = "August";
+            else if (dayArray[1].Equals("09"))
+                dayArray[1] = "September";
+            else if (dayArray[1].Equals("10"))
+                dayArray[1] = "October";
+            else if (dayArray[1].Equals("11"))
+                dayArray[1] = "November";
+            else if (dayArray[1].Equals("12"))
+                dayArray[1] = "December";
+
+            dateOfFeedback.Text = dayArray[1] + " " + dayArray[2] + ", " + dayArray[0] +
+                " at " + timeArray[0] + ":" + timeArray[1]; 
             ratingBarOfFeedback.NumStars = feedbackList.ElementAt(position).stars;
             reviewOfFeedback.Text = feedbackList.ElementAt(position).feedbackText;
 
