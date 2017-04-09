@@ -10,6 +10,8 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
+using SQLite;
+
 namespace mRides_app.Models
 {
     public class User
@@ -22,6 +24,7 @@ namespace mRides_app.Models
         // The user object representing the user using the application
         public static User currentUser { get; set; }
 
+        [PrimaryKey]
         public int id { get; set; }
         public long facebookID { get; set; }
         public string lastName { get; set; }
@@ -38,9 +41,15 @@ namespace mRides_app.Models
         public double latitude { get; set; }
         public double longitude { get; set; }
         public string currentType { get; set; }
+
+        // Ignore the following fields, do not include them in the local database
+        [Ignore]
         public List<Ride> ridesAsDriver { get; set; }
+        [Ignore]
         public List<UserRides> ridesAsRider { get; set; }
+        [Ignore]
         public List<Request> requestsAsDriver { get; set; }
+        [Ignore]
         public List<RiderRequest> requestAsRider { get; set; }
 
     }
