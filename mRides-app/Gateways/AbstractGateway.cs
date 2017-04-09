@@ -215,6 +215,7 @@ namespace mRides_app.Gateways
         public const string findRiders = "Console/findRiders";
         public const string confirm = "Console/confirm";
         public const string acceptConfirm = "Console/acceptConfirm";
+        public const string getRequestById = "Request/getUser/{id}";
 
         // Request related url
         public const string createRequest = "Request/createRequest";
@@ -231,7 +232,7 @@ namespace mRides_app.Gateways
         public const string setGSD = "User/setGSD";
         public const string getGender = "User/getGender/{id}";
         public const string setGender = "User/setGender";
-        public const string getRequest = "User/getRequest/{id}";
+        public const string getRequests = "User/getRequests/{id}";
 
         // Ride related url
         public const string createRide = "Ride/createRide";

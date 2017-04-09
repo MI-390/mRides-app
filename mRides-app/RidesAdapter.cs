@@ -12,15 +12,16 @@ using Android.Widget;
 using Java.Lang;
 using mRides_app.Models;
 using mRides_app.Mappers;
+using Android.Locations;
 
 namespace mRides_app
 {
     /// <summary>
     /// Adapter class for the list of rides
     /// </summary>
-    public class RidesAdapter : BaseAdapter<Request>
+    public class RidesAdapter : BaseAdapter<RiderRequest>
     {
-        private List<Request> requests;
+        private List<RiderRequest> requests;
         private Activity context;
 
         /// <summary>
@@ -28,7 +29,7 @@ namespace mRides_app
         /// </summary>
         /// <param name="context">Current activity</param>
         /// <param name="requests">List of request objects</param>
-        public RidesAdapter(UserCancelRideActivity context, List<Request> requests) : base()
+        public RidesAdapter(UserCancelRideActivity context, List<RiderRequest> requests) : base()
         {
             this.context = context;
             this.requests = requests;
@@ -43,7 +44,7 @@ namespace mRides_app
             get { return requests.Count; }
         }
 
-        public override Request this[int position]
+        public override RiderRequest this[int position]
         {
             get { return requests[position]; }
 
@@ -71,15 +72,16 @@ namespace mRides_app
             riderName = itemView.FindViewById<TextView>(Resource.Id.CancelRides_nameRider);
             location = itemView.FindViewById<TextView>(Resource.Id.CancelRides_location);
             deletecheck = itemView.FindViewById<CheckBox>(Resource.Id.CancelRides_Checkbox);
+            
+            
+                riderName.Text = item.rider.firstName + " " + item.rider.lastName;
+                Geocoder geocoder = new Geocoder(context);
 
-            riderName.Text = item.riderRequests.First().rider.firstName;
-            location.Text = item.location;
+                IList<Address> addresses = geocoder.GetFromLocation(System.Double.Parse(item.location.Split(',')[0]), System.Double.Parse(item.location.Split(',')[1]), 1);
+                location.Text=addresses[0].GetAddressLine(0);
+          
 
-            deletecheck.Tag = item.riderRequests.First().rider.firstName;
-
-            deletecheck.SetOnCheckedChangeListener(null); // need to do this because changing value will fire the event
-            deletecheck.Checked = false;
-            deletecheck.SetOnCheckedChangeListener(new CheckedChangeListener(this.context));
+        
 
             return itemView;
         }

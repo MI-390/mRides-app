@@ -57,6 +57,11 @@ namespace mRides_app.Mappers
             return consoleGateway.FindDrivers(newRequest);
         }
 
+        public Request GetRequest(int requestId)
+        {
+            return consoleGateway.GetRequestById(requestId);
+        }
+
         /**
           * This method is used to find a list of rides that match the criteria
           * of a request made by a driver.

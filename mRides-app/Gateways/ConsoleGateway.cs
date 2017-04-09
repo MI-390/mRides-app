@@ -45,6 +45,7 @@ namespace mRides_app.Gateways
         /// <returns>List of Request that matches the request of the rider</returns>
         public List<Request> FindDrivers(Request newRequest)
         {
+
             // Create a new rest client
             var client = new RestClient()
             {
@@ -73,7 +74,13 @@ namespace mRides_app.Gateways
                 return responseData.requests;
             }
         }
-        
+        /// <summary>
+        /// This method returns a user object given its user ID.
+        /// </summary>
+        public Request GetRequestById(int requestId)
+        {
+            return SendGetWithUrlSegment<Request>(ApiEndPointUrl.getRequestById, "id", requestId.ToString());
+        }
         /// <summary>
         /// This method is used to find a list of rides that match the criteria
         /// of a request made by a driver.
