@@ -14,11 +14,15 @@ using mRides_app.Models;
 
 namespace mRides_app
 {
+
     public interface IStartDrivingModeListener
     {
         void enterDriverMode(double latitude, double longitude);
     }
 
+    /// <summary>
+    /// Fragment for the user profile view shown on the map.
+    /// </summary>
     class UserProfileFragment : DialogFragment
     {
 
@@ -30,6 +34,14 @@ namespace mRides_app
         IStartDrivingModeListener listener;
         string userID;
         string location;
+
+        /// <summary>
+        /// Method that is invoked upon creation of the fragment
+        /// </summary>
+        /// <param name="inflater">A LayoutInflater</param>
+        /// <param name="container">A ViewGroup</param>
+        /// <param name="savedInstanceState">A Bundle</param>
+        /// <returns>View object</returns>
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             // Use this to return your custom view for this Fragment
@@ -52,13 +64,21 @@ namespace mRides_app
             return view;
         }
 
+        /// <summary>
+        /// Method invoked when activity is attached to the fragment
+        /// </summary>
+        /// <param name="activity">Activity object</param>
         public override void OnAttach(Activity activity)
         {
             base.OnAttach(activity);
             listener = (IStartDrivingModeListener)activity;
         }
 
-        // Load a new activity and transfer the data to the new one
+        /// <summary>
+        /// Method that loads user profile activity and transfers the data to it.
+        /// </summary>
+        /// <param name="sender">The initiator of this intent request.</param>
+        /// <param name="e">The event object initiating the request.</param>
         void ViewProfileButtonClicked(object sender, EventArgs e)
         {
             Intent i = new Intent(Context, typeof(UserProfileActivity));
@@ -67,6 +87,11 @@ namespace mRides_app
             Dismiss();
         }
 
+        /// <summary>
+        /// Method that is invoked when the leave a review button is clicked.
+        /// </summary>
+        /// <param name="sender">The initiator of this intent request.</param>
+        /// <param name="e">The event object initiating the request.</param>
         void ReviewButtonClicked(object sender, EventArgs e)
         {
 
@@ -78,6 +103,12 @@ namespace mRides_app
             dialog.Show(transaction, "Leave review fragment");
             Dismiss();
         }
+
+        /// <summary>
+        /// Method that is invoked when the chat button is clicked.
+        /// </summary>
+        /// <param name="sender">The initiator of this intent request.</param>
+        /// <param name="e">The event object initiating the request.</param>
         void ChatButtonClicked(object sender, EventArgs e)
         {
             Intent i = new Intent(Context, typeof(ChatActivity));
@@ -87,6 +118,10 @@ namespace mRides_app
             Dismiss();
         }
 
+        /// <summary>
+        /// Method that creates the chat name.
+        /// </summary>
+        /// <returns>Value of the chat name</returns>
         string createChatName()
         {
             int intUserId = Convert.ToInt32(userID);
@@ -98,6 +133,12 @@ namespace mRides_app
             return userID + " & " + currentUser;
         }
 
+
+        /// <summary>
+        /// Method that is invoked when the pick up user button is pressed.
+        /// </summary>
+        /// <param name="sender">The initiator of this intent request.</param>
+        /// <param name="e">The event object initiating the request.</param>
         void PickUpButtonClicked(object sender, EventArgs e)
         {
             string[] splitCoordinates = location.Split(',');

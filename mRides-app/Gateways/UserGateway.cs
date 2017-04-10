@@ -21,6 +21,9 @@ using System.Threading.Tasks;
 
 namespace mRides_app.Gateways
 {
+    /// <summary>
+    /// Class that corresponds to the user gateway.
+    /// </summary>
     public class UserGateway : AbstractGateway
     {
         private UserGateway() { }

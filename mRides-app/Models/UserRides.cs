@@ -12,6 +12,9 @@ using Android.Widget;
 
 namespace mRides_app.Models
 {
+    /// <summary>
+    /// Class that corresponds to a user's current rides.
+    /// </summary>
     public class UserRides
     {
         public int ID { get; set; }

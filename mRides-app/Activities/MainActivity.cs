@@ -12,21 +12,23 @@ using System.Collections.Generic;
 using Firebase.Iid;
 using System.Linq;
 
-//cvnewggbsc_1487629189@tfbnw.net
-//mi-390
 namespace mRides_app
 {
-    //ggrrg
     [Activity(Label = "MainActivity")]
+    /// <summary>
+    /// Class that corresponds to the main activity of the application.
+    /// </summary>
     public class MainActivity : Activity
     {
         string userName;
 
         // For UI testing
 
-        // To test fragments, an activity was created and solely used for the purpose of opening
-        // the fragments
         [Java.Interop.Export("StartTestFragmentsActivity")]
+        /// <summary>
+        /// This method is used for UI testing.
+        /// It is used to test the fragments used.
+        /// </summary>
         public void StartActivityThree()
         {
             UserMapper userMapper = UserMapper.getInstance();
@@ -37,6 +39,10 @@ namespace mRides_app
         }
 
         [Java.Interop.Export("StartEnterDrivingMode")]
+        /// <summary>
+        /// This method is used for UI testing.
+        /// It is used to test the Driving Mode UI.
+        /// </summary>
         public void StartActivitySix()
         {
             Intent intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse("http://maps.google.com/maps?" + "saddr=" + "45.222,-72.70&daddr=45.4581,-73.6403"));
@@ -45,6 +51,10 @@ namespace mRides_app
         }
 
         [Java.Interop.Export("StartMainMenuActivity")]
+        /// <summary>
+        /// This method is used for UI testing.
+        /// It is used to test the Main Menu.
+        /// </summary>
         public void StartMainMenuActivity()
         {
             UserMapper userMapper = UserMapper.getInstance();
@@ -60,6 +70,10 @@ namespace mRides_app
         }
 
         [Java.Interop.Export("StartMatchActivity")]
+        /// <summary>
+        /// This method is used for UI testing.
+        /// It is used to test the matching activity.
+        /// </summary>
         public void StartMatchActivity()
         {
             UserMapper userMapper = UserMapper.getInstance();
@@ -70,6 +84,10 @@ namespace mRides_app
             StartActivity(matchActivity);
         }
 
+        /// <summary>
+        /// This method is used to begin the login request.
+        /// </summary>
+        /// <param name="allowCancel"> The boolean that determines whether user can cancel the operation.</param>
         void LoginToFacebook(bool allowCancel)
         {
             var auth = new OAuth2Authenticator(
@@ -86,6 +104,11 @@ namespace mRides_app
             StartActivity(intent);
         }
 
+        /// <summary>
+        /// This method handles the completion of the login request.
+        /// </summary>
+        /// <param name="sender">The initiator of this intent request.</param>
+        /// <param name="e">The authentication event object.</param>
         void OnAuthenticationCompleted(object sender, AuthenticatorCompletedEventArgs e)
         {
             if (e.IsAuthenticated)
@@ -98,7 +121,6 @@ namespace mRides_app
         protected override void OnResume()
         {
             base.OnResume();
-          
         }
 
         protected override void OnCreate(Bundle bundle)

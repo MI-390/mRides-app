@@ -17,8 +17,15 @@ using mRides_app.Constants;
 namespace mRides_app
 {
     [Activity(Label = "PreferencesActivity")]
+    /// <summary>
+    /// Activity that corresponds to the select preferences page of the application.
+    /// </summary>
     public class PreferencesActivity : Activity
     {
+        /// <summary>
+        /// Method that is invoked upon the start of this activity.
+        /// </summary>
+        /// <param name="bundle">Variable used for passing data between activities.</param>
         protected override void OnCreate(Bundle savedInstanceState)
         {
             UserMapper.getInstance().setTheme(this);
@@ -162,6 +169,14 @@ namespace mRides_app
 
         }
 
+
+        /// <summary>
+        /// Method that determines where to proceed whether the user is a new or returning user.
+        /// </summary>
+        /// <param name="smoker">Binary value of user's smoker preference.</param>
+        /// <param name="handicap">Binary value of user's handicap preference.</param>
+        /// <param name="pet">Binary value of user's pet preference.</param>
+        /// <param name="gender">Gender preference of the user.</param>
         private void SaveAndContinue(Boolean smoker, Boolean luggage, Boolean handicap, Boolean pet, string gender)
         {
             // If the current user is null and the previous activity is the main, 
@@ -209,17 +224,18 @@ namespace mRides_app
             }
         }
 
-        /**
-         * Represents a radio button group
-         */
+        /// <summary>
+        /// Class that corresponds to the radio button group on preferences page. 
+        /// </summary>
         private class PreferenceSet
         {
             private List<RadioButton> preferenceList = new List<RadioButton>();
             private RadioButton selectedPreference;
 
-            /**
-             * Add a new preference to the set
-             */
+            /// <summary>
+            /// Method that adds a new preference to the set.
+            /// </summary>
+            /// <param name="newPreference">Radio button to be added to list of preferences.</param>
             public void AddPreference(RadioButton newPreference)
             {
                 // Add it to the set of preferences 
@@ -232,10 +248,10 @@ namespace mRides_app
                 };
             }
 
-            /**
-             * Updates which button is currently clicked, and unclicked the previous clicked
-             * button
-             */
+            /// <summary>
+            /// Method that is invoked when a user selects a radio button.
+            /// </summary>
+            /// <param name="clickedRadioButton">RadioButton that is pressed.</param>
             public void Click(RadioButton clickedRadioButton)
             {
                 if (this.preferenceList.Contains(clickedRadioButton))

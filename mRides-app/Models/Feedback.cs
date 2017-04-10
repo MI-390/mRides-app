@@ -12,6 +12,9 @@ using Android.Widget;
 
 namespace mRides_app.Models
 {
+    /// <summary>
+    /// Class that corresponds to the ratings and reviews that constitute a feedbck object.
+    /// </summary>
     public class Feedback
     {
         public const string GIVEN_AS_RIDER = "rider";

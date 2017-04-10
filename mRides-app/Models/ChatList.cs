@@ -12,6 +12,9 @@ using Android.Widget;
 
 namespace mRides_app.Models
 {
+    /// <summary>
+    /// Class that corresponds to the users engaged in a chat.
+    /// </summary>
     class ChatList
     {
         public string ChatName {get;set;}

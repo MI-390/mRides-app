@@ -19,8 +19,15 @@ using Android.Graphics.Drawables;
 namespace mRides_app
 {
     [Activity(Label = "UserProfileActivity")]
+    /// <summary>
+    /// Activity that corresponds to the user profile page of the application.
+    /// </summary>
     public class UserProfileActivity : Activity
     {
+        /// <summary>
+        /// Method that is invoked upon the creation of this activity.
+        /// </summary>
+        /// <param name="bundle">Variable used for passing data between activities.</param>
         protected override void OnCreate(Bundle savedInstanceState)
         {
             UserMapper.getInstance().setTheme(this);

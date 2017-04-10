@@ -17,6 +17,9 @@ using System.Threading.Tasks;
 
 namespace mRides_app.Cache.LocalDataGateways
 {
+    /// <summary>
+    /// Class that corresponds to User class' temporary local storage. 
+    /// </summary>
     public class UserLocalDataGateway
     {
         // -------------------------------------------------------------------------
@@ -25,7 +28,6 @@ namespace mRides_app.Cache.LocalDataGateways
 
         // Singleton instance
         private static UserLocalDataGateway instance;
-
 
 
         // -------------------------------------------------------------------------

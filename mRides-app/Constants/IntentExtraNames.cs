@@ -1,9 +1,8 @@
 namespace mRides_app.Constants
 {
-    /**
-     * This class contains constant strings used for the data passed in the intent
-     * between activities.
-     */
+    /// <summary>
+    /// Class that contains constant strings used for the data passed in intents.
+    /// </summary>
     public static class IntentExtraNames
     {
         public static string UserId { get { return "UserId"; } }
