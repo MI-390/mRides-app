@@ -68,8 +68,6 @@
     <Compile Include="Gateways\RequestGateway.cs" />
     <Compile Include="Gateways\RideGateway.cs" />
     <Compile Include="MainActivity.cs" />
-    <Compile Include="MappersTest\ConsoleMapperTests.cs" />
-    <Compile Include="MappersTest\RequestMapperTests.cs" />
     <Compile Include="MappersTest\UserMapperTests.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
