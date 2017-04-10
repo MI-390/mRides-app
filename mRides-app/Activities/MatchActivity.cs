@@ -279,7 +279,7 @@ namespace mRides_app
         /// </summary>
         private void Done()
         {
-            Intent intent = new Intent(this, typeof(UserCancelRideActivity));
+            Intent intent = new Intent(this, typeof(RequestListActivity));
             this.StartActivity(intent);
             this.Finish();
         }

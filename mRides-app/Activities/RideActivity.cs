@@ -30,7 +30,7 @@ using static mRides_app.Models.Request;
 namespace mRides_app.Activities
 {
     [Activity(Label = "RideActivity")]
-    public class RideActivity : Activity, IOnMapReadyCallback, ILeaveReviewListener
+    public class RideActivity : Activity, IOnMapReadyCallback, ILeaveReviewListener, IStartDrivingModeListener
     {
         private GoogleMap map;
         private Marker originMarker;
