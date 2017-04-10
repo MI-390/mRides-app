@@ -49,17 +49,15 @@ namespace mRides_app
 
             if (User.currentUser != null)
             {
-                if (User.currentUser.currentType == "rider")
+                if (User.currentUser.currentType == mRides_app.Models.Request.TYPE_RIDER)
                 {
-                    skipButton.SetBackgroundResource(Resource.Drawable.green_button);
+                    startRide.SetBackgroundResource(Resource.Drawable.green_button);
                     trashCanButton.SetBackgroundResource(Resource.Drawable.trashcanCancel);
-                    //layout.SetBackgroundResource(Resource.Drawable.greenRoundedBg);
                 }
                 else
                 {
-                    skipButton.SetBackgroundResource(Resource.Drawable.red_button);
+                    startRide.SetBackgroundResource(Resource.Drawable.red_button);
                     trashCanButton.SetBackgroundResource(Resource.Drawable.trashcanCancelRed);
-                    //layout.SetBackgroundResource(Resource.Drawable.greenRoundedBg);
                 }
             }
 

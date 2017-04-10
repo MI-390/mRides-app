@@ -23,7 +23,7 @@
             android:id="@+id/textView1"
             android:gravity="center"
             android:layout_marginTop="39.5dp"
-            android:textColor="#ffffff" />
+            android:textColor="#000000" />
     </LinearLayout>
 <!--Message displayed to tell user to cancel rides (if desired)-->
     <LinearLayout
