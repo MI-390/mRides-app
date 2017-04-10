@@ -76,9 +76,10 @@ namespace mRides_app.Mappers
         /// updated user to the server.
         /// </summary>
         /// <param name="user"></param>
-        public void UpdateUser(User user)
+        public void UpdateUserSettings(User user)
         {
             this.userCache.SaveUserPreferences(user.id, user.isSmoker, user.isHandicap, user.hasLuggage, user.hasPet, user.genderPreference);
+            this.userGateway.UpdateUserSettings(user);
         }
 
         /// <summary>

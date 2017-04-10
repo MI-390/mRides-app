@@ -222,6 +222,7 @@ namespace mRides_app.Gateways
 
         // User related url
         public const string createUser = "User/createUser";
+        public const string updateUserSettings = "User/updateUserSettings";
         public const string getUser = "User/getUser/{id}";
         public const string getUserByFacebookId = "User/getUserByFacebookId";
         public const string getReviews = "User/getReviews/{id}";

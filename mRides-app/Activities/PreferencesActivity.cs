@@ -202,7 +202,7 @@ namespace mRides_app
                 User.currentUser.isHandicap = handicap;
                 User.currentUser.genderPreference = gender;
                 User.currentUser.hasPet = pet;
-                UserMapper.getInstance().UpdateUser(User.currentUser);
+                UserMapper.getInstance().UpdateUserSettings(User.currentUser);
 
                 // Go back to the previous activity
                 this.Finish();
