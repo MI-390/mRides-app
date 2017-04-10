@@ -142,15 +142,17 @@
         android:layout_height="match_parent"
         android:gravity="bottom"
         android:layout_weight="1"
+        android:padding="5dp"
         android:layout_marginTop="0.0dp">
         <Button
             android:layout_width="40.5dp"
             android:layout_height="39.5dp"
             android:id="@+id/trashcanButton"
-            android:background="@drawable/trashcancancel"
+            android:background="@drawable/trashcancancelRed"
             android:layout_gravity="center"
             android:layout_marginBottom="5.5dp"
-            android:stateListAnimator="@null" />
+            android:stateListAnimator="@null"
+            style="@style/button_text" />
         <TextView
             android:text="or"
             android:layout_width="match_parent"
@@ -164,7 +166,8 @@
             android:layout_height="28.5dp"
             android:id="@+id/skipButton"
             android:layout_gravity="center"
-            android:background="#92d36e"
-            android:layout_marginBottom="26.5dp" />
+            android:background="@drawable/red_button"
+            android:layout_marginBottom="26.5dp"
+            style="@style/button_text" />
     </LinearLayout>
 </LinearLayout>

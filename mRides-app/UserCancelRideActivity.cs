@@ -31,12 +31,29 @@ namespace mRides_app
         /// <param name="savedInstanceState"></param>
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            UserMapper.getInstance().setTheme(this);
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.UserCancelRide);
             Button trashCanButton = FindViewById<Button>(Resource.Id.trashcanButton);
             Button skipButton = FindViewById<Button>(Resource.Id.skipButton);
 
             DisplayRides();
+
+            if (User.currentUser != null)
+            {
+                if (User.currentUser.currentType == "rider")
+                {
+                    skipButton.SetBackgroundResource(Resource.Drawable.green_button);
+                    trashCanButton.SetBackgroundResource(Resource.Drawable.trashcanCancel);
+                    //layout.SetBackgroundResource(Resource.Drawable.greenRoundedBg);
+                }
+                else
+                {
+                    skipButton.SetBackgroundResource(Resource.Drawable.red_button);
+                    trashCanButton.SetBackgroundResource(Resource.Drawable.trashcanCancelRed);
+                    //layout.SetBackgroundResource(Resource.Drawable.greenRoundedBg);
+                }
+            }
 
             trashCanButton.Click += CancelRideButtonClicked;
         }
