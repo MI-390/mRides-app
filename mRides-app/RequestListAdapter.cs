@@ -17,20 +17,37 @@ using Android.Locations;
 
 namespace mRides_app
 {
+    /// <summary>
+    /// Adapter class for the list of requests
+    /// </summary>
     internal class RequestListAdapter : BaseAdapter<Request>
     {
         private List<Request> items;
         private Activity context;
+
+        /// <summary>
+        /// Constructor for RequestListAdapter
+        /// </summary>
+        /// <param name="context">Current activity</param>
+        /// <param name="requests">List of request objects</param>
         public RequestListAdapter(RequestListActivity context, List<Request> items):base()
         {
             this.context = context;
             this.items = items;
         }
+
+        /// <summary>
+        /// Method to get ID of the item.
+        /// </summary>
+        /// <returns>ID of item</returns>
         public override long GetItemId(int position)
         {
             return position;
         }
 
+        /// <summary>
+        /// Method to get the number of requests in the list.
+        /// </summary>
         public override int Count
         {
             get { return items.Count; }
@@ -42,6 +59,13 @@ namespace mRides_app
 
         }
 
+        /// <summary>
+        /// Method to get the view of one single row element of a request
+        /// </summary>
+        /// <param name="position">Position of the view</param>
+        /// <param name="convertView">A View object</param>
+        /// <param name="parent">The parent View object</param>
+        /// <returns>View object</returns>
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
             var item = items[position];
@@ -64,10 +88,14 @@ namespace mRides_app
                 return view;
             }
             else return view;
-            
 
         }
 
+        /// <summary>
+        /// Method to get an item given its position in the list.
+        /// </summary>
+        /// <param name="position">Position of item in list</param>
+        /// <returns>Position of item</returns>
         public override Java.Lang.Object GetItem(int position)
         {
             throw new NotImplementedException();

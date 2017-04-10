@@ -18,6 +18,9 @@ using Newtonsoft.Json;
 
 namespace mRides_app.Gateways
 {
+    /// <summary>
+    /// Class that corresponds to the Console class' gateway. 
+    /// </summary>
     public class ConsoleGateway : AbstractGateway
     {
         private ConsoleGateway() { }
@@ -74,6 +77,7 @@ namespace mRides_app.Gateways
                 return responseData.requests;
             }
         }
+
         /// <summary>
         /// This method returns a user object given its user ID.
         /// </summary>
@@ -81,6 +85,7 @@ namespace mRides_app.Gateways
         {
             return SendGetWithUrlSegment<Request>(ApiEndPointUrl.getRequestById, "id", requestId.ToString());
         }
+
         /// <summary>
         /// This method is used to find a list of rides that match the criteria
         /// of a request made by a driver.

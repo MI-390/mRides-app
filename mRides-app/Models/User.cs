@@ -14,6 +14,9 @@ using SQLite;
 
 namespace mRides_app.Models
 {
+    /// <summary>
+    /// Class that corresponds to definition of a user. 
+    /// </summary>
     public class User
     {
         // Constant settings for the values of the gender preferences 
