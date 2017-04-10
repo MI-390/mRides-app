@@ -83,107 +83,6 @@ namespace UnitTests
         }
 
         /// <summary>
-        /// Test whether we are able to successfully get the reviews of a user
-        /// </summary>
-        [Test]
-        public void GetReviews()
-        {
-            UserMapper userMapper = UserMapper.getInstance();
-            List<Feedback> reviews = userMapper.GetReviews(2);
-            Assert.True(reviews.Count > 0);
-        }
-
-        /// <summary>
-        /// Test whether we are able to leave a review
-        /// </summary>
-        [Test]
-        public void LeaveReview()
-        {
-            // Get user mapper
-            UserMapper userMapper = UserMapper.getInstance();
-
-            // Create a driver
-            User driver = new User
-            {
-                firstName = "Driver",
-                lastName = "Driver",
-                genderPreference = "male",
-                gsd = 0,
-                hasLuggage = false,
-                isHandicap = false,
-                isSmoker = false,
-                hasPet = false,
-                prefferedLanguage = "en-ca"
-            };
-            driver = userMapper.CreateUser(driver);
-
-            // Create a rider
-            User rider = new User
-            {
-                firstName = "Rider",
-                lastName = "Rider",
-                genderPreference = "male",
-                gsd = 0,
-                hasLuggage = false,
-                isHandicap = false,
-                isSmoker = false,
-                hasPet = false,
-                prefferedLanguage = "en-ca"
-            };
-            rider = userMapper.CreateUser(rider);
-
-            // Create a ride
-            User.currentUser = driver;
-            RideGateway rideMapper = RideGateway.getInstance();
-            Ride ride = new Ride
-            {
-                destination = "",
-                location = "",
-                dateTime = DateTime.Now,
-                isWeekly = false,
-                Driver = driver,
-                DriverID = driver.id,
-                type = "driver"
-            };
-            ride = rideMapper.CreateRide(ride);
-
-            // Add the rider to the ride
-            User.currentUser = rider;
-            ride = rideMapper.AddRiderToRide(ride.ID);
-
-
-            // Test the leave review by the driver
-            User.currentUser = driver;
-            userMapper.LeaveReview(ride.ID, rider.id, 4, "Review from driver " + driver.id);
-            List<Feedback> riderReviews = userMapper.GetReviews(rider.id);
-            bool successDriverToRiderFeedback = false;
-            foreach (Feedback f in riderReviews)
-            {
-                if (f.givenBy.id == driver.id && f.stars == 4 && f.feedbackText.Equals("Review from driver " + driver.id))
-                {
-                    successDriverToRiderFeedback = true;
-                    break;
-                }
-            }
-            Assert.True(successDriverToRiderFeedback);
-
-            // Test the leave review by the rider
-            User.currentUser = rider;
-            userMapper.LeaveReview(ride.ID, driver.id, 5, "Review from rider " + rider.id);
-            List<Feedback> driverReviews = userMapper.GetReviews(driver.id);
-            bool successRiderToDriverFeedback = false;
-            foreach (Feedback f in driverReviews)
-            {
-                if (f.givenBy.id == rider.id && f.stars == 5 && f.feedbackText.Equals("Review from rider " + rider.id))
-                {
-                    successRiderToDriverFeedback = true;
-                    break;
-                }
-            }
-            Assert.True(successRiderToDriverFeedback);
-        }
-
-        /// <summary>
         /// Test whether we are able to successfully get the gender of a user
         /// </summary>
         [Test]
@@ -193,7 +92,6 @@ namespace UnitTests
             // Create a test user
             User aline = new User
             {
-                id = 7777,
                 firstName = "Test",
                 lastName = "User",
                 genderPreference = "male",
@@ -206,8 +104,8 @@ namespace UnitTests
                 gender = "female"
             };
 
-            userMapper.CreateUser(aline);
-            string testGender = userMapper.getGender(7777);
+            aline = userMapper.CreateUser(aline);
+            string testGender = userMapper.getGender(aline.id);
             Assert.AreEqual(testGender, "female");
         }
 
@@ -221,7 +119,6 @@ namespace UnitTests
             // Create a test user
             User aline = new User
             {
-                id = 6666,
                 firstName = "Test",
                 lastName = "User",
                 genderPreference = "male",
@@ -234,9 +131,9 @@ namespace UnitTests
                 gender = "female"
             };
 
-            userMapper.CreateUser(aline);
-            userMapper.setGender(6666, "male");
-            string testGender = userMapper.getGender(6666);
+            aline = userMapper.CreateUser(aline);
+            userMapper.setGender(aline.id, "male");
+            string testGender = userMapper.getGender(aline.id);
             Assert.AreEqual(testGender, "male");
         }
 
@@ -250,7 +147,6 @@ namespace UnitTests
             // Create a test user
             User aline = new User
             {
-                id = 88888,
                 firstName = "Test",
                 lastName = "User",
                 genderPreference = "male",
@@ -263,8 +159,8 @@ namespace UnitTests
                 gender = "female"
             };
 
-            userMapper.CreateUser(aline);
-            long testGSD = userMapper.GetGSD(88888);
+            aline = userMapper.CreateUser(aline);
+            long testGSD = userMapper.GetGSD(aline.id);
             Assert.AreEqual(testGSD, 15);
         }
 
@@ -278,7 +174,6 @@ namespace UnitTests
             // Create a test user
             User aline = new User
             {
-                id = 9999,
                 firstName = "Test",
                 lastName = "User",
                 genderPreference = "male",
@@ -291,9 +186,9 @@ namespace UnitTests
                 gender = "female"
             };
 
-            userMapper.CreateUser(aline);
-            userMapper.setGSD(9999, 150);
-            long testGSD = userMapper.GetGSD(9999);
+            aline = userMapper.CreateUser(aline);
+            userMapper.setGSD(aline.id, 150);
+            long testGSD = userMapper.GetGSD(aline.id);
             Assert.AreEqual(testGSD, 150);
         }
 
