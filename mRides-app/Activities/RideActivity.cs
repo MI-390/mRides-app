@@ -60,12 +60,12 @@ namespace mRides_app.Activities
             request = ConsoleMapper.getInstance().GetRequest(requestId);
             string[] splitLocationCoordinates = request.location.Split(',');
             string[] splitDestinationCoordinates = request.destination.Split(',');
-            LatLng location = new LatLng(Int32.Parse(splitLocationCoordinates[0]), Int32.Parse(splitLocationCoordinates[1]));
-            LatLng destination = new LatLng(Int32.Parse(splitDestinationCoordinates[0]), Int32.Parse(splitDestinationCoordinates[1]));
+            LatLng location = new LatLng(Double.Parse(splitLocationCoordinates[0]), Double.Parse(splitLocationCoordinates[1]));
+            LatLng destination = new LatLng(Double.Parse(splitDestinationCoordinates[0]), Double.Parse(splitDestinationCoordinates[1]));
 
             originMarker = map.AddMarker(new MarkerOptions().SetPosition(location).SetTitle(GetString(Resource.String.ride_request_location)));
             destinationMarker = map.AddMarker(new MarkerOptions().SetPosition(destination).SetTitle(GetString(Resource.String.ride_request_location)));
-
+            riderRequestsList = new List<RiderRequest>();
             foreach (RiderRequest riderRequest in request.riderRequests)
                 riderRequestsList.Add(riderRequest);
 
@@ -95,7 +95,7 @@ namespace mRides_app.Activities
                     {
                         Bundle args = new Bundle();
                         args.PutString("name", e.Marker.Title);
-                        args.PutString("id", option.Key.id.ToString());
+                        args.PutString("id", option.Key.riderID.ToString());
                         args.PutString("location", option.Value.Position.Latitude.ToString() + "," + option.Value.Position.Longitude.ToString());
                         FragmentTransaction transaction = FragmentManager.BeginTransaction();
                         UserProfileFragment dialog = new UserProfileFragment();
@@ -166,8 +166,8 @@ namespace mRides_app.Activities
                     {
                         pathURL = ("https://maps.googleapis.com/maps/api/directions/json?" +
                        "origin=" + originMarker.Position.Latitude + "," + originMarker.Position.Longitude +
-                       "&destination=" + destinationData.routes[0].legs[destinationData.routes[0].legs.Count - 1].end_location.lat + "," +
-                       destinationData.routes[0].legs[destinationData.routes[0].legs.Count - 1].end_location.lng + waypointString +
+                       "&destination=" + destinationMarker.Position.Latitude + "," +
+                      destinationMarker.Position.Longitude + waypointString +
                        "&key=" + googleApiKey);
                     }
 
@@ -244,8 +244,8 @@ namespace mRides_app.Activities
             try
             {
                 ApplicationInfo info = PackageManager.GetApplicationInfo("com.google.android.apps.maps", 0);
-                Intent intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse("http://maps.google.com/maps?" + "saddr=" + User.currentUser.latitude + "," +
-                User.currentUser.longitude + "&daddr=" + latitude + "," + longitude));
+                Intent intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse("http://maps.google.com/maps?" + "saddr=" + originMarker.Position.Latitude + "," +
+                originMarker.Position.Longitude + "&daddr=" + latitude + "," + longitude));
                 intent.SetClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
                 StartActivity(intent);
             }
@@ -279,6 +279,10 @@ namespace mRides_app.Activities
                         {
                             JsonSerializer serializer = new JsonSerializer();
                             destinationData = serializer.Deserialize<DestinationJSON>(jsonReader);
+
+                            ConsoleMapper.getInstance().setDistanceTravelled(Int32.Parse(Intent.GetStringExtra("id")), (double)destinationData.routes[0].legs[0].distance.value);
+                            ConsoleMapper.getInstance().setDurationTime(Int32.Parse(Intent.GetStringExtra("id")), (long)destinationData.routes[0].legs[0].duration.value);
+
                             if (destinationData != null)
                             {
                                 directionList = getDirectionList(destinationData.routes[0].overview_polyline);

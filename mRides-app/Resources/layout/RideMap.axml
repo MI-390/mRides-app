@@ -7,6 +7,6 @@
         android:name="com.google.android.gms.maps.MapFragment"
         android:id="@+id/rideMap"
         android:layout_width="match_parent"
-        android:layout_height="551.0dp"
-        android:layout_marginTop="0.0dp" />
+        android:layout_height="match_parent"
+        />
 </LinearLayout>
