@@ -99,7 +99,7 @@
 
   <!-- STRINGS FOR USER PROFILE FRAGMENT  --> 
   <string name="viewUserProfile">View Profile</string>
-  <string name ="reviewUser">Review</string>
+  <string name ="reviewUser">Dropped</string>
   <string name="message">Chat</string>
   
   

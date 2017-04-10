@@ -256,6 +256,28 @@ namespace mRides_app.Activities
         }
 
         /// <summary>
+        /// This method is used to remove a rider from the map after being dropped
+        /// </summary>
+        /// <param name="id">The id of the rider</param>
+        public void droppedUser(int id)
+        {
+            RiderRequest riderToRemove = null;
+            foreach (KeyValuePair<RiderRequest, Marker> option in ridersOnMap)
+            {
+                if (option.Key.riderID == id)
+                {
+                    riderToRemove = option.Key;
+                }
+            }
+
+            if (riderToRemove != null)
+            {
+                ridersOnMap[riderToRemove].Visible = false;
+                ridersOnMap.Remove(riderToRemove);
+            }
+        }
+
+        /// <summary>
         /// After the origin and destination were selected, setDestinationData gets asynchronously in JSON format
         /// the response from the Google Web Service DirectionAPI.
         /// </summary>
