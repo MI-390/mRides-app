@@ -270,6 +270,70 @@
           <source>You have declined the match</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Vous avez diminué le match</target>
         </trans-unit>
+        <trans-unit id="modifyButton" translate="yes" xml:space="preserve">
+          <source>Modify destination</source>
+          <target state="new">Modify destination</target>
+        </trans-unit>
+        <trans-unit id="confirmButton" translate="yes" xml:space="preserve">
+          <source>Confirm ride request</source>
+          <target state="new">Confirm ride request</target>
+        </trans-unit>
+        <trans-unit id="origin" translate="yes" xml:space="preserve">
+          <source>Origin</source>
+          <target state="new">Origin</target>
+        </trans-unit>
+        <trans-unit id="google_not_installed" translate="yes" xml:space="preserve">
+          <source>Google Maps is not installed</source>
+          <target state="new">Google Maps is not installed</target>
+        </trans-unit>
+        <trans-unit id="custom_location" translate="yes" xml:space="preserve">
+          <source>Custom location</source>
+          <target state="new">Custom location</target>
+        </trans-unit>
+        <trans-unit id="current_location" translate="yes" xml:space="preserve">
+          <source>Current location</source>
+          <target state="new">Current location</target>
+        </trans-unit>
+        <trans-unit id="ride_request_location" translate="yes" xml:space="preserve">
+          <source>Location during ride request</source>
+          <target state="new">Location during ride request</target>
+        </trans-unit>
+        <trans-unit id="location_question" translate="yes" xml:space="preserve">
+          <source>Do you want to use your current location or </source>
+          <target state="new">Do you want to use your current location or </target>
+        </trans-unit>
+        <trans-unit id="set_origin" translate="yes" xml:space="preserve">
+          <source>Do you want to set your origin to </source>
+          <target state="new">Do you want to set your origin to </target>
+        </trans-unit>
+        <trans-unit id="create_newride" translate="yes" xml:space="preserve">
+          <source>Create a new ride</source>
+          <target state="new">Create a new ride</target>
+        </trans-unit>
+        <trans-unit id="choose_pickup" translate="yes" xml:space="preserve">
+          <source>choose a pick up location</source>
+          <target state="new">choose a pick up location</target>
+        </trans-unit>
+        <trans-unit id="choose_start" translate="yes" xml:space="preserve">
+          <source>choose a start location</source>
+          <target state="new">choose a start location</target>
+        </trans-unit>
+        <trans-unit id="choose_destination" translate="yes" xml:space="preserve">
+          <source>To get started, choose your destination.</source>
+          <target state="new">To get started, choose your destination.</target>
+        </trans-unit>
+        <trans-unit id="set_destination" translate="yes" xml:space="preserve">
+          <source>Do you want to set your destination to </source>
+          <target state="new">Do you want to set your destination to </target>
+        </trans-unit>
+        <trans-unit id="yes" translate="yes" xml:space="preserve">
+          <source>Yes</source>
+          <target state="new">Yes</target>
+        </trans-unit>
+        <trans-unit id="no" translate="yes" xml:space="preserve">
+          <source>No</source>
+          <target state="new">No</target>
+        </trans-unit>
       </group>
     </body>
   </file>
