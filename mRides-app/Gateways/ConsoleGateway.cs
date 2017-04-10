@@ -45,6 +45,7 @@ namespace mRides_app.Gateways
         /// <returns>List of Request that matches the request of the rider</returns>
         public List<Request> FindDrivers(Request newRequest)
         {
+
             // Create a new rest client
             var client = new RestClient()
             {
@@ -73,7 +74,13 @@ namespace mRides_app.Gateways
                 return responseData.requests;
             }
         }
-        
+        /// <summary>
+        /// This method returns a user object given its user ID.
+        /// </summary>
+        public Request GetRequestById(int requestId)
+        {
+            return SendGetWithUrlSegment<Request>(ApiEndPointUrl.getRequestById, "id", requestId.ToString());
+        }
         /// <summary>
         /// This method is used to find a list of rides that match the criteria
         /// of a request made by a driver.
@@ -146,5 +153,38 @@ namespace mRides_app.Gateways
             };
             return SendPost<bool>(ApiEndPointUrl.acceptConfirm, confirmationAcceptance, true);
         }
+
+        /// <summary>
+        /// Sets the distance travelled in a ride in order to keep track
+        /// of ride metrics.
+        /// </summary>
+        /// <param name="rideId">ID of the ride in question</param>
+        /// <param name="distanceMetric">Value of the distance travelled</param>
+        public void setDistanceTravelled(int rideID, double distanceMetric)
+        {
+            object objectSent = new
+            {
+                rideId = rideID,
+                distanceTravelled = distanceMetric
+            };
+            SendPost<object>(ApiEndPointUrl.setDistanceTravelled, objectSent, false);
+        }
+
+        /// <summary>
+        /// Sets the duration of travel in a ride in order to keep track
+        /// of ride metrics.
+        /// </summary>
+        /// <param name="rideId">ID of the ride in question</param>
+        /// <param name="durationMetric">Value of the duration of travel</param>
+        public void setDurationTime(int rideID, long durationMetric)
+        {
+            object objectSent = new
+            {
+                rideId = rideID,
+                duration = durationMetric
+            };
+            SendPost<object>(ApiEndPointUrl.setDuration, objectSent, false);
+        }
+
     }
 }

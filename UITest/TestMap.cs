@@ -13,6 +13,10 @@ using mRides_app.Models;
 
 namespace UITests
 {
+    /// <summary>
+    /// Class to test the UI of the map. Note that not everything can be tested automatically since
+    /// Google Maps API were used and elements on the map cannot be accessed via UI tests calls
+    /// </summary>
     [TestFixture]
     public class TestMap
     {
@@ -21,31 +25,33 @@ namespace UITests
         [SetUp]
         public void BeforeEachTest()
         {
-            // TODO: If the Android app being tested is included in the solution then open
-            // the Unit Tests window, right click Test Apps, select Add App Project
-            // and select the app projects that should be tested.
             app = ConfigureApp
             .Android
             .ApkFile("D:/Projects/mRides-app/mRides-app/bin/Release//mRides_app.mRides_app-Signed.apk") //CHANGE THIS APK PATH
             .EnableLocalScreenshots().StartApp();
-            UserMapper userMapper = UserMapper.getInstance();
-            User user = userMapper.GetUserByFacebookId(113083069215300);
-            User.currentUser = user;
-
         }
 
+        /// <summary>
+        /// Method to test that drive mode screen can be opened successfully
+        /// </summary>
         [Test]
         public void EnterDriveMode()
         {
-            app.WaitForElement(c => c.Marked("loginButton"));
-            app.Invoke("StartActivitySix");
+            app.Invoke("StartEnterDrivingMode");
         }
 
+        /// <summary>
+        /// Method to test that Map activity can be opened successfully
+        /// </summary>
         [Test]
         public void OpenMap()
         {
-            app.WaitForElement(c => c.Marked("loginButton"));
-            app.Invoke("StartActivityTwo");
+            app.Invoke("StartMainMenuActivity");
+            app.WaitForElement(c => c.Marked("createRideButton"));
+            app.Tap(c => c.Marked("createRideButton"));
+            app.WaitForElement(c => c.Marked("alertTitle"));
+            app.Tap(c => c.Marked("button1"));
+            app.WaitForElement(c => c.Marked("place_autocomplete_search_button"));
         }
 
     }

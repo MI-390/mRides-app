@@ -22,30 +22,33 @@ namespace UITest
     //
     // To run all the tests in Visual Studio, open the app with the emulator in 'Release' mode
     // Click on 'Test' tab -> 'Run' -> 'All tests'
+    /// <summary>
+    /// Class for testing UI of Main Activity (login page)
+    /// </summary>
     [TestFixture]
     public class TestFacebookAuthentication
     {
         AndroidApp app;
 
+        /// <summary>
+        /// Method that is invoked before the test. A pre-existing user 'David' is used for testing purpose.
+        /// </summary>
         [SetUp]
         public void BeforeEachTest()
         {
-            // TODO: If the Android app being tested is included in the solution then open
-            // the Unit Tests window, right click Test Apps, select Add App Project
-            // and select the app projects that should be tested.
             app = ConfigureApp
             .Android
             .ApkFile("D:/Projects/mRides-app/mRides-app/bin/Release//mRides_app.mRides_app-Signed.apk") //CHANGE THIS APK PATH
             .EnableLocalScreenshots().StartApp();
-            // Set up the user to David
-            UserMapper userMapper = UserMapper.getInstance();
-            User user = userMapper.GetUserByFacebookId(113083069215300);
-            User.currentUser = user;
         }
 
+        /// <summary>
+        /// Method to test Facebook login using a pre-made user's credentials (David)
+        /// </summary>
         [Test]
         public void FacebookLogin()
         {
+            Thread.Sleep(3000);
             app.WaitForElement(c => c.Marked("loginButton"));
             app.Tap(c => c.Marked("loginButton"));
             Thread.Sleep(3000);
@@ -56,7 +59,7 @@ namespace UITest
             app.ScrollDownTo(c => c.Css("input#u_0_2"));
             app.EnterText(c => c.Css("input#u_0_2"), "mi-390");
             app.PressEnter();
-            app.WaitForElement(c => c.Marked("place_autocomplete_search_input"));
+            app.WaitForElement(c => c.Marked("myProfileButton"));
         }
     }
 }

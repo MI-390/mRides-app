@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:padding="8dp">
+    
+  <RelativeLayout
+          android:id="@+id/relativelayout"
+          android:layout_width="60dp"
+          android:layout_height="60dp" android:layout_alignParentTop="true"
+    >
+
+    <ImageView
+            android:id="@+id/myImageView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:src="@drawable/map_request"
+            android:scaleType="fitXY"
+        />
+
+    <TextView
+            android:id="@+id/ride_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/myImageView"
+            android:layout_alignTop="@id/myImageView"
+            android:layout_alignRight="@id/myImageView"
+            android:layout_alignBottom="@id/myImageView"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:text="10"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:textSize="22dip"/>
+
+  </RelativeLayout>
+  <LinearLayout
+      android:id="@+id/Text"
+      android:orientation="vertical"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:paddingLeft="20dip">
+    <TextView
+            android:id="@+id/driver_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#464646"
+            android:text="John DEE"
+            android:textSize="20dip"
+            android:paddingLeft="38dip"/>
+
+    <TextView
+            android:id="@+id/from"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#A9A9A9"
+            android:text="From:"
+            android:textSize="18dip"
+            android:paddingLeft="38dip"/>
+    <TextView
+            android:id="@+id/to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#A9A9A9"
+            android:text="To:"
+            android:textSize="18dip"
+            android:paddingLeft="38dip"/>
+
+  </LinearLayout>
+
+</RelativeLayout>

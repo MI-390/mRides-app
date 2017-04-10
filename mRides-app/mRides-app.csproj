@@ -212,14 +212,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\RequestListActivity.cs" />
     <Compile Include="Activities\MainMenuActivity.cs" />
     <Compile Include="Activities\MessagingActivity.cs" />
+    <Compile Include="Activities\RideActivity.cs" />
     <Compile Include="Activities\SplashActivity.cs" />
     <Compile Include="Cache\LocalDatabase\MRidesLocalDatabase.cs" />
     <Compile Include="Cache\LocalDataGateways\UserLocalDataGateway.cs" />
     <Compile Include="Cache\UserCache.cs" />
     <Compile Include="Activities\ChatListActivity.cs" />
     <Compile Include="Activities\ChatActivity.cs" />
+    <Compile Include="RequestListAdapter.cs" />
     <Compile Include="ChatListAdapter.cs" />
     <Compile Include="Cache\MemoryCache\UserFacebookProfilePictureCache.cs" />
     <Compile Include="Constants\ActivityNames.cs" />
@@ -258,7 +261,7 @@
     <Compile Include="Tasks\FindMatchAsyncTask.cs" />
     <Compile Include="Tasks\GetReviewsAverageAsyncTask.cs" />
     <Compile Include="Tasks\Callbacks\IOnFindMatchCompleteCallback.cs" />
-    <Compile Include="UserCancelRideActivity.cs" />
+    <Compile Include="Activities\UserCancelRideActivity.cs" />
     <Compile Include="UserProfileFeedbackAdapter.cs" />
     <Compile Include="Fragments\UserProfileFragment.cs" />
     <Compile Include="Fragments\UserTypeFragment.cs" />
@@ -314,6 +317,7 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\ChatRow.axml">
+      <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\UserCancelRide.axml">
       <SubType>Designer</SubType>
@@ -338,6 +342,15 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\MainMenu.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\RequestList.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\RequestRow.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\RideMap.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -437,7 +450,9 @@
     <AndroidResource Include="Resources\drawable\trashcanCancel.png" />
     <AndroidResource Include="Resources\drawable\loyolaTest.PNG" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\map_request.png" />
+  </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\smsicongreen.png" />
   </ItemGroup>
