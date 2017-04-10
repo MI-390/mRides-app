@@ -19,8 +19,15 @@ using Android.Graphics.Drawables;
 namespace mRides_app
 {
     [Activity(Label = "MainMenuActivity")]
+    /// <summary>
+    /// Class that corresponds to the main menu of the application.
+    /// </summary>
     public class MainMenuActivity : Activity
     {
+        /// <summary>
+        /// Method that is invoked upon the start of this activity.
+        /// </summary>
+        /// <param name="bundle">Variable used for passing data between activities.</param>
         protected override void OnCreate(Bundle savedInstanceState)
         {
             UserMapper.getInstance().setTheme(this);

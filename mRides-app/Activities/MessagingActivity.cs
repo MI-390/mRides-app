@@ -17,10 +17,18 @@ using Android.Util;
 namespace mRides_app
 {
     [Activity(Label = "MessagingActivity")]
+    /// <summary>
+    /// Activity that corresponds to the notification services of the application.
+    /// </summary>
     public class MessagingActivity : Activity
     {
         TextView msgText;
         const string TAG = "MessagingActivity";
+
+        /// <summary>
+        /// Method that is invoked upon the start of this activity.
+        /// </summary>
+        /// <param name="bundle">Variable used for passing data between activities.</param>
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
@@ -45,6 +53,11 @@ namespace mRides_app
             };
         }
 
+
+        /// <summary>
+        /// Method that determines whether the current user has Google Play Services installed. 
+        /// </summary>
+        /// <returns>Binary indicator of whether or not the device supports Google Play Services.</returns>
         public bool IsPlayServicesAvailable()
         {
             int resultCode = GoogleApiAvailability.Instance.IsGooglePlayServicesAvailable(this);
