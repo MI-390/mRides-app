@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:background="@drawable/background_mrides"
+    android:background="#ffffff"
     android:minWidth="25px"
     android:minHeight="25px">
 <!--My Rides-->
@@ -16,7 +16,7 @@
         android:layout_height="68.5dp"
         android:id="@+id/linearLayout1">
         <TextView
-            android:text="MY RIDES"
+            android:text="Driver"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_width="match_parent"
             android:layout_height="25.5dp"
@@ -34,11 +34,11 @@
         android:layout_height="56.5dp"
         android:id="@+id/linearLayout1">
         <TextView
-            android:text="Select the rides you wish to cancel "
+            android:text="Driver Name "
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="37.5dp"
-            android:id="@+id/textView1"
+            android:id="@+id/driver_name"
             android:gravity="center"
             android:layout_marginTop="19.5dp"
             android:textColor="#444444" />
@@ -60,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="5dp">
                 <TextView
                     android:text="Riders"
                     android:textAppearance="?android:attr/textAppearanceMedium"
@@ -73,7 +73,6 @@
                     android:layout_marginTop="0dp"
                     android:backgroundTint="#00000000"
                     android:shadowColor="#00000000"
-                    android:layout_marginBottom="15.0dp"
                     android:textStyle="bold"
                     android:textColor="#ffffff" />
             </FrameLayout>
@@ -82,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="5dp">
                 <TextView
                     android:text="Pick-up location"
                     android:textAppearance="?android:attr/textAppearanceMedium"
@@ -95,7 +94,6 @@
                     android:layout_marginTop="0dp"
                     android:backgroundTint="#00000000"
                     android:shadowColor="#00000000"
-                    android:layout_marginBottom="15.0dp"
                     android:textColor="#ffffff"
                     android:textStyle="bold"
                     android:fontFamily="helvetica" />
@@ -105,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="5dp">
                 <TextView
                     android:text="Cancel "
                     android:textAppearance="?android:attr/textAppearanceMedium"
@@ -118,7 +116,6 @@
                     android:layout_marginTop="0dp"
                     android:backgroundTint="#00000000"
                     android:shadowColor="#00000000"
-                    android:layout_marginBottom="15.0dp"
                     android:textColor="#ffffff"
                     android:textStyle="bold" />
             </FrameLayout>
@@ -151,18 +148,11 @@
             android:layout_gravity="center"
             android:layout_marginBottom="5.5dp"
             android:stateListAnimator="@null" />
-        <TextView
-            android:text="or"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView2"
-            android:gravity="center"
-            android:layout_marginBottom="7.0dp" />
         <Button
-            android:text="skip"
+            android:text="Start Ride"
             android:layout_width="86.0dp"
             android:layout_height="28.5dp"
-            android:id="@+id/skipButton"
+            android:id="@+id/start_ride"
             android:layout_gravity="center"
             android:background="#92d36e"
             android:layout_marginBottom="26.5dp" />
