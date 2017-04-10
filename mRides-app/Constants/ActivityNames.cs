@@ -12,6 +12,9 @@ using Android.Widget;
 
 namespace mRides_app.Constants
 {
+    /// <summary>
+    /// Class that corresponds to activity constants used throughout the application.
+    /// </summary>
     public class ActivityNames
     {
         public static string MainActivity { get { return "Main Activity"; } }
