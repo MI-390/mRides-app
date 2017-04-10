@@ -1,0 +1,4 @@
+var namespacem_rides__app_1_1_cache_1_1_memory_cache =
+[
+    [ "UserFacebookProfilePictureCache", "classm_rides__app_1_1_cache_1_1_memory_cache_1_1_user_facebook_profile_picture_cache.html", "classm_rides__app_1_1_cache_1_1_memory_cache_1_1_user_facebook_profile_picture_cache" ]
+];

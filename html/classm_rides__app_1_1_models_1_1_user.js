@@ -1,0 +1,26 @@
+var classm_rides__app_1_1_models_1_1_user =
+[
+    [ "PREFERENCE_GENDER_ANY", "classm_rides__app_1_1_models_1_1_user.html#acfaac26cbd7903a4b809a8d5efd8455b", null ],
+    [ "PREFERENCE_GENDER_FEMALE", "classm_rides__app_1_1_models_1_1_user.html#ae4d11ddeb709a2891cc1675abb0505d5", null ],
+    [ "PREFERENCE_GENDER_MALE", "classm_rides__app_1_1_models_1_1_user.html#a9a23882cc47d142f04b3bcb72007b497", null ],
+    [ "currentType", "classm_rides__app_1_1_models_1_1_user.html#a4746bc56e025a7c56de8bf539837b15b", null ],
+    [ "currentUser", "classm_rides__app_1_1_models_1_1_user.html#a2545598d24dc97e461dcad95a27aae51", null ],
+    [ "facebookID", "classm_rides__app_1_1_models_1_1_user.html#a9dd95d8f1e73b4a69bb3095e1f73187a", null ],
+    [ "firstName", "classm_rides__app_1_1_models_1_1_user.html#a0bb6effe7877b787242cd9fe7898b2da", null ],
+    [ "gender", "classm_rides__app_1_1_models_1_1_user.html#a33a7bc7061b76ab6d38293e01e740051", null ],
+    [ "genderPreference", "classm_rides__app_1_1_models_1_1_user.html#a9dd873350be9e2e349c2445d67b38f40", null ],
+    [ "gsd", "classm_rides__app_1_1_models_1_1_user.html#ad819bd3a26fb24b68f6ae2d696499f2b", null ],
+    [ "hasLuggage", "classm_rides__app_1_1_models_1_1_user.html#a66dbec932438515ec3b3e44de9390238", null ],
+    [ "hasPet", "classm_rides__app_1_1_models_1_1_user.html#a10137663dda99fe933d1dee3c60f74b6", null ],
+    [ "id", "classm_rides__app_1_1_models_1_1_user.html#a9b50e60db8eb22e248a90d29cea24686", null ],
+    [ "isHandicap", "classm_rides__app_1_1_models_1_1_user.html#a3f5af4c8e04a6e099b758ee671bf1d90", null ],
+    [ "isSmoker", "classm_rides__app_1_1_models_1_1_user.html#a2f1034afa286850e9f337200f00a75e1", null ],
+    [ "lastName", "classm_rides__app_1_1_models_1_1_user.html#a4bc2e41df9654de1b2e8763f680f7e56", null ],
+    [ "latitude", "classm_rides__app_1_1_models_1_1_user.html#a91533cfb55a970f4b0e43a12a13d8a24", null ],
+    [ "longitude", "classm_rides__app_1_1_models_1_1_user.html#a1ec6131ed1cd8fb9fc79b0bc55a7f5d1", null ],
+    [ "prefferedLanguage", "classm_rides__app_1_1_models_1_1_user.html#a187a1a164255f32ad5e76c48e6c6f700", null ],
+    [ "requestAsRider", "classm_rides__app_1_1_models_1_1_user.html#a3e1578a293dca417a9f462f87510a083", null ],
+    [ "requestsAsDriver", "classm_rides__app_1_1_models_1_1_user.html#ac99f22d3de12c8ca2e44200e90cfd19b", null ],
+    [ "ridesAsDriver", "classm_rides__app_1_1_models_1_1_user.html#a46a6334e38738b1544d7d6d302f39ee1", null ],
+    [ "ridesAsRider", "classm_rides__app_1_1_models_1_1_user.html#a7121effc2dceea4a592a69b9a41a542e", null ]
+];

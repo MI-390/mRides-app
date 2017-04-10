@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UITests", "UITest\UITests.c
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{F69BC183-4326-44E3-9065-6C9B2C4367D0}"
 EndProject
-Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "mRidesDocumentation", "mRidesDocumentation\mRidesDocumentation.shfbproj", "{EE65D60D-AA02-47C5-870E-B857E1572B54}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,10 +31,6 @@ Global
 		{F69BC183-4326-44E3-9065-6C9B2C4367D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F69BC183-4326-44E3-9065-6C9B2C4367D0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F69BC183-4326-44E3-9065-6C9B2C4367D0}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{EE65D60D-AA02-47C5-870E-B857E1572B54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EE65D60D-AA02-47C5-870E-B857E1572B54}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EE65D60D-AA02-47C5-870E-B857E1572B54}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EE65D60D-AA02-47C5-870E-B857E1572B54}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
