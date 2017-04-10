@@ -247,7 +247,7 @@ namespace mRides_app
                 }
                 else
                 {
-                    consoleMapper.Confirm(this.matchedRequests[currentMatchedUserIndex].ID, this.userRequest.ID);
+                    consoleMapper.Confirm(this.userRequest.ID, this.matchedRequests[currentMatchedUserIndex].ID);
                     this.Done();
                 }
             }

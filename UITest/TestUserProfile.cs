@@ -13,63 +13,68 @@ using mRides_app.Models;
 
 namespace UITest
 {
+    /// <summary>
+    /// Class to test the UI of the UserProfile activity
+    /// </summary>
     [TestFixture]
     public class TestUserProfile
     {
         AndroidApp app;
 
+        /// <summary>
+        /// Method that is invoked before the test. A pre-existing user 'David' is used for testing purpose.
+        /// </summary>
         [SetUp]
         public void BeforeEachTest()
         {
-            // TODO: If the Android app being tested is included in the solution then open
-            // the Unit Tests window, right click Test Apps, select Add App Project
-            // and select the app projects that should be tested.
             app = ConfigureApp
             .Android
-            .ApkFile("D:/Projects/mRides-app/mRides-app/bin/Release//mRides_app.mRides_app-Signed.apk") //CHANGE THIS APK PATH
+            .ApkFile("D:/Projects/mRides-app/mRides-app/bin/Release//mRides_app.mRides_app-Signed.apk")
             .EnableLocalScreenshots().StartApp();
-            UserMapper userMapper = UserMapper.getInstance();
-            User user = userMapper.GetUserByFacebookId(113083069215300);
-            User.currentUser = user;
-
         }
 
+        /// <summary>
+        /// Test method to verify that the required elements are present on the profile, such as the user name,
+        /// the gender, the profile picture, the rating bar, the GSD
+        /// </summary>
         [Test]
-        public void IsNameVisibleOnProfile()
+        public void VerifyAllUserProfileElements()
         {
-            app.Invoke("StartActivityFour");
+            app.Invoke("StartMainMenuActivity");
+            app.WaitForElement(c => c.Marked("myProfileButton"));
+            app.Tap(c => c.Marked("myProfileButton"));
+            
+            // Visibility of user name
             app.WaitForElement("userName");
             app.Flash(c => c.Marked("userName"));
-        }
 
-        [Test]
-        public void IsGenderVisibleOnProfile()
-        {
-            app.Invoke("StartActivityFour");
+            // Visibility of gender
             app.WaitForElement(c => c.Marked("genderImage"));
             app.Flash(c => c.Marked("genderImage"));
-        }
 
-        [Test]
-        public void UserProfilePicture()
-        {
-            app.Invoke("StartActivityFour");
+            // Visibility of profile picture
             app.WaitForElement(c => c.Marked("userPhoto"));
             app.Flash(c => c.Marked("userPhoto"));
-        }
 
-        [Test]
-        public void IsRatingsVisibleOnProfile()
-        {
-            app.Invoke("StartActivityFour");
+            // Visibility of the rating bar
             app.WaitForElement(c => c.Marked("ratingBar"));
             app.Flash("ratingBar");
+
+            // Visibility of the GSD (Good Samaritan Dollar)
+            app.WaitForElement("userProfileGSD");
+            app.Flash(c => c.Marked("userProfileGSD"));
         }
 
+        /// <summary>
+        /// Test method to verify the feedbacks are on the user profile
+        /// </summary>
         [Test]
-        public void isFeedbackVisibleOnProfile()
+        public void VerifyFeedbackOnProfile()
         {
-            app.Invoke("StartActivityFour");
+            app.Invoke("StartMainMenuActivity");
+            app.WaitForElement(c => c.Marked("myProfileButton"));
+            app.Tap(c => c.Marked("myProfileButton"));
+
             app.WaitForElement(c => c.Marked("userProfileListView"));
             app.Flash("feedbackDateProfileFragment");
             app.Flash("feedbackFragmentUserName");
