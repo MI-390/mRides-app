@@ -26,9 +26,8 @@ using System.Threading.Tasks;
 
 namespace mRides_app
 {
-
     /// <summary>
-    /// Implementation of the chat activity
+    /// Activity class for the list of chats
     /// </summary>
     [Activity(Label = "ChatListActivity", Icon = "@drawable/icon", Theme = "@style/Theme.AppCompat.Light.NoActionBar")]
     public class ChatListActivity : AppCompatActivity
@@ -36,6 +35,11 @@ namespace mRides_app
         private FirebaseClient firebase;
         ListView listView;
         List<ChatList> chatList = new List<ChatList>();
+
+        /// <summary>
+        /// Method invoked when activity is first created
+        /// </summary>
+        /// <param name="bundle">A Bundle object</param>
         protected override async void OnCreate(Bundle bundle)
         {
             UserMapper.getInstance().setTheme(this);
@@ -48,7 +52,7 @@ namespace mRides_app
             getFirebase();
 
             listView = FindViewById<ListView>(Resource.Id.List); // get reference to the ListView in the layout
-                                                                 // populate the listview with data
+            // populate the listview with data
             listView.Adapter = new ChatListAdapter(this, chatList);
             listView.ItemClick += OnListItemClick;  // to be defined
 
@@ -77,6 +81,12 @@ namespace mRides_app
             };
 
         }
+
+        /// <summary>
+        /// Method invoked when an item of the list is clicked
+        /// </summary>
+        /// <param name="sender">A sender object</param>
+        /// <param name="e">An ItemClickEvent argument</param>
         void OnListItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
             var listView = sender as ListView;
@@ -87,16 +97,18 @@ namespace mRides_app
             userID = cl.user1.id.ToString();
             if (User.currentUser.id == cl.user1.id)
                 userID = cl.user2.id.ToString();
-        
 
             i.PutExtra("id", userID);
             StartActivity(i);
-            //Android.Widget.Toast.MakeText(this, t.Heading, Android.Widget.ToastLength.Short).Show();
         }
+
+        /// <summary>
+        /// Asynchronous method that will get all the chats related to two users from Firebase
+        /// </summary>
+        /// <returns>An integer</returns>
         public async Task<int> getFirebase()
         {
             firebase = new FirebaseClient(GetString(Resource.String.firebase_database_url));
-            //chatList.Clear();
             var allObjects = firebase.Child("").OnceAsync<ChatList>();
             var ss = firebase.Child("3 & 8").OnceAsync<object>();
             var f = 2;
@@ -111,8 +123,6 @@ namespace mRides_app
 
             }
             return 2;
-           
-            
         }
     }
 }

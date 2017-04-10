@@ -17,7 +17,7 @@
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -234,9 +234,7 @@
     <Compile Include="Activities\MatchActivity.cs" />
     <Compile Include="Fragments\LeaveReviewFragment.cs" />
     <Compile Include="Activities\MapActivity.cs" />
-    <Compile Include="Authentication\Facebook.cs" />
     <Compile Include="Activities\MainActivity.cs" />
-    <Compile Include="Activities\MessagingActivity.cs" />
     <Compile Include="MessagingService\FirebaseMessagingService.cs" />
     <Compile Include="Models\ChatList.cs" />
     <Compile Include="Models\Feedback.cs" />
@@ -265,7 +263,6 @@
     <Compile Include="Fragments\UserTypeFragment.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Activities\UserProfileActivity.cs" />
-    <Compile Include="Feedback\FeedbackTest.cs" />
     <Compile Include="Fragments\TestFragments.cs" />
   </ItemGroup>
   <ItemGroup>

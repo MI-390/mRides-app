@@ -15,10 +15,10 @@ using mRides_app.Gateways;
 
 namespace UnitTests.Gateways
 {
-    /**
-     * This mapper class is only used for testing purposes in order to populate requests.
-     * It should never be used by the activities in the app.
-     */
+    /// <summary>
+    /// This mapper class is only used for testing purposes in order to populate requests.
+    /// It should never be used by the activities in the app.
+    /// </summary>
     public class RequestGateway : AbstractGateway
     {
         private RequestGateway() { }
@@ -36,9 +36,10 @@ namespace UnitTests.Gateways
         // CALLS TO REQUEST WEB API
         // ---------------------------------------------------------------------------
 
-        /**
-         * Create a request
-         */
+        /// <summary>
+        /// Method to create a request
+        /// </summary>
+        /// <param name="newRequest"></param>
         public void CreateRequest(Request newRequest)
         {
             newRequest.driverID = null;

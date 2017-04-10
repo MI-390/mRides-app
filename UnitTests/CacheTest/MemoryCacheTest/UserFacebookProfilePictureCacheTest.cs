@@ -8,9 +8,15 @@ using System.Net;
 
 namespace UnitTests
 {
+    /// <summary>
+    /// Testing class for the cache in terms of the User Facebook Profile Picture
+    /// </summary>
     [TestFixture]
     public class UserFacebookProfilePictureCacheTest
     {
+        /// <summary>
+        /// Set up method for testing
+        /// </summary>
         [SetUp]
         public void Setup()
         {

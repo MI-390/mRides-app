@@ -8,6 +8,9 @@ using static mRides_app.Models.Request;
 
 namespace UnitTests
 {
+    /// <summary>
+    /// Testing class for the ConsoleMapper
+    /// </summary>
     [TestFixture]
     public class ConsoleMapperTests
     {
@@ -22,6 +25,9 @@ namespace UnitTests
         // CONSOLE RELATED TESTS
         // -------------------------------------------------------------------
 
+        /// <summary>
+        /// Test method to find drivers
+        /// </summary>
         [Test]
         public void FindDrivers()
         {
@@ -46,6 +52,9 @@ namespace UnitTests
             Assert.True(requests != null && requests.Count > 0);
         }
 
+        /// <summary>
+        /// Test method to find riders
+        /// </summary>
         [Test]
         public void FindRiders()
         {
@@ -72,6 +81,9 @@ namespace UnitTests
             Assert.True(response != null && response.Count > 0);
         }
 
+        /// <summary>
+        /// Test method to confirm a request
+        /// </summary>
         [Test]
         public void Confirm()
         {

@@ -12,11 +12,19 @@ using Android.Widget;
 
 namespace mRides_app
 {
+    /// <summary>
+    /// Activity class used for UI testing purpose to open fragments
+    /// </summary>
     [Activity(Label = "TestFragments", MainLauncher = true)]
     public class TestFragments : Activity, IEditUserSelectionListener
     {
         string userType;
         int numberOfPeople;
+
+        /// <summary>
+        /// Method that is invoked upon creation of the activity
+        /// </summary>
+        /// <param name="savedInstanceState"></param>
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -44,6 +52,12 @@ namespace mRides_app
             };
         }
 
+        /// <summary>
+        /// Method that displays a message showing the usertype and number of people selected
+        /// from the UserTypeFragment
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="number"></param>
         public void updateUserSelection(string type, int number)
         {
             userType = type;
