@@ -71,6 +71,18 @@ namespace mRides_app.Gateways
         }
 
         /// <summary>
+        /// This method updates the settings of a user, given the user object. 
+        /// The updated settings include the preferences, first name, last name, 
+        /// and gender.
+        /// </summary>
+        /// <param name="userToUpdate"></param>
+        /// <returns></returns>
+        public bool UpdateUserSettings(User userToUpdate)
+        {
+            return SendPost<bool>(ApiEndPointUrl.updateUserSettings, userToUpdate, true);
+        }
+
+        /// <summary>
         /// Updates a fcm token of a user.
         /// </summary>
         public void UpdateFcmToken(string fcmToken)
