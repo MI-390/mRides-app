@@ -17,7 +17,7 @@ using Android.Graphics;
 namespace mRides_app
 {
     /// <summary>
-    /// Interface that will be used by MapActivity
+    /// Interface that will be used by MapActivity so that the fragment can pass information to it
     /// </summary>
     public interface IEditUserSelectionListener
     {
@@ -40,11 +40,11 @@ namespace mRides_app
         IEditUserSelectionListener listener;
 
         /// <summary>
-        /// Method for the creation of the fragment's view
+        /// Method invoked upon creation of the fragment
         /// </summary>
-        /// <param name="inflater"></param>
-        /// <param name="container"></param>
-        /// <param name="savedInstanceState"></param>
+        /// <param name="inflater">A LayoutInflater object</param>
+        /// <param name="container">A ViewGroup object</param>
+        /// <param name="savedInstanceState">A Bundle object</param>
         /// <returns></returns>
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {

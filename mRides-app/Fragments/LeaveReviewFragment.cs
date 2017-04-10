@@ -30,7 +30,13 @@ namespace mRides_app
         int rating;
         string review;
 
-        // Method that will be executed when the fragment is created
+        /// <summary>
+        /// Method that is invoked upon creation of the fragment
+        /// </summary>
+        /// <param name="inflater">A LayoutInflater</param>
+        /// <param name="container">A ViewGroup</param>
+        /// <param name="savedInstanceState">A Bundle</param>
+        /// <returns></returns>
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             Bundle args = Arguments;
@@ -64,12 +70,20 @@ namespace mRides_app
             return view;
         }
 
+        /// <summary>
+        /// Method invoked when activity is attached to the fragment
+        /// </summary>
+        /// <param name="activity"></param>
         public override void OnAttach(Activity activity)
         {
             base.OnAttach(activity);
         }
 
-        // Method that is called when the user clicks on 'Submit' button
+        /// <summary>
+        /// Method that is invoked when the user clicks on 'Submit' button
+        /// </summary>
+        /// <param name="sender">The sender object</param>
+        /// <param name="e">An EventArgs argument</param>
         void SubmitFeedback(object sender, EventArgs e)
         {
             // Get the review and rating
@@ -98,7 +112,11 @@ namespace mRides_app
             Toast.MakeText(Activity, "Thank you for leaving a feedback!", ToastLength.Short).Show();
         }
 
-        // Method that will close the feedback fragment after clicking the 'Close' button
+        /// <summary>
+        /// Method that will close the feedback fragment after clicking the 'Close' button
+        /// </summary>
+        /// <param name="sender">A sender object</param>
+        /// <param name="e">An EventArgs argument</param>
         void CloseFeedback(object sender, EventArgs e)
         {
             Dismiss();
