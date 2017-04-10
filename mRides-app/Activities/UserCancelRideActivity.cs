@@ -13,6 +13,7 @@ using Android.Widget;
 using Android.Support.V7.App;
 using mRides_app.Models;
 using mRides_app.Mappers;
+using mRides_app.Activities;
 
 namespace mRides_app
 {
@@ -23,7 +24,7 @@ namespace mRides_app
     public class UserCancelRideActivity : AppCompatActivity
     {
         ListView listView;
-        List<Request> ridesList = new List<Request>();
+        List<RiderRequest> ridesList = new List<RiderRequest>();
 
         /// <summary>
         /// Method that is called when the activity is created
@@ -35,7 +36,14 @@ namespace mRides_app
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.UserCancelRide);
             Button trashCanButton = FindViewById<Button>(Resource.Id.trashcanButton);
-            Button skipButton = FindViewById<Button>(Resource.Id.skipButton);
+            Button startRide = FindViewById<Button>(Resource.Id.start_ride);
+
+            startRide.Click += delegate
+            {
+                Intent i = new Intent(this, typeof(RideActivity));
+                i.PutExtra("id", Intent.GetStringExtra("id"));
+                StartActivity(i);
+            };
 
             DisplayRides();
 
@@ -90,10 +98,15 @@ namespace mRides_app
         private void DisplayRides()
         {
             ridesList.Clear();
-            int usrID = User.currentUser.id;
-            ridesList=UserMapper.getInstance().GetRequests(User.currentUser.id);
-            
-
+            int requestId = Convert.ToInt32(Intent.GetStringExtra("id"));
+            Request request=ConsoleMapper.getInstance().GetRequest(requestId);
+             
+            foreach(RiderRequest rr in request.riderRequests)
+            {
+                ridesList.Add(rr);
+            }
+            var driverName=FindViewById<TextView>(Resource.Id.driver_name);
+            driverName.Text =request.driver.firstName;
             listView = FindViewById<ListView>(Resource.Id.list_of_rides); // get reference to the ListView in the layout
             RidesAdapter adapter = new RidesAdapter(this, ridesList);
             listView.Adapter = new RidesAdapter(this, ridesList);

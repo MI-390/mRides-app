@@ -16,11 +16,19 @@ using Android.Util;
 
 namespace mRides_app
 {
+    /// <summary>
+    /// Activity class for Messaging
+    /// </summary>
     [Activity(Label = "MessagingActivity")]
     public class MessagingActivity : Activity
     {
         TextView msgText;
         const string TAG = "MessagingActivity";
+
+        /// <summary>
+        /// Method invoked upon creation of the activity
+        /// </summary>
+        /// <param name="bundle">A Bundle object</param>
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
@@ -45,6 +53,10 @@ namespace mRides_app
             };
         }
 
+        /// <summary>
+        /// Method to verify if Google Play Services is available
+        /// </summary>
+        /// <returns></returns>
         public bool IsPlayServicesAvailable()
         {
             int resultCode = GoogleApiAvailability.Instance.IsGooglePlayServicesAvailable(this);

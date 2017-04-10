@@ -8,6 +8,9 @@ using System.Threading;
 
 namespace UnitTests
 {
+    /// <summary>
+    /// Test class for UserMapper
+    /// </summary>
     [TestFixture]
     public class UserMapperTests
     {
@@ -22,10 +25,10 @@ namespace UnitTests
         // USER RELATED TESTS
         // -------------------------------------------------------------------
 
-        /**
-         * Test whether sending a POST request to the server to create a user is successful
-         * and a response is received. This does not test the content of the response.
-         */
+        /// <summary>
+        /// Test whether sending a POST request to the server to create a user is successful
+        /// and a response is received.This does not test the content of the response.
+        /// </summary>
         [Test]
         public void CreateUser()
         {
@@ -39,9 +42,9 @@ namespace UnitTests
             Assert.True(!response.isHandicap);
         }
 
-        /**
-         * Test whether we can retrieve a user by its Facebook id
-         */
+        /// <summary>
+        /// Test whether we can retrieve a user by its Facebook id
+        /// </summary>
         [Test]
         public void GetUserByFacebookId()
         {
@@ -68,10 +71,10 @@ namespace UnitTests
             Assert.True(response2.facebookID == facebookId);
         }
 
-        /**
-         * Test whether we are able to successfully send a request to the server to
-         * obtain information about a user. For now assume that there is a user in the database.
-         */
+        /// <summary>
+        /// Test whether we are able to successfully send a request to the server to
+        /// obtain information about a user.For now assume that there is a user in the database.
+        /// </summary>
         [Test]
         public void GetUser()
         {
@@ -79,23 +82,20 @@ namespace UnitTests
             Assert.True(response.id == 1);
         }
 
-        /**
-         * Test whether we are able to successfully get the reviews of a user
-         */
+        /// <summary>
+        /// Test whether we are able to successfully get the reviews of a user
+        /// </summary>
         [Test]
         public void GetReviews()
         {
             UserMapper userMapper = UserMapper.getInstance();
             List<Feedback> reviews = userMapper.GetReviews(2);
-
-            // TODO: Make a better test to ensure that this user actually
-            // has a review.
             Assert.True(reviews.Count > 0);
         }
 
-        /**
-         * Test whether we are able to leave a review
-         */
+        /// <summary>
+        /// Test whether we are able to leave a review
+        /// </summary>
         [Test]
         public void LeaveReview()
         {
@@ -183,9 +183,9 @@ namespace UnitTests
             Assert.True(successRiderToDriverFeedback);
         }
 
-        /**
-        * Test whether we are able to successfully get the gender of a user
-        */
+        /// <summary>
+        /// Test whether we are able to successfully get the gender of a user
+        /// </summary>
         [Test]
         public void GetGender()
         {
@@ -211,9 +211,9 @@ namespace UnitTests
             Assert.AreEqual(testGender, "female");
         }
 
-        /**
-        * Test whether we are able to successfully set the gender of a user
-        */
+        /// <summary>
+        /// Test whether we are able to successfully set the gender of a user
+        /// </summary>
         [Test]
         public void SetGender()
         {
@@ -240,9 +240,9 @@ namespace UnitTests
             Assert.AreEqual(testGender, "male");
         }
 
-        /**
-        * Test whether we are able to successfully get the GSD of a user
-        */
+        /// <summary>
+        /// Test whether we are able to successfully get the GSD of a user
+        /// </summary>
         [Test]
         public void GetGSD()
         {
@@ -264,14 +264,13 @@ namespace UnitTests
             };
 
             userMapper.CreateUser(aline);
-            //Thread.Sleep(5000);
             long testGSD = userMapper.GetGSD(88888);
             Assert.AreEqual(testGSD, 15);
         }
 
-        /**
-        * Test whether we are able to successfully set the GSD of a user
-        */
+        /// <summary>
+        /// Test whether we are able to successfully set the GSD of a user
+        /// </summary>
         [Test]
         public void SetGSD()
         {
@@ -293,12 +292,10 @@ namespace UnitTests
             };
 
             userMapper.CreateUser(aline);
-            //Thread.Sleep(5000);
             userMapper.setGSD(9999, 150);
             long testGSD = userMapper.GetGSD(9999);
             Assert.AreEqual(testGSD, 150);
         }
-
 
     }
 }
