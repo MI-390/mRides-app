@@ -58,6 +58,13 @@ namespace mRides_app.Activities
             //Get the ride request
             int requestId = Int32.Parse(Intent.GetStringExtra("id"));
             request = ConsoleMapper.getInstance().GetRequest(requestId);
+            //Convert Request to Ride via Json
+            Ride ride =JsonConvert.DeserializeObject<Ride>(JsonConvert.SerializeObject(request));
+            ride.ID = 0;
+            ride.UserRides = JsonConvert.DeserializeObject<List<UserRides>>(JsonConvert.SerializeObject(request.riderRequests));
+
+
+
             string[] splitLocationCoordinates = request.location.Split(',');
             string[] splitDestinationCoordinates = request.destination.Split(',');
             LatLng location = new LatLng(Double.Parse(splitLocationCoordinates[0]), Double.Parse(splitLocationCoordinates[1]));
