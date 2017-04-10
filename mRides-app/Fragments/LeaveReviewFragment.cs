@@ -16,8 +16,6 @@ using Android.Graphics;
 
 namespace mRides_app
 {
-
-
     /// <summary>
     /// Interface to allow the calling activity to get the data
     /// </summary>

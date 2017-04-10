@@ -17,7 +17,6 @@ namespace mRides_app
     public interface IStartDrivingModeListener
     {
         void enterDriverMode(double latitude, double longitude);
-        void droppedUser(int id);
     }
 
     class UserProfileFragment : DialogFragment
@@ -77,7 +76,6 @@ namespace mRides_app
             dialog.Arguments = args;
             FragmentTransaction transaction = FragmentManager.BeginTransaction();
             dialog.Show(transaction, "Leave review fragment");
-            listener.droppedUser(Int32.Parse(userID));
             Dismiss();
         }
 

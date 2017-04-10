@@ -30,7 +30,7 @@ using static mRides_app.Models.Request;
 namespace mRides_app.Activities
 {
     [Activity(Label = "RideActivity")]
-    public class RideActivity : Activity, IOnMapReadyCallback, IStartDrivingModeListener, ILeaveReviewListener
+    public class RideActivity : Activity, IOnMapReadyCallback, ILeaveReviewListener
     {
         private GoogleMap map;
         private Marker originMarker;
@@ -262,28 +262,6 @@ namespace mRides_app.Activities
         }
 
         /// <summary>
-        /// This method is used to remove a rider from the map after being dropped
-        /// </summary>
-        /// <param name="id">The id of the rider</param>
-        public void droppedUser(int id)
-        {
-            RiderRequest riderToRemove = null;
-            foreach (KeyValuePair<RiderRequest, Marker> option in ridersOnMap)
-            {
-                if (option.Key.riderID == id)
-                {
-                    riderToRemove = option.Key;
-                }
-            }
-
-            if (riderToRemove != null)
-            {
-                ridersOnMap[riderToRemove].Visible = false;
-                ridersOnMap.Remove(riderToRemove);
-            }
-        }
-
-        /// <summary>
         /// After the origin and destination were selected, setDestinationData gets asynchronously in JSON format
         /// the response from the Google Web Service DirectionAPI.
         /// </summary>
@@ -331,6 +309,21 @@ namespace mRides_app.Activities
         /// <param name="review">Review given</param>
         public void reviewWasMade(int userID, int rating, string review)
         {
+            RiderRequest riderToRemove = null;
+            foreach (KeyValuePair<RiderRequest, Marker> option in ridersOnMap)
+            {
+                if (option.Key.riderID == userID)
+                {
+                    riderToRemove = option.Key;
+                }
+            }
+
+            if (riderToRemove != null)
+            {
+                ridersOnMap[riderToRemove].Visible = false;
+                ridersOnMap.Remove(riderToRemove);
+            }
+
             foreach (UserRides ride in ride.UserRides)
             {
                 if (ride.RiderId == userID)
@@ -338,6 +331,14 @@ namespace mRides_app.Activities
                     ride.riderFeedback = review;
                     ride.riderStars = rating;
                 }
+            }
+
+            if (ridersOnMap.Count == 0)
+            {
+                ConsoleMapper.getInstance().createRide(ride);
+                ConsoleMapper.getInstance().deleteRequest(Int32.Parse(Intent.GetStringExtra("id")));
+                Intent i = new Intent(this, typeof(MainMenuActivity));
+                StartActivity(i);
             }
         }
     }
