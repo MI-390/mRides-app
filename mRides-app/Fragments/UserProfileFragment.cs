@@ -80,6 +80,7 @@ namespace mRides_app
             listener.droppedUser(Int32.Parse(userID));
             Dismiss();
         }
+
         void ChatButtonClicked(object sender, EventArgs e)
         {
             Intent i = new Intent(Context, typeof(ChatActivity));

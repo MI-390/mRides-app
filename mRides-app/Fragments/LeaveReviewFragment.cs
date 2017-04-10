@@ -16,6 +16,16 @@ using Android.Graphics;
 
 namespace mRides_app
 {
+
+
+    /// <summary>
+    /// Interface to allow the calling activity to get the data
+    /// </summary>
+    public interface ILeaveReviewListener
+    {
+        void reviewWasMade(int userID, int rating, string review);
+    }
+
     /// <summary>
     /// Fragment for leaving a review
     /// </summary>
@@ -25,7 +35,7 @@ namespace mRides_app
         Button submitButton;
         Button closeReview;
         EditText reviewEditText;
-
+        ILeaveReviewListener listener;
         int userID;
         int rating;
         string review;
@@ -67,6 +77,7 @@ namespace mRides_app
         public override void OnAttach(Activity activity)
         {
             base.OnAttach(activity);
+            listener = (ILeaveReviewListener)activity;
         }
 
         // Method that is called when the user clicks on 'Submit' button
@@ -91,7 +102,7 @@ namespace mRides_app
                 gsdAmount += 0; // Change this if necessary, for now GSD doesn't increase if rating is below 2/5
 
             UserMapper.getInstance().setGSD(userID, gsdAmount);
-
+            listener.reviewWasMade(userID, rating, review);
             Dismiss();
 
             // To debug

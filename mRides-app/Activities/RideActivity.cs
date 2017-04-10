@@ -30,7 +30,7 @@ using static mRides_app.Models.Request;
 namespace mRides_app.Activities
 {
     [Activity(Label = "RideActivity")]
-    public class RideActivity : Activity, IOnMapReadyCallback, IStartDrivingModeListener
+    public class RideActivity : Activity, IOnMapReadyCallback, IStartDrivingModeListener, ILeaveReviewListener
     {
         private GoogleMap map;
         private Marker originMarker;
@@ -40,6 +40,7 @@ namespace mRides_app.Activities
         private List<LatLng> directionList;
         private List<RiderRequest> riderRequestsList;
         private Dictionary<RiderRequest, Marker> ridersOnMap;
+        private Ride ride;
         private Android.Gms.Maps.Model.Polyline polyline;
         private const string googleApiKey = "AIzaSyAz9p6O99w8ZWkFUbaREJXmnj01Mpm19dA";
 
@@ -59,11 +60,9 @@ namespace mRides_app.Activities
             int requestId = Int32.Parse(Intent.GetStringExtra("id"));
             request = ConsoleMapper.getInstance().GetRequest(requestId);
             //Convert Request to Ride via Json
-            Ride ride =JsonConvert.DeserializeObject<Ride>(JsonConvert.SerializeObject(request));
+            ride =JsonConvert.DeserializeObject<Ride>(JsonConvert.SerializeObject(request));
             ride.ID = 0;
             ride.UserRides = JsonConvert.DeserializeObject<List<UserRides>>(JsonConvert.SerializeObject(request.riderRequests));
-
-
 
             string[] splitLocationCoordinates = request.location.Split(',');
             string[] splitDestinationCoordinates = request.destination.Split(',');
@@ -320,6 +319,24 @@ namespace mRides_app.Activities
                             }
                         }
                     }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Overriden interface method when a review was made from the fragment
+        /// </summary>
+        /// <param name="userID">Id of the user who made the review</param>
+        /// <param name="rating">Rating given</param>
+        /// <param name="review">Review given</param>
+        public void reviewWasMade(int userID, int rating, string review)
+        {
+            foreach (UserRides ride in ride.UserRides)
+            {
+                if (ride.RiderId == userID)
+                {
+                    ride.riderFeedback = review;
+                    ride.riderStars = rating;
                 }
             }
         }
