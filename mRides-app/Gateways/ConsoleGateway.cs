@@ -141,6 +141,11 @@ namespace mRides_app.Gateways
             return SendPost<bool>(ApiEndPointUrl.confirm, confirmation, true);
         }
 
+        public void createRide(Ride ride)
+        {
+            SendPost<Ride>(ApiEndPointUrl.createRide, ride, false);
+        }
+
         /// <summary>
         /// The other user already accepts the match, upon notifying this user,
         /// if the user also accepts to be match with the first user, this method

@@ -65,6 +65,10 @@ namespace mRides_app.Mappers
         {
              consoleGateway.deleteRequest(requestId);
         }
+        public void createRide(Ride ride)
+        {
+            consoleGateway.createRide(ride);
+        }
         /**
           * This method is used to find a list of rides that match the criteria
           * of a request made by a driver.
