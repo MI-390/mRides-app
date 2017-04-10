@@ -12,9 +12,15 @@ using mRides_app.Models;
 
 namespace UnitTests
 {
+    /// <summary>
+    /// Testing class for the User Local DataGateway
+    /// </summary>
     [TestFixture]
     public class UserLocalDataGatewayTest
     {
+        /// <summary>
+        /// Set up method for testing
+        /// </summary>
         [SetUp]
         public void Setup()
         {
@@ -39,6 +45,9 @@ namespace UnitTests
         // UNIT TESTS
         // -------------------------------------------------------------------------------------------------------------
         
+        /// <summary>
+        /// Test method for adding a user
+        /// </summary>
         [Test]
         public void AddUser()
         {
@@ -83,7 +92,9 @@ namespace UnitTests
             }
         }
 
-
+        /// <summary>
+        /// Test method for updating a user
+        /// </summary>
         [Test]
         public void UpdateUser()
         {
@@ -137,6 +148,9 @@ namespace UnitTests
                 && !foundUser.hasPet);
         }
 
+        /// <summary>
+        /// Test method for finding a user by userId
+        /// </summary>
         [Test]
         public void FindUserById()
         {
@@ -182,6 +196,9 @@ namespace UnitTests
                 && foundUser.hasPet);
         }
 
+        /// <summary>
+        /// Test method for deleting a user
+        /// </summary>
         [Test]
         public void DeleteUser()
         {

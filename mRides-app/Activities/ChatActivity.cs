@@ -28,7 +28,7 @@ namespace mRides_app
 {
 
     /// <summary>
-    /// Implementation of the chat activity
+    /// Activity class for the chat messaging system
     /// </summary>
     [Activity(Label = "ChatActivity", Icon = "@drawable/icon")]
     public class ChatActivity : Activity, IValueEventListener
@@ -111,7 +111,7 @@ namespace mRides_app
 
 
         /// <summary>
-        /// Method that will display the message after a user posts a message
+        /// Method that is invoked upon data change, such as when a user posts a message
         /// </summary>
         public async void OnDataChange(DataSnapshot snapshot)
         {

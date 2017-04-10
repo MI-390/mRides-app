@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace UnitTests
 {
+    /// <summary>
+    /// Test class for RequestMapper
+    /// </summary>
     [TestFixture]
     public class RequestMapperTests
     {
@@ -20,6 +23,9 @@ namespace UnitTests
         // REQUEST RELATED TESTS
         // -------------------------------------------------------------------
 
+        /// <summary>
+        /// Test method to create a request
+        /// </summary>
         [Test]
         public void CreateRequest()
         {

@@ -16,6 +16,9 @@ using Android.Util;
 
 namespace mRides_app
 {
+    /// <summary>
+    /// Activity class for Messaging
+    /// </summary>
     [Activity(Label = "MessagingActivity")]
     /// <summary>
     /// Activity that corresponds to the notification services of the application.

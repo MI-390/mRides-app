@@ -40,7 +40,7 @@ namespace mRides_app
     /// </summary>
     public class MapActivity : Activity, IOnMapReadyCallback, Android.Gms.Location.ILocationListener,
         GoogleApiClient.IConnectionCallbacks, GoogleApiClient.IOnConnectionFailedListener, IPlaceSelectionListener,
-        IEditUserSelectionListener, IStartDrivingModeListener
+        IEditUserSelectionListener
     {
         private Android.Gms.Maps.GoogleMap map;
         private GoogleApiClient googleApiClient;
@@ -51,10 +51,7 @@ namespace mRides_app
         private Button modifyDestinationButton;
         private Button confirmRideButton;
         private LatLng userLocation;
-        private bool mapButtonClicked;
-        private Dictionary<User, Marker> usersOnMap;
         private List<LatLng> directionList;
-        private List<Request> requestList;
         private DestinationJSON destinationData;
         private PlaceAutocompleteFragment autocompleteFragment;
         private Android.Gms.Maps.Model.Polyline polyline;
@@ -178,7 +175,6 @@ namespace mRides_app
         public void OnMapReady(Android.Gms.Maps.GoogleMap googleMap)
         {
             map = googleMap;
-            map.MarkerClick += OnMarkerClick;
             if (locationPermissionGranted)
             {
                 map.MyLocationEnabled = true;
@@ -189,32 +185,6 @@ namespace mRides_app
             }
             if (User.currentUser.latitude != null && User.currentUser.longitude != null)
             UpdateCameraPosition(new LatLng(User.currentUser.latitude, User.currentUser.longitude));
-        }
-
-        /// <summary>
-        /// Method that describes the behavior of the application when the user clicks on a marker.
-        /// </summary>
-        /// <param name="sender">The initiator of this intent request.</param>
-        /// <param name="e">The event object initiating the request.</param>
-        private void OnMarkerClick(object sender, Android.Gms.Maps.GoogleMap.MarkerClickEventArgs e)
-        {
-            if (!e.Marker.Equals(destinationMarker) && !e.Marker.Equals(originMarker))
-            {
-                foreach (KeyValuePair<User, Marker> option in usersOnMap)
-                {
-                    if (e.Marker.Equals(option.Value))
-                    {
-                        Bundle args = new Bundle();
-                        args.PutString("name", e.Marker.Title);
-                        args.PutString("id", option.Key.id.ToString());
-                        args.PutString("location", option.Value.Position.Latitude.ToString() + "," + option.Value.Position.Longitude.ToString());
-                        FragmentTransaction transaction = FragmentManager.BeginTransaction();
-                        UserProfileFragment dialog = new UserProfileFragment();
-                        dialog.Arguments = args;
-                        dialog.Show(transaction, "User profile fragment");
-                    }
-                }
-            }
         }
 
         /// <summary>
@@ -324,26 +294,6 @@ namespace mRides_app
         }
 
         /// <summary>
-        /// Send coordinates to the server to get a list of users and display them on the map
-        /// </summary>
-        /// <param name="directionList"> The formatted LatLng list of direction coordinates obtained from the Google Directions API.</param>
-        public void findNearbyUsers(List<LatLng> directionList)
-        {
-            List<DestinationCoordinate> destinationCoordinates = getFormattedDirectionList();
-
-            Request newRequest = new Request
-            {
-                destinationCoordinates = destinationCoordinates,
-                destination = destinationCoordinates.Last().coordinate,
-                location = destinationCoordinates.First().coordinate,
-                type = "driver"
-            };
-            newRequest.destinationCoordinates = destinationCoordinates;
-            User.currentUser.requestsAsDriver = ConsoleMapper.getInstance().FindRiders(newRequest);
-            showNearbyUsers();
-        }
-
-        /// <summary>
         /// Obtain the formatted list of coordinates.
         /// </summary>
         /// <returns>List of string representing the coordinates of the directions</returns>
@@ -436,56 +386,6 @@ namespace mRides_app
             }
 
             return path;
-        }
-
-        /// <summary>
-        /// SHow users on the map along the polyline path.
-        /// </summary>
-        public void showNearbyUsers()
-        {
-            //Instantiate a new dictionary for the new destination
-            usersOnMap = new Dictionary<User, Marker>();
-
-            if (User.currentUser.requestsAsDriver != null)
-            {
-                foreach (Request request in User.currentUser.requestsAsDriver)
-                {
-                    if (request.riderRequests.First().rider.firstName != null && request.riderRequests.First().rider.lastName != null)
-                    {
-                        Android.Gms.Maps.Model.MarkerOptions userMarker = new Android.Gms.Maps.Model.MarkerOptions();
-                        string[] splitCoordinates = request.riderRequests.First().location.Split(',');
-                        userMarker.SetPosition(new LatLng(Double.Parse(splitCoordinates[0]), Double.Parse(splitCoordinates[1])))
-                                  .SetTitle(request.riderRequests.First().rider.firstName.ToString() + " " + request.riderRequests.First().rider.lastName.ToString())
-                                  .SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.userIcon2)).Anchor(0.5f, 0.5f);
-                        if (map != null)
-                        {
-                            Marker marker = map.AddMarker(userMarker);
-                            usersOnMap.Add(request.riderRequests.First().rider, marker);
-                        }
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Used to start Google Maps Navigation to have real-time navigation system to pick up the selected user.
-        /// </summary>
-        /// <param name="latitude"> Destination latitude.</param>
-        /// <param name="longitude"> Destination longitude.</param>
-        public void enterDriverMode(double latitude, double longitude)
-        {
-            try
-            {
-                ApplicationInfo info = PackageManager.GetApplicationInfo("com.google.android.apps.maps", 0);
-                Intent intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse("http://maps.google.com/maps?" + "saddr=" + User.currentUser.latitude + "," +
-                User.currentUser.longitude + "&daddr=" + latitude + "," + longitude));
-                intent.SetClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
-                StartActivity(intent);
-            }
-            catch (PackageManager.NameNotFoundException e)
-            {
-                Toast.MakeText(ApplicationContext, GetString(Resource.String.google_not_installed), ToastLength.Long).Show();
-            }
         }
 
         /// <summary>

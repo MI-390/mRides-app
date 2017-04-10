@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace UnitTests
 {
+    /// <summary>
+    /// Testing class for the User Cache
+    /// </summary>
     [TestFixture]
     public class UserCacheTest
     {
@@ -15,6 +18,9 @@ namespace UnitTests
         [TearDown]
         public void Tear() { }
 
+        /// <summary>
+        /// Test method for saving the user's preferences
+        /// </summary>
         [Test]
         public void SaveUserPreferences()
         {
@@ -23,6 +29,9 @@ namespace UnitTests
             Assert.True(saveSuccess);
         }
 
+        /// <summary>
+        /// Test method to get the current user's preferences
+        /// </summary>
         [Test]
         public void GetCurrentUserPreferences()
         {

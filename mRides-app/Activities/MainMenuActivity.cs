@@ -92,7 +92,7 @@ namespace mRides_app
             myRidesButton.Click += delegate
             {
                 myRidesButton.Pressed = true;
-                Intent i = new Intent(this, typeof(UserCancelRideActivity));
+                Intent i = new Intent(this, typeof(RequestListActivity));
                 StartActivity(i);
                 //Will later include the code of the "my rides" page
             };

@@ -248,7 +248,7 @@ namespace mRides_app
                 }
                 else
                 {
-                    consoleMapper.Confirm(this.matchedRequests[currentMatchedUserIndex].ID, this.userRequest.ID);
+                    consoleMapper.Confirm(this.userRequest.ID, this.matchedRequests[currentMatchedUserIndex].ID);
                     this.Done();
                 }
             }
@@ -484,6 +484,12 @@ namespace mRides_app
             {
                 // Display some message to the user
                 Toast.MakeText(ApplicationContext, Resources.GetString(Resource.String.matchNoMatchFound), ToastLength.Long).Show();
+
+                // Go back to the main menu, clearing the activity stack
+                Intent intent = new Intent(this, typeof(MainMenuActivity));
+                intent.AddFlags(ActivityFlags.NewTask);
+                intent.AddFlags(ActivityFlags.ClearTask);
+                this.StartActivity(intent);
                 Finish();
             }
         }

@@ -31,6 +31,9 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Java.Interop">
+      <HintPath>C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\MonoAndroid\v1.0\Java.Interop.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.core, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnitTestAdapter.2.0.0\lib\nunit.core.dll</HintPath>
       <Private>False</Private>
@@ -60,8 +63,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TestFeedback.cs" />
+    <Compile Include="TestMainMenu.cs" />
     <Compile Include="TestMap.cs" />
-    <Compile Include="TestRideInformationcs.cs" />
+    <Compile Include="TestPreferences.cs" />
+    <Compile Include="TestRiderDriverChoice.cs" />
+    <Compile Include="TestRides.cs" />
     <Compile Include="TestUserProfile.cs" />
     <Compile Include="TestFacebookAuthentication.cs" />
   </ItemGroup>
