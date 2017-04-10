@@ -322,7 +322,9 @@
     <AndroidResource Include="Resources\layout\UserCancelRide.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\Match.axml" />
+    <AndroidResource Include="Resources\layout\Match.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\List_Ride.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
@@ -451,6 +453,9 @@
     <AndroidResource Include="Resources\drawable\loyolaTest.PNG" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\drawable\trashcanCancelRed.png" />
+  </ItemGroup>
+  <ItemGroup>
     <AndroidResource Include="Resources\drawable\map_request.png" />
   </ItemGroup>
   <ItemGroup>
@@ -461,9 +466,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\loyolaTest.PNG" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\trashcanCancel.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\mcgill_test.PNG" />
