@@ -61,7 +61,10 @@ namespace mRides_app.Mappers
         {
             return consoleGateway.GetRequestById(requestId);
         }
-
+        public void deleteRequest(int requestId)
+        {
+             consoleGateway.deleteRequest(requestId);
+        }
         /**
           * This method is used to find a list of rides that match the criteria
           * of a request made by a driver.

@@ -81,6 +81,11 @@ namespace mRides_app.Gateways
         {
             return SendGetWithUrlSegment<Request>(ApiEndPointUrl.getRequestById, "id", requestId.ToString());
         }
+
+        public void deleteRequest(int requestId)
+        {
+            SendGetWithUrlSegment<Request>(ApiEndPointUrl.deleteRequest, "id", requestId.ToString());
+        }
         /// <summary>
         /// This method is used to find a list of rides that match the criteria
         /// of a request made by a driver.
