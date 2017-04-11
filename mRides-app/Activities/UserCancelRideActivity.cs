@@ -45,8 +45,9 @@ namespace mRides_app
             };
 
             DisplayRides();
-
-            trashCanButton.Click += CancelRideButtonClicked;
+            int requestId = Convert.ToInt32(Intent.GetStringExtra("id"));
+            trashCanButton.Click += delegate
+            { ConsoleMapper.getInstance().deleteRequest(requestId); };
         }
 
         /// <summary>
