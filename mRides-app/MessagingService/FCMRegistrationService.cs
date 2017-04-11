@@ -32,11 +32,8 @@ namespace mRides_app.MessagingService
                     if (string.IsNullOrEmpty(token))
                         return;
 
-#if DEBUG
                     instanceId.DeleteToken(token, "");
                     instanceId.DeleteInstanceId();
-
-#endif
 
 
                 }

@@ -328,8 +328,8 @@ namespace mRides_app.Activities
             {
                 if (ride.RiderId == userID)
                 {
-                    ride.riderFeedback = review;
-                    ride.riderStars = rating;
+                    ride.driverFeedback = review;
+                    ride.driverStars = rating;
                 }
             }
 

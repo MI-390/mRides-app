@@ -34,7 +34,7 @@ namespace mRides_app.MessagingService
         /// <param name="token"></param>
         void SendRegistrationToServer(string token)
         {
-            if (User.currentUser!=null){
+            if (User.currentUser!=null && token!=null){
                 UserMapper.getInstance().updateFcmToken(token);
             }
             
