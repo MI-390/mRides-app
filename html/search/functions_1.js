@@ -1,0 +1,5 @@
+var searchData=
+[
+  ['beforeeachtest',['BeforeEachTest',['../class_u_i_test_1_1_test_facebook_authentication.html#a0dd20522873d730ec71173162a0a3de1',1,'UITest.TestFacebookAuthentication.BeforeEachTest()'],['../class_u_i_test_1_1_test_preferences.html#a6d424b64090bfa3dde6e16987f36a795',1,'UITest.TestPreferences.BeforeEachTest()'],['../class_u_i_test_1_1_test_rider_driver_choice.html#a7b7a6c8b556fb4229d385066a2b25e57',1,'UITest.TestRiderDriverChoice.BeforeEachTest()'],['../class_u_i_test_1_1_test_rides.html#a189afb0edaedddd1ad9545c84bb1b272',1,'UITest.TestRides.BeforeEachTest()'],['../class_u_i_test_1_1_test_user_profile.html#a9b612dea084d90057b467ad8ef79b5f1',1,'UITest.TestUserProfile.BeforeEachTest()']]],
+  ['begintransaction',['BeginTransaction',['../class_s_q_lite_1_1_s_q_lite_connection.html#aba3becdb524808bd49f349587f1b7049',1,'SQLite.SQLiteConnection.BeginTransaction()'],['../class_s_q_lite_1_1_s_q_lite_connection.html#aba3becdb524808bd49f349587f1b7049',1,'SQLite.SQLiteConnection.BeginTransaction()']]]
+];

@@ -1,0 +1,27 @@
+var classm_rides__app_1_1_gateways_1_1_api_end_point_url =
+[
+    [ "acceptConfirm", "classm_rides__app_1_1_gateways_1_1_api_end_point_url.html#a92c319b1cfa316ab1c414282c97e6c19", null ],
+    [ "addRiderToRide", "classm_rides__app_1_1_gateways_1_1_api_end_point_url.html#a55edd15a1c407f4dd3a3afa9250343f4", null ],
+    [ "confirm", "classm_rides__app_1_1_gateways_1_1_api_end_point_url.html#ad2b2d35e190c0d52cc0630da2225f728", null ],
+    [ "createRequest", "classm_rides__app_1_1_gateways_1_1_api_end_point_url.html#ad4a9dd7d6b5fa4d296ea1087df90dd0d", null ],
+    [ "createRide", "classm_rides__app_1_1_gateways_1_1_api_end_point_url.html#ac37a699da0ec00d2619481b9938fefeb", null ],
+    [ "createUser", "classm_rides__app_1_1_gateways_1_1_api_end_point_url.html#a3bee743225cb008cb5ca4f91441d6b28", null ],
+    [ "deleteRequest", "classm_rides__app_1_1_gateways_1_1_api_end_point_url.html#a7f4b472768864c776fb3fac389e867e7", null ],
+    [ "findDrivers", "classm_rides__app_1_1_gateways_1_1_api_end_point_url.html#a8d689353df8d70fe182ae5998002eb6f", null ],
+    [ "findRiders", "classm_rides__app_1_1_gateways_1_1_api_end_point_url.html#a02c201e3cd1c825528ebaede2d7daf72", null ],
+    [ "getGender", "classm_rides__app_1_1_gateways_1_1_api_end_point_url.html#a94ab140c0cf0269db900479313cd9d54", null ],
+    [ "getGSD", "classm_rides__app_1_1_gateways_1_1_api_end_point_url.html#a53d25bdd194e8b272c7aa0a9cabb4571", null ],
+    [ "getRequestById", "classm_rides__app_1_1_gateways_1_1_api_end_point_url.html#af8445608eb7f94c38a6d59f3be0e48f7", null ],
+    [ "getRequests", "classm_rides__app_1_1_gateways_1_1_api_end_point_url.html#af4207bd6844c82ce718ebe3ae9de2cd1", null ],
+    [ "getReviews", "classm_rides__app_1_1_gateways_1_1_api_end_point_url.html#ad6a9583d2476c1c57ca4267958d38828", null ],
+    [ "getRide", "classm_rides__app_1_1_gateways_1_1_api_end_point_url.html#a583515c9f8dbd9792daa1291a7df18c7", null ],
+    [ "getUser", "classm_rides__app_1_1_gateways_1_1_api_end_point_url.html#a5de31f4eea5fa78c8f4b1dafe1aa99b6", null ],
+    [ "getUserByFacebookId", "classm_rides__app_1_1_gateways_1_1_api_end_point_url.html#a929f6c2aac5c9d3d15d833f51f737d69", null ],
+    [ "leaveReview", "classm_rides__app_1_1_gateways_1_1_api_end_point_url.html#ab4c25dc760f5d18cd6fe7979e9f2851c", null ],
+    [ "setDistanceTravelled", "classm_rides__app_1_1_gateways_1_1_api_end_point_url.html#af7ae26f6201b447fb22703b0b49699d3", null ],
+    [ "setDuration", "classm_rides__app_1_1_gateways_1_1_api_end_point_url.html#a0de62f662fd532170c9076fcac27b24c", null ],
+    [ "setGender", "classm_rides__app_1_1_gateways_1_1_api_end_point_url.html#a612e79ef7bd03212c5f8e96713129d7b", null ],
+    [ "setGSD", "classm_rides__app_1_1_gateways_1_1_api_end_point_url.html#a2bce3aa27b62a8525854f7c9a64f4e78", null ],
+    [ "updateFcmToken", "classm_rides__app_1_1_gateways_1_1_api_end_point_url.html#a13b8f47e7283cfc94c60c6e667bfddcc", null ],
+    [ "updateUserSettings", "classm_rides__app_1_1_gateways_1_1_api_end_point_url.html#a75e18e8905fb561726d59bad7d729eda", null ]
+];

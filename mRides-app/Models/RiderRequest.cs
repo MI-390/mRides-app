@@ -13,6 +13,9 @@ using Java.IO;
 
 namespace mRides_app.Models
 {
+    /// <summary>
+    /// Class that corresponds to the requests made by a rider.
+    /// </summary>
     public class RiderRequest
     {
         public int id { get; set; }

@@ -17,6 +17,9 @@ using Firebase.Iid;
 
 namespace mRides_app
 {
+    /// <summary>
+    /// Class for the login request for the Facebook Login functionality.
+    /// </summary>
     class LoginRequest
     {
         /// <summary>

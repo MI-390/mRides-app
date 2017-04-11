@@ -21,6 +21,9 @@ using System.Threading.Tasks;
 
 namespace mRides_app.Gateways
 {
+    /// <summary>
+    /// Class that corresponds to the user gateway.
+    /// </summary>
     public class UserGateway : AbstractGateway
     {
         private UserGateway() { }
@@ -65,6 +68,18 @@ namespace mRides_app.Gateways
         public User CreateUser(User newUser)
         {
             return SendPost<User>(ApiEndPointUrl.createUser, newUser, false);
+        }
+
+        /// <summary>
+        /// This method updates the settings of a user, given the user object. 
+        /// The updated settings include the preferences, first name, last name, 
+        /// and gender.
+        /// </summary>
+        /// <param name="userToUpdate"></param>
+        /// <returns></returns>
+        public bool UpdateUserSettings(User userToUpdate)
+        {
+            return SendPost<bool>(ApiEndPointUrl.updateUserSettings, userToUpdate, true);
         }
 
         /// <summary>

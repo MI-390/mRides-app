@@ -2305,8 +2305,8 @@ namespace mRides_app
 			// aapt resource value: 0x7f020085
 			public const int navigation_empty_icon = 2130837637;
 			
-			// aapt resource value: 0x7f020097
-			public const int notification_template_icon_bg = 2130837655;
+			// aapt resource value: 0x7f020098
+			public const int notification_template_icon_bg = 2130837656;
 			
 			// aapt resource value: 0x7f020086
 			public const int passenger_icon = 2130837638;
@@ -2354,10 +2354,13 @@ namespace mRides_app
 			public const int trashcanCancel = 2130837652;
 			
 			// aapt resource value: 0x7f020095
-			public const int user = 2130837653;
+			public const int trashcanCancelRed = 2130837653;
 			
 			// aapt resource value: 0x7f020096
-			public const int userIcon2 = 2130837654;
+			public const int user = 2130837654;
+			
+			// aapt resource value: 0x7f020097
+			public const int userIcon2 = 2130837655;
 			
 			static Drawable()
 			{

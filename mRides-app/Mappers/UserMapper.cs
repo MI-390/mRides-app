@@ -23,6 +23,9 @@ using System.Threading.Tasks;
 
 namespace mRides_app.Mappers
 {
+    /// <summary>
+    /// Class that corresponds to the mappers for the User type.
+    /// </summary>
     public class UserMapper : AbstractMapper
     {
         private UserGateway userGateway;
@@ -69,6 +72,17 @@ namespace mRides_app.Mappers
             }
 
             return user;
+        }
+
+        /// <summary>
+        /// Updates a user by saving its preferences in the phone storage, and sending the 
+        /// updated user to the server.
+        /// </summary>
+        /// <param name="user"></param>
+        public void UpdateUserSettings(User user)
+        {
+            this.userCache.SaveUserPreferences(user.id, user.isSmoker, user.isHandicap, user.hasLuggage, user.hasPet, user.genderPreference);
+            this.userGateway.UpdateUserSettings(user);
         }
 
         /// <summary>
@@ -177,16 +191,21 @@ namespace mRides_app.Mappers
         }
 
         /// <summary>
-        /// Obtains the GSD amount of a user.
+        /// Method that otains the GSD amount of a user.
         /// </summary>
+        /// <param name="userId">User ID of the user for which we want the GSD.</param>
+        /// <returns>GSD value of user</returns>
         public long GetGSD(int userId)
         {
             return userGateway.GetGSD(userId);
         }
 
         /// <summary>
-        /// This method sets the GSD amount of a user.
+        /// Method that sets the GSD amount of a user.
         /// </summary>
+        /// <param name="id">User ID of the user for which we want to update the GSD.</param>
+        /// <param name="gsdAmount">Amount of GSD we want to update to.</param>
+        /// <returns>GSD value of user</returns>
         public long setGSD(int id, long gsdAmount)
         {
             return userGateway.setGSD(id, gsdAmount);
@@ -203,8 +222,10 @@ namespace mRides_app.Mappers
         }
 
         /// <summary>
-        /// This method sets the gender of a user.
+        /// Method that sets the gender value of a user.
         /// </summary>
+        /// <param name="id">User ID of the user for which we want to update the gender.</param>
+        /// <param name="gsdAmount">Gender we want to update to.</param>
         public void setGender(int id, string newGender)
         {
             userGateway.setGender(id, newGender);

@@ -20,3 +20,5 @@ The team:
 * Philip Lim - 27485506
 
 Please take a look at this repository's [wiki](https://github.com/MI-390/mRides-app/wiki) for more information! 
+
+The documentation HTML file is found in the html folder of the repository.

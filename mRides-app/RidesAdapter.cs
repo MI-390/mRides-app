@@ -25,7 +25,7 @@ namespace mRides_app
         private Activity context;
 
         /// <summary>
-        /// Constructor
+        /// Constructor for RidesAdapter
         /// </summary>
         /// <param name="context">Current activity</param>
         /// <param name="requests">List of request objects</param>
@@ -34,11 +34,19 @@ namespace mRides_app
             this.context = context;
             this.requests = requests;
         }
+
+        /// <summary>
+        /// Method to get ID of the item.
+        /// </summary>
+        /// <returns>ID of item</returns>
         public override long GetItemId(int position)
         {
             return position;
         }
 
+        /// <summary>
+        /// Method to get the number of requests in the list.
+        /// </summary>
         public override int Count
         {
             get { return requests.Count; }
@@ -53,10 +61,10 @@ namespace mRides_app
         /// <summary>
         /// Method to get the view of one single row element of a ride
         /// </summary>
-        /// <param name="position"></param>
-        /// <param name="convertView"></param>
-        /// <param name="parent"></param>
-        /// <returns></returns>
+        /// <param name="position">Position of the view</param>
+        /// <param name="convertView">A View object</param>
+        /// <param name="parent">The parent View object</param>
+        /// <returns>View object</returns>
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
             var item = requests[position];
@@ -79,9 +87,7 @@ namespace mRides_app
 
                 IList<Address> addresses = geocoder.GetFromLocation(System.Double.Parse(item.location.Split(',')[0]), System.Double.Parse(item.location.Split(',')[1]), 1);
                 location.Text=addresses[0].GetAddressLine(0);
-          
 
-        
 
             return itemView;
         }
@@ -109,6 +115,11 @@ namespace mRides_app
             }
         }
 
+        /// <summary>
+        /// Method to get an item given its position in the list.
+        /// </summary>
+        /// <param name="position">Position of item in list</param>
+        /// <returns>Position of item</returns>
         public override Java.Lang.Object GetItem(int position)
         {
             throw new NotImplementedException();

@@ -73,7 +73,7 @@ namespace mRides_app
         /// of importance contained in the page will be captured. A request to the server
         /// is then sent to obtain the list of matched users.
         /// </summary>
-        /// <param name="bundle"></param>
+        /// <param name="bundle">Variable used for passing data between activities.</param>
         protected override void OnCreate(Bundle bundle)
         {
             // Obtain the mapper instances
@@ -234,6 +234,7 @@ namespace mRides_app
         /// match was accepted or not, this method will update the view to the next match,
         /// or finish the activity if no more matches are found.
         /// </summary>
+        /// <param name="accept">The binary indicated whether the driver has accepted the request.</param>
         private void Proceed(bool accept)
         {
             // Send confirmation message to the server if driver accepted
@@ -285,7 +286,6 @@ namespace mRides_app
         }
 
         
-        
         // ---------------------------------------------------------------------------------------------------------
         // Event methods that require changing activity
         // ---------------------------------------------------------------------------------------------------------
@@ -334,16 +334,9 @@ namespace mRides_app
         }
 
 
-
         // ---------------------------------------------------------------------------------------------------------
         // Supportive methods
         // ---------------------------------------------------------------------------------------------------------
-
-        /// <summary>
-        /// Creates the chat name based on the user id to which we want to communicate with
-        /// </summary>
-        /// <param name="riderId"></param>
-        /// <returns>string chat name</returns>
         private string CreateChatName(int riderId)
         {
             int intUserId = Convert.ToInt32(riderId);
@@ -354,8 +347,13 @@ namespace mRides_app
             }
             return riderId + " & " + currentUser;
         }
-        
 
+        /// <summary>
+        /// Retrieves the geocode in reverse order.
+        /// </summary>
+        /// <param name="latitude">Value of the location's latitude.</param>
+        /// <param name="riderId">Value of the location's longitude.</param>
+        /// <returns>The reverse string of the geolocation.</returns>
         public string GetReverseGeoCodeEndApi(string latitude, string longitude)
         {
             return "json?latlng=" + latitude + "," + longitude;

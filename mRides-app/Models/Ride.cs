@@ -12,6 +12,9 @@ using Android.Widget;
 
 namespace mRides_app.Models
 {
+    /// <summary>
+    /// Class that corresponds to ride between a driver and possibly many riders.
+    /// </summary>
     public class Ride
     {
         public int ID { get; set; }

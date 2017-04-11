@@ -17,8 +17,15 @@ using mRides_app.Constants;
 namespace mRides_app
 {
     [Activity(Label = "PreferencesActivity")]
+    /// <summary>
+    /// Activity that corresponds to the select preferences page of the application.
+    /// </summary>
     public class PreferencesActivity : Activity
     {
+        /// <summary>
+        /// Method that is invoked upon the start of this activity.
+        /// </summary>
+        /// <param name="bundle">Variable used for passing data between activities.</param>
         protected override void OnCreate(Bundle savedInstanceState)
         {
             UserMapper.getInstance().setTheme(this);
@@ -65,15 +72,39 @@ namespace mRides_app
             petPreferences.AddPreference(rbPet);
             petPreferences.AddPreference(rbNoPet);
 
-            // Set the default checked values
-            rbSmoker.Checked = true;
-            rbLuggage.Checked = true;
-            rbHandicap.Checked = true;
-            rbPet.Checked = true;
-            smokerPreferences.Click(rbSmoker);
-            luggagePreferences.Click(rbLuggage);
-            handicapPreferences.Click(rbHandicap);
-            petPreferences.Click(rbPet);
+            // Set the default checked values if it is the first time, otherwise set the current user's preferences
+            if(User.currentUser == null)
+            {
+                rbSmoker.Checked = true;
+                rbLuggage.Checked = true;
+                rbHandicap.Checked = true;
+                rbPet.Checked = true;
+
+                smokerPreferences.Click(rbSmoker);
+                luggagePreferences.Click(rbLuggage);
+                handicapPreferences.Click(rbHandicap);
+                petPreferences.Click(rbPet);
+            }
+            else
+            {
+                rbSmoker.Checked  = User.currentUser.isSmoker;
+                rbNonSmoker.Checked = !User.currentUser.isSmoker;
+                smokerPreferences.Click(User.currentUser.isSmoker ? rbSmoker : rbNonSmoker);
+
+                rbLuggage.Checked = User.currentUser.hasLuggage;
+                rbNoLuggage.Checked = !User.currentUser.hasLuggage;
+                luggagePreferences.Click(User.currentUser.hasLuggage ? rbLuggage : rbNoLuggage);
+
+                rbHandicap.Checked = User.currentUser.isHandicap;
+                rbNoHandicap.Checked = !User.currentUser.isHandicap;
+                handicapPreferences.Click(User.currentUser.isHandicap ? rbHandicap : rbNoHandicap);
+
+                rbPet.Checked = User.currentUser.hasPet;
+                rbNoPet.Checked = !User.currentUser.hasPet;
+                petPreferences.Click(User.currentUser.hasPet ? rbPet : rbNoPet);
+            }
+            
+            
 
             // Populate the gender spinner
             Spinner spinnerGender = FindViewById<Spinner>(Resource.Id.spinnerGender);
@@ -81,6 +112,21 @@ namespace mRides_app
                     this, Resource.Array.Pref_Gender, Android.Resource.Layout.SimpleSpinnerItem);
             adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
             spinnerGender.Adapter = adapter;
+            if(User.currentUser != null)
+            {
+                if(User.currentUser.genderPreference.Equals(User.PREFERENCE_GENDER_ANY))
+                {
+                    spinnerGender.SetSelection(0);
+                }
+                else if (User.currentUser.genderPreference.Equals(User.PREFERENCE_GENDER_MALE))
+                {
+                    spinnerGender.SetSelection(1);
+                }
+                else if(User.currentUser.genderPreference.Equals(User.PREFERENCE_GENDER_FEMALE))
+                {
+                    spinnerGender.SetSelection(2);
+                }
+            }
 
             // Set the done button to save and continue to the next activity
             Button doneButton = FindViewById<Button>(Resource.Id.buttonDone);
@@ -101,25 +147,36 @@ namespace mRides_app
                     layout.SetBackgroundResource(Resource.Drawable.redRoundedBg);
                 }
             }
-
-            string genderPreference = "";
-            int selectedGenderPref = (int)spinnerGender.SelectedItemId;
-            if (selectedGenderPref == 0)
+            
+            doneButton.Click += delegate 
             {
-                genderPreference = User.PREFERENCE_GENDER_ANY;
-            }
-            else if (selectedGenderPref == 1)
-            {
-                genderPreference = User.PREFERENCE_GENDER_MALE;
-            }
-            else
-            {
-                genderPreference = User.PREFERENCE_GENDER_FEMALE;
-            }
-            doneButton.Click += delegate { this.SaveAndContinue(rbSmoker.Checked, rbLuggage.Checked, rbHandicap.Checked, rbPet.Checked, genderPreference); };
+                string genderPreference = "";
+                int selectedGenderPref = (int)spinnerGender.SelectedItemId;
+                if (selectedGenderPref == 0)
+                {
+                    genderPreference = User.PREFERENCE_GENDER_ANY;
+                }
+                else if (selectedGenderPref == 1)
+                {
+                    genderPreference = User.PREFERENCE_GENDER_MALE;
+                }
+                else
+                {
+                    genderPreference = User.PREFERENCE_GENDER_FEMALE;
+                }
+                this.SaveAndContinue(rbSmoker.Checked, rbLuggage.Checked, rbHandicap.Checked, rbPet.Checked, genderPreference);
+            };
 
         }
 
+
+        /// <summary>
+        /// Method that determines where to proceed whether the user is a new or returning user.
+        /// </summary>
+        /// <param name="smoker">Binary value of user's smoker preference.</param>
+        /// <param name="handicap">Binary value of user's handicap preference.</param>
+        /// <param name="pet">Binary value of user's pet preference.</param>
+        /// <param name="gender">Gender preference of the user.</param>
         private void SaveAndContinue(Boolean smoker, Boolean luggage, Boolean handicap, Boolean pet, string gender)
         {
             // If the current user is null and the previous activity is the main, 
@@ -160,24 +217,25 @@ namespace mRides_app
                 User.currentUser.isHandicap = handicap;
                 User.currentUser.genderPreference = gender;
                 User.currentUser.hasPet = pet;
-                //UserMapper.getInstance().UpdateUser(User.currentUser);
+                UserMapper.getInstance().UpdateUserSettings(User.currentUser);
 
                 // Go back to the previous activity
                 this.Finish();
             }
         }
 
-        /**
-         * Represents a radio button group
-         */
+        /// <summary>
+        /// Class that corresponds to the radio button group on preferences page. 
+        /// </summary>
         private class PreferenceSet
         {
             private List<RadioButton> preferenceList = new List<RadioButton>();
             private RadioButton selectedPreference;
 
-            /**
-             * Add a new preference to the set
-             */
+            /// <summary>
+            /// Method that adds a new preference to the set.
+            /// </summary>
+            /// <param name="newPreference">Radio button to be added to list of preferences.</param>
             public void AddPreference(RadioButton newPreference)
             {
                 // Add it to the set of preferences 
@@ -190,10 +248,10 @@ namespace mRides_app
                 };
             }
 
-            /**
-             * Updates which button is currently clicked, and unclicked the previous clicked
-             * button
-             */
+            /// <summary>
+            /// Method that is invoked when a user selects a radio button.
+            /// </summary>
+            /// <param name="clickedRadioButton">RadioButton that is pressed.</param>
             public void Click(RadioButton clickedRadioButton)
             {
                 if (this.preferenceList.Contains(clickedRadioButton))

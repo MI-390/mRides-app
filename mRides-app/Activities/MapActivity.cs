@@ -35,6 +35,9 @@ using Android.Graphics;
 namespace mRides_app
 {
     [Activity(Label = "MapActivity")]
+    /// <summary>
+    /// Class that corresponds to the map services of the application. 
+    /// </summary>
     public class MapActivity : Activity, IOnMapReadyCallback, Android.Gms.Location.ILocationListener,
         GoogleApiClient.IConnectionCallbacks, GoogleApiClient.IOnConnectionFailedListener, IPlaceSelectionListener,
         IEditUserSelectionListener
@@ -59,7 +62,10 @@ namespace mRides_app
         int numberOfPeople;
         string pathURL;
 
-
+        /// <summary>
+        /// Method that is invoked upon the start of this activity.
+        /// </summary>
+        /// <param name="bundle">Variable used for passing data between activities.</param>
         protected override void OnCreate(Bundle bundle)
         {
             UserMapper.getInstance().setTheme(this);
@@ -120,6 +126,11 @@ namespace mRides_app
 
         }
 
+        /// <summary>
+        /// Method that describes the behavior of the application when the choose destination button is pressed.
+        /// </summary>
+        /// <param name="sender">The initiator of this intent request.</param>
+        /// <param name="e">The event object initiating the request.</param>
         void OnModifyDestinationButtonClick(object sender, EventArgs e)
         {
             if (selectingOrigin)
@@ -135,6 +146,11 @@ namespace mRides_app
             }
         }
 
+        /// <summary>
+        /// Method that describes the behavior of the application when the confirm ride button is pressed.
+        /// </summary>
+        /// <param name="sender">The initiator of this intent request.</param>
+        /// <param name="e">The event object initiating the request.</param>
         void OnConfirmRideButtonClick(object sender, EventArgs e)
         {
             confirmRideButton.Visibility = ViewStates.Invisible;
@@ -152,6 +168,10 @@ namespace mRides_app
             StartActivity(matchActivity);
         }
 
+        /// <summary>
+        /// Method that describes the behavior of the application when the user enters the map view.
+        /// </summary>
+        /// <param name="googleMap">The GoogleMap API map object being loaded.</param>
         public void OnMapReady(Android.Gms.Maps.GoogleMap googleMap)
         {
             map = googleMap;
@@ -167,6 +187,11 @@ namespace mRides_app
             UpdateCameraPosition(new LatLng(User.currentUser.latitude, User.currentUser.longitude));
         }
 
+        /// <summary>
+        /// Method that describes the behavior of the application when the my location button is pressed.
+        /// </summary>
+        /// <param name="sender">The initiator of this intent request.</param>
+        /// <param name="e">The event object initiating the request.</param>
         private void OnMyLocationButtonClick(object sender, Android.Gms.Maps.GoogleMap.MyLocationButtonClickEventArgs e)
         {
             LatLng position = new LatLng(User.currentUser.latitude, User.currentUser.longitude);
@@ -677,7 +702,7 @@ namespace mRides_app
             selectingDestination = false;
             autocompleteFragment.SetText("");
             autocompleteFragment.SetHint(GetString(Resource.String.origin) + "?");
-            //// Get the list of coordinates
+            // Get the list of coordinates
 
             // For multilingual purposes
             string typeDisplayed = "";

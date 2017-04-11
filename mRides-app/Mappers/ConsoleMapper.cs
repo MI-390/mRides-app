@@ -19,6 +19,9 @@ using mRides_app.Gateways;
 
 namespace mRides_app.Mappers
 {
+    /// <summary>
+    /// Class that corresponds to the mappers for the Console type.
+    /// </summary>
     public class ConsoleMapper : AbstractMapper
     {
         private ConsoleGateway consoleGateway;

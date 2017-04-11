@@ -13,6 +13,9 @@ using Java.IO;
 
 namespace mRides_app.Models
 {
+    /// <summary>
+    /// Class that corresponds to the requests made by a rider or driver.
+    /// </summary>
     public class Request
     {
         public const string TYPE_RIDER = "rider";

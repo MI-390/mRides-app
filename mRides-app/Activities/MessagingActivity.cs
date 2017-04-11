@@ -20,15 +20,18 @@ namespace mRides_app
     /// Activity class for Messaging
     /// </summary>
     [Activity(Label = "MessagingActivity")]
+    /// <summary>
+    /// Activity that corresponds to the notification services of the application.
+    /// </summary>
     public class MessagingActivity : Activity
     {
         TextView msgText;
         const string TAG = "MessagingActivity";
 
         /// <summary>
-        /// Method invoked upon creation of the activity
+        /// Method that is invoked upon the start of this activity.
         /// </summary>
-        /// <param name="bundle">A Bundle object</param>
+        /// <param name="bundle">Variable used for passing data between activities.</param>
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
@@ -53,10 +56,11 @@ namespace mRides_app
             };
         }
 
+
         /// <summary>
-        /// Method to verify if Google Play Services is available
+        /// Method that determines whether the current user has Google Play Services installed. 
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Binary indicator of whether or not the device supports Google Play Services.</returns>
         public bool IsPlayServicesAvailable()
         {
             int resultCode = GoogleApiAvailability.Instance.IsGooglePlayServicesAvailable(this);
