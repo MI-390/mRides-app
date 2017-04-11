@@ -286,8 +286,8 @@ namespace mRides_app.Activities
                             JsonSerializer serializer = new JsonSerializer();
                             destinationData = serializer.Deserialize<DestinationJSON>(jsonReader);
 
-                            ConsoleMapper.getInstance().setDistanceTravelled(Int32.Parse(Intent.GetStringExtra("id")), (double)destinationData.routes[0].legs[0].distance.value);
-                            ConsoleMapper.getInstance().setDurationTime(Int32.Parse(Intent.GetStringExtra("id")), (long)destinationData.routes[0].legs[0].duration.value);
+                            ride.distanceTravelled = (double)destinationData.routes[0].legs[0].distance.value;
+                            ride.duration = (long)destinationData.routes[0].legs[0].duration.value;
 
                             if (destinationData != null)
                             {
