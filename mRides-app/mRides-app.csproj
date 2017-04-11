@@ -221,6 +221,7 @@
     <Compile Include="Cache\UserCache.cs" />
     <Compile Include="Activities\ChatListActivity.cs" />
     <Compile Include="Activities\ChatActivity.cs" />
+    <Compile Include="MessagingService\FCMRegistrationService.cs" />
     <Compile Include="RequestListAdapter.cs" />
     <Compile Include="ChatListAdapter.cs" />
     <Compile Include="Cache\MemoryCache\UserFacebookProfilePictureCache.cs" />

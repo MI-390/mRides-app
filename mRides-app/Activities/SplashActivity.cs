@@ -13,6 +13,7 @@ using Android.Support.V7.App;
 using Android.Util;
 using System.Threading.Tasks;
 using Xamarin.Auth;
+using mRides_app.MessagingService;
 
 namespace mRides_app
 {
@@ -37,6 +38,10 @@ namespace mRides_app
         {
             Log.Debug(typeof(SplashActivity).Name, "Performing startup work that takes time.");
             var account = AccountStore.Create(this).FindAccountsForService("Facebook").FirstOrDefault();
+           
+                var intent = new Intent(this, typeof(FCMRegistrationService));
+                StartService(intent);
+            
             if (account != null)
                 LoginRequest.handleLoginRequest(account, this);
             else
